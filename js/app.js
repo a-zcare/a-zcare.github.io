@@ -2,9 +2,24 @@ const phoneView = document.getElementById('phoneView');
 const phoneTabs = [...document.querySelectorAll('.phone-tab')];
 let currentPhoneScreen = 'home';
 
+function getPhoneGreeting(hour = new Date().getHours()) {
+  if (hour >= 5 && hour < 12) return 'GOOD MORNING';
+  if (hour >= 12 && hour < 17) return 'GOOD AFTERNOON';
+  if (hour >= 17 && hour < 22) return 'GOOD EVENING';
+  return 'GOOD NIGHT';
+}
+
+function getPhoneDate() {
+  return new Intl.DateTimeFormat(undefined, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long'
+  }).format(new Date());
+}
+
 const phoneScreens = {
   home: `
-    <div class="phone-title"><div><small>GOOD MORNING</small><h3>Alex</h3></div><div class="avatar">A</div></div>
+    <div class="phone-title"><div><small id="homeGreeting">${getPhoneGreeting()}</small><h3>Alex</h3><p id="homeDate" style="margin:5px 0 0;color:#8997aa;font-size:9px;line-height:1.3">${getPhoneDate()}</p></div><div class="avatar">A</div></div>
     <div class="status-card"><div class="shield">✓</div><div><strong>Everything looks safe</strong><small>No active safety alerts</small></div></div>
     <div class="phone-label">ESSENTIALS</div>
     <div class="phone-app-grid">
@@ -151,6 +166,10 @@ function updatePhoneClock() {
   const hours = String(now.getHours()).padStart(2, '0');
   const minutes = String(now.getMinutes()).padStart(2, '0');
   clock.textContent = `${hours}:${minutes}`;
+  const greeting = document.getElementById('homeGreeting');
+  const date = document.getElementById('homeDate');
+  if (greeting) greeting.textContent = getPhoneGreeting(now.getHours());
+  if (date) date.textContent = getPhoneDate();
 }
 updatePhoneClock();
 setInterval(updatePhoneClock, 1000);
