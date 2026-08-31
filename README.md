@@ -1,53 +1,60 @@
-# A-Z Care 🛡️
+# A-Z Care
 
-> Safe, secure, and privacy-focused smartphone ecosystem designed specifically for kids and seniors.
+> A privacy-first, AI-assisted smartphone safety concept for kids, seniors and families.
 
-A-Z Care is an independent initiative aimed at bridging the gap between digital accessibility and absolute safety. We protect vulnerable user groups from modern digital threats, fraudulent scams, and invasive tracking while keeping family connections simple and transparent.
+**Status:** Active concept / interactive web prototype. The website demonstrates intended product flows; it is not currently a live security, emergency-response or threat-detection service.
 
----
+## Product idea
 
-## 🚀 Core Features & Architecture
+A-Z Care explores how one simple smartphone safety layer could combine emergency help, scam awareness, consent-based family safety and an AI assistant without turning family protection into invisible surveillance.
 
-### 1. 🚫 Anti-Scam & Anti-Fraud Protection
-* Real-Time Call & SMS Filtering: Automated screening of incoming numbers against known scam databases and suspicious communication patterns.
-* Phishing & Scam Link Interception: Proactive blocking of malicious URLs sent via SMS, messengers, or browser links before elderly users can click them.
-* Smart Alerts: Instant notifications sent to designated family members if a suspicious financial transaction or high-risk scam attempt is detected.
+## Core concept
 
-### 2. 👁️ Privacy & Anti-Tracking
-* Telemetry Stripping: Elimination of unnecessary background telemetry, hidden trackers, and data-harvesting modules found in standard consumer OS builds.
-* Anti-Tracker Protection: System-level blocks against unauthorized background data collection by third-party applications.
-* Controlled App Whitelisting: Prevention of accidental installation of unverified APKs or potentially dangerous applications from unknown sources.
+- **Emergency SOS** — a clear emergency flow for notifying trusted contacts and sharing status/location when activated.
+- **AI Safety Assistant** — explains suspicious messages, links and calls in plain language and suggests safer next steps.
+- **Scam awareness** — surfaces common fraud signals such as urgency, impersonation and suspicious links.
+- **Family safety** — optional location sharing, safe zones, battery/offline status and a meaningful safety timeline.
+- **Kids Mode** — safe browsing, age-appropriate controls, school mode and emergency access.
+- **Senior Mode** — larger controls, trusted contacts, voice-oriented assistance and simple scam warnings.
+- **Privacy Center** — visible permissions and explicit user control over sharing.
 
-### 3. 📍 Transparent Family Tracking & Safety
-* Configurable Location Services: Designed with a dual philosophy: strict privacy for general operations, but reliable, consent-based GPS tracking when safety is at stake (e.g., locating a lost child or an elderly family member with dementia).
-* SOS & Emergency Triggers: One-touch physical or software panic buttons that instantly notify caregivers and share critical location data.
-* Family Dashboard: A centralized, easy-to-use cloud management interface for parents and caregivers to monitor device safety without invading personal privacy.
+## Current prototype
 
-### 4. 👴 Senior & Child-Friendly UX
-* Simplified Interface: Large, high-contrast UI elements, simplified navigation, and removal of complex menus that typically cause confusion.
-* Parental & Caregiver Control: Remote configuration capabilities allowing family members to manage settings, trusted contacts, and app access safely from their own devices.
+The GitHub Pages site includes interactive demonstrations of:
 
----
+1. A multi-screen A-Z Care phone UI.
+2. AI scam-message analysis.
+3. An SOS activation flow.
+4. Scam call and phishing-message examples.
+5. Family location and safety timeline concepts.
+6. Kids and Senior interface concepts.
+7. Interactive privacy controls.
 
-## 🗺️ Project Roadmap
+## Roadmap
 
-* [x] Phase 1: Concept validation, market research, and core architecture design.
-* [ ] Phase 2: Landing page deployment, community building, and early adopter waitlist (A-Z Care web presence).
-* [ ] Phase 3: Prototype development of the custom security launcher & anti-scam algorithms.
-* [ ] Phase 4: Pilot testing, integration with regional security frameworks, and preparation for hardware/software scaling.
+- [x] Concept and product direction
+- [x] Landing page and interactive web prototype
+- [ ] Mobile launcher / app prototype
+- [ ] Trusted-contact and SOS prototype
+- [ ] Threat-intelligence experiments
+- [ ] User research and accessibility testing
+- [ ] Regional safety-service integration research
 
----
+## Principles
 
-## 🛠️ Tech Stack & Philosophy
-* Platform: Android-based secure environments & custom application layers.
-* Management: Centralized MDM-ready architecture for scalable deployment (expanding from B2C to B2B/institutional use).
-* Core Value: Putting human safety, privacy, and peace of mind ahead of mass data collection.
+**Privacy first.** Safety features should be transparent and consent-based.
 
----
+**Human in the loop.** AI should help users understand risk, not pretend to provide certainty.
 
-## 📄 License & Status
-* Status: Active R&D / Startup Concept.
-* License: Proprietary / Open-Core components (to be determined).
+**Simple under pressure.** Emergency and scam-protection flows should remain understandable for users with very different levels of technical experience.
 
----
-*Created and maintained by Alexanders Azarevičs.*
+## Web stack
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- GitHub Pages
+
+## License / project status
+
+License model is still to be determined. Until a license is selected, no open-source license is granted by this repository.
