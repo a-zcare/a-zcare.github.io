@@ -1,0 +1,173 @@
+/* A-Z Care responsive layer — intentionally separate from the base design */
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Larger, easier-to-read desktop presentation */
+@media (min-width: 1200px) {
+  .container { width: min(1280px, 92%); }
+  .hero-grid, .split-grid { gap: 110px; }
+  .hero-lead, .section-heading > p, .section-copy > p, .cta-card > p { font-size: 18px; line-height: 1.75; }
+  .feature-card p, .demo-note, .mode-card p, .privacy-note { font-size: 15px; line-height: 1.7; }
+  .feature-card h3 { font-size: 20px; }
+  .phone { width: 350px; height: 700px; }
+  .phone-view { height: 585px; }
+  .phone-stage { min-height: 730px; }
+  .orbit-one { width: 570px; height: 570px; }
+  .orbit-two { width: 430px; height: 430px; }
+  .assistant-panel, .call-card, .sms-card, .timeline, .privacy-panel, .mode-card, .sos-console { padding: 30px; }
+}
+
+/* Tablet */
+@media (max-width: 992px) {
+  .container { width: min(92%, 760px); }
+  .hero { padding-top: 115px; }
+  .hero-grid, .split-grid, .family-grid, .demo-grid, .mode-grid { grid-template-columns: 1fr !important; gap: 54px !important; }
+  .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .hero-copy, .section-copy { max-width: 720px; }
+  .phone-stage { min-height: 690px; }
+  .floating-chip { display: none; }
+  .desktop-nav { display: none !important; }
+  .nav-cta { display: none !important; }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  :root { scroll-padding-top: 76px; }
+
+  body { padding-top: 0; }
+  .container { width: 92%; max-width: 100%; }
+  .header { height: 64px; }
+  .nav { height: 64px; }
+  .logo { font-size: 20px; }
+
+  .hero { min-height: auto; padding: 104px 0 68px; }
+  .hero-grid { gap: 34px !important; }
+  .hero h1 { font-size: clamp(42px, 12vw, 54px) !important; line-height: 1.02 !important; letter-spacing: -2.4px !important; }
+  .hero-lead { font-size: 17px !important; line-height: 1.65 !important; margin: 22px 0 !important; }
+  .status-pill { margin-bottom: 18px; }
+  .eyebrow { font-size: 11px; letter-spacing: 1.6px; }
+  .hero-actions { width: 100%; }
+  .hero-actions .button { flex: 1 1 100%; min-height: 48px; font-size: 14px; }
+  .hero-points { flex-wrap: wrap; gap: 9px 16px; margin-top: 26px; font-size: 12px; }
+
+  .section { padding: 78px 0 !important; }
+  .section-heading { margin-bottom: 34px; }
+  .section-heading h2, .section-copy h2, .cta-card h2 { font-size: clamp(34px, 10vw, 43px) !important; line-height: 1.08 !important; letter-spacing: -2px !important; }
+  .section-heading > p, .section-copy > p, .cta-card > p { font-size: 16px !important; line-height: 1.7 !important; }
+
+  .feature-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+  .feature-card { min-height: 0 !important; padding: 24px !important; }
+  .feature-card h3 { font-size: 20px !important; margin: 18px 0 8px !important; }
+  .feature-card p { font-size: 15px !important; line-height: 1.65 !important; }
+  .text-button { font-size: 13px !important; }
+
+  .phone-stage { min-height: 610px !important; width: 100%; overflow: visible; }
+  .phone { width: min(290px, 86vw) !important; height: 590px !important; transform: none !important; }
+  .phone-screen { padding: 16px !important; }
+  .phone-view { height: 480px !important; padding-top: 28px !important; overflow: hidden; }
+  .orbit, .floating-chip { display: none !important; }
+  .phone-title h3 { font-size: 19px !important; }
+  .phone-title small, .phone-label { font-size: 9px !important; }
+  .status-card strong { font-size: 11px !important; }
+  .status-card small, .family-mini small, .phone-small-card small { font-size: 8px !important; }
+  .family-mini strong, .phone-small-card strong { font-size: 10px !important; }
+  .phone-tab small { font-size: 8px !important; }
+
+  .assistant-panel, .call-card, .sms-card, .timeline, .privacy-panel, .mode-card, .sos-console { padding: 22px !important; border-radius: 18px !important; }
+  .call-card, .sms-card { min-height: 0 !important; }
+  .chat { font-size: 14px !important; }
+  .chat.user { margin-left: 18px !important; }
+  .analysis-card p, .demo-note, .signal-list, .timeline-item small, .privacy-panel small { font-size: 12px !important; }
+  .check-list span { font-size: 14px !important; }
+  .sms-bubble { margin: 32px 0 24px 0 !important; font-size: 14px !important; }
+  .result-row { gap: 14px; align-items: flex-start !important; }
+  .result-row strong { font-size: 15px !important; }
+  .demo-actions { flex-wrap: wrap; }
+  .demo-actions button { min-height: 44px; min-width: 110px; }
+  .sos-choices { display: grid !important; grid-template-columns: 1fr 1fr; gap: 9px !important; }
+  .sos-choices button { min-width: 0 !important; padding: 11px 8px !important; font-size: 12px !important; }
+  .family-map { min-height: 390px !important; overflow: hidden; }
+  .timeline-item { grid-template-columns: 48px 12px 1fr !important; }
+  .mode-card h3 { font-size: 24px !important; line-height: 1.2; }
+  .mode-card p { font-size: 15px !important; }
+  .senior-buttons { grid-template-columns: 1fr !important; }
+  .permission { gap: 12px; }
+  .permission > div { min-width: 0; }
+  .permission strong { font-size: 14px !important; }
+
+  .roadmap { overflow: hidden; }
+  .roadmap-item { grid-template-columns: 44px 1fr !important; gap: 14px !important; }
+  .roadmap-item strong { font-size: 15px !important; }
+
+  footer { padding-bottom: 26px; }
+  .footer { flex-direction: column; align-items: flex-start !important; gap: 12px; }
+
+  /* Fixed top mobile navigation */
+  .mobile-menu-button {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255,255,255,.11);
+    border-radius: 12px;
+    background: rgba(255,255,255,.045);
+    color: #fff;
+    cursor: pointer;
+    font-size: 21px;
+    line-height: 1;
+  }
+
+  .mobile-menu {
+    position: fixed;
+    z-index: 140;
+    top: 64px;
+    left: 0;
+    right: 0;
+    padding: 12px 4% 18px;
+    background: rgba(5,8,13,.97);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+    transform: translateY(-120%);
+    opacity: 0;
+    visibility: hidden;
+    transition: transform .28s ease, opacity .28s ease, visibility .28s;
+    max-height: calc(100dvh - 64px);
+    overflow-y: auto;
+  }
+
+  .mobile-menu.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-menu a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 52px;
+    padding: 0 14px;
+    border-bottom: 1px solid rgba(255,255,255,.065);
+    color: #dfe6f2;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .mobile-menu a::after { content: '→'; color: #6f8fff; }
+  .mobile-menu a:last-child { border-bottom: 0; }
+  body.mobile-menu-open { overflow: hidden; }
+}
+
+@media (min-width: 641px) {
+  .mobile-menu-button, .mobile-menu { display: none !important; }
+}
