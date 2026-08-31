@@ -58,8 +58,7 @@ const phoneScreens = {
     <div class="ai-phone-chat">“My bank says I need to verify my account through a link. Is this safe?”</div>
     <div class="ai-phone-result"><strong>⚠ Pause before acting</strong><p>Unexpected urgency and a login link are common scam signals. Open your bank app directly or call the official number instead.</p></div>
     <div class="phone-label">ASK A-Z CARE</div>
-    <div class="phone-app-grid compact"><button data-app="messages"><span>✉</span><strong>Message</strong></button><button data-app="browser"><span>↗</span><strong>Link</strong></button><button data-app="calls"><span>☎</span><strong>Call</strong></button><button data-app="contacts"><span>♥</span><strong>Ask family</strong></button></div>
-    <button class="voice-button">🔊 Read explanation aloud</button>`,
+    <div class="phone-app-grid compact"><button data-app="messages"><span>✉</span><strong>Message</strong></button><button data-app="browser"><span>↗</span><strong>Link</strong></button><button data-app="calls"><span>☎</span><strong>Call</strong></button><button data-app="contacts"><span>♥</span><strong>Ask family</strong></button></div>`,
 
   calls: `
     <div class="phone-subhead"><button data-back>‹</button><div><small>CALL PROTECTION</small><h3>Incoming call</h3></div></div>
