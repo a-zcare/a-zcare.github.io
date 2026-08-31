@@ -144,6 +144,18 @@ document.querySelectorAll('[data-phone-screen]').forEach(button => button.addEve
 }));
 showPhoneScreen('home');
 
+const phoneClock = document.querySelector('.phone-status span:first-child');
+function updatePhoneClock() {
+  if (!phoneClock) return;
+  phoneClock.textContent = new Intl.DateTimeFormat(undefined, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  }).format(new Date());
+}
+updatePhoneClock();
+setInterval(updatePhoneClock, 15000);
+
 const aiButton = document.getElementById('runAiDemo');
 const aiResult = document.getElementById('aiResult');
 if (aiButton && aiResult) aiButton.addEventListener('click', () => {
