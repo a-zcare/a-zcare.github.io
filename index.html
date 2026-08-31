@@ -18,6 +18,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .survey-wrap{max-width:900px;margin:0 auto}.survey-card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border-radius:24px;padding:34px;box-shadow:0 30px 80px rgba(0,0,0,.24)}.survey-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.survey-field{display:grid;gap:8px}.survey-field.full{grid-column:1/-1}.survey-field>label,.survey-label{font-size:12px;font-weight:700;color:#dbe3ef}.survey-field small{color:var(--muted);font-size:10px}.survey-field select,.survey-field input[type="email"],.survey-field textarea{width:100%;border:1px solid var(--line);background:#0a111b;color:#f5f7fb;border-radius:12px;padding:13px 14px;outline:none}.survey-field select:focus,.survey-field input[type="email"]:focus,.survey-field textarea:focus{border-color:rgba(91,140,255,.65);box-shadow:0 0 0 3px rgba(91,140,255,.08)}.survey-field textarea{min-height:105px;resize:vertical}.survey-options{display:flex;flex-wrap:wrap;gap:8px}.survey-option{position:relative}.survey-option input{position:absolute;opacity:0;pointer-events:none}.survey-option span{display:block;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#aeb9c8;padding:9px 12px;border-radius:10px;font-size:11px;cursor:pointer;transition:.2s}.survey-option input:checked+span{border-color:rgba(91,140,255,.55);background:rgba(91,140,255,.13);color:#dce7ff}.survey-consent{display:flex;gap:10px;align-items:flex-start;margin:22px 0 16px;color:#9aa6b6;font-size:11px}.survey-consent input{margin-top:3px}.survey-submit-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.survey-status{font-size:11px;color:var(--muted)}.survey-status.success{color:var(--green)}.survey-status.error{color:#ff8090}.survey-card button[disabled]{opacity:.6;cursor:not-allowed;transform:none}.survey-privacy{margin-top:16px;color:#687588;font-size:10px}.survey-thanks{display:none;text-align:center;padding:30px 12px}.survey-thanks.show{display:block}.survey-thanks .check{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:rgba(88,230,169,.1);color:var(--green);font-size:22px}.survey-thanks h3{margin:0 0 7px;font-size:24px}.survey-thanks p{margin:0;color:var(--muted);font-size:13px}@media(max-width:700px){.survey-card{padding:22px}.survey-grid{grid-template-columns:1fr}.survey-field.full{grid-column:auto}}
+  </style>
 </head>
 <body>
   <div class="page-grid" aria-hidden="true"></div>
@@ -30,6 +33,7 @@
         <a href="#ai">AI Safety</a>
         <a href="#sos">SOS</a>
         <a href="#family">Family</a>
+        <a href="#survey">Survey</a>
         <a href="#privacy">Privacy</a>
       </nav>
       <a class="nav-cta" href="https://github.com/a-zcare/a-zcare.github.io" target="_blank" rel="noreferrer">View project ↗</a>
@@ -46,7 +50,7 @@
           <p class="hero-lead">A-Z Care is a privacy-first smartphone safety concept for kids, seniors and the people who care for them — combining scam awareness, SOS, family safety and an AI assistant in one clear experience.</p>
           <div class="hero-actions">
             <a class="button primary" href="#product">Explore the concept</a>
-            <a class="button ghost" href="#ai">Meet A-Z Care AI →</a>
+            <a class="button ghost" href="#survey">Share your opinion →</a>
           </div>
           <div class="hero-points" aria-label="Product principles">
             <span>Privacy first</span><span>Human-in-the-loop</span><span>Easy to use</span>
@@ -165,7 +169,7 @@
             <div class="map-grid"></div><div class="map-zone zone-home"><span>Home</span></div><div class="map-zone zone-school"><span>School</span></div><div class="map-person person-one"><span>A</span><small>Alex</small></div><div class="map-person person-two"><span>M</span><small>Mom</small></div>
             <div class="map-card"><strong>2 people sharing</strong><span>Location sharing is consent-based</span></div>
           </div>
-          <div class="timeline reveal"><div class="timeline-head"><div><small>TODAY</small><h3>Safety timeline</h3></div><span>Live demo</span></div><div class="timeline-item"><time>08:32</time><i class="ok"></i><div><strong>Left Home</strong><small>Safe zone event</small></div></div><div class="timeline-item"><time>08:47</time><i class="ok"></i><div><strong>Arrived at School</strong><small>Safe zone event</small></div></div><div class="timeline-item"><time>12:14</time><i class="warn"></i><div><strong>Suspicious message flagged</strong><small>No link opened</small></div></div><div class="timeline-item"><time>15:31</time><i class="ok"></i><div><strong>Arrived Home</strong><small>Battery 62%</small></div></div><div class="timeline-item"><time>18:42</time><i class="battery"></i><div><strong>Battery low</strong><small>18% remaining</small></div></div></div>
+          <div class="timeline reveal"><div class="timeline-head"><div><small>TODAY</small><h3>Safety timeline</h3></div><span>Live demo</span></div><div class="timeline-item"><time>08:32</time><i class="ok"></i><div><strong>Left Home</strong><small>Safe zone event</small></div></div><div class="timeline-item"><time>08:47</time><i class="ok"></i><div><strong>Arrived at School</strong><small>Safe zone event</small></div></div><div class="timeline-item"><time>12:14</time><i class="warn"></i><div><strong>Suspicious message flagged</strong><small>No link opened</small></div></div><div class="timeline-item"><time>15:31</time><i class="ok"></i><div><strong>Arrived Home</strong><small>Safe zone event · Battery 62%</small></div></div><div class="timeline-item"><time>18:42</time><i class="battery"></i><div><strong>Battery low</strong><small>18% remaining</small></div></div></div>
         </div>
       </div>
     </section>
@@ -194,6 +198,111 @@
       </div>
     </section>
 
+    <section class="section section-alt" id="survey">
+      <div class="container survey-wrap">
+        <div class="section-heading center reveal">
+          <p class="eyebrow">HELP SHAPE A-Z CARE</p>
+          <h2>Would this phone be useful to you or your family?</h2>
+          <p>This short survey helps us understand who A-Z Care should be built for and which safety features matter most.</p>
+        </div>
+        <div class="survey-card reveal">
+          <form id="azSurvey">
+            <div class="survey-grid">
+              <div class="survey-field">
+                <label for="surveyAudience">Who would you use A-Z Care for?</label>
+                <select id="surveyAudience" name="audience" required>
+                  <option value="">Choose one</option>
+                  <option value="child">My child</option>
+                  <option value="parent_or_grandparent">Parent or grandparent</option>
+                  <option value="other_family">Another family member</option>
+                  <option value="myself">Myself</option>
+                  <option value="just_interested">I'm just interested in the concept</option>
+                </select>
+              </div>
+              <div class="survey-field">
+                <label for="surveyPurchase">Would you consider buying it?</label>
+                <select id="surveyPurchase" name="purchase_intent" required>
+                  <option value="">Choose one</option>
+                  <option value="yes">Yes</option>
+                  <option value="maybe_price">Maybe, depending on price</option>
+                  <option value="need_more_info">I need more information</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="survey-field full">
+                <span class="survey-label">Which features matter most?</span>
+                <small>Select as many as you want.</small>
+                <div class="survey-options">
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="scam_protection"><span>Scam protection</span></label>
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="sos"><span>SOS</span></label>
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="location"><span>Family location</span></label>
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="simple_mode"><span>Simple mode</span></label>
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="kids_mode"><span>Kids mode</span></label>
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="senior_mode"><span>Senior mode</span></label>
+                  <label class="survey-option"><input type="checkbox" name="important_features" value="ai_assistant"><span>AI assistant</span></label>
+                </div>
+              </div>
+              <div class="survey-field">
+                <label for="surveyPrice">What price feels reasonable?</label>
+                <select id="surveyPrice" name="price_range">
+                  <option value="">Not sure</option>
+                  <option value="under_150">Under €150</option>
+                  <option value="150_249">€150–249</option>
+                  <option value="250_399">€250–399</option>
+                  <option value="400_plus">€400+</option>
+                  <option value="subscription">I would prefer a monthly subscription</option>
+                </select>
+              </div>
+              <div class="survey-field">
+                <label for="surveyAge">Your age group</label>
+                <select id="surveyAge" name="age_group">
+                  <option value="">Prefer not to say</option>
+                  <option value="under_18">Under 18</option>
+                  <option value="18_24">18–24</option>
+                  <option value="25_34">25–34</option>
+                  <option value="35_44">35–44</option>
+                  <option value="45_54">45–54</option>
+                  <option value="55_64">55–64</option>
+                  <option value="65_plus">65+</option>
+                </select>
+              </div>
+              <div class="survey-field">
+                <label for="surveyCountry">Country</label>
+                <select id="surveyCountry" name="country">
+                  <option value="">Prefer not to say</option>
+                  <option value="Latvia">Latvia</option>
+                  <option value="Lithuania">Lithuania</option>
+                  <option value="Estonia">Estonia</option>
+                  <option value="Germany">Germany</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div class="survey-field">
+                <label for="surveyEmail">Email <small>optional</small></label>
+                <input id="surveyEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com">
+              </div>
+              <div class="survey-field full">
+                <label for="surveyFeedback">What would you add or change?</label>
+                <textarea id="surveyFeedback" name="feedback" maxlength="1000" placeholder="Your idea, concern or suggestion…"></textarea>
+              </div>
+            </div>
+            <label class="survey-consent"><input id="surveyConsent" type="checkbox" required><span>I agree to submit these answers for A-Z Care product research. Email is optional and will only be used if I choose to provide it.</span></label>
+            <div class="survey-submit-row">
+              <button class="button primary" id="surveySubmit" type="submit">Send my feedback</button>
+              <span class="survey-status" id="surveyStatus" aria-live="polite"></span>
+            </div>
+            <p class="survey-privacy">Responses are stored in the A-Z Care research database. Other website visitors cannot read submitted responses.</p>
+          </form>
+          <div class="survey-thanks" id="surveyThanks">
+            <div class="check">✓</div>
+            <h3>Thank you.</h3>
+            <p>Your response was saved and will help shape the A-Z Care prototype.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section roadmap-section" id="roadmap">
       <div class="container">
         <div class="section-heading center reveal"><p class="eyebrow">ROADMAP</p><h2>From concept to working prototype.</h2><p>The site deliberately separates the current concept from features that still need to be built and validated.</p></div>
@@ -202,12 +311,131 @@
     </section>
 
     <section class="cta-section">
-      <div class="container cta-card reveal"><div class="cta-glow"></div><p class="eyebrow">A-Z CARE</p><h2>Make everyday technology easier to trust.</h2><p>A privacy-first family safety concept for the people who need technology to be clearer, calmer and safer.</p><div class="hero-actions centered"><a class="button primary" href="https://github.com/a-zcare/a-zcare.github.io" target="_blank" rel="noreferrer">Explore on GitHub ↗</a><a class="button ghost" href="#top">Back to top ↑</a></div></div>
+      <div class="container cta-card reveal"><div class="cta-glow"></div><p class="eyebrow">A-Z CARE</p><h2>Make everyday technology easier to trust.</h2><p>A privacy-first family safety concept for the people who need technology to be clearer, calmer and safer.</p><div class="hero-actions centered"><a class="button primary" href="#survey">Share your opinion</a><a class="button ghost" href="#top">Back to top ↑</a></div></div>
     </section>
   </main>
 
-  <footer><div class="container footer"><a class="logo" href="#top">A-Z<span>Care</span></a><p>Concept / prototype · © 2026 A-Z Care</p><div><a href="#privacy">Privacy</a><a href="#roadmap">Roadmap</a></div></div></footer>
+  <footer><div class="container footer"><a class="logo" href="#top">A-Z<span>Care</span></a><p>Concept / prototype · © 2026 A-Z Care</p><div><a href="#privacy">Privacy</a><a href="#survey">Survey</a><a href="#roadmap">Roadmap</a></div></div></footer>
 
   <script src="js/app.js?v=20260831-ai-clean-2"></script>
+  <script>
+    (() => {
+      const form = document.getElementById('azSurvey');
+      if (!form) return;
+
+      const SUPABASE_URL = 'https://juulhxotgrryscehsjlj.supabase.co';
+      const SUPABASE_KEY = 'sb_publishable_60swk3LP-qrxpWy-nLmM8g_SR-NrCI6';
+      const status = document.getElementById('surveyStatus');
+      const submit = document.getElementById('surveySubmit');
+      const thanks = document.getElementById('surveyThanks');
+      const draftKey = 'azcare_survey_draft_v1';
+      const completeKey = 'azcare_survey_complete_v1';
+      let started = false;
+
+      const track = (eventName) => {
+        if (typeof window.gtag === 'function') window.gtag('event', eventName, {event_category:'survey'});
+      };
+
+      const getValues = () => {
+        const features = [...form.querySelectorAll('input[name="important_features"]:checked')].map(el => el.value);
+        return {
+          audience: form.elements.audience.value || null,
+          purchase_intent: form.elements.purchase_intent.value || null,
+          important_features: features.join(','),
+          price_range: form.elements.price_range.value || null,
+          age_group: form.elements.age_group.value || null,
+          country: form.elements.country.value || null,
+          email: form.elements.email.value.trim() || null,
+          feedback: form.elements.feedback.value.trim() || null
+        };
+      };
+
+      const saveDraft = () => {
+        try { localStorage.setItem(draftKey, JSON.stringify(getValues())); } catch (_) {}
+      };
+
+      const restoreDraft = () => {
+        try {
+          const saved = JSON.parse(localStorage.getItem(draftKey) || 'null');
+          if (!saved) return;
+          ['audience','purchase_intent','price_range','age_group','country','email','feedback'].forEach(name => {
+            if (saved[name] && form.elements[name]) form.elements[name].value = saved[name];
+          });
+          if (saved.important_features) {
+            saved.important_features.split(',').forEach(value => {
+              const input = form.querySelector(`input[name="important_features"][value="${CSS.escape(value)}"]`);
+              if (input) input.checked = true;
+            });
+          }
+        } catch (_) {}
+      };
+
+      const showThanks = () => {
+        form.style.display = 'none';
+        thanks.classList.add('show');
+      };
+
+      try {
+        if (localStorage.getItem(completeKey) === '1') showThanks();
+        else restoreDraft();
+      } catch (_) { restoreDraft(); }
+
+      form.addEventListener('input', () => {
+        if (!started) { started = true; track('survey_start'); }
+        saveDraft();
+      });
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        status.className = 'survey-status';
+        status.textContent = '';
+
+        if (!form.reportValidity()) return;
+        const payload = getValues();
+        if (!payload.important_features) {
+          status.className = 'survey-status error';
+          status.textContent = 'Please choose at least one important feature.';
+          return;
+        }
+
+        submit.disabled = true;
+        submit.textContent = 'Sending…';
+        status.textContent = 'Saving your response…';
+
+        try {
+          const response = await fetch(`${SUPABASE_URL}/rest/v1/survey_responses`, {
+            method: 'POST',
+            headers: {
+              'apikey': SUPABASE_KEY,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            const details = await response.text();
+            throw new Error(details || `Request failed: ${response.status}`);
+          }
+
+          try {
+            localStorage.setItem(completeKey, '1');
+            localStorage.removeItem(draftKey);
+          } catch (_) {}
+          track('survey_complete');
+          status.className = 'survey-status success';
+          status.textContent = 'Saved ✓';
+          showThanks();
+        } catch (error) {
+          console.error('A-Z Care survey submit failed:', error);
+          track('survey_error');
+          status.className = 'survey-status error';
+          status.textContent = 'Could not send the response. Please try again.';
+          submit.disabled = false;
+          submit.textContent = 'Send my feedback';
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
