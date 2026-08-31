@@ -144,17 +144,18 @@ document.querySelectorAll('[data-phone-screen]').forEach(button => button.addEve
 }));
 showPhoneScreen('home');
 
-const phoneClock = document.querySelector('.phone-status span:first-child');
 function updatePhoneClock() {
-  if (!phoneClock) return;
-  phoneClock.textContent = new Intl.DateTimeFormat(undefined, {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  }).format(new Date());
+  const clock = document.querySelector('.phone-status span:first-child');
+  if (!clock) return;
+  const now = new Date();
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  clock.textContent = `${hours}:${minutes}`;
 }
 updatePhoneClock();
-setInterval(updatePhoneClock, 15000);
+setInterval(updatePhoneClock, 1000);
+window.addEventListener('pageshow', updatePhoneClock);
+document.addEventListener('visibilitychange', () => { if (!document.hidden) updatePhoneClock(); });
 
 const aiButton = document.getElementById('runAiDemo');
 const aiResult = document.getElementById('aiResult');
