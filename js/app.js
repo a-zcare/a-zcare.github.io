@@ -100,3 +100,52 @@ const observer = new IntersectionObserver(entries => entries.forEach(entry => {
   if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); }
 }), {threshold:.12});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* Responsive enhancement layer */
+const responsiveStyles = document.createElement('link');
+responsiveStyles.rel = 'stylesheet';
+responsiveStyles.href = 'css/responsive.css';
+document.head.appendChild(responsiveStyles);
+
+const siteNav = document.querySelector('.nav');
+if (siteNav) {
+  const mobileButton = document.createElement('button');
+  mobileButton.className = 'mobile-menu-button';
+  mobileButton.type = 'button';
+  mobileButton.setAttribute('aria-label', 'Open navigation');
+  mobileButton.setAttribute('aria-expanded', 'false');
+  mobileButton.innerHTML = '☰';
+  siteNav.appendChild(mobileButton);
+
+  const mobileMenu = document.createElement('nav');
+  mobileMenu.className = 'mobile-menu';
+  mobileMenu.setAttribute('aria-label', 'Mobile navigation');
+  mobileMenu.innerHTML = `
+    <a href="#product">Product</a>
+    <a href="#ai">AI Safety</a>
+    <a href="#scam">Scam Protection</a>
+    <a href="#sos">SOS</a>
+    <a href="#family">Family</a>
+    <a href="#modes">Kids & Seniors</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#roadmap">Roadmap</a>`;
+  document.body.appendChild(mobileMenu);
+
+  const closeMobileMenu = () => {
+    mobileMenu.classList.remove('open');
+    document.body.classList.remove('mobile-menu-open');
+    mobileButton.setAttribute('aria-expanded', 'false');
+    mobileButton.innerHTML = '☰';
+  };
+
+  mobileButton.addEventListener('click', () => {
+    const opening = !mobileMenu.classList.contains('open');
+    mobileMenu.classList.toggle('open', opening);
+    document.body.classList.toggle('mobile-menu-open', opening);
+    mobileButton.setAttribute('aria-expanded', String(opening));
+    mobileButton.innerHTML = opening ? '×' : '☰';
+  });
+
+  mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
+  window.addEventListener('resize', () => { if (window.innerWidth > 640) closeMobileMenu(); });
+}
