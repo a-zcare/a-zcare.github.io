@@ -248,3 +248,114 @@ if (siteNav) {
   mobileMenu.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
   window.addEventListener('resize', () => { if (window.innerWidth > 640) closeMobileMenu(); });
 }
+
+// Product clarity, waitlist, interactive AI demo, use cases and FAQ.
+(() => {
+  const style = document.createElement('style');
+  style.textContent = `
+    .product-definition{margin:14px 0 0;color:#8997aa;font-size:11px;line-height:1.5}.waitlist-mini{margin-top:20px;max-width:520px}.waitlist-mini strong{display:block;color:#f4f7fb;font-size:12px;margin-bottom:9px}.waitlist-row{display:flex;gap:8px}.waitlist-row input{min-width:0;flex:1;border:1px solid var(--line);background:#09111b;color:#fff;border-radius:12px;padding:12px 14px;font:inherit;outline:none}.waitlist-row input:focus{border-color:rgba(91,140,255,.7);box-shadow:0 0 0 3px rgba(91,140,255,.08)}.waitlist-row button{white-space:nowrap}.waitlist-status{display:block;min-height:16px;margin-top:7px;color:#7f8b9c;font-size:10px}.waitlist-status.ok{color:var(--green)}.waitlist-status.err{color:#ff8090}
+    .ai-live-form{margin-top:14px}.ai-live-form textarea{width:100%;min-height:94px;resize:vertical;border:1px solid var(--line);background:#09111b;color:#f5f7fb;border-radius:14px;padding:13px 14px;font:inherit;line-height:1.45;outline:none}.ai-live-form textarea:focus{border-color:rgba(91,140,255,.7);box-shadow:0 0 0 3px rgba(91,140,255,.08)}.ai-live-actions{display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap}.ai-live-actions button{border:1px solid var(--line);background:rgba(255,255,255,.04);color:#dce6f4;border-radius:10px;padding:9px 12px;cursor:pointer}.ai-live-actions .ai-analyze{background:linear-gradient(135deg,#4f7cff,#42d7c4);color:#061018;border:0;font-weight:800}.ai-demo-note{margin-top:9px!important;font-size:10px!important;color:#69778a!important}.ai-examples{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}.ai-examples button{border:1px solid var(--line);background:transparent;color:#8e9bae;border-radius:999px;padding:6px 9px;font-size:9px;cursor:pointer}
+    .usecase-family{border:1px solid var(--line);border-radius:22px;padding:28px;background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015))}.usecase-family .mode-label{display:inline-block;margin-bottom:18px}.usecase-family h3{font-size:24px;margin:0 0 12px}.usecase-family p{color:var(--muted);line-height:1.65}.family-use-list{display:grid;gap:9px;margin-top:20px}.family-use-list span{border:1px solid var(--line);border-radius:11px;padding:10px 12px;color:#b7c2d0;font-size:11px}.mode-grid.three-usecases{grid-template-columns:repeat(3,1fr)}
+    .faq-section{border-top:1px solid var(--line)}.faq-wrap{max-width:900px;margin:0 auto}.faq-list{display:grid;gap:10px;margin-top:30px}.faq-item{border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.02);overflow:hidden}.faq-item button{width:100%;display:flex;justify-content:space-between;gap:20px;text-align:left;border:0;background:transparent;color:#eef3f9;padding:18px 20px;font:inherit;font-weight:700;cursor:pointer}.faq-item button span:last-child{color:#6f7f94}.faq-answer{display:none;padding:0 20px 18px;color:var(--muted);font-size:13px;line-height:1.65}.faq-item.open .faq-answer{display:block}
+    @media(max-width:900px){.mode-grid.three-usecases{grid-template-columns:1fr}.waitlist-row{flex-direction:column}.waitlist-row .button{width:100%}}
+  `;
+  document.head.appendChild(style);
+
+  const heroLead = document.querySelector('.hero-lead');
+  if (heroLead) heroLead.textContent = 'A-Z Care is an AI-assisted smartphone safety concept for kids, seniors and families — designed to recognize scams and digital risks, make emergencies simpler and keep trusted people connected.';
+
+  const heroActions = document.querySelector('.hero-copy .hero-actions');
+  if (heroActions) {
+    const definition = document.createElement('p');
+    definition.className = 'product-definition';
+    definition.textContent = 'Interactive web prototype · Mobile product in development';
+    heroActions.insertAdjacentElement('beforebegin', definition);
+
+    const waitlist = document.createElement('form');
+    waitlist.className = 'waitlist-mini';
+    waitlist.id = 'earlyAccess';
+    waitlist.innerHTML = '<strong>Get early access to A-Z Care</strong><div class="waitlist-row"><input type="email" name="email" autocomplete="email" maxlength="254" required placeholder="Your email address" aria-label="Email address"><button class="button primary" type="submit">Join waitlist</button></div><span class="waitlist-status" aria-live="polite">No spam. Early prototype updates only.</span>';
+    heroActions.insertAdjacentElement('afterend', waitlist);
+
+    waitlist.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = waitlist.elements.email.value.trim();
+      const button = waitlist.querySelector('button');
+      const status = waitlist.querySelector('.waitlist-status');
+      if (!email || !waitlist.reportValidity()) return;
+      button.disabled = true; button.textContent = 'Joining…'; status.className = 'waitlist-status'; status.textContent = 'Saving your email…';
+      try {
+        const response = await fetch('https://juulhxotgrryscehsjlj.supabase.co/rest/v1/survey_responses', {
+          method:'POST',
+          headers:{'apikey':'sb_publishable_60swk3LP-qrxpWy-nLmM8g_SR-NrCI6','Content-Type':'application/json','Prefer':'return=minimal'},
+          body:JSON.stringify({audience:'waitlist',purchase_intent:'early_access',important_features:'early_access',email})
+        });
+        if (!response.ok) throw new Error('Waitlist request failed');
+        waitlist.elements.email.value = '';
+        status.className = 'waitlist-status ok'; status.textContent = 'You’re on the early-access list ✓'; button.textContent = 'Joined ✓';
+        if (typeof window.gtag === 'function') window.gtag('event','waitlist_join',{event_category:'conversion'});
+      } catch (error) {
+        status.className = 'waitlist-status err'; status.textContent = 'Could not join right now. Please try again.'; button.disabled = false; button.textContent = 'Join waitlist';
+      }
+    });
+  }
+
+  const aiPanel = document.querySelector('#ai .assistant-panel');
+  const oldAiButton = document.getElementById('runAiDemo');
+  if (oldAiButton) oldAiButton.style.display = 'none';
+  if (aiPanel) {
+    aiPanel.innerHTML = '<div class="panel-head"><div class="ai-mark">✦</div><div><strong>A-Z Care AI</strong><small>Safety Assistant · Interactive concept demo</small></div><span class="online-dot"></span></div><div class="analysis-card" id="liveAiResult"><div class="analysis-state"><span class="loader-dot"></span><span>Ask before you act</span></div><p>Paste a suspicious message, link or describe a situation. This demo recognizes common safety patterns locally; live AI will be connected next.</p></div><form class="ai-live-form" id="aiLiveForm"><textarea id="aiLiveInput" maxlength="600" required placeholder="Example: My bank texted me a link and says my account will be blocked today…"></textarea><div class="ai-examples"><button type="button" data-ai-example="bank">Bank message</button><button type="button" data-ai-example="parcel">Parcel link</button><button type="button" data-ai-example="call">Unknown call</button><button type="button" data-ai-example="family">Family safety</button></div><div class="ai-live-actions"><button class="ai-analyze" type="submit">✦ Ask A-Z Care</button><button type="button" id="clearAiDemo">Clear</button></div><p class="ai-demo-note">Concept demo — not a live security service. Do not enter passwords, card details or verification codes.</p></form>';
+    const form = aiPanel.querySelector('#aiLiveForm');
+    const input = aiPanel.querySelector('#aiLiveInput');
+    const result = aiPanel.querySelector('#liveAiResult');
+    const examples = {
+      bank:'Your bank account will be locked today. Verify immediately using this link and enter the code we send you.',
+      parcel:'Your parcel is waiting. Pay €1.99 now using delivery-check.example or it will be returned.',
+      call:'Someone called my mother saying they are from the bank and asked for her verification code.',
+      family:'My child is late coming home and is not answering the phone. What should I do?'
+    };
+    aiPanel.querySelectorAll('[data-ai-example]').forEach(button => button.addEventListener('click', () => { input.value = examples[button.dataset.aiExample]; input.focus(); }));
+    aiPanel.querySelector('#clearAiDemo').addEventListener('click', () => { input.value=''; result.className='analysis-card'; result.innerHTML='<div class="analysis-state"><span class="loader-dot"></span><span>Ask before you act</span></div><p>Paste a suspicious message, link or describe a situation.</p>'; input.focus(); });
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const text = input.value.trim(); if (!text) return;
+      const lower = text.toLowerCase();
+      const hasLink = /(https?:\/\/|www\.|\.com|\.lv|\.net|\.org|link)/i.test(text);
+      const urgency = /(urgent|immediately|today|now|blocked|locked|expire|return|срочно|сегодня|заблок|немедленно)/i.test(text);
+      const code = /(code|verification|otp|password|pin|код|парол)/i.test(text);
+      const payment = /(pay|€|payment|card|bank|оплат|банк|кар[тд])/i.test(text);
+      const family = /(child|kid|daughter|son|mother|father|parent|grandma|family|реб[её]н|мам|пап|семь)/i.test(text);
+      const signals = [hasLink&&'Unfamiliar link',urgency&&'Urgency / pressure',code&&'Sensitive code request',payment&&'Money / account context'].filter(Boolean);
+      let title = 'No obvious high-risk pattern in this demo';
+      let answer = 'Stay cautious and verify important requests through an official app, website or a trusted contact before acting.';
+      let cls = 'analysis-card';
+      if (code || (hasLink && urgency) || (payment && urgency)) { title='⚠ Possible scam — pause before acting'; answer='Do not share verification codes, passwords or payment details. Avoid the link and contact the organization through its official app, website or known phone number.'; cls='analysis-card danger-result'; }
+      else if (family) { title='Family safety situation'; answer='Try the person again and contact a trusted nearby person. If you believe someone is in immediate danger, contact local emergency services rather than relying on this demo.'; }
+      else if (hasLink || urgency) { title='⚠ Worth checking before you act'; answer='The message contains a warning sign. Do not rush. Verify the sender independently and open the official service directly instead of using the message link.'; cls='analysis-card danger-result'; }
+      result.className=cls;
+      result.innerHTML='<div class="analysis-state"><span class="loader-dot"></span><span>'+title+'</span></div><p>'+answer+'</p>'+(signals.length?'<div class="risk-tags">'+signals.map(s=>'<span>'+s+'</span>').join('')+'</div>':'');
+      if (typeof window.gtag === 'function') window.gtag('event','ai_demo_question',{event_category:'ai_demo'});
+    });
+  }
+
+  const modes = document.getElementById('modes');
+  if (modes) {
+    const eyebrow = modes.querySelector('.eyebrow'); const heading = modes.querySelector('h2'); const grid = modes.querySelector('.mode-grid');
+    if (eyebrow) eyebrow.textContent='WHO A-Z CARE IS FOR';
+    if (heading) heading.textContent='Different people. Different risks. One safety layer.';
+    if (grid) {
+      grid.classList.add('three-usecases');
+      const familyCard=document.createElement('article'); familyCard.className='usecase-family reveal';
+      familyCard.innerHTML='<span class="mode-label">FOR FAMILIES & CAREGIVERS</span><h3>More context. Less worrying.</h3><p>Trusted people can see the safety information that has deliberately been shared and step in when someone needs help.</p><div class="family-use-list"><span>⌖ Consent-based family status</span><span>✓ Safe-zone and battery context</span><span>♥ Trusted contact escalation</span></div>';
+      grid.appendChild(familyCard); observer.observe(familyCard);
+    }
+  }
+
+  const roadmap = document.getElementById('roadmap');
+  if (roadmap) {
+    const faq=document.createElement('section'); faq.className='section faq-section'; faq.id='faq';
+    faq.innerHTML='<div class="container faq-wrap"><div class="section-heading center"><p class="eyebrow">FAQ</p><h2>What A-Z Care is — and what it isn’t yet.</h2><p>A-Z Care is currently an interactive concept and web prototype. The mobile product is still being designed and validated.</p></div><div class="faq-list"><div class="faq-item"><button type="button"><span>Is A-Z Care an app, a phone or an operating system?</span><span>+</span></button><div class="faq-answer">Right now it is an interactive product concept. The goal is a safer smartphone experience with protection, AI assistance, SOS and family-safety features. The final mobile architecture is still being evaluated.</div></div><div class="faq-item"><button type="button"><span>Does A-Z Care work on Android and iOS?</span><span>+</span></button><div class="faq-answer">Not yet. The public site demonstrates the intended experience; platform support will be confirmed as the mobile prototype is built.</div></div><div class="faq-item"><button type="button"><span>Is the AI Safety Assistant live?</span><span>+</span></button><div class="faq-answer">The current website demo uses example safety rules so people can try the interaction. A live AI service is planned, with clear limits and privacy protections.</div></div><div class="faq-item"><button type="button"><span>How will personal and family data be protected?</span><span>+</span></button><div class="faq-answer">The concept is privacy-first: clear consent, visible permissions and no hidden family tracking. Exact technical safeguards will be documented as the working prototype is developed.</div></div><div class="faq-item"><button type="button"><span>Will it work without internet?</span><span>+</span></button><div class="faq-answer">Offline behavior has not been finalized. Essential safety flows are being considered for degraded connectivity, but the site does not claim offline protection today.</div></div><div class="faq-item"><button type="button"><span>How much will A-Z Care cost?</span><span>+</span></button><div class="faq-answer">Pricing has not been decided. The current survey and early-access list are helping validate what people need before a pricing model is chosen.</div></div></div></div>';
+    roadmap.insertAdjacentElement('beforebegin',faq);
+    faq.querySelectorAll('.faq-item button').forEach(button=>button.addEventListener('click',()=>{const item=button.parentElement; const open=item.classList.toggle('open'); button.querySelector('span:last-child').textContent=open?'−':'+';}));
+  }
+})();
