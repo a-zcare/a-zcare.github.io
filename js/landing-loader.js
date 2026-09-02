@@ -1,0 +1,1 @@
+(()=>{const c=document.createElement('link');c.rel='stylesheet';c.href='css/landing-v2.css?v=20260902-1';document.head.appendChild(c);const s=document.createElement('script');s.src='js/landing-v2.js?v=20260902-1';s.defer=true;document.head.appendChild(s)})();
