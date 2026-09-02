@@ -1,24 +1,253 @@
 (() => {
-  let addonScreen = null;
+  const view = () => document.getElementById('phoneView');
+  const mainTabs = new Set(['home', 'protect', 'location', 'ai']);
   const history = [];
-  const phoneView = () => document.getElementById('phoneView');
-  const isMainTab = name => ['home','protect','location','ai'].includes(name);
+  let current = 'home';
 
-  function bindAddonControls(){document.querySelectorAll('[data-device-toggle]').forEach(btn=>btn.onclick=e=>{e.stopPropagation();btn.classList.toggle('on')});document.querySelectorAll('[data-location-action]').forEach(btn=>btn.onclick=e=>{e.stopPropagation();const status=document.getElementById('locationActionStatus');if(btn.dataset.locationAction==='share'){if(navigator.share)navigator.share({title:'A-Z Care location',text:'I am sharing my location with you.'}).catch(()=>{});if(status)status.textContent='Location ready to share with Mom and Grandma ✓'}else if(status)status.textContent='Home route ready · navigation demo ✓'})}
+  const toggleRow = (label, note, on = true) => `
+    <div class="settings-toggle-row">
+      <div><strong>${label}</strong><small>${note}</small></div>
+      <button class="settings-toggle${on ? ' on' : ''}" data-setting-toggle aria-label="Toggle ${label}"></button>
+    </div>`;
 
-  function renderAddon(name){const view=phoneView();if(!view)return;addonScreen=name;document.querySelectorAll('.phone-tab').forEach(t=>t.classList.remove('active'));if(name==='device'){view.innerHTML=`<div class="phone-subhead"><button data-addon-back>‹</button><div><small>MY PHONE</small><h3>A-Z Care Phone 1</h3></div></div><div class="device-spec-list"><div><span>Platform</span><strong>Snapdragon 7-series</strong></div><div><span>Memory</span><strong>12 GB · 256 GB</strong></div><div><span>Display</span><strong>AMOLED · 120 Hz</strong></div><div><span>Battery</span><strong>6200–6500 mAh · 65 W</strong></div><div><span>Network</span><strong>5G · eSIM · NFC · Wi-Fi 6E</strong></div><div><span>Camera</span><strong>50 MP OIS</strong></div><div><span>Protection</span><strong>IP68 · SOS button</strong></div><div><span>Price</span><strong>Estimated $496</strong></div></div><div class="phone-label">PRIVACY CONTROLS</div><div class="device-controls"><div class="device-toggle"><span>Microphone</span><button class="on" data-device-toggle></button></div><div class="device-toggle"><span>Camera</span><button class="on" data-device-toggle></button></div><div class="device-toggle"><span>Location</span><button class="on" data-device-toggle></button></div><div class="device-toggle"><span>Family sharing</span><button class="on" data-device-toggle></button></div></div><a class="phone-link" href="hardware.html">Full specifications →</a>`}else if(name==='sharelocation'){view.innerHTML=`<div class="phone-subhead"><button data-addon-back>‹</button><div><small>LOCATION SHARING</small><h3>Share location</h3></div></div><div class="location-card"><span>⌖</span><strong>Share with family</strong><p>Send your current location to Mom and Grandma.</p></div><button class="phone-wide-action good" data-location-action="share">Share now</button><div class="location-action-status" id="locationActionStatus"></div>`}else if(name==='navigate'){view.innerHTML=`<div class="phone-subhead"><button data-addon-back>‹</button><div><small>NAVIGATION</small><h3>Navigate home</h3></div></div><div class="location-card"><span>⌖</span><strong>Home route</strong><p>Navigation demo is ready. A production device would open the selected maps provider.</p></div><button class="phone-wide-action good" data-location-action="navigate">Start route</button><div class="location-action-status" id="locationActionStatus"></div>`}view.querySelector('[data-addon-back]')?.addEventListener('click',goBack);bindAddonControls()}
+  const menuRow = (icon, title, note, target) => `
+    <button class="device-menu-row" data-addon-screen="${target}">
+      <span class="device-menu-icon">${icon}</span>
+      <span><strong>${title}</strong><small>${note}</small></span>
+      <b>›</b>
+    </button>`;
 
-  function currentScreenName(){if(addonScreen)return addonScreen;return document.querySelector('.phone-tab.active')?.dataset.screen||'home'}
-  function goBack(){const previous=history.pop()||'home';addonScreen=null;if(['device','sharelocation','navigate'].includes(previous))renderAddon(previous);else if(typeof window.showPhoneScreen==='function'){window.showPhoneScreen(previous,!isMainTab(previous));setTimeout(enhanceCurrentPhone,0)}}
+  function renderAddon(name) {
+    const phone = view();
+    if (!phone) return;
+    current = name;
+    document.querySelectorAll('.phone-tab').forEach(t => t.classList.remove('active'));
 
-  function addDeviceToHome(){const view=phoneView();if(!view||!document.querySelector('.phone-tab[data-screen="home"]')?.classList.contains('active')||view.querySelector('[data-addon="device"]'))return;const sos=view.querySelector('.phone-sos');if(!sos)return;const button=document.createElement('button');button.className='phone-device-card';button.dataset.addon='device';button.innerHTML='<span><b class="device-icon">▣</b><span><strong>Device</strong><small>12 GB · 256 GB · 5G · AMOLED 120 Hz</small></span><b>›</b></span>';button.onclick=()=>{history.push('home');renderAddon('device')};sos.before(button)}
-  function enhanceLocation(){const view=phoneView();if(!view||!document.querySelector('.phone-tab[data-screen="location"]')?.classList.contains('active'))return;view.querySelectorAll('.map-pin').forEach((p,i)=>p.textContent=i===0?'M':'G');const actions=view.querySelector('.phone-mini-actions');if(actions&&!actions.querySelector('[data-addon="share"]')){const old=actions.querySelector('button:last-child');if(old){old.textContent='Share location';old.removeAttribute('data-app');old.dataset.addon='share';old.onclick=()=>{history.push('location');renderAddon('sharelocation')}}}}
-  function enhanceLost(){const view=phoneView();if(!view)return;const title=view.querySelector('.phone-subhead h3');if(!title||title.textContent.trim()!=="I'm lost")return;const buttons=[...view.querySelectorAll('.phone-wide-action')];const nav=buttons.find(b=>b.textContent.includes('Navigate home'));const share=buttons.find(b=>b.textContent.includes('Share location'));if(nav&&!nav.dataset.addon){nav.dataset.addon='navigate';nav.onclick=e=>{e.stopImmediatePropagation();history.push('lost');renderAddon('navigate')}}if(share&&!share.dataset.addon){share.removeAttribute('data-app');share.dataset.addon='share';share.onclick=e=>{e.stopImmediatePropagation();history.push('lost');renderAddon('sharelocation')}}}
-  function enhanceBack(){const view=phoneView();if(!view)return;view.querySelectorAll('[data-back]').forEach(btn=>{if(btn.dataset.historyBound)return;btn.dataset.historyBound='1';btn.addEventListener('click',e=>{if(history.length){e.stopImmediatePropagation();goBack()}},true)})}
-  function enhanceCurrentPhone(){addDeviceToHome();enhanceLocation();enhanceLost();enhanceBack()}
+    if (name === 'device') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>DEVICE & SETTINGS</small><h3>A-Z Care Phone</h3></div></div>
+        <div class="device-hero-card"><div class="device-hero-icon">▣</div><div><strong>Connected · Protected</strong><small>12 GB · 256 GB · 5G</small></div><span>✓</span></div>
+        <div class="device-menu-list">
+          ${menuRow('i','Device information','Model, memory and security','deviceinfo')}
+          ${menuRow('◉','Privacy & permissions','Camera, microphone and location','privacysettings')}
+          ${menuRow('⌁','Connectivity','5G, Wi-Fi, Bluetooth and NFC','connectivity')}
+          ${menuRow('ϟ','Battery','Battery health and charging','batterysettings')}
+        </div>
+        <a class="phone-link" href="hardware.html">Full hardware specifications →</a>`;
+    }
 
-  function compactLanding(){document.querySelector('.hero-actions .button.ghost')?.remove();document.querySelectorAll('.desktop-nav a[href="#ai"],.desktop-nav a[href="#sos"]').forEach(a=>a.remove());document.getElementById('ai')?.remove();document.getElementById('scam')?.remove();const overview=document.getElementById('overview');if(overview)overview.innerHTML=`<div class="container"><div class="compact-heading reveal"><p class="eyebrow">WHAT IT DOES</p><h2>One phone. Four safety layers.</h2><p>The main product experience lives in the interactive phone above.</p></div><div class="compact-grid"><article class="compact-card reveal"><div class="compact-icon">◇</div><h3>Protect</h3><p>Check messages, links and callers before acting.</p></article><article class="compact-card reveal"><div class="compact-icon">✦</div><h3>AI Care</h3><p>Explain risk in simple language and suggest safer next steps.</p></article><article class="compact-card reveal"><div class="compact-icon danger">SOS</div><h3>SOS</h3><p>Reach trusted people and share emergency status quickly.</p></article><article class="compact-card reveal"><div class="compact-icon">⌖</div><h3>Family</h3><p>Consent-based location, safe zones and device status.</p></article></div></div>`;const sos=document.getElementById('sos');if(sos)sos.innerHTML=`<div class="container"><div class="mini-sos reveal"><div class="compact-icon danger">SOS</div><div><h3>Emergency SOS</h3><p>The full emergency flow lives inside the interactive phone.</p></div><button class="button primary" id="compactSos">Try SOS</button></div></div>`;const modes=document.getElementById('modes');if(modes)modes.innerHTML=`<div class="container"><div class="compact-heading reveal"><p class="eyebrow">WHO IT'S FOR</p><h2>Different people. Different risks.</h2></div><div class="compact-grid audience-grid"><article class="compact-card reveal"><div class="compact-icon">K</div><h3>Kids</h3><p>Safer communication, location and simple protection.</p></article><article class="compact-card reveal"><div class="compact-icon">S</div><h3>Seniors</h3><p>Clear warnings, trusted contacts and simple emergency actions.</p></article><article class="compact-card reveal"><div class="compact-icon">F</div><h3>Families</h3><p>Consent-based safety tools without hidden tracking.</p></article></div></div>`;const privacy=document.getElementById('privacy');if(privacy)privacy.innerHTML=`<div class="container"><div class="compact-heading reveal"><p class="eyebrow">PRIVACY</p><h2>Safety without surveillance.</h2></div><div class="principles"><div class="principle"><strong>Visible controls</strong><span>Permissions stay understandable and controllable.</span></div><div class="principle"><strong>Consent first</strong><span>Family sharing is explicit, not hidden.</span></div><div class="principle"><strong>Minimum necessary data</strong><span>Use only what a safety feature actually needs.</span></div></div></div>`;const roadmap=document.getElementById('roadmap');if(roadmap)roadmap.innerHTML=`<div class="container"><div class="compact-heading reveal"><p class="eyebrow">ROADMAP</p><h2>From concept to tested prototype.</h2></div><div class="roadmap-short"><div><small>01</small><strong>Concept</strong><span>Product direction and interactive experience.</span></div><div><small>02</small><strong>Prototype</strong><span>Android flows and hardware platform.</span></div><div><small>03</small><strong>Testing</strong><span>Real users, safety validation and iteration.</span></div></div></div>`;document.getElementById('survey')?.classList.add('compact-section');document.getElementById('compactSos')?.addEventListener('click',()=>{history.push(currentScreenName());addonScreen=null;window.showPhoneScreen?.('sosphone',true);document.getElementById('product')?.scrollIntoView({behavior:'smooth',block:'center'})})}
+    if (name === 'deviceinfo') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>DEVICE</small><h3>Device information</h3></div></div>
+        <div class="settings-list">
+          <div><span>Device</span><strong>A-Z Care Phone</strong></div>
+          <div><span>Memory</span><strong>12 GB RAM</strong></div>
+          <div><span>Storage</span><strong>256 GB</strong></div>
+          <div><span>System</span><strong>Android</strong></div>
+          <div><span>Security</span><strong class="safe-text">Protected ✓</strong></div>
+        </div>
+        <a class="phone-link" href="hardware.html">Full specifications →</a>`;
+    }
 
-  function init(){compactLanding();enhanceCurrentPhone();document.addEventListener('click',e=>{const tab=e.target.closest('.phone-tab');const app=e.target.closest('[data-app]');if(tab){history.length=0;addonScreen=null;setTimeout(enhanceCurrentPhone,0)}else if(app){history.push(currentScreenName());addonScreen=null;setTimeout(enhanceCurrentPhone,0)}},true);const view=phoneView();if(view)new MutationObserver(()=>enhanceCurrentPhone()).observe(view,{childList:true,subtree:true})}
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+    if (name === 'privacysettings') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>PRIVACY</small><h3>Permissions</h3></div></div>
+        <div class="privacy-summary"><strong>4 permissions active</strong><small>You stay in control of sensitive access.</small></div>
+        <div class="settings-toggle-list">
+          ${toggleRow('Microphone','Allowed when a feature needs it')}
+          ${toggleRow('Camera','Allowed when a feature needs it')}
+          ${toggleRow('Location','Used for safety and navigation')}
+          ${toggleRow('Family location','Shared only with trusted family')}
+        </div>`;
+    }
+
+    if (name === 'connectivity') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>DEVICE</small><h3>Connectivity</h3></div></div>
+        <div class="settings-list">
+          <div><span>Mobile network</span><strong>5G</strong></div>
+          <div><span>Wi-Fi</span><strong>Connected</strong></div>
+        </div>
+        <div class="settings-toggle-list compact-toggles">
+          ${toggleRow('Bluetooth','Nearby accessories')}
+          ${toggleRow('NFC','Contactless payments')}
+        </div>
+        <button class="phone-wide-action">SIM & eSIM settings</button>`;
+    }
+
+    if (name === 'batterysettings') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>DEVICE</small><h3>Battery</h3></div></div>
+        <div class="battery-summary"><strong>82%</strong><span>Battery health · Good</span></div>
+        <div class="settings-toggle-list">
+          ${toggleRow('Charge limit: 80%','Helps reduce long-term battery wear')}
+          ${toggleRow('Adaptive charging','Learns your charging routine')}
+        </div>`;
+    }
+
+    if (name === 'sharelocation') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>LOCATION SHARING</small><h3>Share location</h3></div></div>
+        <div class="location-card"><span>⌖</span><strong>Share with family</strong><p>Send your current location to Mom and Grandma.</p></div>
+        <button class="phone-wide-action good" data-location-action="share">Share now</button>
+        <div class="location-action-status" id="locationActionStatus"></div>`;
+    }
+
+    if (name === 'navigate') {
+      phone.innerHTML = `
+        <div class="phone-subhead"><button data-addon-back>‹</button><div><small>NAVIGATION</small><h3>Navigate home</h3></div></div>
+        <div class="location-card"><span>⌖</span><strong>Home route</strong><p>Navigation demo is ready. A production device would open the selected maps provider.</p></div>
+        <button class="phone-wide-action good" data-location-action="navigate">Start route</button>
+        <div class="location-action-status" id="locationActionStatus"></div>`;
+    }
+
+    bindAddonControls();
+  }
+
+  function goBack() {
+    const previous = history.pop() || 'home';
+    if (['device','deviceinfo','privacysettings','connectivity','batterysettings','sharelocation','navigate'].includes(previous)) {
+      renderAddon(previous);
+      return;
+    }
+    current = previous;
+    if (typeof window.showPhoneScreen === 'function') {
+      window.showPhoneScreen(previous, !mainTabs.has(previous));
+      setTimeout(enhancePhoneScreen, 0);
+    }
+  }
+
+  function bindAddonControls() {
+    const phone = view();
+    if (!phone) return;
+    phone.querySelector('[data-addon-back]')?.addEventListener('click', goBack);
+    phone.querySelectorAll('[data-addon-screen]').forEach(btn => btn.addEventListener('click', () => {
+      history.push(current);
+      renderAddon(btn.dataset.addonScreen);
+    }));
+    phone.querySelectorAll('[data-setting-toggle]').forEach(btn => btn.addEventListener('click', () => btn.classList.toggle('on')));
+    phone.querySelectorAll('[data-location-action]').forEach(btn => btn.addEventListener('click', () => {
+      const status = document.getElementById('locationActionStatus');
+      if (btn.dataset.locationAction === 'share') {
+        if (navigator.share) navigator.share({title:'A-Z Care location', text:'I am sharing my location with you.'}).catch(() => {});
+        if (status) status.textContent = 'Location ready to share with Mom and Grandma ✓';
+      } else if (status) status.textContent = 'Home route ready · navigation demo ✓';
+    }));
+  }
+
+  function addDeviceToHome() {
+    const phone = view();
+    const homeActive = document.querySelector('.phone-tab[data-screen="home"]')?.classList.contains('active');
+    if (!phone || !homeActive || phone.querySelector('[data-addon="device"]')) return;
+    const sos = phone.querySelector('.phone-sos');
+    if (!sos) return;
+    const card = document.createElement('button');
+    card.className = 'phone-device-card';
+    card.dataset.addon = 'device';
+    card.innerHTML = '<span><b class="device-icon">▣</b><span><strong>A-Z Care Phone</strong><small>Connected · Protected</small></span><b>›</b></span>';
+    card.addEventListener('click', () => { history.push('home'); renderAddon('device'); });
+    sos.after(card);
+  }
+
+  function enhanceLocation() {
+    const phone = view();
+    const locationActive = document.querySelector('.phone-tab[data-screen="location"]')?.classList.contains('active');
+    if (!phone || !locationActive) return;
+    phone.querySelectorAll('.map-pin').forEach((pin, i) => pin.textContent = i === 0 ? 'M' : 'G');
+    const actions = phone.querySelector('.phone-mini-actions');
+    if (!actions || actions.querySelector('[data-addon="share"]')) return;
+    const old = actions.querySelector('button:last-child');
+    if (!old) return;
+    old.textContent = 'Share location';
+    old.removeAttribute('data-app');
+    old.dataset.addon = 'share';
+    old.addEventListener('click', () => { history.push('location'); renderAddon('sharelocation'); });
+  }
+
+  function enhanceLost() {
+    const phone = view();
+    if (!phone || phone.querySelector('.phone-subhead h3')?.textContent.trim() !== "I'm lost") return;
+    const buttons = [...phone.querySelectorAll('.phone-wide-action')];
+    const nav = buttons.find(b => b.textContent.includes('Navigate home'));
+    const share = buttons.find(b => b.textContent.includes('Share location'));
+    if (nav && !nav.dataset.addon) {
+      nav.dataset.addon = 'navigate';
+      nav.addEventListener('click', e => { e.stopImmediatePropagation(); history.push('lost'); renderAddon('navigate'); });
+    }
+    if (share && !share.dataset.addon) {
+      share.removeAttribute('data-app');
+      share.dataset.addon = 'share';
+      share.addEventListener('click', e => { e.stopImmediatePropagation(); history.push('lost'); renderAddon('sharelocation'); });
+    }
+  }
+
+  function enhancePhoneScreen() {
+    addDeviceToHome();
+    enhanceLocation();
+    enhanceLost();
+  }
+
+  function compactLanding() {
+    document.querySelector('.hero-actions .button.ghost')?.remove();
+    document.querySelectorAll('.desktop-nav a[href="#ai"], .desktop-nav a[href="#sos"]').forEach(a => a.remove());
+    document.getElementById('ai')?.remove();
+    document.getElementById('scam')?.remove();
+    document.getElementById('sos')?.remove();
+    document.querySelector('.cta-section')?.remove();
+
+    const overview = document.getElementById('overview');
+    if (overview) overview.innerHTML = `<div class="container"><div class="compact-heading reveal"><p class="eyebrow">WHAT IT DOES</p><h2>One phone. Four safety layers.</h2><p>The interactive phone is the main product demo. Everything below explains the idea without repeating the same flows.</p></div><div class="compact-grid"><article class="compact-card reveal"><div class="compact-icon">◇</div><h3>Protect</h3><p>Check messages, links and callers before acting.</p></article><article class="compact-card reveal"><div class="compact-icon">✦</div><h3>AI Care</h3><p>Explain risk simply and suggest safer next steps.</p></article><article class="compact-card reveal"><div class="compact-icon danger">SOS</div><h3>SOS</h3><p>Reach trusted people and share emergency status quickly.</p></article><article class="compact-card reveal"><div class="compact-icon">⌖</div><h3>Family</h3><p>Consent-based location, safe zones and device status.</p></article></div></div>`;
+
+    const modes = document.getElementById('modes');
+    if (modes) modes.innerHTML = `<div class="container"><div class="compact-heading reveal"><p class="eyebrow">WHO IT'S FOR</p><h2>Different people. Different risks.</h2></div><div class="compact-grid audience-grid"><article class="compact-card reveal"><div class="compact-icon">K</div><h3>Kids</h3><p>Safer communication, location and simple protection.</p></article><article class="compact-card reveal"><div class="compact-icon">S</div><h3>Seniors</h3><p>Clear warnings, trusted contacts and simple emergency actions.</p></article><article class="compact-card reveal"><div class="compact-icon">F</div><h3>Families</h3><p>Consent-based safety tools without hidden tracking.</p></article></div></div>`;
+
+    const privacy = document.getElementById('privacy');
+    if (privacy) privacy.innerHTML = `<div class="container"><div class="compact-heading reveal"><p class="eyebrow">PRIVACY</p><h2>Safety without surveillance.</h2></div><div class="principles"><div class="principle"><strong>Visible controls</strong><span>Permissions stay understandable and controllable.</span></div><div class="principle"><strong>Consent first</strong><span>Family sharing is explicit, not hidden.</span></div><div class="principle"><strong>Minimum necessary data</strong><span>Use only what a safety feature actually needs.</span></div></div></div>`;
+
+    const roadmap = document.getElementById('roadmap');
+    if (roadmap) roadmap.innerHTML = `<div class="container"><div class="compact-heading reveal"><p class="eyebrow">ROADMAP</p><h2>Concept → Prototype → Testing</h2></div><div class="roadmap-short"><div><small>01</small><strong>Concept</strong><span>Product direction and interactive experience.</span></div><div><small>02</small><strong>Prototype</strong><span>Android flows and hardware platform.</span></div><div><small>03</small><strong>Testing</strong><span>Real users, safety validation and iteration.</span></div></div></div>`;
+
+    document.getElementById('survey')?.classList.add('compact-section');
+  }
+
+  function init() {
+    compactLanding();
+    enhancePhoneScreen();
+
+    document.addEventListener('click', e => {
+      const back = e.target.closest('[data-back]');
+      if (back && history.length) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        goBack();
+        return;
+      }
+
+      const tab = e.target.closest('.phone-tab');
+      if (tab) {
+        history.length = 0;
+        current = tab.dataset.screen;
+        setTimeout(enhancePhoneScreen, 0);
+        return;
+      }
+
+      const app = e.target.closest('[data-app]');
+      if (app) {
+        history.push(current);
+        current = app.dataset.app;
+        setTimeout(enhancePhoneScreen, 0);
+        return;
+      }
+
+      const phoneTarget = e.target.closest('[data-phone-screen]');
+      if (phoneTarget) {
+        history.length = 0;
+        current = phoneTarget.dataset.phoneScreen;
+        setTimeout(enhancePhoneScreen, 0);
+      }
+    }, true);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {once:true});
+  else init();
 })();
