@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css?v=20260902-mobile-fix-2">
   <style>
     .survey-wrap{max-width:900px;margin:0 auto}.survey-card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));border-radius:24px;padding:34px;box-shadow:0 30px 80px rgba(0,0,0,.24)}.survey-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.survey-field{display:grid;gap:8px}.survey-field.full{grid-column:1/-1}.survey-field>label,.survey-label{font-size:12px;font-weight:700;color:#dbe3ef}.survey-field small{color:var(--muted);font-size:10px}.survey-field select,.survey-field input[type="email"],.survey-field textarea{width:100%;border:1px solid var(--line);background:#0a111b;color:#f5f7fb;border-radius:12px;padding:13px 14px;outline:none}.survey-field select:focus,.survey-field input[type="email"]:focus,.survey-field textarea:focus{border-color:rgba(91,140,255,.65);box-shadow:0 0 0 3px rgba(91,140,255,.08)}.survey-field textarea{min-height:105px;resize:vertical}.survey-options{display:flex;flex-wrap:wrap;gap:8px}.survey-option{position:relative}.survey-option input{position:absolute;opacity:0;pointer-events:none}.survey-option span{display:block;border:1px solid var(--line);background:rgba(255,255,255,.025);color:#aeb9c8;padding:9px 12px;border-radius:10px;font-size:11px;cursor:pointer;transition:.2s}.survey-option input:checked+span{border-color:rgba(91,140,255,.55);background:rgba(91,140,255,.13);color:#dce7ff}.survey-consent{display:flex;gap:10px;align-items:flex-start;margin:22px 0 16px;color:#9aa6b6;font-size:11px}.survey-consent input{margin-top:3px}.survey-submit-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.survey-status{font-size:11px;color:var(--muted)}.survey-status.success{color:var(--green)}.survey-status.error{color:#ff8090}.survey-card button[disabled]{opacity:.6;cursor:not-allowed;transform:none}.survey-privacy{margin-top:16px;color:#687588;font-size:10px}.survey-thanks{display:none;text-align:center;padding:30px 12px}.survey-thanks.show{display:block}.survey-thanks .check{width:52px;height:52px;margin:0 auto 14px;border-radius:50%;display:grid;place-items:center;background:rgba(88,230,169,.1);color:var(--green);font-size:22px}.survey-thanks h3{margin:0 0 7px;font-size:24px}.survey-thanks p{margin:0;color:var(--muted);font-size:13px}
     .hero-copy{max-width:640px}.hero-copy h1{max-width:650px}.hero-lead{max-width:610px}.hero-actions .primary{min-width:170px}.hero-points{flex-wrap:wrap;gap:12px 20px}.hero-points span{white-space:nowrap}.hero .floating-chip{box-shadow:0 15px 45px rgba(0,0,0,.3)}
@@ -322,7 +323,14 @@
 
   <footer><div class="container footer"><a class="logo brand-logo" href="#top"><img src="assets/azcare-logo.jpg" alt="A-Z Care shield logo"><span class="brand-word">A-Z<span>Care</span></span></a><p>Concept / prototype · © 2026 A-Z Care</p><div><a href="#privacy">Privacy</a><a href="#survey">Survey</a><a href="#roadmap">Roadmap</a></div></div></footer>
 
-  <script src="js/app.js?v=20260831-ai-clean-2"></script>
+  <script src="js/app.js?v=20260902-mobile-fix-2"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('link[href^="css/responsive.css"]').forEach(link => {
+        link.href = 'css/responsive.css?v=20260902-mobile-fix-2';
+      });
+    });
+  </script>
   <script>
     (() => {
       const form = document.getElementById('azSurvey');
