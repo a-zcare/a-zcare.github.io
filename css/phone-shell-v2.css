@@ -8,10 +8,10 @@
 .android-dock .android-app{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;padding:0!important;text-align:center!important}
 .android-dock .android-app>span{margin-left:auto!important;margin-right:auto!important;transform:none!important}
 .android-dock .android-app small{width:100%!important;text-align:center!important}
-/* Phone: draw a balanced handset instead of the tilted Unicode telephone glyph. */
+/* Phone icon: fully upright and geometrically centered, with zero rotation. */
 .android-dock [data-az-app="calls"]>span{display:grid!important;place-items:center!important;margin-left:auto!important;margin-right:auto!important;position:relative!important;font-size:0!important;transform:none!important}
-.android-dock [data-az-app="calls"]>span:before{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:19px!important;height:10px!important;border-left:5px solid #fff!important;border-bottom:5px solid #fff!important;border-radius:3px 3px 8px 8px!important;box-sizing:border-box!important;transform:translate(-50%,-50%) rotate(-45deg)!important;transform-origin:center!important;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))!important}
-.android-dock [data-az-app="calls"]>span:after{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:7px!important;height:7px!important;border-radius:2px!important;background:#fff!important;transform:translate(4px,-9px) rotate(-45deg)!important;transform-origin:center!important}
+.android-dock [data-az-app="calls"]>span:before{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:24px!important;height:15px!important;box-sizing:border-box!important;border-left:5px solid #fff!important;border-right:5px solid #fff!important;border-bottom:5px solid #fff!important;border-top:0!important;border-radius:3px 3px 10px 10px!important;transform:translate(-50%,-45%)!important;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))!important}
+.android-dock [data-az-app="calls"]>span:after{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:26px!important;height:6px!important;border-radius:4px!important;background:linear-gradient(90deg,#fff 0 8px,transparent 8px 18px,#fff 18px 26px)!important;transform:translate(-50%,-10px)!important}
 .android-gesture{display:none!important}
 .android-grid [data-az-app="protect"]>span{font-size:0!important;background:linear-gradient(145deg,#24463e,#17312b)!important;color:#8af0c3!important}
 .android-grid [data-az-app="protect"]>span:before{display:none!important;content:none!important}
