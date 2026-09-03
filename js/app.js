@@ -10,7 +10,7 @@
   core.async = false;
   core.onload = () => {
     const landing = document.createElement('script');
-    landing.src = 'js/landing-v2.js?v=20260903-android-1';
+    landing.src = 'js/landing-v2.js?v=20260903-android-2';
     landing.async = false;
     document.body.appendChild(landing);
   };
