@@ -7,7 +7,7 @@
 
   const shell = document.createElement('link');
   shell.rel = 'stylesheet';
-  shell.href = 'css/phone-shell-v2.css?v=20260903-2';
+  shell.href = 'css/phone-shell-v2.css?v=20260903-3';
   document.head.appendChild(shell);
 
   const core = document.createElement('script');
@@ -15,7 +15,7 @@
   core.async = false;
   core.onload = () => {
     const landing = document.createElement('script');
-    landing.src = 'js/landing-v2.js?v=20260903-android-4';
+    landing.src = 'js/landing-v2.js?v=20260903-android-5';
     landing.async = false;
     document.body.appendChild(landing);
   };
