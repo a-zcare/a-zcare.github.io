@@ -1,80 +1,21 @@
 /* Final Android phone shell refinements: true edge-to-edge display and bottom dock. */
 .phone-stage{display:flex!important;justify-content:center!important;align-items:flex-start!important;transform:none!important;perspective:none!important}
-.phone{
-  width:330px!important;
-  height:660px!important;
-  padding:2px!important;
-  margin-left:auto!important;
-  margin-right:auto!important;
-  border-radius:22px!important;
-  background:linear-gradient(180deg,#252b33,#11161c)!important;
-  border:1px solid rgba(255,255,255,.08)!important;
-  overflow:hidden!important;
-  transform:none!important;
-  rotate:0deg!important;
-}
-.phone-screen{
-  position:relative!important;
-  width:100%!important;
-  height:100%!important;
-  margin:0!important;
-  padding:0!important;
-  border-radius:20px!important;
-  overflow:hidden!important;
-  background:#090f19!important;
-  transform:none!important;
-}
-.phone-view{
-  position:absolute!important;
-  inset:0!important;
-  width:100%!important;
-  height:100%!important;
-  min-height:100%!important;
-  margin:0!important;
-  padding:13px 5px 0!important;
-  border:0!important;
-  border-radius:20px!important;
-  overflow:hidden!important;
-  box-sizing:border-box!important;
-  background:radial-gradient(circle at 75% 8%,rgba(56,104,194,.19),transparent 34%),linear-gradient(180deg,#101827,#090f19)!important;
-  transform:none!important;
-}
-.phone-island{
-  display:block!important;
-  width:6px!important;
-  height:6px!important;
-  top:5px!important;
-  border-radius:50%!important;
-  background:#010305!important;
-  box-shadow:0 0 0 1px rgba(255,255,255,.05)!important;
-}
-.android-dock{
-  left:1px!important;
-  right:1px!important;
-  bottom:1px!important;
-  gap:4px!important;
-  padding:8px 2px 7px!important;
-  border:0!important;
-  border-radius:0 0 18px 18px!important;
-  background:linear-gradient(180deg,rgba(14,21,31,.10),rgba(14,21,31,.88))!important;
-  backdrop-filter:blur(10px)!important;
-}
+.phone{width:330px!important;height:660px!important;padding:2px!important;margin-left:auto!important;margin-right:auto!important;border-radius:22px!important;background:linear-gradient(180deg,#252b33,#11161c)!important;border:1px solid rgba(255,255,255,.08)!important;overflow:hidden!important;transform:none!important;rotate:0deg!important}
+.phone-screen{position:relative!important;width:100%!important;height:100%!important;margin:0!important;padding:0!important;border-radius:20px!important;overflow:hidden!important;background:#090f19!important;transform:none!important}
+.phone-view{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100%!important;margin:0!important;padding:13px 5px 0!important;border:0!important;border-radius:20px!important;overflow:hidden!important;box-sizing:border-box!important;background:radial-gradient(circle at 75% 8%,rgba(56,104,194,.19),transparent 34%),linear-gradient(180deg,#101827,#090f19)!important;transform:none!important}
+.phone-island{display:block!important;width:6px!important;height:6px!important;top:5px!important;border-radius:50%!important;background:#010305!important;box-shadow:0 0 0 1px rgba(255,255,255,.05)!important}
+.android-dock{left:1px!important;right:1px!important;bottom:1px!important;gap:4px!important;padding:8px 2px 7px!important;border:0!important;border-radius:0 0 18px 18px!important;background:linear-gradient(180deg,rgba(14,21,31,.10),rgba(14,21,31,.88))!important;backdrop-filter:blur(10px)!important}
 .android-dock .android-app{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;padding:0!important;text-align:center!important}
 .android-dock .android-app>span{margin-left:auto!important;margin-right:auto!important;transform:none!important}
 .android-dock .android-app small{width:100%!important;text-align:center!important}
-.android-dock [data-az-app="calls"]>span{display:grid!important;place-items:center!important;margin-left:auto!important;margin-right:auto!important;transform:none!important}
-.android-dock [data-az-app="calls"]>span:before{inset:0!important;display:grid!important;place-items:center!important;transform:none!important;text-align:center!important}
-/* No iPhone-style gesture pill: keep the home screen visually Android-first. */
+/* Phone: draw a balanced handset instead of the tilted Unicode telephone glyph. */
+.android-dock [data-az-app="calls"]>span{display:grid!important;place-items:center!important;margin-left:auto!important;margin-right:auto!important;position:relative!important;font-size:0!important;transform:none!important}
+.android-dock [data-az-app="calls"]>span:before{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:19px!important;height:10px!important;border-left:5px solid #fff!important;border-bottom:5px solid #fff!important;border-radius:3px 3px 8px 8px!important;box-sizing:border-box!important;transform:translate(-50%,-50%) rotate(-45deg)!important;transform-origin:center!important;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))!important}
+.android-dock [data-az-app="calls"]>span:after{content:""!important;position:absolute!important;left:50%!important;top:50%!important;width:7px!important;height:7px!important;border-radius:2px!important;background:#fff!important;transform:translate(4px,-9px) rotate(-45deg)!important;transform-origin:center!important}
 .android-gesture{display:none!important}
-/* A-Z Care site mark is used consistently in Protect. */
 .android-grid [data-az-app="protect"]>span{font-size:0!important;background:linear-gradient(145deg,#24463e,#17312b)!important;color:#8af0c3!important}
 .android-grid [data-az-app="protect"]>span:before{display:none!important;content:none!important}
 .az-app-logo{display:block!important;width:30px!important;height:30px!important;margin:auto!important;object-fit:contain!important}
 .az-widget-logo{display:block!important;width:24px!important;height:24px!important;margin:auto!important;object-fit:contain!important}
 .shield-dot{display:grid!important;place-items:center!important;overflow:hidden!important}
-@media(max-width:560px){
-  .phone-stage{justify-content:center!important;transform:none!important}
-  .phone{width:320px!important;height:640px!important;padding:2px!important;margin-left:auto!important;margin-right:auto!important;transform:none!important}
-  .phone-view{padding-left:4px!important;padding-right:4px!important}
-  .android-dock{left:1px!important;right:1px!important;bottom:1px!important}
-}
+@media(max-width:560px){.phone-stage{justify-content:center!important;transform:none!important}.phone{width:320px!important;height:640px!important;padding:2px!important;margin-left:auto!important;margin-right:auto!important;transform:none!important}.phone-view{padding-left:4px!important;padding-right:4px!important}.android-dock{left:1px!important;right:1px!important;bottom:1px!important}}
