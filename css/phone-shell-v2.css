@@ -57,23 +57,16 @@
 .android-gesture{
   display:none!important;
 }
-/* A-Z Care mark becomes the Protect app logo. */
+/* Use the actual A-Z Care logo for Protect. */
 .android-grid [data-az-app="protect"]>span{
   font-size:0!important;
   background:linear-gradient(145deg,#24463e,#17312b)!important;
   color:#8af0c3!important;
 }
-.android-grid [data-az-app="protect"]>span:before{
-  content:"A-Z";
-  display:grid;
-  place-items:center;
-  width:100%;
-  height:100%;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:-.7px;
-  color:#8af0c3;
-}
+.android-grid [data-az-app="protect"]>span:before{display:none!important}
+.az-app-logo{width:30px!important;height:30px!important;display:block!important;object-fit:contain!important}
+.az-widget-logo{width:24px!important;height:24px!important;display:block!important;object-fit:contain!important}
+.shield-dot{overflow:hidden!important}
 @media(max-width:560px){
   .phone{width:320px!important;height:640px!important;padding:2px!important}
   .phone-view{padding-left:4px!important;padding-right:4px!important}
