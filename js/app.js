@@ -1,6 +1,6 @@
 // Same-origin stable loader for A-Z Care.
 (() => {
-  const build = '20260904-phone-icon-refresh-2';
+  const build = '20260904-gap-cleanup-3';
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
