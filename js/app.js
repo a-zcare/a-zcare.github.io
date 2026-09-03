@@ -1,6 +1,6 @@
 // Same-origin stable loader for A-Z Care.
 (() => {
-  const build = '20260904-modern-phone-2';
+  const build = '20260904-dock-icons-1';
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
