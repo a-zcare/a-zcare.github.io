@@ -53,27 +53,23 @@
   background:linear-gradient(180deg,rgba(14,21,31,.10),rgba(14,21,31,.88))!important;
   backdrop-filter:blur(10px)!important;
 }
+.android-dock .android-app{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important}
+.android-dock .android-app>span{margin-left:auto!important;margin-right:auto!important}
+.android-dock .android-app small{width:100%!important;text-align:center!important}
 /* No iPhone-style gesture pill: keep the home screen visually Android-first. */
 .android-gesture{
   display:none!important;
 }
-/* A-Z Care mark becomes the Protect app logo. */
+/* A-Z Care site mark is used consistently in Protect. */
 .android-grid [data-az-app="protect"]>span{
   font-size:0!important;
   background:linear-gradient(145deg,#24463e,#17312b)!important;
   color:#8af0c3!important;
 }
-.android-grid [data-az-app="protect"]>span:before{
-  content:"A-Z";
-  display:grid;
-  place-items:center;
-  width:100%;
-  height:100%;
-  font-size:11px;
-  font-weight:900;
-  letter-spacing:-.7px;
-  color:#8af0c3;
-}
+.android-grid [data-az-app="protect"]>span:before{display:none!important;content:none!important}
+.az-app-logo{display:block!important;width:30px!important;height:30px!important;margin:auto!important;object-fit:contain!important}
+.az-widget-logo{display:block!important;width:24px!important;height:24px!important;margin:auto!important;object-fit:contain!important}
+.shield-dot{display:grid!important;place-items:center!important;overflow:hidden!important}
 @media(max-width:560px){
   .phone{width:320px!important;height:640px!important;padding:2px!important}
   .phone-view{padding-left:4px!important;padding-right:4px!important}
