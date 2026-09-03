@@ -54,76 +54,59 @@
   backdrop-filter:blur(10px)!important;
 }
 .android-gesture{display:none!important}
-.android-grid [data-az-app="protect"]>span{font-size:0!important;background:linear-gradient(145deg,#24463e,#17312b)!important;color:#8af0c3!important}
+.android-grid [data-az-app="protect"]>span{
+  font-size:0!important;
+  background:linear-gradient(145deg,#24463e,#17312b)!important;
+  color:#8af0c3!important;
+}
 .android-grid [data-az-app="protect"]>span:before{display:none!important}
 .az-app-logo{width:30px!important;height:30px!important;display:block!important;object-fit:contain!important}
 .az-widget-logo{width:24px!important;height:24px!important;display:block!important;object-fit:contain!important}
 .shield-dot{overflow:hidden!important}
 
-/* Family map: clean rings, plain labels, no glow and no info box. */
-#family .family-map{background:#09111b!important}
-#family .map-zone{background:transparent!important;border:2px solid #5b8cff!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important}
-#family .zone-school{border-color:#9b6cff!important}
-#family .map-zone span{background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important;color:inherit!important;font-weight:700!important}
-#family .map-person{background:transparent!important;border:0!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important;padding:0!important}
-#family .map-person span{box-shadow:none!important;border:0!important}
-#family .person-one span{background:#4f8cff!important}
-#family .person-two span{background:#9b6cff!important}
-#family .map-person small{display:block!important;width:auto!important;margin:5px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;text-align:center!important;font-weight:800!important}
-#family .person-one small{color:#6da0ff!important}
-#family .person-two small{color:#b090ff!important}
-#family .map-card{display:none!important}
-
-/* Remove useless vertical air from the current compact landing. */
-#overview,#family,#modes,#privacy,#survey,#roadmap{scroll-margin-top:72px}
-.compact-heading p:last-child{margin-bottom:0!important}
-.compact-card p{margin-bottom:0!important}
+/* Family map: simple radius circles and plain names, no blur/glow/info box. */
+.map-zone{background:transparent!important;border-style:solid!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important}
+.map-person{background:transparent!important;border:0!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important;padding:0!important}
+.map-person span{box-shadow:none!important}
+.map-person small{display:block!important;width:auto!important;margin:5px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;text-align:center!important}
+.person-one small{color:#6da0ff!important}
+.person-two small{color:#b090ff!important}
+.map-card{display:none!important}
 
 @media(max-width:992px){
-  .hero-grid,.split-grid,.family-grid,.demo-grid,.mode-grid{gap:18px!important}
+  .hero-grid,.split-grid,.family-grid,.demo-grid,.mode-grid{gap:24px!important}
   .phone-stage{min-height:660px!important;height:660px!important;margin:0!important;padding:0!important}
-  #family .section-heading{margin-bottom:14px!important}
-  #family .family-grid{gap:10px!important}
+  #family .section-heading{margin-bottom:18px!important}
+  #family .family-grid{gap:14px!important}
 }
 
 @media(max-width:640px){
-  .hero{padding:82px 0 6px!important;min-height:0!important}
-  .hero-grid{gap:8px!important}
+  .hero{padding:88px 0 14px!important;min-height:0!important}
+  .hero-grid{gap:14px!important}
   .hero-copy{margin:0!important;padding:0!important}
-  .hero-lead{margin:14px 0 16px!important}
-  .hero-points{margin-top:12px!important;margin-bottom:0!important}
-  .phone-stage{width:100%!important;min-height:0!important;height:640px!important;margin:0!important;padding:0!important;overflow:visible!important;align-items:flex-start!important}
+  .hero-points{margin-top:16px!important}
+  .phone-stage{width:100%!important;min-height:640px!important;height:640px!important;margin:0!important;padding:0!important;overflow:visible!important;align-items:flex-start!important}
   .phone{width:min(320px,calc(100vw - 18px))!important;height:640px!important;margin:0 auto!important;padding:2px!important}
   .phone-view{padding:13px 4px 0!important}
   .android-dock{left:1px!important;right:1px!important;bottom:1px!important}
-
-  main>.section,.section,.compact-section{padding:24px 0!important}
-  #overview{padding-top:20px!important;padding-bottom:20px!important}
-  #family,#modes,#privacy,#survey,#roadmap{padding-top:24px!important;padding-bottom:24px!important}
-  .section-heading,.compact-heading{margin-top:0!important;margin-bottom:12px!important}
-  .section-heading>p,.compact-heading>p{margin-top:10px!important;margin-bottom:0!important}
-  .compact-grid,.audience-grid,.principles,.roadmap-short{gap:8px!important}
-  .compact-card{padding:14px!important}
-  .family-grid{gap:8px!important}
-
-  #family .family-map{min-height:320px!important;height:320px!important;border-radius:14px!important}
-  #family .map-zone{width:100px!important;height:100px!important}
-  #family .zone-home{left:24px!important;top:44px!important}
-  #family .zone-school{right:22px!important;bottom:34px!important}
-  #family .person-one{left:58px!important;top:78px!important}
-  #family .person-two{right:54px!important;bottom:66px!important}
-  #family .timeline{padding:14px!important}
-  #family .timeline-head{margin-bottom:8px!important}
-  #family .timeline-item{padding:8px 0!important}
-
-  .survey-card{padding:14px!important}
-  .survey-grid{gap:10px!important}
-  .survey-consent{margin:12px 0 10px!important}
-  footer{padding:18px 0!important}
+  .section{padding:34px 0!important}
+  .compact-section{padding:30px 0!important}
+  .section-heading,.compact-heading{margin-bottom:18px!important}
+  #overview{padding-top:28px!important}
+  #family{padding-top:32px!important;padding-bottom:32px!important}
+  #family .family-grid{gap:12px!important}
+  .family-map{min-height:360px!important;height:360px!important;border-radius:16px!important}
+  .map-zone{width:112px!important;height:112px!important}
+  .zone-home{left:28px!important;top:52px!important}
+  .zone-school{right:24px!important;bottom:42px!important}
+  .person-one{left:70px!important;top:94px!important}
+  .person-two{right:62px!important;bottom:78px!important}
+  .timeline{padding:18px!important}
+  .timeline-item{padding:11px 0!important}
 }
 
 @media(max-width:360px){
-  .phone-stage{height:610px!important}
+  .phone-stage{height:610px!important;min-height:610px!important}
   .phone{width:calc(100vw - 14px)!important;height:610px!important}
-  #family .family-map{height:300px!important;min-height:300px!important}
+  .family-map{height:330px!important;min-height:330px!important}
 }
