@@ -43,23 +43,45 @@
   box-shadow:0 0 0 1px rgba(255,255,255,.05)!important;
 }
 .android-dock{
-  left:1px!important;
-  right:1px!important;
-  bottom:1px!important;
+  display:grid!important;
+  position:absolute!important;
+  left:4px!important;
+  right:4px!important;
+  bottom:4px!important;
+  height:78px!important;
+  grid-template-columns:repeat(4,1fr)!important;
   gap:4px!important;
-  padding:8px 2px 7px!important;
+  padding:7px 3px 6px!important;
   border:0!important;
-  border-radius:0 0 18px 18px!important;
-  background:linear-gradient(180deg,rgba(14,21,31,.10),rgba(14,21,31,.88))!important;
-  backdrop-filter:blur(10px)!important;
+  border-radius:14px!important;
+  background:rgba(14,21,31,.96)!important;
+  backdrop-filter:none!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  z-index:999!important;
+  pointer-events:auto!important;
 }
+.android-dock .android-app{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  min-width:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:auto!important;
+}
+.android-dock .android-app>span{display:grid!important}
+.android-dock .android-app small{display:block!important;color:#e7edf7!important;opacity:1!important}
+.android-grid{position:relative!important;z-index:2!important;padding-bottom:88px!important}
 .android-gesture{display:none!important}
 .android-grid [data-az-app="protect"]>span{font-size:0!important;background:linear-gradient(145deg,#24463e,#17312b)!important;color:#8af0c3!important}
 .android-grid [data-az-app="protect"]>span:before{display:none!important}
 .az-app-logo{width:30px!important;height:30px!important;display:block!important;object-fit:contain!important}
 .az-widget-logo{width:24px!important;height:24px!important;display:block!important;object-fit:contain!important}
 .shield-dot{overflow:hidden!important}
-.phone-side-sos{position:absolute!important;right:0!important;top:185px!important;width:5px!important;height:54px!important;padding:0!important;border:0!important;border-radius:4px 0 0 4px!important;background:linear-gradient(180deg,#ff6678,#c7354b)!important;box-shadow:0 0 12px rgba(255,81,105,.24)!important;z-index:30!important;cursor:pointer!important}
+.phone-side-sos{position:absolute!important;right:0!important;top:185px!important;width:5px!important;height:54px!important;padding:0!important;border:0!important;border-radius:4px 0 0 4px!important;background:linear-gradient(180deg,#ff6678,#c7354b)!important;box-shadow:0 0 12px rgba(255,81,105,.24)!important;z-index:1000!important;cursor:pointer!important}
 .phone-side-sos:focus-visible{outline:2px solid #ff9aaa!important;outline-offset:-2px!important}
 
 /* Keep map cleanup separate from the phone layout. */
@@ -80,11 +102,12 @@
   .hero{padding:88px 0 14px!important;min-height:0!important}
   .hero-grid{gap:14px!important}
   .hero-copy{margin:0!important;padding:0!important}
-  .hero-points{margin-top:16px!important}
   .phone-stage{width:100%!important;min-height:660px!important;height:660px!important;margin:0!important;padding:0!important;overflow:visible!important;align-items:flex-start!important}
   .phone{width:330px!important;max-width:calc(100vw - 18px)!important;height:660px!important;margin:0 auto!important;padding:2px!important}
-  .phone-view{padding:13px 5px 0!important}
-  .android-dock{left:1px!important;right:1px!important;bottom:1px!important}
+  .phone-screen{height:100%!important;padding:0!important}
+  .phone-view{height:100%!important;min-height:100%!important;padding:13px 5px 0!important;overflow:hidden!important}
+  .android-dock{display:grid!important;left:4px!important;right:4px!important;bottom:4px!important;height:78px!important;z-index:999!important}
+  .android-grid{padding-bottom:88px!important}
   .section{padding:34px 0!important}
   .compact-section{padding:30px 0!important}
   .section-heading,.compact-heading{margin-bottom:18px!important}
