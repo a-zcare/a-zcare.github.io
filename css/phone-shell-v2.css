@@ -67,8 +67,33 @@
 .az-app-logo{width:30px!important;height:30px!important;display:block!important;object-fit:contain!important}
 .az-widget-logo{width:24px!important;height:24px!important;display:block!important;object-fit:contain!important}
 .shield-dot{overflow:hidden!important}
-@media(max-width:560px){
-  .phone{width:320px!important;height:640px!important;padding:2px!important}
-  .phone-view{padding-left:4px!important;padding-right:4px!important}
+
+/* Mobile: remove the large dead gaps around and below the phone. */
+@media(max-width:640px){
+  .hero{padding-top:88px!important;padding-bottom:20px!important}
+  .hero-grid{gap:18px!important}
+  .phone-stage{
+    width:100%!important;
+    min-height:0!important;
+    height:640px!important;
+    margin:0!important;
+    padding:0!important;
+    overflow:visible!important;
+    align-items:flex-start!important;
+  }
+  .phone{
+    width:min(320px,calc(100vw - 18px))!important;
+    height:640px!important;
+    margin:0 auto!important;
+    padding:2px!important;
+  }
+  .phone-view{padding:13px 4px 0!important}
   .android-dock{left:1px!important;right:1px!important;bottom:1px!important}
+  .section{padding:46px 0!important}
+  .compact-section{padding:38px 0!important}
+}
+
+@media(max-width:360px){
+  .phone-stage{height:610px!important}
+  .phone{width:calc(100vw - 14px)!important;height:610px!important}
 }
