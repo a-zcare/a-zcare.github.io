@@ -2,7 +2,7 @@
 (() => {
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = 'css/landing-v2.css?v=20260903-android-7';
+  css.href = 'css/landing-v2.css?v=20260903-android-8';
   document.head.appendChild(css);
 
   const core = document.createElement('script');
