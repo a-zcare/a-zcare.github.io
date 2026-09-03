@@ -53,11 +53,7 @@
   background:linear-gradient(180deg,rgba(14,21,31,.10),rgba(14,21,31,.88))!important;
   backdrop-filter:blur(10px)!important;
 }
-/* No iPhone-style gesture pill: keep the home screen visually Android-first. */
-.android-gesture{
-  display:none!important;
-}
-/* Use the actual A-Z Care logo for Protect. */
+.android-gesture{display:none!important}
 .android-grid [data-az-app="protect"]>span{
   font-size:0!important;
   background:linear-gradient(145deg,#24463e,#17312b)!important;
@@ -68,32 +64,47 @@
 .az-widget-logo{width:24px!important;height:24px!important;display:block!important;object-fit:contain!important}
 .shield-dot{overflow:hidden!important}
 
-/* Mobile: remove the large dead gaps around and below the phone. */
+/* Family map: simple radius circles and plain names, no blur/glow/info box. */
+.map-zone{background:transparent!important;border-style:solid!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important}
+.map-person{background:transparent!important;border:0!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important;padding:0!important}
+.map-person span{box-shadow:none!important}
+.map-person small{display:block!important;width:auto!important;margin:5px 0 0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;color:#eef3fb!important;text-align:center!important}
+.map-card{display:none!important}
+
+@media(max-width:992px){
+  .hero-grid,.split-grid,.family-grid,.demo-grid,.mode-grid{gap:24px!important}
+  .phone-stage{min-height:660px!important;height:660px!important;margin:0!important;padding:0!important}
+  #family .section-heading{margin-bottom:18px!important}
+  #family .family-grid{gap:14px!important}
+}
+
 @media(max-width:640px){
-  .hero{padding-top:88px!important;padding-bottom:20px!important}
-  .hero-grid{gap:18px!important}
-  .phone-stage{
-    width:100%!important;
-    min-height:0!important;
-    height:640px!important;
-    margin:0!important;
-    padding:0!important;
-    overflow:visible!important;
-    align-items:flex-start!important;
-  }
-  .phone{
-    width:min(320px,calc(100vw - 18px))!important;
-    height:640px!important;
-    margin:0 auto!important;
-    padding:2px!important;
-  }
+  .hero{padding:88px 0 14px!important;min-height:0!important}
+  .hero-grid{gap:14px!important}
+  .hero-copy{margin:0!important;padding:0!important}
+  .hero-points{margin-top:16px!important}
+  .phone-stage{width:100%!important;min-height:640px!important;height:640px!important;margin:0!important;padding:0!important;overflow:visible!important;align-items:flex-start!important}
+  .phone{width:min(320px,calc(100vw - 18px))!important;height:640px!important;margin:0 auto!important;padding:2px!important}
   .phone-view{padding:13px 4px 0!important}
   .android-dock{left:1px!important;right:1px!important;bottom:1px!important}
-  .section{padding:46px 0!important}
-  .compact-section{padding:38px 0!important}
+  .section{padding:34px 0!important}
+  .compact-section{padding:30px 0!important}
+  .section-heading,.compact-heading{margin-bottom:18px!important}
+  #overview{padding-top:28px!important}
+  #family{padding-top:32px!important;padding-bottom:32px!important}
+  #family .family-grid{gap:12px!important}
+  .family-map{min-height:360px!important;height:360px!important;border-radius:16px!important}
+  .map-zone{width:112px!important;height:112px!important}
+  .zone-home{left:28px!important;top:52px!important}
+  .zone-school{right:24px!important;bottom:42px!important}
+  .person-one{left:70px!important;top:94px!important}
+  .person-two{right:62px!important;bottom:78px!important}
+  .timeline{padding:18px!important}
+  .timeline-item{padding:11px 0!important}
 }
 
 @media(max-width:360px){
-  .phone-stage{height:610px!important}
+  .phone-stage{height:610px!important;min-height:610px!important}
   .phone{width:calc(100vw - 14px)!important;height:610px!important}
+  .family-map{height:330px!important;min-height:330px!important}
 }
