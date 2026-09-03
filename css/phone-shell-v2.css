@@ -59,6 +59,8 @@
 .az-app-logo{width:30px!important;height:30px!important;display:block!important;object-fit:contain!important}
 .az-widget-logo{width:24px!important;height:24px!important;display:block!important;object-fit:contain!important}
 .shield-dot{overflow:hidden!important}
+.phone-side-sos{position:absolute!important;right:0!important;top:185px!important;width:5px!important;height:54px!important;padding:0!important;border:0!important;border-radius:4px 0 0 4px!important;background:linear-gradient(180deg,#ff6678,#c7354b)!important;box-shadow:0 0 12px rgba(255,81,105,.24)!important;z-index:30!important;cursor:pointer!important}
+.phone-side-sos:focus-visible{outline:2px solid #ff9aaa!important;outline-offset:-2px!important}
 
 /* Keep map cleanup separate from the phone layout. */
 .map-zone{background:transparent!important;border-style:solid!important;box-shadow:none!important;filter:none!important;backdrop-filter:none!important}
