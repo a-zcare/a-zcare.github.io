@@ -7,7 +7,7 @@
 
   const shell = document.createElement('link');
   shell.rel = 'stylesheet';
-  shell.href = 'css/phone-shell-v2.css?v=20260903-5';
+  shell.href = 'css/phone-shell-v2.css?v=20260903-6';
   document.head.appendChild(shell);
 
   const core = document.createElement('script');
