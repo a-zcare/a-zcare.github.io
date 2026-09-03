@@ -1,6 +1,6 @@
 // Same-origin stable loader for A-Z Care.
 (() => {
-  const build = '20260904-phone-restore-1';
+  const build = '20260904-modern-phone-2';
 
   const css = document.createElement('link');
   css.rel = 'stylesheet';
