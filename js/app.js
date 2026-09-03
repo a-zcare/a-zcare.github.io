@@ -2,7 +2,7 @@
 (() => {
   const css = document.createElement('link');
   css.rel = 'stylesheet';
-  css.href = 'css/landing-v2.css?v=20260903-android-10';
+  css.href = 'css/landing-v2.css?v=20260904-landing-refine-1';
   document.head.appendChild(css);
 
   const shell = document.createElement('link');
@@ -15,7 +15,7 @@
   core.async = false;
   core.onload = () => {
     const landing = document.createElement('script');
-    landing.src = 'js/landing-v2.js?v=20260903-android-7';
+    landing.src = 'js/landing-v2.js?v=20260904-landing-refine-1';
     landing.async = false;
     document.body.appendChild(landing);
   };
