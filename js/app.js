@@ -5,6 +5,11 @@
   css.href = 'css/landing-v2.css?v=20260904-landing-refine-1';
   document.head.appendChild(css);
 
+  const refine = document.createElement('link');
+  refine.rel = 'stylesheet';
+  refine.href = 'css/landing-refine.css?v=20260904-1';
+  document.head.appendChild(refine);
+
   const shell = document.createElement('link');
   shell.rel = 'stylesheet';
   shell.href = 'css/phone-shell-v2.css?v=20260904-phone-stable-1';
