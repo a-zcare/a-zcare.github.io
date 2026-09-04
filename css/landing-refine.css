@@ -1,47 +1,42 @@
 /* Landing-only refinements. Intentionally does not alter the interactive phone internals. */
-/* Remove oversized legacy section gaps while keeping normal breathing room. */
-.section{padding:58px 0!important}
-.section-heading{margin-bottom:28px!important}
-.compact-section{padding:42px 0!important}
-#overview{padding-top:42px!important;padding-bottom:42px!important}
-#family{padding-top:48px!important;padding-bottom:24px!important}
-#modes{padding-top:28px!important;padding-bottom:44px!important}
-#privacy{padding-top:42px!important;padding-bottom:42px!important}
-#survey{padding-top:46px!important;padding-bottom:46px!important}
-/* Kill the base 100vh hero reservation that leaves a blank strip below the phone. */
-.hero{min-height:0!important;padding-top:108px!important;padding-bottom:4px!important;align-items:flex-start!important}
-.hero + .section{padding-top:20px!important}
+.section{padding:34px 0!important}
+.section-heading{margin-bottom:20px!important}
+.compact-section{padding:24px 0!important}
+#overview{padding-top:18px!important;padding-bottom:22px!important}
+#family{padding-top:30px!important;padding-bottom:8px!important}
+#modes{padding-top:8px!important;padding-bottom:24px!important}
+#privacy{padding-top:24px!important;padding-bottom:24px!important}
+#survey{padding-top:28px!important;padding-bottom:28px!important}
+.hero{min-height:0!important;padding-top:104px!important;padding-bottom:0!important;align-items:flex-start!important}
+.hero + .section{padding-top:10px!important}
 .hero .phone-stage{min-height:0!important;height:auto!important;padding:0!important;margin:0!important}
 .hero-grid{align-items:start!important}
-/* The old map was 480px tall while the timeline is much shorter. Keep both compact. */
 #family .family-grid{align-items:start!important;margin-bottom:0!important;padding-bottom:0!important}
-#family .family-map{min-height:280px!important;height:280px!important;margin-bottom:0!important}
-#family .timeline{margin-bottom:0!important}
-#family .map-zone{width:112px!important;height:112px!important}
-#family .zone-home{left:48px!important;top:48px!important}
-#family .zone-school{right:34px!important;bottom:38px!important}
-#family .person-one{left:92px!important;top:88px!important}
-#family .person-two{right:74px!important;bottom:76px!important}
-.hardware-teaser{padding:6px 0 30px!important}
-.hardware-teaser-card{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:24px 28px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(91,140,255,.07),rgba(255,255,255,.018))}.hardware-teaser-card h2{margin:5px 0 8px;font-size:clamp(24px,3vw,38px)}.hardware-teaser-card p:last-child{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.hardware-teaser-card .button{flex:0 0 auto}.audience-icon{font-size:17px}.privacy-line{max-width:940px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.018)}.privacy-line>div{padding:16px 18px}.privacy-line>div+div{border-left:1px solid var(--line)}.privacy-line strong,.privacy-line span{display:block}.privacy-line strong{font-size:13px;margin-bottom:4px}.privacy-line span{font-size:11px;line-height:1.45;color:var(--muted)}.roadmap-section{padding:24px 0!important}.roadmap-line{display:flex;align-items:center;justify-content:center;gap:14px;min-height:64px;padding:15px 20px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018)}.roadmap-line .roadmap-label{font-size:9px;letter-spacing:.16em;color:var(--muted);margin-right:10px}.roadmap-line strong{font-size:13px}.roadmap-line strong b{color:var(--green)}.roadmap-line i{font-style:normal;color:#59677a}.timeline-item{min-height:0}.survey-card{box-shadow:0 18px 50px rgba(0,0,0,.18)!important}footer .footer>div{display:flex;gap:16px;flex-wrap:wrap}footer .footer>div a{white-space:nowrap}
-@media(max-width:992px){
-  .hero-grid,.family-grid{gap:18px!important}
-  .hero .phone-stage{min-height:0!important;height:auto!important}
-}
+#family .family-map{min-height:230px!important;height:230px!important;margin-bottom:0!important}
+#family .timeline{margin-bottom:0!important;padding-bottom:12px!important}
+#family .map-zone{width:100px!important;height:100px!important}
+#family .zone-home{left:42px!important;top:40px!important}
+#family .zone-school{right:30px!important;bottom:28px!important}
+#family .person-one{left:84px!important;top:76px!important}
+#family .person-two{right:68px!important;bottom:62px!important}
+.hardware-teaser{padding:2px 0 20px!important}
+.hardware-teaser-card{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:24px 28px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(91,140,255,.07),rgba(255,255,255,.018))}.hardware-teaser-card h2{margin:5px 0 8px;font-size:clamp(24px,3vw,38px)}.hardware-teaser-card p:last-child{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.hardware-teaser-card .button{flex:0 0 auto}.audience-icon{font-size:17px}.privacy-line{max-width:940px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.018)}.privacy-line>div{padding:16px 18px}.privacy-line>div+div{border-left:1px solid var(--line)}.privacy-line strong,.privacy-line span{display:block}.privacy-line strong{font-size:13px;margin-bottom:4px}.privacy-line span{font-size:11px;line-height:1.45;color:var(--muted)}.roadmap-section{padding:16px 0!important}.roadmap-line{display:flex;align-items:center;justify-content:center;gap:14px;min-height:58px;padding:12px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018)}.roadmap-line .roadmap-label{font-size:9px;letter-spacing:.16em;color:var(--muted);margin-right:10px}.roadmap-line strong{font-size:13px}.roadmap-line strong b{color:var(--green)}.roadmap-line i{font-style:normal;color:#59677a}.timeline-item{min-height:0}.survey-card{box-shadow:0 18px 50px rgba(0,0,0,.18)!important}footer .footer>div{display:flex;gap:16px;flex-wrap:wrap}footer .footer>div a{white-space:nowrap}
+@media(max-width:992px){.hero-grid,.family-grid{gap:12px!important}.hero .phone-stage{min-height:0!important;height:auto!important}}
 @media(max-width:700px){
-  .section{padding:28px 0!important}
-  .section-heading{margin-bottom:18px!important}
-  .compact-section{padding:24px 0!important}
-  #overview{padding-top:16px!important;padding-bottom:22px!important}
-  #family{padding-top:26px!important;padding-bottom:10px!important}
-  #modes{padding-top:14px!important;padding-bottom:26px!important}
-  #privacy,#survey{padding-top:26px!important;padding-bottom:26px!important}
-  .hero{min-height:0!important;padding:92px 0 0!important;align-items:flex-start!important}
-  .hero + .section{padding-top:14px!important}
-  .hero-grid{gap:10px!important}
+  .section{padding:18px 0!important}
+  .section-heading{margin-bottom:12px!important}
+  .compact-section{padding:14px 0!important}
+  #overview{padding-top:6px!important;padding-bottom:12px!important}
+  #family{padding-top:18px!important;padding-bottom:4px!important}
+  #modes{padding-top:4px!important;padding-bottom:16px!important}
+  #privacy,#survey{padding-top:18px!important;padding-bottom:18px!important}
+  .hero{min-height:0!important;padding:88px 0 0!important;align-items:flex-start!important}
+  .hero + .section{padding-top:6px!important}
+  .hero-grid{gap:6px!important}
   .hero .phone-stage{min-height:0!important;height:auto!important;padding:0!important;margin:0!important}
-  #family .family-grid{gap:10px!important}
-  #family .family-map{min-height:250px!important;height:250px!important}
-  .hardware-teaser{padding:0 0 18px!important}
-  .hardware-teaser-card{display:block;padding:19px}.hardware-teaser-card .button{display:block;width:100%;margin-top:16px;text-align:center}.privacy-line{grid-template-columns:1fr}.privacy-line>div+div{border-left:0;border-top:1px solid var(--line)}.roadmap-section{padding:18px 0!important}.roadmap-line{gap:8px;padding:13px 10px;flex-wrap:wrap}.roadmap-line .roadmap-label{width:100%;margin:0;text-align:center}.roadmap-line strong{font-size:11px}.compact-card{padding:15px!important}.compact-card h3{margin-top:7px}.compact-heading{margin-bottom:14px!important}footer .footer{gap:14px!important}footer .footer>div{justify-content:center}
+  #family .family-grid{gap:6px!important}
+  #family .family-map{min-height:220px!important;height:220px!important}
+  #family .timeline{padding-bottom:8px!important}
+  .hardware-teaser{padding:0 0 12px!important}
+  .hardware-teaser-card{display:block;padding:17px}.hardware-teaser-card .button{display:block;width:100%;margin-top:14px;text-align:center}.privacy-line{grid-template-columns:1fr}.privacy-line>div+div{border-left:0;border-top:1px solid var(--line)}.roadmap-section{padding:12px 0!important}.roadmap-line{gap:7px;padding:10px 8px;flex-wrap:wrap}.roadmap-line .roadmap-label{width:100%;margin:0;text-align:center}.roadmap-line strong{font-size:11px}.compact-card{padding:15px!important}.compact-card h3{margin-top:7px}.compact-heading{margin-bottom:10px!important}footer .footer{gap:12px!important}footer .footer>div{justify-content:center}
 }
