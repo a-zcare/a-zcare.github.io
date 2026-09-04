@@ -1,21 +1,7 @@
-// Same-origin stable loader for A-Z Care.
+// Same-origin runtime loader for A-Z Care.
+// CSS is loaded once from index.html; this file only loads the phone logic.
 (() => {
-  const build = '20260904-phone-spacing-fix-5';
-
-  const css = document.createElement('link');
-  css.rel = 'stylesheet';
-  css.href = `css/landing-v2.css?v=${build}`;
-  document.head.appendChild(css);
-
-  const refine = document.createElement('link');
-  refine.rel = 'stylesheet';
-  refine.href = `css/landing-refine.css?v=${build}`;
-  document.head.appendChild(refine);
-
-  const shell = document.createElement('link');
-  shell.rel = 'stylesheet';
-  shell.href = `css/phone-shell-v2.css?v=${build}`;
-  document.head.appendChild(shell);
+  const build = '20260904-layout-refactor-6';
 
   const core = document.createElement('script');
   core.src = `js/core.js?v=${build}`;
