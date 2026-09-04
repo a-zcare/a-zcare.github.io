@@ -1,42 +1,104 @@
-/* Landing-only refinements. Intentionally does not alter the interactive phone internals. */
-.section{padding:34px 0!important}
-.section-heading{margin-bottom:20px!important}
-.compact-section{padding:24px 0!important}
-#overview{padding-top:18px!important;padding-bottom:22px!important}
-#family{padding-top:30px!important;padding-bottom:8px!important}
-#modes{padding-top:8px!important;padding-bottom:24px!important}
-#privacy{padding-top:24px!important;padding-bottom:24px!important}
-#survey{padding-top:28px!important;padding-bottom:28px!important}
-.hero{min-height:0!important;padding-top:104px!important;padding-bottom:0!important;align-items:flex-start!important}
-.hero + .section{padding-top:10px!important}
-.hero .phone-stage{min-height:0!important;height:auto!important;padding:0!important;margin:0!important}
-.hero-grid{align-items:start!important}
-#family .family-grid{align-items:start!important;margin-bottom:0!important;padding-bottom:0!important}
-#family .family-map{min-height:230px!important;height:230px!important;margin-bottom:0!important}
-#family .timeline{margin-bottom:0!important;padding-bottom:12px!important}
-#family .map-zone{width:100px!important;height:100px!important}
-#family .zone-home{left:42px!important;top:40px!important}
-#family .zone-school{right:30px!important;bottom:28px!important}
-#family .person-one{left:84px!important;top:76px!important}
-#family .person-two{right:68px!important;bottom:62px!important}
-.hardware-teaser{padding:2px 0 20px!important}
-.hardware-teaser-card{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:24px 28px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(91,140,255,.07),rgba(255,255,255,.018))}.hardware-teaser-card h2{margin:5px 0 8px;font-size:clamp(24px,3vw,38px)}.hardware-teaser-card p:last-child{margin:0;color:var(--muted);font-size:12px;line-height:1.6}.hardware-teaser-card .button{flex:0 0 auto}.audience-icon{font-size:17px}.privacy-line{max-width:940px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.018)}.privacy-line>div{padding:16px 18px}.privacy-line>div+div{border-left:1px solid var(--line)}.privacy-line strong,.privacy-line span{display:block}.privacy-line strong{font-size:13px;margin-bottom:4px}.privacy-line span{font-size:11px;line-height:1.45;color:var(--muted)}.roadmap-section{padding:16px 0!important}.roadmap-line{display:flex;align-items:center;justify-content:center;gap:14px;min-height:58px;padding:12px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018)}.roadmap-line .roadmap-label{font-size:9px;letter-spacing:.16em;color:var(--muted);margin-right:10px}.roadmap-line strong{font-size:13px}.roadmap-line strong b{color:var(--green)}.roadmap-line i{font-style:normal;color:#59677a}.timeline-item{min-height:0}.survey-card{box-shadow:0 18px 50px rgba(0,0,0,.18)!important}footer .footer>div{display:flex;gap:16px;flex-wrap:wrap}footer .footer>div a{white-space:nowrap}
-@media(max-width:992px){.hero-grid,.family-grid{gap:12px!important}.hero .phone-stage{min-height:0!important;height:auto!important}}
+/* A-Z Care final landing/layout layer.
+   Loaded last. It owns page spacing and the four-icon dock geometry.
+   Phone app screens and behavior stay in landing-v2/core. */
+
+/* ---------- Global vertical rhythm ---------- */
+main>section{margin:0!important}
+.section,.compact-section{min-height:0!important;height:auto!important;margin:0!important}
+.section{padding:24px 0!important}
+.compact-section{padding:16px 0!important}
+.section-heading,.compact-heading{margin-top:0!important;margin-bottom:16px!important}
+.section-heading>p:last-child,.compact-heading>p:last-child{margin-bottom:0!important}
+
+/* ---------- Hero: no viewport/min-height reservations ---------- */
+.hero{min-height:0!important;height:auto!important;padding:96px 0 0!important;margin:0!important;align-items:start!important}
+.hero-grid{align-items:start!important;gap:28px!important}
+.hero .phone-stage{display:block!important;position:relative!important;min-height:0!important;height:auto!important;padding:0!important;margin:0!important;overflow:visible!important}
+.hero .phone{display:block!important;margin:0 auto!important}
+.hero + #overview{padding-top:12px!important}
+
+/* ---------- Main sections ---------- */
+#overview{padding-top:12px!important;padding-bottom:16px!important}
+.hardware-teaser{padding:0 0 14px!important;margin:0!important}
+#family{padding-top:22px!important;padding-bottom:8px!important}
+#modes{padding-top:10px!important;padding-bottom:18px!important}
+#privacy{padding-top:18px!important;padding-bottom:18px!important}
+#survey{padding-top:22px!important;padding-bottom:22px!important}
+.roadmap-section{padding:12px 0!important}
+footer{margin-top:0!important}
+
+/* ---------- Hardware teaser ---------- */
+.hardware-teaser-card{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:22px 26px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(145deg,rgba(91,140,255,.07),rgba(255,255,255,.018))}
+.hardware-teaser-card h2{margin:5px 0 8px;font-size:clamp(24px,3vw,38px)}
+.hardware-teaser-card p:last-child{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+.hardware-teaser-card .button{flex:0 0 auto}
+
+/* ---------- Family: content defines height, not old fixed reservations ---------- */
+#family .family-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px!important;align-items:start!important;margin:0!important;padding:0!important}
+#family .family-map{min-height:0!important;height:220px!important;margin:0!important;align-self:start!important}
+#family .timeline{min-height:0!important;height:auto!important;margin:0!important;padding:18px 20px!important;align-self:start!important}
+#family .timeline-head{margin-bottom:8px!important}
+#family .timeline-item{min-height:0!important;padding:11px 0!important}
+#family .map-zone{width:96px!important;height:96px!important}
+#family .zone-home{left:40px!important;top:36px!important}
+#family .zone-school{right:28px!important;bottom:24px!important}
+#family .person-one{left:80px!important;top:70px!important}
+#family .person-two{right:64px!important;bottom:56px!important}
+
+/* ---------- Compact cards/privacy/roadmap ---------- */
+.audience-icon{font-size:17px}
+.privacy-line{max-width:940px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.018)}
+.privacy-line>div{padding:15px 17px}
+.privacy-line>div+div{border-left:1px solid var(--line)}
+.privacy-line strong,.privacy-line span{display:block}
+.privacy-line strong{font-size:13px;margin-bottom:4px}
+.privacy-line span{font-size:11px;line-height:1.45;color:var(--muted)}
+.roadmap-line{display:flex;align-items:center;justify-content:center;gap:12px;min-height:54px;padding:10px 16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.018)}
+.roadmap-line .roadmap-label{font-size:9px;letter-spacing:.16em;color:var(--muted);margin-right:8px}
+.roadmap-line strong{font-size:13px}.roadmap-line strong b{color:var(--green)}.roadmap-line i{font-style:normal;color:#59677a}
+.survey-card{box-shadow:0 18px 50px rgba(0,0,0,.18)!important}
+footer .footer>div{display:flex;gap:16px;flex-wrap:wrap}footer .footer>div a{white-space:nowrap}
+
+/* ---------- Phone dock: one clean geometry, no inherited/stretching surprises ---------- */
+.android-dock{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;align-items:start!important;gap:4px!important;left:2px!important;right:2px!important;bottom:2px!important;padding:7px 3px 6px!important;box-sizing:border-box!important}
+.android-dock .android-app{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;width:100%!important;min-width:0!important;margin:0!important;padding:0!important}
+.android-dock .android-app>span{display:grid!important;place-items:center!important;width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;max-height:44px!important;flex:0 0 44px!important;aspect-ratio:1/1!important;margin:0 auto 3px!important;padding:0!important;box-sizing:border-box!important;border-radius:14px!important;transform:none!important;overflow:hidden!important}
+.android-dock .android-app small{display:block!important;width:100%!important;margin:0!important;text-align:center!important;line-height:1.15!important}
+.android-dock [data-az-app="calls"]>span{position:relative!important;background:linear-gradient(145deg,#2a9a69,#176044)!important;border:1px solid rgba(255,255,255,.08)!important;box-shadow:0 5px 14px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.10)!important;font-size:0!important}
+.android-dock [data-az-app="calls"]>span:before{content:""!important;display:block!important;width:24px!important;height:24px!important;margin:0!important;background-repeat:no-repeat!important;background-position:center!important;background-size:24px 24px!important;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6.3 3.8 9.4 7 7.6 9.5c1.45 2.85 3.7 5.1 6.55 6.55l2.55-1.8 3.1 3.1c.45.45.55 1.15.2 1.7-.7 1.15-2 1.85-3.35 1.7C9.9 20.05 4.6 14.75 3.9 8c-.15-1.35.55-2.65 1.7-3.35.55-.35 1.25-.25 1.7.2Z'/%3E%3C/svg%3E")!important;transform:none!important}
+.android-dock [data-az-app="calls"]>span:after{content:none!important;display:none!important}
+
+@media(max-width:992px){
+  .hero-grid{grid-template-columns:1fr!important;gap:12px!important}
+  #family .family-grid{grid-template-columns:1fr!important;gap:10px!important}
+}
+
 @media(max-width:700px){
-  .section{padding:18px 0!important}
-  .section-heading{margin-bottom:12px!important}
-  .compact-section{padding:14px 0!important}
-  #overview{padding-top:6px!important;padding-bottom:12px!important}
-  #family{padding-top:18px!important;padding-bottom:4px!important}
-  #modes{padding-top:4px!important;padding-bottom:16px!important}
-  #privacy,#survey{padding-top:18px!important;padding-bottom:18px!important}
-  .hero{min-height:0!important;padding:88px 0 0!important;align-items:flex-start!important}
-  .hero + .section{padding-top:6px!important}
-  .hero-grid{gap:6px!important}
-  .hero .phone-stage{min-height:0!important;height:auto!important;padding:0!important;margin:0!important}
+  .section{padding:14px 0!important}
+  .compact-section{padding:10px 0!important}
+  .section-heading,.compact-heading{margin-bottom:10px!important}
+  .hero{padding:78px 0 0!important}
+  .hero-grid{gap:8px!important}
+  .hero-copy{text-align:left!important}
+  .hero + #overview{padding-top:4px!important}
+  #overview{padding-top:4px!important;padding-bottom:8px!important}
+  .hardware-teaser{padding:0 0 8px!important}
+  #family{padding-top:14px!important;padding-bottom:2px!important}
+  #modes{padding-top:2px!important;padding-bottom:10px!important}
+  #privacy{padding-top:12px!important;padding-bottom:12px!important}
+  #survey{padding-top:14px!important;padding-bottom:14px!important}
+  .roadmap-section{padding:8px 0!important}
   #family .family-grid{gap:6px!important}
-  #family .family-map{min-height:220px!important;height:220px!important}
-  #family .timeline{padding-bottom:8px!important}
-  .hardware-teaser{padding:0 0 12px!important}
-  .hardware-teaser-card{display:block;padding:17px}.hardware-teaser-card .button{display:block;width:100%;margin-top:14px;text-align:center}.privacy-line{grid-template-columns:1fr}.privacy-line>div+div{border-left:0;border-top:1px solid var(--line)}.roadmap-section{padding:12px 0!important}.roadmap-line{gap:7px;padding:10px 8px;flex-wrap:wrap}.roadmap-line .roadmap-label{width:100%;margin:0;text-align:center}.roadmap-line strong{font-size:11px}.compact-card{padding:15px!important}.compact-card h3{margin-top:7px}.compact-heading{margin-bottom:10px!important}footer .footer{gap:12px!important}footer .footer>div{justify-content:center}
+  #family .family-map{height:205px!important}
+  #family .timeline{padding:14px 16px!important}
+  #family .timeline-item{padding:9px 0!important}
+  .hardware-teaser-card{display:block;padding:16px}
+  .hardware-teaser-card .button{display:block;width:100%;margin-top:12px;text-align:center}
+  .privacy-line{grid-template-columns:1fr}
+  .privacy-line>div+div{border-left:0;border-top:1px solid var(--line)}
+  .roadmap-line{gap:7px;padding:9px 8px;flex-wrap:wrap}
+  .roadmap-line .roadmap-label{width:100%;margin:0;text-align:center}
+  .roadmap-line strong{font-size:11px}
+  .compact-card{padding:15px!important}.compact-card h3{margin-top:7px}
+  footer .footer{gap:12px!important}footer .footer>div{justify-content:center}
 }
