@@ -1,0 +1,39 @@
+/* A-Z Care desktop readability + product-story refinement.
+   Kept separate from style.css so this pass is easy to review/rollback. */
+
+.problem-grid,.scenario-grid,.proof-grid{display:grid;gap:14px}.problem-grid{grid-template-columns:repeat(5,1fr)}.problem-card,.scenario-card,.proof-card{border:1px solid var(--line);background:#ffffff07;border-radius:18px}.problem-card{padding:22px 18px}.problem-card b{display:block;font-size:17px;margin-bottom:7px}.problem-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.55}.problem-card span{display:inline-grid;place-items:center;width:34px;height:34px;margin-bottom:16px;border-radius:10px;background:#5b8cff18;color:#91b0ff;font-weight:800}.scenario-grid{grid-template-columns:repeat(2,1fr)}.scenario-card{padding:26px}.scenario-card small{display:block;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:1.7px;margin-bottom:9px}.scenario-card h3{font-size:22px;line-height:1.15;margin:0 0 10px}.scenario-card p{margin:0;color:var(--muted);font-size:14px;line-height:1.65}.flow{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.flow span{padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#ffffff06;color:#b9c4d2;font-size:11px}.proof-shell{padding:34px;border:1px solid #6f94ff26;border-radius:22px;background:radial-gradient(circle at 85% 20%,#335fff20,transparent 35%),#ffffff06}.proof-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:24px}.proof-top h2{margin:0;font-size:clamp(34px,4vw,52px);line-height:1.05;letter-spacing:-2px}.proof-top p{max-width:580px;margin:0;color:var(--muted);font-size:16px}.proof-grid{grid-template-columns:repeat(3,1fr)}.proof-card{padding:20px}.proof-card b{display:block;font-size:17px;margin-bottom:6px}.proof-card span{color:var(--muted);font-size:13px}.proof-card strong{display:block;color:var(--cyan);font-size:12px;letter-spacing:1px;margin-bottom:8px}.privacy-intro{max-width:720px;color:var(--muted);font-size:16px;margin:16px 0 28px}.truth-note{margin-top:20px;padding:14px 16px;border-left:2px solid var(--blue);background:#5b8cff0b;color:#9daabd;font-size:13px}.hero-actions{display:flex;gap:10px;flex-wrap:wrap}.hero-proof{display:flex;gap:18px;flex-wrap:wrap;margin-top:24px}.hero-proof span{color:#8390a2;font-size:12px}.hero-proof b{color:#dce5f2;font-weight:600}.section-label{display:inline-block;margin-bottom:12px;color:var(--blue);font-size:10px;font-weight:800;letter-spacing:2px}
+
+@media (min-width:901px){
+ body{font-size:16px;line-height:1.65}
+ .container{width:min(1220px,90%)}
+ nav a,.nav-btn{font-size:14px}
+ .nav-btn{padding:10px 14px}
+ .hero{padding-top:128px;padding-bottom:42px}
+ .hero-grid{gap:72px;align-items:center}
+ .pill{font-size:12px;padding:7px 13px;margin-bottom:24px}
+ .eyebrow,.section-label{font-size:12px;letter-spacing:2.2px}
+ .hero h1{font-size:clamp(56px,6vw,84px);line-height:.98}
+ .lead,.heading>p{font-size:19px;line-height:1.65;max-width:720px}
+ .lead{max-width:680px}
+ .button{font-size:14px;padding:14px 20px}
+ .hardware-card{padding:26px 30px}
+ .hardware-card h2{font-size:30px}
+ .hardware-card p:last-child{font-size:15px}
+ .section{padding:92px 0}
+ .heading{max-width:840px;margin-bottom:40px}
+ .heading h2{font-size:clamp(42px,4.4vw,60px)}
+ .cards{gap:16px}
+ .cards article,.timeline{padding:28px}
+ .cards h3{font-size:20px;margin-top:20px}
+ .cards p,.timeline p{font-size:15px;line-height:1.65}
+ .principles{gap:18px}
+ .principles div{padding:24px 20px}
+ .principles b{font-size:18px;margin-bottom:7px}
+ .principles span{font-size:14px;line-height:1.6}
+ .survey form{padding:34px}
+ .form-grid label,fieldset{font-size:14px}
+ select,input[type=email]{font-size:14px}
+}
+
+@media (max-width:1000px){.problem-grid{grid-template-columns:repeat(2,1fr)}.proof-grid{grid-template-columns:1fr}.proof-top{display:block}.proof-top p{margin-top:14px}}
+@media (max-width:700px){.problem-grid,.scenario-grid{grid-template-columns:1fr}.proof-shell{padding:24px}.hero-proof{gap:10px 14px}.problem-card b{font-size:16px}.scenario-card{padding:22px}}
