@@ -6,8 +6,7 @@
   let lastDirection = 1;
 
   const isClockOnly = () =>
-    Boolean(view.querySelector('#widgetClock')) &&
-    !view.querySelector('.widget-weather-time');
+    Boolean(view.querySelector('#widgetClock')) && !view.querySelector('.widget-weather-time');
 
   const isWeather = () =>
     view.querySelector('.widget-content small')?.textContent?.includes('RIGA · WEATHER');
@@ -66,9 +65,7 @@
     if (!isClockOnly() || skipping) return false;
 
     skipping = true;
-    const button = view.querySelector(
-      `[data-widget="${direction < 0 ? '-1' : '1'}"]`,
-    );
+    const button = view.querySelector(`[data-widget="${direction < 0 ? '-1' : '1'}"]`);
 
     if (button) button.click();
     skipping = false;

@@ -1,25 +1,9 @@
 (() => {
   const correct = {
-    Display: [
-      '6.3″ AMOLED',
-      '120 Hz adaptive refresh',
-      'FHD+ display',
-    ],
-    Performance: [
-      '12 GB RAM',
-      '256 GB UFS 3.1 or better',
-      'Snapdragon 7-series target',
-    ],
-    Battery: [
-      '6500 mAh',
-      'Adaptive battery protection',
-      '65W USB-C PD/PPS wired charging',
-    ],
-    Connectivity: [
-      '5G · Wi-Fi 6E',
-      'Bluetooth 5.4+ · NFC',
-      'Dual SIM / eSIM',
-    ],
+    Display: ['6.3″ AMOLED', '120 Hz adaptive refresh', 'FHD+ display'],
+    Performance: ['12 GB RAM', '256 GB UFS 3.1 or better', 'Snapdragon 7-series target'],
+    Battery: ['6500 mAh', 'Adaptive battery protection', '65W USB-C PD/PPS wired charging'],
+    Connectivity: ['5G · Wi-Fi 6E', 'Bluetooth 5.4+ · NFC', 'Dual SIM / eSIM'],
     Protection: [
       'IP68 water & dust',
       'Hardware-backed Keystore / TEE',
