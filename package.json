@@ -1,0 +1,13 @@
+{
+  "name": "az-care-web-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A-Z Care interactive web prototype",
+  "scripts": {
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{html,css,js,json,md}\""
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  }
+}
