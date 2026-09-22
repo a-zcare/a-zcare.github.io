@@ -48,9 +48,7 @@
     `<button class="phone-row" ${target ? `data-open="${target}"` : ''}><span>${icon}</span><b>${title}<small>${note}</small></b><i>›</i></button>`;
   const widgets = [
     () =>
-      `<div class="widget-main"><span class="widget-symbol">☁</span><div><small>RIGA · WEATHER</small><strong>18°</strong><p>Partly cloudy · 14° / 20°</p></div></div>`,
-    () =>
-      `<div class="widget-main"><span class="widget-symbol">◷</span><div><small>NOW</small><strong id="widgetClock"></strong><p id="widgetDate"></p></div></div>`,
+      `<div class="widget-weather-time"><div class="weather-side"><span class="widget-symbol">☁</span><div><small>RIGA · WEATHER</small><strong>18°</strong><p>Partly cloudy · 14° / 20°</p></div></div><div class="time-side"><small>LOCAL TIME</small><strong id="widgetClock"></strong><p id="widgetDate"></p></div></div>`,
     () =>
       `<div class="widget-health"><small>HEALTH · DEMO</small><div><b>6.4<em> mmol/L</em><span>Glucose</span></b><b>72<em> bpm</em><span>Pulse</span></b><b>122/78<span>Pressure</span></b></div></div>`,
     () =>
@@ -73,13 +71,7 @@
     view.innerHTML = `<div class="android-status"><b id="clock"></b><span>5G · 82%</span></div>${widgetHtml()}<div class="apps">${app('Protect', 'protect')}${app('AI Care', 'ai')}${app('Health', 'health', 'health')}${app('Family', 'family')}${app('Location', 'location')}${app('Contacts', 'contacts')}${app('Specifications', 'specs', 'specs')}${app('Settings', 'settings')}${app('SOS', 'sos', 'sos')}</div><div class="dock">${app('Phone', 'calls')}${app('Messages', 'messages')}${app('Browser', 'browser')}${app('Camera', 'camera')}</div>`;
     tick();
   }
-  const specData = {
-    display: ['6.3″ AMOLED', '120 Hz adaptive refresh', '2400 × 1080 · HDR'],
-    performance: ['12 GB RAM', '256 GB storage', 'Secure on-device AI'],
-    battery: ['6500 mAh', 'Adaptive battery protection', 'Fast + wireless charging'],
-    connectivity: ['5G · Wi-Fi 7', 'Bluetooth · NFC', 'Dual SIM / eSIM'],
-    protection: ['IP68 water & dust', 'Hardware security module', 'Privacy-first permissions'],
-  };
+  const specData = window.AZ_PRODUCT?.specs || {};
   function specs() {
     const d = specData[specTab];
     return `${head('A-Z CARE PHONE', 'Specifications')}<div class="spec-hero"><span>${icons.specs}</span><div><strong>A-Z Care Phone</strong><small>Concept hardware</small></div></div><div class="spec-tabs">${Object.keys(
