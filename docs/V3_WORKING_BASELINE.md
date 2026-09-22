@@ -15,7 +15,7 @@ This is the working baseline for the next round of development. The goal is to p
 - Protect / AI Care / Location / Family / Contacts / Settings / Emergency screens.
 - Compact landing spacing after the mobile layout cleanup.
 - Hardware teaser and Family Dashboard.
-- Survey integration and GA4.
+- Consent-gated GA4 and a dedicated Privacy Policy.
 
 ## Bugs/regressions already encountered
 

@@ -10,24 +10,10 @@
     />
     <title>A-Z Care — Safer smartphone experience</title>
     <link rel="icon" href="assets/azcare-logo-white.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="css/style.css?v=5" />
     <link rel="stylesheet" href="css/ton-feedback-refine.css?v=2" />
     <link rel="stylesheet" href="css/visual-polish.css?v=3" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KC2R3GT4XF"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
-      gtag('config', 'G-KC2R3GT4XF');
-    </script>
+    <link rel="stylesheet" href="css/consent.css?v=1" />
   </head>
   <body>
     <header>
@@ -37,7 +23,7 @@
         >
         <nav>
           <a href="#why">Why</a><a href="#product">Product</a><a href="#how">How it works</a
-          ><a href="#privacy">Privacy</a><a href="#survey">Survey</a>
+          ><a href="#privacy">Privacy</a><a href="#research">Research</a>
         </nav>
         <a
           class="nav-btn"
@@ -61,7 +47,7 @@
             </p>
             <div class="hero-actions">
               <a class="button primary" href="#product">Explore the phone ↓</a
-              ><a class="button ghost" href="#survey">Share feedback</a>
+              ><a class="button ghost" href="#how">View demo scenarios</a>
             </div>
             <div class="hero-proof">
               <span><b>Interactive web prototype</b></span
@@ -70,9 +56,12 @@
             </div>
           </div>
           <div class="phone-wrap" id="product">
-            <div class="phone">
-              <div class="camera-dot"></div>
-              <div id="phoneView" class="phone-view" aria-live="polite"></div>
+            <div class="phone-demo-shell">
+              <p class="phone-demo-label">Interactive demo · No live services</p>
+              <div class="phone">
+                <div class="camera-dot"></div>
+                <div id="phoneView" class="phone-view" aria-live="polite"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -409,9 +398,10 @@
             A-Z Care is currently a concept and interactive web prototype. It is not an emergency
             service, medical device or finished consumer phone.
           </p>
+          <a class="text-link" href="privacy.html">Read the Privacy Policy →</a>
         </div>
       </section>
-      <section class="section alt">
+      <section class="section alt" id="research">
         <div class="container proof-shell">
           <div class="proof-top">
             <div>
@@ -419,8 +409,8 @@
               <h2>Prove the need before building at scale.</h2>
             </div>
             <p>
-              We are collecting product research before making claims about demand. Real survey
-              results can later replace assumptions with evidence.
+              We are preparing structured product research before making claims about demand. No
+              questionnaire responses or contact details are collected on this website right now.
             </p>
           </div>
           <div class="proof-grid">
@@ -442,76 +432,6 @@
           </div>
         </div>
       </section>
-      <section class="section" id="survey">
-        <div class="container survey">
-          <div class="heading center">
-            <p class="eyebrow">HELP SHAPE A-Z CARE</p>
-            <h2>Would this phone be useful to you or your family?</h2>
-            <p>
-              A short survey helps us understand what matters most. We will use real responses to
-              guide the next prototype.
-            </p>
-          </div>
-          <form id="azSurvey">
-            <div class="form-grid">
-              <label
-                >Who would you use it for?<select name="audience" required>
-                  <option value="">Choose one</option>
-                  <option>My child</option>
-                  <option>Parent or grandparent</option>
-                  <option>Another family member</option>
-                  <option>Myself</option>
-                  <option>Just interested</option>
-                </select></label
-              ><label
-                >Would you consider buying it?<select name="purchase_intent" required>
-                  <option value="">Choose one</option>
-                  <option>Yes</option>
-                  <option>Maybe, depending on price</option>
-                  <option>Need more information</option>
-                  <option>No</option>
-                </select></label
-              ><label
-                >Reasonable price<select name="price_range">
-                  <option>Not sure</option>
-                  <option>Under €150</option>
-                  <option>€150–249</option>
-                  <option>€250–399</option>
-                  <option>€400+</option>
-                </select></label
-              ><label
-                >Email (optional)<input type="email" name="email" placeholder="you@example.com"
-              /></label>
-            </div>
-            <fieldset>
-              <legend>Which features matter most?</legend>
-              <div class="checks">
-                <label
-                  ><input type="checkbox" name="important_features" value="scam_protection" /> Scam
-                  protection</label
-                ><label
-                  ><input type="checkbox" name="important_features" value="health" /> Health</label
-                ><label
-                  ><input type="checkbox" name="important_features" value="fall_detection" /> Fall
-                  detection</label
-                ><label><input type="checkbox" name="important_features" value="sos" /> SOS</label
-                ><label
-                  ><input type="checkbox" name="important_features" value="location" /> Family
-                  location</label
-                ><label
-                  ><input type="checkbox" name="important_features" value="ai_assistant" /> AI
-                  assistant</label
-                >
-              </div>
-            </fieldset>
-            <label class="consent"
-              ><input type="checkbox" required /> I agree that my answers may be stored for product
-              research.</label
-            ><button class="button primary" type="submit">Send feedback</button
-            ><span id="surveyStatus"></span>
-          </form>
-        </div>
-      </section>
     </main>
     <footer>
       <div class="container">
@@ -519,8 +439,13 @@
           ><img src="assets/azcare-logo-white.svg" alt="" /><b>A-Z<span>Care</span></b></a
         >
         <p>Concept prototype · Not an emergency or medical service.</p>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <button type="button" data-privacy-settings>Privacy settings</button>
+        </div>
       </div>
     </footer>
+    <script src="js/consent.js?v=1" defer></script>
     <script src="js/app.js?v=5" defer></script>
     <script src="js/widget-merge.js?v=1" defer></script>
     <script src="js/audience-expansion.js?v=1" defer></script>

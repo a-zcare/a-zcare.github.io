@@ -111,17 +111,6 @@
   flex: 0 0 auto;
   text-align: center;
 }
-.survey form > .button {
-  display: flex;
-  width: max-content;
-  min-width: 170px;
-  margin: 14px auto 0;
-}
-.survey #surveyStatus {
-  display: block;
-  margin: 9px auto 0;
-  text-align: center;
-}
 .widget-weather-time {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -445,9 +434,6 @@
   }
   .hero-actions .button {
     width: min(100%, 260px);
-  }
-  .survey form > .button {
-    width: min(100%, 230px);
   }
   .widget-weather-time {
     grid-template-columns: 1fr 1fr;
