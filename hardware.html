@@ -7,12 +7,7 @@
     <meta name="description" content="A-Z Care Phone 1 target hardware specification." />
     <title>A-Z Care Phone 1 — Target Hardware</title>
     <link rel="icon" type="image/jpeg" href="assets/azcare-logo.jpg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="css/consent.css?v=1" />
     <style>
       :root {
         --bg: #071018;
@@ -31,7 +26,12 @@
         background:
           radial-gradient(circle at 75% 5%, rgba(40, 130, 255, 0.13), transparent 32%), var(--bg);
         color: var(--text);
-        font-family: Inter, system-ui, sans-serif;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
       }
       .wrap {
         width: min(1120px, calc(100% - 36px));
@@ -197,6 +197,21 @@
         color: var(--muted);
         font-size: 11px;
         line-height: 1.7;
+      }
+      .foot-links {
+        display: flex;
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .foot-links a,
+      .foot-links button {
+        padding: 0;
+        border: 0;
+        background: none;
+        color: #b7c4d3;
+        font: inherit;
+        text-decoration: none;
+        cursor: pointer;
       }
       @media (max-width: 800px) {
         .highlights {
@@ -396,7 +411,12 @@
         intended product direction, not a final shipping specification. Final components,
         dimensions, certifications, availability and price remain subject to engineering validation
         and manufacturing agreements.
+        <div class="foot-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <button type="button" data-privacy-settings>Privacy settings</button>
+        </div>
       </footer>
     </div>
+    <script src="js/consent.js?v=1" defer></script>
   </body>
 </html>

@@ -1,13 +1,16 @@
-name: Format code
+name: Code quality
 
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   prettier:
@@ -25,20 +28,7 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Format project
-        run: npm run format
-
-      - name: Commit formatting
-        shell: bash
-        run: |
-          if git diff --quiet; then
-            echo "Project is already formatted."
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit -m "style: format project with Prettier"
-          git push
+      - name: Check formatting
+        run: npm run format:check

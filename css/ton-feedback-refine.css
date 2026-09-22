@@ -269,17 +269,6 @@
     font-size: 14px;
     line-height: 1.6;
   }
-  .survey form {
-    padding: 34px;
-  }
-  .form-grid label,
-  fieldset {
-    font-size: 14px;
-  }
-  select,
-  input[type='email'] {
-    font-size: 14px;
-  }
 }
 
 @media (max-width: 1000px) {
