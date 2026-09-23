@@ -1,5 +1,7 @@
 (() => {
-  const CONSENT_KEY = 'azcare_consent_v1';
+  const CONSENT_VERSION = 2;
+  const CONSENT_KEY = `azcare_consent_v${CONSENT_VERSION}`;
+  const CONSENT_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
   const MEASUREMENT_ID = 'G-KC2R3GT4XF';
   const GA_DISABLE_KEY = `ga-disable-${MEASUREMENT_ID}`;
 
@@ -7,7 +9,12 @@
     get() {
       try {
         const value = JSON.parse(localStorage.getItem(CONSENT_KEY));
-        return typeof value?.analytics === 'boolean' ? value : null;
+        const updatedAt = Date.parse(value?.updatedAt);
+        const isCurrent = value?.version === CONSENT_VERSION;
+        const isValidDate = Number.isFinite(updatedAt) && updatedAt <= Date.now();
+        const isFresh = isValidDate && Date.now() - updatedAt <= CONSENT_MAX_AGE_MS;
+
+        return isCurrent && isFresh && typeof value?.analytics === 'boolean' ? value : null;
       } catch {
         return null;
       }
@@ -16,7 +23,11 @@
       try {
         localStorage.setItem(
           CONSENT_KEY,
-          JSON.stringify({ analytics, updatedAt: new Date().toISOString(), version: 1 }),
+          JSON.stringify({
+            analytics,
+            updatedAt: new Date().toISOString(),
+            version: CONSENT_VERSION,
+          }),
         );
       } catch {
         // The choice applies for this page view even when browser storage is unavailable.
@@ -33,9 +44,9 @@
         <a href="privacy.html">Read the Privacy Policy</a>
       </div>
       <div class="consent-actions">
-        <button class="consent-button secondary" type="button" data-consent="reject">Reject optional</button>
+        <button class="consent-button decision" type="button" data-consent="reject">Reject optional</button>
+        <button class="consent-button decision" type="button" data-consent="accept">Accept analytics</button>
         <button class="consent-button secondary" type="button" data-consent="manage">Manage choices</button>
-        <button class="consent-button primary" type="button" data-consent="accept">Accept analytics</button>
       </div>
     </aside>
     <dialog class="consent-dialog" id="consentDialog" aria-labelledby="preferencesTitle">

@@ -81,6 +81,11 @@
   background: #ffffff08;
 }
 
+.consent-button.decision {
+  border-color: #789cff50;
+  background: #15213a;
+}
+
 .consent-button.primary {
   background: linear-gradient(135deg, #5b8cff, #735cff);
 }
@@ -215,7 +220,7 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .consent-actions .primary {
+  .consent-actions .secondary {
     grid-column: 1 / -1;
   }
 

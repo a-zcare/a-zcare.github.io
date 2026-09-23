@@ -8,6 +8,10 @@ const index = read('index.html');
 const app = read('js/app.js');
 const css = read('css/visual-polish.css');
 const product = read('js/product-data.js');
+const navigation = read('js/navigation.js');
+const consent = read('js/consent.js');
+const privacy = read('privacy.html');
+const workflow = read('.github/workflows/format.yml');
 
 for (const path of ['privacy.html','hardware.html','js/consent.js','js/navigation.js','js/product-data.js','js/app.js']) {
   if (!fs.existsSync(path)) fail('missing ' + path);
@@ -22,6 +26,17 @@ if (!index.includes('class="future-concept"')) fail('future concept is not seman
 if (!index.includes('js/navigation.js')) fail('navigation script is not loaded');
 if (!index.includes('js/product-data.js')) fail('product data is not loaded');
 if (!css.includes('.menu-toggle')) fail('mobile navigation styles missing');
+if (!index.includes('aria-controls="site-navigation"')) fail('semantic navigation toggle missing');
+if (!navigation.includes('navigation.inert')) fail('closed mobile navigation is not inert');
+if (!navigation.includes("event.key === 'Escape'")) fail('mobile navigation Escape handling missing');
+if (!consent.includes('CONSENT_VERSION = 2')) fail('current consent version missing');
+if (!consent.includes('CONSENT_MAX_AGE_MS')) fail('consent expiry missing');
+if (!privacy.includes('mailto:azcare.project@gmail.com')) fail('privacy contact missing');
+if (!workflow.includes('run: npm test')) fail('CI does not run formatting and static checks');
+if (!workflow.includes('run: npm run test:e2e')) fail('CI does not run browser tests');
+if (!fs.existsSync('playwright.config.js') || !fs.existsSync('tests/e2e/site.spec.js')) {
+  fail('Playwright E2E suite missing');
+}
 if (app.includes('Wi-Fi 7') || app.includes('wireless charging') || app.includes('2400 × 1080')) fail('stale target specs remain in app.js');
 if (!app.includes('window.AZ_PRODUCT?.specs')) fail('app does not use shared product specs');
 if (!product.includes('Wi-Fi 6E') || !product.includes('65W USB-C PD/PPS')) fail('canonical product specs incomplete');

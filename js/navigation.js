@@ -1,40 +1,49 @@
 (() => {
-  const header = document.querySelector('body > header');
-  const nav = header?.querySelector('nav');
-  const navBar = header?.querySelector('.nav');
-  if (!nav || !navBar) return;
+  const button = document.querySelector('.menu-toggle');
+  if (!button) return;
 
-  nav.id = nav.id || 'site-navigation';
-  const button = document.createElement('button');
-  button.className = 'menu-toggle';
-  button.type = 'button';
-  button.setAttribute('aria-controls', nav.id);
-  button.setAttribute('aria-expanded', 'false');
-  button.setAttribute('aria-label', 'Open navigation');
-  button.innerHTML = '<span></span><span></span><span></span>';
-  navBar.insertBefore(button, nav);
+  const navigation = document.getElementById(button.getAttribute('aria-controls'));
+  if (!navigation) return;
 
-  const setOpen = (open) => {
-    nav.classList.toggle('is-open', open);
-    button.classList.toggle('is-open', open);
-    button.setAttribute('aria-expanded', String(open));
-    button.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
-  };
+  const desktop = window.matchMedia('(min-width: 801px)');
 
-  button.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
-  nav.addEventListener('click', (event) => {
+  function isOpen() {
+    return button.getAttribute('aria-expanded') === 'true';
+  }
+
+  function setOpen(open, restoreFocus = false) {
+    const mobileOpen = !desktop.matches && open;
+
+    button.setAttribute('aria-expanded', String(mobileOpen));
+    button.setAttribute('aria-label', mobileOpen ? 'Close navigation' : 'Open navigation');
+    navigation.classList.toggle('is-open', mobileOpen);
+    navigation.inert = !desktop.matches && !mobileOpen;
+
+    if (!mobileOpen && restoreFocus) button.focus();
+  }
+
+  button.addEventListener('click', () => setOpen(!isOpen()));
+
+  navigation.addEventListener('click', (event) => {
     if (event.target.closest('a')) setOpen(false);
   });
+
   document.addEventListener('click', (event) => {
-    if (!navBar.contains(event.target)) setOpen(false);
+    if (!isOpen() || button.contains(event.target) || navigation.contains(event.target)) return;
+    setOpen(false);
   });
+
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      setOpen(false);
-      button.focus();
-    }
+    if (event.key === 'Escape' && isOpen()) setOpen(false, true);
   });
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 800) setOpen(false);
-  });
+
+  function handleViewportChange() {
+    setOpen(false);
+    navigation.inert = !desktop.matches;
+  }
+
+  if (desktop.addEventListener) desktop.addEventListener('change', handleViewportChange);
+  else desktop.addListener(handleViewportChange);
+
+  setOpen(false);
 })();
