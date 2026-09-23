@@ -41,9 +41,9 @@
     camera: svg('<path d="M4 7h4l1.5-2h5L16 7h4v12H4V7z"/><circle cx="12" cy="13" r="4"/>'),
   };
   const app = (label, target, cls = '') =>
-    `<button class="app ${cls}" data-open="${target}"><span class="app-icon">${icons[target]}</span><small>${label}</small></button>`;
+    `<button class="app ${cls}" data-open="${target}" aria-label="${label}"><span class="app-icon" aria-hidden="true">${icons[target]}</span><small>${label}</small></button>`;
   const head = (k, t) =>
-    `<div class="subhead"><button data-back>‹</button><div><small>${k}</small><h3>${t}</h3></div></div>`;
+    `<div class="subhead"><button data-back aria-label="Back to previous screen"><span aria-hidden="true">‹</span></button><div><small>${k}</small><h3 tabindex="-1">${t}</h3></div></div>`;
   const row = (icon, title, note, target = '') =>
     `<button class="phone-row" ${target ? `data-open="${target}"` : ''}><span>${icon}</span><b>${title}<small>${note}</small></b><i>›</i></button>`;
   const widgets = [
@@ -52,7 +52,7 @@
     () =>
       `<div class="widget-health"><small>HEALTH · DEMO</small><div><b>6.4<em> mmol/L</em><span>Glucose</span></b><b>72<em> bpm</em><span>Pulse</span></b><b>122/78<span>Pressure</span></b></div></div>`,
     () =>
-      `<div class="widget-music"><div class="album">♪</div><div><small>NOW PLAYING</small><b>Midnight Drive</b><p>A-Z Radio</p></div><button data-music>▶</button></div>`,
+      `<div class="widget-music"><div class="album">♪</div><div><small>NOW PLAYING</small><b>Midnight Drive</b><p>A-Z Radio</p></div><button data-music aria-label="Play or pause music">▶</button></div>`,
     () =>
       `<div class="widget-agenda"><small>TODAY · CARE</small><b>18:00 Medication</b><p>19:30 · Call Anna</p><p>21:00 · Evening check-in</p></div>`,
     () =>
@@ -62,14 +62,16 @@
   ];
   function widgetHtml() {
     widget = (widget + widgets.length) % widgets.length;
-    return `<div class="smart-widget"><button class="widget-arrow" data-widget="-1">‹</button><div class="widget-content">${widgets[widget]()}</div><button class="widget-arrow" data-widget="1">›</button></div><div class="widget-footer"><span>WIDGET</span><div>${widgets.map((_, i) => `<button data-widget-set="${i}" class="${i === widget ? 'active' : ''}"></button>`).join('')}</div></div>`;
+    return `<div class="smart-widget"><button class="widget-arrow" data-widget="-1" aria-label="Previous widget">‹</button><div class="widget-content">${widgets[widget]()}</div><button class="widget-arrow" data-widget="1" aria-label="Next widget">›</button></div><div class="widget-footer"><span>WIDGET</span><div>${widgets.map((_, i) => `<button data-widget-set="${i}" class="${i === widget ? 'active' : ''}" aria-label="Show widget ${i + 1}" aria-pressed="${i === widget}"></button>`).join('')}</div></div>`;
   }
-  function home() {
+  function home(focusTarget = '') {
     clearInterval(fallTimer);
     current = 'home';
     history.length = 0;
     view.innerHTML = `<div class="android-status"><b id="clock"></b><span>5G · 82%</span></div>${widgetHtml()}<div class="apps">${app('Protect', 'protect')}${app('AI Care', 'ai')}${app('Health', 'health', 'health')}${app('Family', 'family')}${app('Location', 'location')}${app('Contacts', 'contacts')}${app('Specifications', 'specs', 'specs')}${app('Settings', 'settings')}${app('SOS', 'sos', 'sos')}</div><div class="dock">${app('Phone', 'calls')}${app('Messages', 'messages')}${app('Browser', 'browser')}${app('Camera', 'camera')}</div>`;
     tick();
+    if (focusTarget)
+      view.querySelector(`[data-open="${focusTarget}"]`)?.focus({ preventScroll: true });
   }
   const specData = window.AZ_PRODUCT?.specs || {};
   function specs() {
@@ -141,10 +143,12 @@
     if (push) history.push(current);
     current = name;
     view.innerHTML = screens[name]();
+    view.querySelector('h3')?.focus({ preventScroll: true });
   }
   function back() {
+    const leaving = current;
     const prev = history.pop() || 'home';
-    prev === 'home' ? home() : render(prev, false);
+    prev === 'home' ? home(leaving) : render(prev, false);
   }
   function tick() {
     const n = new Date(),
@@ -167,7 +171,7 @@
     $('.widget-footer div').innerHTML = widgets
       .map(
         (_, i) =>
-          `<button data-widget-set="${i}" class="${i === widget ? 'active' : ''}"></button>`,
+          `<button data-widget-set="${i}" class="${i === widget ? 'active' : ''}" aria-label="Show widget ${i + 1}" aria-pressed="${i === widget}"></button>`,
       )
       .join('');
     localStorage.setItem('az_widget', widget);

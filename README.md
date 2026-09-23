@@ -2,7 +2,7 @@
 
 > A privacy-first, AI-assisted smartphone safety concept for kids, seniors and families.
 
-**Status:** Active concept / interactive web prototype. The website demonstrates intended product flows; it is not currently a live security, emergency-response or threat-detection service.
+**Status:** Private research concept / interactive web prototype. The website demonstrates intended product flows; it is not currently a live security, emergency-response or threat-detection service.
 
 ## Product idea
 
@@ -20,7 +20,7 @@ A-Z Care explores how one simple smartphone safety layer could combine emergency
 
 ## Current prototype
 
-The GitHub Pages site includes interactive demonstrations of:
+The private prototype includes interactive demonstrations of:
 
 1. A multi-screen A-Z Care phone UI.
 2. AI scam-message analysis.
@@ -53,7 +53,19 @@ The GitHub Pages site includes interactive demonstrations of:
 - HTML5
 - CSS3
 - Vanilla JavaScript
-- GitHub Pages
+- Playwright browser tests
+
+## Local checks
+
+```bash
+npm ci
+npm test
+npx playwright install chromium
+npm run test:e2e
+```
+
+Public GitHub Pages publishing is intentionally disabled. Any research deployment must use an
+access-controlled host and must not be made public without explicit approval.
 
 ## License / project status
 
