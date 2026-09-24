@@ -1,5 +1,5 @@
 (() => {
-  const CONSENT_VERSION = 2;
+  const CONSENT_VERSION = 3;
   const CONSENT_KEY = `azcare_consent_v${CONSENT_VERSION}`;
   const CONSENT_MAX_AGE_MS = 180 * 24 * 60 * 60 * 1000;
   const MEASUREMENT_ID = 'G-KC2R3GT4XF';
@@ -83,6 +83,11 @@
   const analyticsToggle = document.querySelector('#analyticsConsent');
   let currentChoice = storage.get();
 
+  window.AZ_PRIVACY = Object.freeze({
+    analyticsAllowed: () => Boolean(currentChoice?.analytics),
+    consentVersion: CONSENT_VERSION,
+  });
+
   function removeAnalyticsCookies() {
     document.cookie.split(';').forEach((entry) => {
       const name = entry.split('=')[0].trim();
@@ -151,7 +156,8 @@
     banner.hidden = true;
   }
 
-  function openPreferences() {
+  function openPreferences(source) {
+    window.AZ_ANALYTICS?.track('privacy_settings_open', { source });
     analyticsToggle.checked = Boolean(currentChoice?.analytics);
     if (typeof dialog.showModal === 'function') dialog.showModal();
     else dialog.setAttribute('open', '');
@@ -166,12 +172,13 @@
     const action = event.target.closest('[data-consent]')?.dataset.consent;
     if (action === 'accept') saveChoice(true);
     if (action === 'reject') saveChoice(false);
-    if (action === 'manage') openPreferences();
+    if (action === 'manage') openPreferences('banner');
     if (action === 'save') {
       saveChoice(analyticsToggle.checked);
       closePreferences();
     }
-    if (event.target.closest('[data-privacy-settings]')) openPreferences();
+    const privacyTrigger = event.target.closest('[data-privacy-settings]');
+    if (privacyTrigger) openPreferences(privacyTrigger.dataset.privacySource || 'footer');
   });
 
   applyChoice(currentChoice);

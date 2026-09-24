@@ -7,6 +7,14 @@ const viewports = [
   { name: 'desktop', width: 1366, height: 768 },
 ];
 
+const readAnalyticsEvents = (page) =>
+  page.evaluate(() =>
+    (window.dataLayer || [])
+      .map((entry) => Array.from(entry))
+      .filter(([command]) => command === 'event')
+      .map(([, name, parameters]) => ({ name, parameters })),
+  );
+
 for (const viewport of viewports) {
   test.describe(viewport.name, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } });
@@ -134,15 +142,15 @@ test('optional analytics stays off until a valid choice is saved', async ({ page
   await expect(banner).toBeHidden();
   expect(analyticsRequests).toEqual([]);
 
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('azcare_consent_v2')));
-  expect(saved).toMatchObject({ analytics: false, version: 2 });
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('azcare_consent_v3')));
+  expect(saved).toMatchObject({ analytics: false, version: 3 });
 });
 
 test('expired consent is ignored and the site asks again', async ({ page }) => {
   await page.addInitScript(() => {
     localStorage.setItem(
-      'azcare_consent_v2',
-      JSON.stringify({ analytics: true, version: 2, updatedAt: '2025-01-01T00:00:00.000Z' }),
+      'azcare_consent_v3',
+      JSON.stringify({ analytics: true, version: 3, updatedAt: '2025-01-01T00:00:00.000Z' }),
     );
   });
 
@@ -167,8 +175,81 @@ test('privacy settings can enable analytics explicitly', async ({ page }) => {
 
   await expect(dialog).toBeHidden();
   await expect.poll(() => analyticsRequests.length).toBe(1);
-  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('azcare_consent_v2')));
-  expect(saved).toMatchObject({ analytics: true, version: 2 });
+  const saved = await page.evaluate(() => JSON.parse(localStorage.getItem('azcare_consent_v3')));
+  expect(saved).toMatchObject({ analytics: true, version: 3 });
+});
+
+test('interaction events are discarded before analytics consent', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Messages', exact: true }).click();
+  await page.getByRole('button', { name: 'Scan this message' }).click();
+
+  expect(await readAnalyticsEvents(page)).toEqual([]);
+  expect(
+    await page.evaluate(() =>
+      window.AZ_ANALYTICS.track('scenario_complete', {
+        scenario_name: 'sos',
+        result: 'simulation_complete',
+      }),
+    ),
+  ).toBe(false);
+});
+
+test('consented events use the allowlisted schema and exclude free text', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem(
+      'azcare_consent_v3',
+      JSON.stringify({ analytics: true, version: 3, updatedAt: new Date().toISOString() }),
+    );
+  });
+  await page.route('https://www.googletagmanager.com/**', (route) => route.abort());
+
+  await page.goto('/');
+  await page.getByRole('link', { name: 'Explore the phone' }).click();
+  await page.getByRole('button', { name: 'Messages', exact: true }).click();
+  await page.getByRole('button', { name: 'Scan this message' }).click();
+
+  const accepted = await page.evaluate(() =>
+    window.AZ_ANALYTICS.track('scenario_complete', {
+      scenario_name: 'sos',
+      result: 'simulation_complete',
+      message_text: 'must not be collected',
+    }),
+  );
+  const rejected = await page.evaluate(() =>
+    window.AZ_ANALYTICS.track('scenario_complete', {
+      scenario_name: 'sos',
+      result: 'unapproved_value',
+    }),
+  );
+  const events = await readAnalyticsEvents(page);
+
+  expect(accepted).toBe(true);
+  expect(rejected).toBe(false);
+  expect(events).toEqual(
+    expect.arrayContaining([
+      expect.objectContaining({
+        name: 'navigation_select',
+        parameters: expect.objectContaining({ destination: 'product', placement: 'hero' }),
+      }),
+      expect.objectContaining({
+        name: 'demo_screen_view',
+        parameters: expect.objectContaining({ screen_name: 'messages', previous_screen: 'home' }),
+      }),
+      expect.objectContaining({
+        name: 'scenario_start',
+        parameters: expect.objectContaining({ scenario_name: 'scam_message' }),
+      }),
+      expect.objectContaining({
+        name: 'scenario_complete',
+        parameters: expect.objectContaining({
+          scenario_name: 'scam_message',
+          result: 'warning_shown',
+        }),
+      }),
+    ]),
+  );
+  expect(events.some(({ parameters }) => 'message_text' in parameters)).toBe(false);
 });
 
 test('interactive phone opens an app and returns to its trigger', async ({ page }) => {
@@ -200,6 +281,6 @@ test('scam and SOS demonstrations complete without real actions', async ({ page 
 test('privacy policy exposes the project contact and current revision', async ({ page }) => {
   await page.goto('/privacy.html');
   await expect(page.getByRole('heading', { name: 'Privacy Policy' })).toBeVisible();
-  await expect(page.getByText('Last updated: 23 September 2026')).toBeVisible();
+  await expect(page.getByText('Last updated: 24 September 2026')).toBeVisible();
   await expect(page.locator('a[href="mailto:azcare.project@gmail.com"]')).toBeVisible();
 });

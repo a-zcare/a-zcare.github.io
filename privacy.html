@@ -37,7 +37,7 @@
       <div class="container legal-shell">
         <p class="eyebrow">PRIVACY & TRUST</p>
         <h1>Privacy Policy</h1>
-        <p class="legal-updated">Last updated: 23 September 2026</p>
+        <p class="legal-updated">Last updated: 24 September 2026</p>
 
         <div class="legal-summary">
           <strong>The short version</strong>
@@ -83,6 +83,18 @@
             storage, Google Signals and ad-personalisation signals are disabled. The site does not
             load Google Analytics before consent and does not use analytics if you reject it.
           </p>
+          <p>After consent, the site may measure these predefined interactions:</p>
+          <ul>
+            <li>which measured navigation destination or project link was selected;</li>
+            <li>which screen was opened inside the interactive phone;</li>
+            <li>whether a scam, fall or SOS simulation was started and its predefined outcome;</li>
+            <li>whether Privacy settings or the full specifications were opened.</li>
+          </ul>
+          <p>
+            The analytics event layer uses a fixed list of permitted values. It does not send
+            message text, health readings, contact names, precise location, survey answers or other
+            free-form content.
+          </p>
         </section>
 
         <section>
@@ -98,7 +110,12 @@
             Care analytics cookies that the page can access. Withdrawal does not undo processing
             that occurred while consent was active.
           </p>
-          <button class="button ghost" type="button" data-privacy-settings>
+          <button
+            class="button ghost"
+            type="button"
+            data-privacy-settings
+            data-privacy-source="privacy_page"
+          >
             Open Privacy settings
           </button>
         </section>
@@ -177,10 +194,13 @@
         <p>Concept prototype · Not an emergency or medical service.</p>
         <div class="footer-links">
           <a href="privacy.html" aria-current="page">Privacy Policy</a>
-          <button type="button" data-privacy-settings>Privacy settings</button>
+          <button type="button" data-privacy-settings data-privacy-source="footer">
+            Privacy settings
+          </button>
         </div>
       </div>
     </footer>
-    <script src="js/consent.js?v=2" defer></script>
+    <script src="js/consent.js?v=3" defer></script>
+    <script src="js/analytics.js?v=1" defer></script>
   </body>
 </html>

@@ -8,6 +8,7 @@
     fallTimer = null,
     fallLeft = 10;
   const logo = 'assets/azcare-logo-white.svg';
+  const track = (eventName, parameters) => window.AZ_ANALYTICS?.track(eventName, parameters);
   const svg = (d, extra = '') => `<svg viewBox="0 0 24 24" aria-hidden="true">${d}${extra}</svg>`;
   const icons = {
     protect: `<img src="${logo}" alt="">`,
@@ -71,6 +72,8 @@
     view.innerHTML = `<div class="android-status"><b id="clock"></b><span>5G · 82%</span></div>${widgetHtml()}<div class="apps">${app('Protect', 'protect')}${app('AI Care', 'ai')}${app('Health', 'health', 'health')}${app('Family', 'family')}${app('Location', 'location')}${app('Contacts', 'contacts')}${app('Specifications', 'specs', 'specs')}${app('Settings', 'settings')}${app('SOS', 'sos', 'sos')}</div><div class="dock">${app('Phone', 'calls')}${app('Messages', 'messages')}${app('Browser', 'browser')}${app('Camera', 'camera')}</div>`;
     tick();
     if (focusTarget)
+      track('demo_screen_view', { screen_name: 'home', previous_screen: focusTarget });
+    if (focusTarget)
       view.querySelector(`[data-open="${focusTarget}"]`)?.focus({ preventScroll: true });
   }
   const specData = window.AZ_PRODUCT?.specs || {};
@@ -85,7 +88,7 @@
       )
       .join(
         '',
-      )}</div><div class="spec-detail"><small>${specTab.toUpperCase()}</small><strong>${d[0]}</strong><p>${d[1]}</p><p>${d[2]}</p></div><a class="wide phone-link" href="hardware.html">Full specifications →</a>`;
+      )}</div><div class="spec-detail"><small>${specTab.toUpperCase()}</small><strong>${d[0]}</strong><p>${d[1]}</p><p>${d[2]}</p></div><a class="wide phone-link" href="hardware.html" data-analytics-event="specifications_open" data-analytics-source="phone">Full specifications →</a>`;
   }
   function settings() {
     const tracking = localStorage.getItem('az_tracking') === 'on',
@@ -140,10 +143,13 @@
     clearInterval(fallTimer);
     if (name === 'home') return home();
     if (!screens[name]) return;
+    const previous = current;
     if (push) history.push(current);
     current = name;
     view.innerHTML = screens[name]();
     view.querySelector('h3')?.focus({ preventScroll: true });
+    if (previous !== name)
+      track('demo_screen_view', { screen_name: name, previous_screen: previous });
   }
   function back() {
     const leaving = current;
@@ -179,6 +185,7 @@
   }
   function startFall() {
     const box = $('#fallState');
+    track('scenario_start', { scenario_name: 'fall' });
     fallLeft = 10;
     box.innerHTML = `<div class="fall-alert warning"><strong>Possible fall detected</strong><p>Are you OK?</p><b id="fallCount">${fallLeft}</b><button data-ok>I'm OK</button><button data-need>I need help</button></div>`;
     fallTimer = setInterval(() => {
@@ -187,6 +194,7 @@
       if (c) c.textContent = fallLeft;
       if (fallLeft <= 0) {
         clearInterval(fallTimer);
+        track('scenario_complete', { scenario_name: 'fall', result: 'no_response' });
         box.innerHTML =
           '<div class="fall-alert warning"><strong>Simulation complete · No alert sent</strong><p>In a working product, no response could alert chosen contacts and include the last permitted location.</p><button data-open="contacts">View demo contacts</button></div>';
       }
@@ -230,23 +238,30 @@
       render(current, false);
     }
     if (e.target.closest('[data-scan]')) {
+      track('scenario_start', { scenario_name: 'scam_message' });
       localStorage.setItem('az_scanned', 'yes');
       render('messages', false);
+      track('scenario_complete', { scenario_name: 'scam_message', result: 'warning_shown' });
     }
     if (e.target.closest('[data-fall]')) startFall();
     if (e.target.closest('[data-ok]')) {
       clearInterval(fallTimer);
+      track('scenario_complete', { scenario_name: 'fall', result: 'ok' });
       $('#fallState').innerHTML =
         '<div class="info-card health-head"><strong>✓ Check-in confirmed</strong><small>No alert was sent.</small></div>';
     }
     if (e.target.closest('[data-need]')) {
       clearInterval(fallTimer);
+      track('scenario_complete', { scenario_name: 'fall', result: 'help_requested' });
       $('#fallState').innerHTML =
         '<div class="info-card warning"><strong>Simulation complete · No alert sent</strong><p>In a working product, this action would request help from chosen contacts.</p></div>';
     }
-    if (e.target.closest('[data-sos]'))
+    if (e.target.closest('[data-sos]')) {
+      track('scenario_start', { scenario_name: 'sos' });
       $('#sosState').innerHTML =
         '<div class="info-card warning"><strong>SOS simulation complete · No alert sent</strong><p>In a working product, Anna and Michael would receive your SOS status and permitted location.</p></div>';
+      track('scenario_complete', { scenario_name: 'sos', result: 'simulation_complete' });
+    }
     const h = e.target.closest('[data-health]');
     if (h) {
       const id =

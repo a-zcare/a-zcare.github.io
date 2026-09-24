@@ -42,14 +42,45 @@
           ></span>
         </button>
         <nav id="site-navigation" class="primary-nav" aria-label="Primary navigation">
-          <a href="#why">Why</a><a href="#product">Product</a><a href="#how">How it works</a
-          ><a href="#privacy">Privacy</a><a href="#research">Research</a>
+          <a
+            href="#why"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="why"
+            data-analytics-placement="header"
+            >Why</a
+          ><a
+            href="#product"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="product"
+            data-analytics-placement="header"
+            >Product</a
+          ><a
+            href="#how"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="how"
+            data-analytics-placement="header"
+            >How it works</a
+          ><a
+            href="#privacy"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="privacy"
+            data-analytics-placement="header"
+            >Privacy</a
+          ><a
+            href="#research"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="research"
+            data-analytics-placement="header"
+            >Research</a
+          >
         </nav>
         <a
           class="nav-btn"
           href="https://github.com/a-zcare/a-zcare.github.io"
           target="_blank"
           rel="noreferrer"
+          data-analytics-event="project_link_open"
+          data-analytics-placement="header"
           >View project ↗</a
         >
       </div>
@@ -66,8 +97,21 @@
               detection, SOS and clear privacy controls in one familiar smartphone experience.
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#product">Explore the phone ↓</a
-              ><a class="button ghost" href="#how">View demo scenarios</a>
+              <a
+                class="button primary"
+                href="#product"
+                data-analytics-event="navigation_select"
+                data-analytics-destination="product"
+                data-analytics-placement="hero"
+                >Explore the phone ↓</a
+              ><a
+                class="button ghost"
+                href="#how"
+                data-analytics-event="navigation_select"
+                data-analytics-destination="how"
+                data-analytics-placement="hero"
+                >View demo scenarios</a
+              >
             </div>
             <div class="hero-proof">
               <span><b>Interactive web prototype</b></span
@@ -93,7 +137,13 @@
             <h2>Designed as a real everyday phone.</h2>
             <p>6.3″ AMOLED · 5G · 12 GB RAM · 256 GB · 6500 mAh · NFC · IP68</p>
           </div>
-          <a class="button ghost" href="hardware.html">Full specifications →</a>
+          <a
+            class="button ghost"
+            href="hardware.html"
+            data-analytics-event="specifications_open"
+            data-analytics-source="landing"
+            >Full specifications →</a
+          >
         </div>
       </section>
       <section class="section alt" id="why">
@@ -571,14 +621,23 @@
         >
         <p>Concept prototype · Not an emergency or medical service.</p>
         <div class="footer-links">
-          <a href="privacy.html">Privacy Policy</a>
-          <button type="button" data-privacy-settings>Privacy settings</button>
+          <a
+            href="privacy.html"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="privacy_policy"
+            data-analytics-placement="footer"
+            >Privacy Policy</a
+          >
+          <button type="button" data-privacy-settings data-privacy-source="footer">
+            Privacy settings
+          </button>
         </div>
       </div>
     </footer>
-    <script src="js/consent.js?v=2" defer></script>
+    <script src="js/consent.js?v=3" defer></script>
+    <script src="js/analytics.js?v=1" defer></script>
     <script src="js/navigation.js?v=2" defer></script>
     <script src="js/product-data.js?v=1" defer></script>
-    <script src="js/app.js?v=8" defer></script>
+    <script src="js/app.js?v=9" defer></script>
   </body>
 </html>
