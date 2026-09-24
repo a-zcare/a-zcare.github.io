@@ -54,6 +54,10 @@ The public prototype includes interactive demonstrations of:
 - CSS3
 - Vanilla JavaScript
 - Playwright browser tests
+- Consent-gated GA4 event allowlist
+
+The tracked interaction names, permitted parameters and GA4 setup notes are documented in
+[`docs/analytics-events.md`](docs/analytics-events.md).
 
 ## Local checks
 
