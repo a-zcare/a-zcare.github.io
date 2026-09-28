@@ -561,3 +561,34 @@
     transition: none;
   }
 }
+
+
+/* Interactive phone: consistent vertical rhythm between standalone cards, rows and demo states */
+.phone-view > .phone-row + .phone-row {
+  margin-top: 12px !important;
+}
+.phone-view > .info-card + .phone-row,
+.phone-view > .phone-row + .info-card,
+.phone-view > .info-card + .wide,
+.phone-view > .phone-row + .wide {
+  margin-top: 12px !important;
+}
+.phone-view > #fallState:not(:empty),
+.phone-view > #sosState:not(:empty) {
+  margin-top: 12px;
+}
+.phone-view > #fallState > .info-card,
+.phone-view > #sosState > .info-card {
+  margin: 0 !important;
+}
+@media (max-width: 520px) {
+  .phone-view > .phone-row + .phone-row,
+  .phone-view > .info-card + .phone-row,
+  .phone-view > .phone-row + .info-card,
+  .phone-view > .info-card + .wide,
+  .phone-view > .phone-row + .wide,
+  .phone-view > #fallState:not(:empty),
+  .phone-view > #sosState:not(:empty) {
+    margin-top: 14px !important;
+  }
+}
