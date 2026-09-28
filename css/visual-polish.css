@@ -562,7 +562,6 @@
   }
 }
 
-
 /* Interactive phone: consistent vertical rhythm between standalone cards, rows and demo states */
 .phone-view > .phone-row + .phone-row {
   margin-top: 12px !important;
