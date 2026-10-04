@@ -86,40 +86,133 @@
       </div>
     </header>
     <main id="top">
-      <section class="hero">
-        <div class="container hero-grid">
-          <div>
-            <div class="pill"><i></i>Concept · In development</div>
-            <p class="eyebrow">SAFER SMARTPHONE EXPERIENCE</p>
-            <h1>A phone that adapts <em>to the person.</em></h1>
+      <section class="hero ecosystem-hero">
+        <div class="container">
+          <div class="ecosystem-intro">
+            <div class="pill"><i></i>A-Z Care ecosystem · Concept in development</div>
+            <p class="eyebrow">PHONE + WATCH + SAFETY NETWORK</p>
+            <h1>Safety that stays <em>with you.</em></h1>
             <p class="lead">
-              A-Z Care combines scam protection, AI assistance, family safety, health support, fall
-              detection, SOS and clear privacy controls in one familiar smartphone experience.
+              One privacy-first system for digital protection, health awareness and emergency
+              connectivity — designed around a phone, a watch and the people you trust.
             </p>
-            <div class="hero-actions">
-              <a
-                class="button primary"
-                href="#product"
-                data-analytics-event="navigation_select"
-                data-analytics-destination="product"
-                data-analytics-placement="hero"
-                >Explore the phone ↓</a
-              ><a
-                class="button ghost"
-                href="#how"
-                data-analytics-event="navigation_select"
-                data-analytics-destination="how"
-                data-analytics-placement="hero"
-                >View demo scenarios</a
-              >
-            </div>
-            <div class="hero-proof">
-              <span><b>Interactive web prototype</b></span
-              ><span><b>Target hardware defined</b></span
-              ><span><b>User validation underway</b></span>
+            <div class="ecosystem-choices" aria-label="Explore A-Z Care">
+              <a class="choice active" href="#protect">
+                <b>01</b><span>Protect<small>Scams · AI Care · privacy</small></span>
+              </a>
+              <a class="choice" href="#health">
+                <b>02</b><span>Health<small>Watch · Guardian · sensors</small></span>
+              </a>
+              <a class="choice" href="#connect">
+                <b>03</b><span>Connect<small>SOS · family · resilient network</small></span>
+              </a>
             </div>
           </div>
-          <div class="phone-wrap" id="product">
+
+          <div class="device-stage" id="product">
+            <div class="device-copy">
+              <span class="device-kicker">A-Z CARE PHONE</span>
+              <h2>Your everyday safety hub.</h2>
+              <p>
+                Protection, family, health and emergency tools stay understandable in one familiar
+                Android experience.
+              </p>
+              <a
+                href="#phone-demo"
+                aria-label="Explore the phone"
+                data-analytics-event="navigation_select"
+                data-analytics-destination="phone_demo"
+                data-analytics-placement="hero"
+                >Try the interactive phone ↓</a
+              >
+            </div>
+            <div class="product-phone" aria-label="A-Z Care Phone concept">
+              <div class="product-phone-camera"></div>
+              <div class="product-phone-screen">
+                <div class="product-status"><span>09:41</span><span>5G · 92%</span></div>
+                <div class="product-greeting">
+                  <small>A-Z CARE</small><strong>Good morning</strong
+                  ><span>Everything looks normal</span>
+                </div>
+                <div class="product-shield">✓</div>
+                <div class="product-apps">
+                  <span>Protect</span><span>Health</span><span>Family</span><span>SOS</span>
+                </div>
+                <div class="product-bottom">A-Z Guardian active</div>
+              </div>
+            </div>
+            <div class="watch-column">
+              <div class="watch-shell" aria-label="A-Z Care Watch concept">
+                <div class="watch-crown"></div>
+                <div class="watch-screen">
+                  <small>A-Z GUARDIAN</small>
+                  <strong>72 <i>bpm</i></strong>
+                  <div class="watch-wave">⌁⌁⌁⌁⌁</div>
+                  <div class="watch-stats">
+                    <span>SpO₂<b>98%</b></span
+                    ><span>STATUS<b>Normal</b></span>
+                  </div>
+                  <button type="button" aria-label="Watch SOS concept">SOS</button>
+                </div>
+              </div>
+              <div class="watch-copy">
+                <span class="device-kicker">A-Z CARE WATCH</span>
+                <h2>Protection on the wrist.</h2>
+                <p>
+                  Health Guardian, fall/no-response detection, GPS, voice, SOS and independent
+                  connectivity on compatible hardware.
+                </p>
+                <a href="ecosystem.html">Watch & Health Guardian →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="ecosystem-feature-grid">
+            <a class="ecosystem-feature" id="protect" href="#how">
+              <span>01 · DIGITAL SAFETY</span>
+              <h3>Protect & AI Care</h3>
+              <p>
+                Scam checks, suspicious links and callers, understandable warnings and privacy-first
+                assistance.
+              </p>
+              <b>Explore scenarios →</b>
+            </a>
+            <a class="ecosystem-feature" id="health" href="ecosystem.html">
+              <span>02 · HEALTH</span>
+              <h3>Watch & Health Guardian</h3>
+              <p>
+                Heart rate, SpO₂, ECG where supported, sleep, breathing, temperature, movement, CGM
+                and compatible sensor integrations.
+              </p>
+              <b>Explore health system →</b>
+            </a>
+            <a class="ecosystem-feature" id="connect" href="ecosystem.html">
+              <span>03 · RESILIENT SAFETY</span>
+              <h3>SOS & Connectivity</h3>
+              <p>
+                Trusted contacts, location, LTE/eSIM, offline emergency concepts, nearby relay,
+                precise finding and mesh R&D.
+              </p>
+              <b>Explore connectivity →</b>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="section phone-lab" id="phone-demo">
+        <div class="container phone-lab-grid">
+          <div class="phone-lab-copy">
+            <p class="eyebrow">INTERACTIVE PROTOTYPE</p>
+            <h2>Try A-Z Care on the phone.</h2>
+            <p>
+              This is the existing clickable web prototype. Explore the home screen and safety flows
+              separately from the product overview above.
+            </p>
+            <div class="phone-lab-points">
+              <span>Protect & AI Care</span><span>Health concepts</span
+              ><span>Family & location</span><span>SOS & privacy</span>
+            </div>
+          </div>
+          <div class="phone-wrap">
             <div class="phone-demo-shell">
               <p class="phone-demo-label">Interactive demo · No live services</p>
               <div class="phone">

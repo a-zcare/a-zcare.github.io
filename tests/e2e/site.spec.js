@@ -102,7 +102,7 @@ for (const viewport of viewports.filter((item) => item.width <= 800)) {
       await expect(toggle).toHaveAttribute('aria-expanded', 'true');
       const firstLink = page.locator('#site-navigation a').first();
       await firstLink.focus();
-      await firstLink.press('Enter');
+      await Promise.all([page.waitForURL(/#why$/), firstLink.press('Enter')]);
 
       await expect(page).toHaveURL(/#why$/);
       await expect(toggle).toHaveAttribute('aria-expanded', 'false');
@@ -230,7 +230,7 @@ test('consented events use the allowlisted schema and exclude free text', async 
     expect.arrayContaining([
       expect.objectContaining({
         name: 'navigation_select',
-        parameters: expect.objectContaining({ destination: 'product', placement: 'hero' }),
+        parameters: expect.objectContaining({ destination: 'phone_demo', placement: 'hero' }),
       }),
       expect.objectContaining({
         name: 'demo_screen_view',

@@ -25,7 +25,15 @@
     navigation_select: {
       required: ['destination', 'placement'],
       values: {
-        destination: ['how', 'privacy', 'privacy_policy', 'product', 'research', 'why'],
+        destination: [
+          'how',
+          'phone_demo',
+          'privacy',
+          'privacy_policy',
+          'product',
+          'research',
+          'why',
+        ],
         placement: ['footer', 'header', 'hero'],
       },
     },
@@ -96,14 +104,15 @@
     track,
   });
 
-  document.addEventListener('click', (event) => {
-    const target = event.target.closest('[data-analytics-event]');
-    if (!target) return;
-
-    track(target.dataset.analyticsEvent, {
+  function trackElement(target) {
+    return track(target.dataset.analyticsEvent, {
       destination: target.dataset.analyticsDestination,
       placement: target.dataset.analyticsPlacement,
       source: target.dataset.analyticsSource,
     });
+  }
+
+  document.querySelectorAll('[data-analytics-event]').forEach((target) => {
+    target.addEventListener('click', () => trackElement(target));
   });
 })();
