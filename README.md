@@ -29,12 +29,16 @@ The public prototype includes interactive demonstrations of:
 5. Family location and safety timeline concepts.
 6. Kids and Senior interface concepts.
 7. Interactive privacy controls.
+8. A documented ecosystem technology vision covering wearable health, sensor integration, offline safety and resilient connectivity.
 
 ## Roadmap
 
 - [x] Concept and product direction
 - [x] Landing page and interactive web prototype
 - [ ] Mobile launcher / app prototype
+- [ ] A-Z Sensor Hub (Health Connect / Wear OS / BLE adapters)
+- [ ] A-Z Watch / Health Guardian prototype
+- [ ] Resilient-connectivity and encrypted emergency-relay experiments
 - [ ] Trusted-contact and SOS prototype
 - [ ] Threat-intelligence experiments
 - [ ] User research and accessibility testing
