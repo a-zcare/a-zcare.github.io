@@ -1860,9 +1860,10 @@ footer p {
 }
 
 @media (max-width: 650px) {
-  .showcase-phone-demo .phone {
+  .phone-demo-shell.showcase-phone-demo .phone {
     width: 292px;
     height: 704px;
+    max-height: none;
   }
 }
 
