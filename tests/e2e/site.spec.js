@@ -1,10 +1,15 @@
 import { expect, test } from '@playwright/test';
 
 const viewports = [
+  { name: 'phone-320', width: 320, height: 700 },
   { name: 'phone-360', width: 360, height: 800 },
   { name: 'phone-390', width: 390, height: 844 },
-  { name: 'tablet', width: 768, height: 1024 },
-  { name: 'desktop', width: 1366, height: 768 },
+  { name: 'phone-430', width: 430, height: 932 },
+  { name: 'tablet-768', width: 768, height: 1024 },
+  { name: 'tablet-820', width: 820, height: 1180 },
+  { name: 'desktop-1024', width: 1024, height: 768 },
+  { name: 'desktop-1366', width: 1366, height: 768 },
+  { name: 'desktop-1440', width: 1440, height: 900 },
 ];
 
 const readAnalyticsEvents = (page) =>
