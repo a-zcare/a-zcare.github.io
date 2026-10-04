@@ -1749,7 +1749,6 @@ footer p {
   }
 }
 
-
 /* Interactive device showcase */
 .showcase-phone-slot {
   width: 278px;
@@ -1817,11 +1816,15 @@ footer p {
 }
 
 .watch-screen.demo-alert {
-  box-shadow: 0 25px 60px #000, 0 0 34px #ff637638;
+  box-shadow:
+    0 25px 60px #000,
+    0 0 34px #ff637638;
 }
 
 .watch-screen.demo-health {
-  box-shadow: 0 25px 60px #000, 0 0 34px #58e6a92b;
+  box-shadow:
+    0 25px 60px #000,
+    0 0 34px #58e6a92b;
 }
 
 @media (max-width: 900px) {
