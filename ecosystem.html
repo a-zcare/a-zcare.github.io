@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="theme-color" content="#071018" />
+  <meta name="description" content="A-Z Care ecosystem technology vision: Watch, Health Guardian, Sensor Hub, resilient connectivity, emergency relay and privacy-first safety." />
+  <title>A-Z Care — Ecosystem & Technology Vision</title>
+  <link rel="canonical" href="https://a-zcare.github.io/ecosystem.html" />
+  <link rel="icon" type="image/jpeg" href="assets/azcare-logo.jpg" />
+  <link rel="stylesheet" href="css/consent.css?v=2" />
+  <link rel="stylesheet" href="css/hardware.css?v=1" />
+</head>
+<body>
+<div class="wrap">
+  <nav class="nav">
+    <a class="logo" href="./"><img src="assets/azcare-logo.jpg" alt="A-Z Care shield logo" />A-Z<span>Care</span></a>
+    <a class="back" href="./">← Back to product</a>
+  </nav>
+
+  <header class="hero">
+    <span class="pill">TECHNOLOGY VISION · RESEARCH & DEVELOPMENT</span>
+    <h1>A-Z Care<br />Ecosystem.</h1>
+    <p>A privacy-first safety platform connecting the phone, watch, health sensors, trusted people and multiple communication paths. The goal is simple: useful protection should keep working even when a person is stressed, offline or unable to ask for help.</p>
+    <div class="notice">Product direction, not a shipping specification. Health features may require compatible or certified hardware, regulatory validation and user consent. A-Z Care is not currently a medical or emergency service.</div>
+  </header>
+
+  <div class="highlights">
+    <div class="metric"><strong>Phone</strong><small>SAFETY HUB</small></div>
+    <div class="metric"><strong>Watch</strong><small>ON-BODY GUARDIAN</small></div>
+    <div class="metric"><strong>Sensor Hub</strong><small>ONE DATA LAYER</small></div>
+    <div class="metric"><strong>Mesh</strong><small>OFFLINE RELAY R&D</small></div>
+    <div class="metric"><strong>UWB</strong><small>PRECISE NEARBY FINDING</small></div>
+    <div class="metric"><strong>Local-first</strong><small>PRIVACY BY DESIGN</small></div>
+  </div>
+
+  <section class="section">
+    <h2>A-Z Health Guardian</h2>
+    <div class="grid">
+      <div class="spec"><span>Heart</span><strong>Heart rate · HRV · unusual-rhythm signals · ECG where supported</strong></div>
+      <div class="spec"><span>Blood oxygen</span><strong>SpO₂ from compatible wearable hardware</strong></div>
+      <div class="spec"><span>Breathing</span><strong>Respiratory-rate trends using supported sensors and algorithms</strong></div>
+      <div class="spec"><span>Temperature</span><strong>Skin-temperature trends with context, baseline and measurement-quality checks</strong></div>
+      <div class="spec"><span>Blood pressure</span><strong>Compatible validated watch or BLE cuff integration</strong></div>
+      <div class="spec"><span>Sleep</span><strong>Sleep duration · movement · heart-rate · breathing · oxygen and temperature trends where available</strong></div>
+      <div class="spec"><span>Personal baseline</span><strong>Look for meaningful changes from the person's normal pattern, not one universal number</strong></div>
+      <div class="spec"><span>Escalation</span><strong>Normal → warning → “Are you OK?” → trusted-contact / SOS flow when appropriate</strong></div>
+      <div class="spec full"><span>Safety boundary</span><strong>Health Guardian is designed to surface signals and context. Medical diagnosis or treatment decisions require validated medical systems and appropriate clinical/regulatory pathways.</strong></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>A-Z Sensor Hub</h2>
+    <div class="grid">
+      <div class="spec"><span>Unified model</span><strong>Normalize readings from different vendors into one A-Z health-data layer</strong></div>
+      <div class="spec"><span>Android</span><strong>Health Connect adapter for compatible health and fitness data</strong></div>
+      <div class="spec"><span>Wearables</span><strong>Wear OS / Health Services adapter</strong></div>
+      <div class="spec"><span>Medical devices</span><strong>BLE device adapters for compatible monitors and sensors</strong></div>
+      <div class="spec"><span>CGM</span><strong>Integrate supported CGM data without scattering vendor-specific logic across the app</strong></div>
+      <div class="spec"><span>Quality</span><strong>Source · timestamp · trend · confidence/quality · permissions tracked with each reading</strong></div>
+      <div class="spec full"><span>Glucose</span><strong>Watch-only non-invasive glucose is not treated as a medical measurement. A-Z plans to use compatible CGM / validated sensor integrations for glucose data.</strong></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>A-Z Care Watch</h2>
+    <div class="grid">
+      <div class="spec"><span>Motion</span><strong>Accelerometer · gyroscope · activity recognition · fall detection</strong></div>
+      <div class="spec"><span>Position</span><strong>GPS/GNSS · compass · barometer · altitude</strong></div>
+      <div class="spec"><span>Nearby</span><strong>Bluetooth LE · UWB for precise nearby finding where hardware supports it</strong></div>
+      <div class="spec"><span>Connectivity</span><strong>LTE/eSIM · Wi-Fi · Bluetooth, designed to remain useful without the phone nearby</strong></div>
+      <div class="spec"><span>Interaction</span><strong>Microphone · speaker · haptics · voice-trigger concept · tactile emergency action</strong></div>
+      <div class="spec"><span>NFC</span><strong>Emergency identity / permitted health information / secure nearby interactions</strong></div>
+      <div class="spec"><span>Environment</span><strong>Ambient light and future environmental / experimental biosensor research</strong></div>
+      <div class="spec"><span>Wear OS first</span><strong>Prototype on existing compatible watches before designing dedicated A-Z hardware</strong></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Resilient Connectivity</h2>
+    <div class="grid">
+      <div class="spec"><span>Normal path</span><strong>Mobile data / SIM / eSIM → Wi-Fi → available internet</strong></div>
+      <div class="spec"><span>Safety connectivity</span><strong>Research partner vSIM/eSIM connectivity for low-bandwidth A-Z safety traffic</strong></div>
+      <div class="spec"><span>Nearby relay</span><strong>Bluetooth LE / Wi-Fi Direct / Wi-Fi Aware research for encrypted device-to-device emergency relay</strong></div>
+      <div class="spec"><span>Store & forward</span><strong>Carry an encrypted emergency packet until a participating device reaches connectivity</strong></div>
+      <div class="spec"><span>Mesh R&D</span><strong>Explore multi-hop emergency delivery without exposing message contents to relay devices</strong></div>
+      <div class="spec"><span>Satellite</span><strong>Future integration where device hardware, OS and regional services support satellite emergency communication</strong></div>
+      <div class="spec full"><span>Design goal</span><strong>A-Z Care cannot promise connectivity everywhere. The system should attempt the safest available path to deliver critical information instead of assuming the internet is always present.</strong></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Offline & emergency safety</h2>
+    <div class="grid">
+      <div class="spec"><span>Dead Zone Mode</span><strong>Recognize loss of normal connectivity and preserve emergency-capable paths</strong></div>
+      <div class="spec"><span>Emergency Beacon</span><strong>Privacy-preserving temporary identifier + SOS state + last permitted location + timestamp</strong></div>
+      <div class="spec"><span>Lost Person Mode</span><strong>Last-known position · direction · battery · locally stored route breadcrumbs</strong></div>
+      <div class="spec"><span>No-response detection</span><strong>Combine fall/motion and available health context before escalating</strong></div>
+      <div class="spec"><span>Crash / impact R&D</span><strong>Explore strong-motion and context signals with confirmation before emergency escalation</strong></div>
+      <div class="spec"><span>Emergency QR / NFC</span><strong>User-controlled emergency contact and essential health information without unlocking private phone content</strong></div>
+      <div class="spec"><span>Battery Guardian</span><strong>Reduce nonessential activity at low battery and preserve energy for location snapshots, communication and SOS</strong></div>
+      <div class="spec"><span>Local-first</span><strong>Core detection and SOS logic should not stop merely because cloud services are unavailable</strong></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Digital & physical protection</h2>
+    <div class="grid">
+      <div class="spec"><span>Protect</span><strong>Scam messages · suspicious links · caller risk · understandable AI-assisted explanations</strong></div>
+      <div class="spec"><span>Anti-tracker</span><strong>Surface supported unwanted-tracker warnings and safety guidance</strong></div>
+      <div class="spec"><span>Safe Zones</span><strong>Consent-based geofencing instead of constant high-frequency GPS uploads</strong></div>
+      <div class="spec"><span>Trusted people</span><strong>Per-person permissions for SOS, location, health alerts and device status</strong></div>
+      <div class="spec"><span>Precise finding</span><strong>UWB/BLE-assisted nearby search for compatible devices</strong></div>
+      <div class="spec"><span>Private analytics</span><strong>No message text, phone numbers, precise location or health readings in product analytics</strong></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Development path</h2>
+    <div class="grid">
+      <div class="spec"><span>01 · Mobile MVP</span><strong>Kotlin + Jetpack Compose · Scam Protection · SOS · Trusted Contacts</strong></div>
+      <div class="spec"><span>02 · Sensor layer</span><strong>Health Connect + A-Z Sensor Hub + normalized permissions/data model</strong></div>
+      <div class="spec"><span>03 · Wearable MVP</span><strong>Wear OS app + Health Services + fall/no-response experiments</strong></div>
+      <div class="spec"><span>04 · Connectivity</span><strong>Offline queues · relay prototypes · partner connectivity research</strong></div>
+      <div class="spec"><span>05 · Validation</span><strong>Battery · accessibility · security · false-positive testing · real-device testing</strong></div>
+      <div class="spec"><span>06 · Hardware</span><strong>Only after validation: privileged Android integration, AOSP/OS research and dedicated watch/phone hardware</strong></div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <strong>A-Z Care · Ecosystem Technology Vision</strong><br />
+    Research direction only. Availability depends on compatible hardware, operating-system access, connectivity partners, validation, certification and regional requirements.
+    <div class="foot-links"><a href="privacy.html">Privacy Policy</a><button type="button" data-privacy-settings data-privacy-source="footer">Privacy settings</button></div>
+  </footer>
+</div>
+<script src="js/consent.js?v=3" defer></script>
+<script src="js/analytics.js?v=1" defer></script>
+</body>
+</html>
