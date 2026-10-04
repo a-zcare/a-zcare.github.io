@@ -126,19 +126,13 @@
                 >Try the interactive phone ↓</a
               >
             </div>
-            <div class="product-phone" aria-label="A-Z Care Phone concept">
-              <div class="product-phone-camera"></div>
-              <div class="product-phone-screen">
-                <div class="product-status"><span>09:41</span><span>5G · 92%</span></div>
-                <div class="product-greeting">
-                  <small>A-Z CARE</small><strong>Good morning</strong
-                  ><span>Everything looks normal</span>
+            <div class="showcase-phone-slot" id="phone-demo">
+              <div class="phone-demo-shell showcase-phone-demo">
+                <p class="phone-demo-label">Interactive demo · No live services</p>
+                <div class="phone">
+                  <div class="camera-dot"></div>
+                  <div id="phoneView" class="phone-view" aria-live="polite"></div>
                 </div>
-                <div class="product-shield">✓</div>
-                <div class="product-apps">
-                  <span>Protect</span><span>Health</span><span>Family</span><span>SOS</span>
-                </div>
-                <div class="product-bottom">A-Z Guardian active</div>
               </div>
             </div>
             <div class="watch-column">
@@ -152,7 +146,21 @@
                     <span>SpO₂<b>98%</b></span
                     ><span>STATUS<b>Normal</b></span>
                   </div>
-                  <button type="button" aria-label="Watch SOS concept">SOS</button>
+                  <div class="watch-actions" aria-label="Watch demo controls">
+                    <button type="button" data-watch-action="health">Health</button>
+                    <button type="button" data-watch-action="status">Status</button>
+                    <button
+                      type="button"
+                      class="watch-sos"
+                      data-watch-action="sos"
+                      aria-label="Watch SOS demo"
+                    >
+                      SOS
+                    </button>
+                  </div>
+                  <small class="watch-demo-state" id="watchDemoState" aria-live="polite"
+                    >Tap a control</small
+                  >
                 </div>
               </div>
               <div class="watch-copy">
@@ -195,31 +203,6 @@
               </p>
               <b>Explore connectivity →</b>
             </a>
-          </div>
-        </div>
-      </section>
-      <section class="section phone-lab" id="phone-demo">
-        <div class="container phone-lab-grid">
-          <div class="phone-lab-copy">
-            <p class="eyebrow">INTERACTIVE PROTOTYPE</p>
-            <h2>Try A-Z Care on the phone.</h2>
-            <p>
-              This is the existing clickable web prototype. Explore the home screen and safety flows
-              separately from the product overview above.
-            </p>
-            <div class="phone-lab-points">
-              <span>Protect & AI Care</span><span>Health concepts</span
-              ><span>Family & location</span><span>SOS & privacy</span>
-            </div>
-          </div>
-          <div class="phone-wrap">
-            <div class="phone-demo-shell">
-              <p class="phone-demo-label">Interactive demo · No live services</p>
-              <div class="phone">
-                <div class="camera-dot"></div>
-                <div id="phoneView" class="phone-view" aria-live="polite"></div>
-              </div>
-            </div>
           </div>
         </div>
       </section>

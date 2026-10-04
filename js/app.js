@@ -183,6 +183,24 @@
     localStorage.setItem('az_widget', widget);
     tick();
   }
+  function runSosDemo(source) {
+    track('scenario_start', { scenario_name: 'sos', source });
+    if (source === 'watch') {
+      const screen = document.querySelector('.watch-screen');
+      const state = document.querySelector('#watchDemoState');
+      screen?.classList.remove('demo-health');
+      screen?.classList.add('demo-alert');
+      if (state) state.textContent = 'SOS simulation complete · No alert sent';
+    } else {
+      const state = $('#sosState');
+      if (state) {
+        state.innerHTML =
+          '<div class="info-card warning"><strong>SOS simulation complete · No alert sent</strong><p>In a working product, Anna and Michael would receive your SOS status and permitted location.</p></div>';
+      }
+    }
+    track('scenario_complete', { scenario_name: 'sos', source, result: 'simulation_complete' });
+  }
+
   function startFall() {
     const box = $('#fallState');
     track('scenario_start', { scenario_name: 'fall' });
@@ -201,6 +219,24 @@
     }, 1000);
   }
   document.addEventListener('click', (e) => {
+    const watchAction = e.target.closest('[data-watch-action]');
+    if (watchAction) {
+      const screen = watchAction.closest('.watch-screen');
+      const state = screen?.querySelector('#watchDemoState');
+      const action = watchAction.dataset.watchAction;
+      screen?.classList.remove('demo-alert', 'demo-health');
+      if (action === 'health') {
+        screen?.classList.add('demo-health');
+        if (state) state.textContent = 'Health check · 72 bpm · SpO₂ 98%';
+      } else if (action === 'status') {
+        if (state) state.textContent = 'Guardian active · connection ready';
+      } else {
+        runSosDemo('watch');
+      }
+      track('watch_demo_action', { action });
+      return;
+    }
+
     const o = e.target.closest('[data-open]'),
       b = e.target.closest('[data-back]'),
       w = e.target.closest('[data-widget]'),
@@ -256,12 +292,7 @@
       $('#fallState').innerHTML =
         '<div class="info-card warning"><strong>Simulation complete · No alert sent</strong><p>In a working product, this action would request help from chosen contacts.</p></div>';
     }
-    if (e.target.closest('[data-sos]')) {
-      track('scenario_start', { scenario_name: 'sos' });
-      $('#sosState').innerHTML =
-        '<div class="info-card warning"><strong>SOS simulation complete · No alert sent</strong><p>In a working product, Anna and Michael would receive your SOS status and permitted location.</p></div>';
-      track('scenario_complete', { scenario_name: 'sos', result: 'simulation_complete' });
-    }
+    if (e.target.closest('[data-sos]')) runSosDemo('phone');
     const h = e.target.closest('[data-health]');
     if (h) {
       const id =

@@ -1748,3 +1748,122 @@ footer p {
     width: calc(100vw - 28px);
   }
 }
+
+/* Interactive device showcase */
+.showcase-phone-slot {
+  width: 278px;
+  height: 568px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+.showcase-phone-demo {
+  width: 330px;
+  transform: scale(0.82);
+  transform-origin: top center;
+}
+
+.showcase-phone-demo .phone {
+  border-radius: 42px;
+  padding: 5px;
+  border: 1px solid #ffffff26;
+  background: linear-gradient(145deg, #3a4451, #11161d 58%, #070a0e);
+  box-shadow:
+    0 38px 90px #000b,
+    inset 0 0 0 1px #ffffff0a;
+}
+
+.showcase-phone-demo .phone-view {
+  border-radius: 36px;
+}
+
+.showcase-phone-demo .camera-dot {
+  top: 11px;
+  width: 42px;
+  height: 11px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+}
+
+.watch-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  margin-top: 5px;
+}
+
+.watch-actions button {
+  min-height: 25px;
+  cursor: pointer;
+}
+
+.watch-actions .watch-sos {
+  grid-column: 1 / -1;
+  border-color: #ff637655;
+  background: #ff637619;
+  color: #ff8796;
+}
+
+.watch-demo-state {
+  display: block;
+  min-height: 13px;
+  margin-top: 5px;
+  color: #7f91a8;
+  font-size: 6px !important;
+  letter-spacing: 0 !important;
+}
+
+.watch-screen.demo-alert {
+  box-shadow:
+    0 25px 60px #000,
+    0 0 34px #ff637638;
+}
+
+.watch-screen.demo-health {
+  box-shadow:
+    0 25px 60px #000,
+    0 0 34px #58e6a92b;
+}
+
+@media (max-width: 900px) {
+  .showcase-phone-slot {
+    width: 260px;
+    height: 532px;
+  }
+
+  .showcase-phone-demo {
+    transform: scale(0.77);
+  }
+}
+
+@media (max-width: 650px) {
+  .showcase-phone-slot {
+    width: 244px;
+    height: 500px;
+  }
+
+  .showcase-phone-demo {
+    transform: scale(0.72);
+  }
+
+  .device-stage {
+    justify-items: center;
+  }
+
+  .device-copy {
+    text-align: left;
+  }
+}
+
+@media (max-width: 380px) {
+  .showcase-phone-slot {
+    width: 228px;
+    height: 468px;
+  }
+
+  .showcase-phone-demo {
+    transform: scale(0.68);
+  }
+}
