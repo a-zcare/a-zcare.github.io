@@ -344,6 +344,34 @@ test('phone and watch SOS share the service but keep feedback on their own devic
   await expect(page.locator('#sosState')).toContainText('No alert sent');
 });
 
+test('Watch Health Guardian links health and fall flows to the phone', async ({ page }) => {
+  await page.goto('/');
+
+  await page.getByRole('button', { name: 'ECG', exact: true }).click();
+  await expect(page.locator('#watchDemoState')).toContainText('ECG concept');
+  await expect(page.locator('#watchKicker')).toContainText('ECG');
+
+  await page.getByRole('button', { name: 'SpO₂', exact: true }).click();
+  await expect(page.locator('#watchValue')).toContainText('98');
+
+  await page.getByRole('button', { name: 'Fall', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Fall detection' })).toBeVisible();
+  await expect(page.locator('#watchDemoState')).toContainText('phone safety flow linked');
+});
+
+test('Battery Guardian and privacy dashboard expose safety-first controls', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Settings', exact: true }).click();
+  await page.getByRole('button', { name: /Battery Guardian/ }).click();
+  await expect(page.getByRole('heading', { name: 'Battery Guardian' })).toBeVisible();
+  await expect(page.locator('#phoneView')).toContainText('20% safety threshold');
+
+  await page.getByRole('button', { name: 'Back to previous screen' }).click();
+  await page.getByRole('button', { name: /Privacy dashboard/ }).click();
+  await expect(page.locator('#phoneView')).toContainText('Last safety share');
+  await expect(page.locator('#phoneView')).toContainText('Optional analytics');
+});
+
 test('privacy policy exposes the project contact and current revision', async ({ page }) => {
   await page.goto('/privacy.html');
   await expect(page.getByRole('heading', { name: 'Privacy Policy' })).toBeVisible();
