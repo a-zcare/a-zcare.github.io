@@ -32,7 +32,10 @@
     const opening = !isOpen();
     setOpen(opening);
 
-    if (opening && keyboardActivation) navigation.querySelector('a')?.focus();
+    if (opening && keyboardActivation) {
+      const firstLink = navigation.querySelector('a');
+      window.requestAnimationFrame(() => firstLink?.focus());
+    }
     keyboardActivation = false;
   });
 
