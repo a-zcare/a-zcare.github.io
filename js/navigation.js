@@ -22,7 +22,15 @@
     if (!mobileOpen && restoreFocus) button.focus();
   }
 
-  button.addEventListener('click', () => setOpen(!isOpen()));
+  button.addEventListener('click', (event) => {
+    const opening = !isOpen();
+    setOpen(opening);
+
+    // Keyboard activation of a native button dispatches a click with detail 0.
+    // Move focus into the opened navigation explicitly so the next keyboard
+    // target never depends on viewport-specific tab-order/layout timing.
+    if (opening && event.detail === 0) navigation.querySelector('a')?.focus();
+  });
 
   navigation.addEventListener('click', (event) => {
     if (!event.target.closest('a')) return;
