@@ -27,7 +27,12 @@ if (!index.includes('class="future-concept"')) fail('future concept is not seman
 if (!index.includes('js/navigation.js')) fail('navigation script is not loaded');
 if (!index.includes('js/product-data.js')) fail('product data is not loaded');
 if (!css.includes('.menu-toggle')) fail('mobile navigation styles missing');
-if (index.includes('ton-feedback-refine.css') || index.includes('visual-polish.css')) fail('retired CSS layers are still loaded');
+for (const page of ['index.html', 'privacy.html', 'hardware.html', 'watch.html', 'ecosystem.html']) {
+  const pageContent = read(page);
+  for (const retired of ['ton-feedback-refine.css', 'visual-polish.css']) {
+    if (pageContent.includes(retired)) fail('retired CSS layer ' + retired + ' is still loaded by ' + page);
+  }
+}
 if (!index.includes('aria-controls="site-navigation"')) fail('semantic navigation toggle missing');
 if (!navigation.includes('navigation.inert')) fail('closed mobile navigation is not inert');
 if (!navigation.includes("event.key === 'Escape'")) fail('mobile navigation Escape handling missing');
@@ -38,7 +43,7 @@ if (!analytics.includes('window.AZ_PRIVACY?.analyticsAllowed()')) fail('analytic
 if (!analytics.includes('scenario_complete')) fail('analytics scenario events missing');
 if (!app.includes('window.AZ_ANALYTICS?.track')) fail('phone demo analytics integration missing');
 if (!privacy.includes('fixed list of permitted values')) fail('analytics disclosure missing');
-for (const page of ['index.html', 'privacy.html', 'hardware.html', 'ecosystem.html']) {
+for (const page of ['index.html', 'privacy.html', 'hardware.html', 'watch.html', 'ecosystem.html']) {
   if (!read(page).includes('js/analytics.js')) fail('analytics module missing from ' + page);
 }
 if (!privacy.includes('mailto:azcare.project@gmail.com')) fail('privacy contact missing');
