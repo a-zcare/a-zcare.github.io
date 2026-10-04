@@ -134,39 +134,32 @@
               </div>
             </div>
             <div class="watch-column">
-              <div class="watch-shell" aria-label="A-Z Care Watch concept">
+              <div class="watch-shell" aria-label="Interactive A-Z Care Watch concept">
                 <div class="watch-crown"></div>
-                <div class="watch-screen">
-                  <small>A-Z GUARDIAN</small>
-                  <strong>72 <i>bpm</i></strong>
-                  <div class="watch-wave">⌁⌁⌁⌁⌁</div>
-                  <div class="watch-stats">
-                    <span>SpO₂<b>98%</b></span
-                    ><span>STATUS<b>Normal</b></span>
+                <div class="watch-screen" data-watch-screen>
+                  <small id="watchKicker">A-Z GUARDIAN · HEART</small>
+                  <strong id="watchValue">72 <i>bpm</i></strong>
+                  <div class="watch-wave" id="watchWave">⌁⌁⌁⌁⌁</div>
+                  <div class="watch-stats" id="watchStats">
+                    <span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>
                   </div>
                   <div class="watch-actions" aria-label="Watch demo controls">
-                    <button type="button" data-watch-action="health">Health</button>
-                    <button type="button" data-watch-action="status">Status</button>
-                    <button
-                      type="button"
-                      class="watch-sos"
-                      data-watch-action="sos"
-                      aria-label="Watch SOS demo"
-                    >
-                      SOS
-                    </button>
+                    <button type="button" data-watch-action="heart">Heart</button>
+                    <button type="button" data-watch-action="ecg">ECG</button>
+                    <button type="button" data-watch-action="oxygen">SpO₂</button>
+                    <button type="button" data-watch-action="temperature">Temp</button>
+                    <button type="button" data-watch-action="fall">Fall</button>
+                    <button type="button" class="watch-sos" data-watch-action="sos" aria-label="Watch SOS demo">SOS</button>
                   </div>
-                  <small class="watch-demo-state" id="watchDemoState" aria-live="polite"
-                    >Tap a control</small
-                  >
+                  <small class="watch-demo-state" id="watchDemoState" aria-live="polite">Tap a health or safety control</small>
                 </div>
               </div>
               <div class="watch-copy">
                 <span class="device-kicker">A-Z CARE WATCH</span>
                 <h2>Protection on the wrist.</h2>
                 <p>
-                  Health Guardian, fall/no-response detection, GPS, voice, SOS and independent
-                  connectivity on compatible hardware.
+                  Built-in heart rate, ECG concept, SpO₂, skin temperature, motion/fall sensing and
+                  GPS — plus CGM and validated external sensor integrations through A-Z Sensor Hub.
                 </p>
                 <a href="watch.html">Explore A-Z Watch →</a>
               </div>
