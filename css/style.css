@@ -1130,11 +1130,19 @@ footer p {
   transition: 0.2s ease;
 }
 
-.choice:hover,
-.choice.active {
+.choice.active,
+.choice:focus-visible {
   transform: translateY(-2px);
   border-color: #5b8cff70;
   background: #5b8cff12;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .choice:hover {
+    transform: translateY(-2px);
+    border-color: #5b8cff70;
+    background: #5b8cff12;
+  }
 }
 
 .choice > b {
