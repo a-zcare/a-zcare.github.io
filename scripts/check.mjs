@@ -54,6 +54,11 @@ if (!read('watch.html').includes('$250–600')) fail('watch concept price range 
 if (!read('hardware.html').includes('$500–900')) fail('phone concept price range missing');
 if (read('hardware.html').includes('$496')) fail('stale single phone price remains');
 if (!read('ecosystem.html').includes('A-Z Care Center')) fail('Care Center concept missing');
+if (!read('ecosystem.html').includes('At 20% battery')) fail('20% Battery Guardian threshold missing');
+if (!read('watch.html').includes('External · CGM') || !read('watch.html').includes('Built in · ECG')) fail('Watch sensor architecture incomplete');
+if (!index.includes('data-watch-action="ecg"') || !index.includes('data-watch-action="fall"')) fail('interactive Watch health/safety controls missing');
+if (!app.includes("'battery'") || !app.includes("'connectivity'")) fail('phone Battery Guardian or connectivity screen missing');
+if (!analytics.includes('watch_demo_action')) fail('Watch analytics schema missing');
 if (!workflow.includes('run: npm test')) fail('CI does not run formatting and static checks');
 if (!workflow.includes('run: npm run test:e2e')) fail('CI does not run browser tests');
 if (!fs.existsSync('playwright.config.js') || !fs.existsSync('tests/e2e/site.spec.js')) {
