@@ -72,8 +72,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-The public prototype is deployed from `main` with GitHub Pages. Changes should be submitted through
-a pull request and must pass the repository's formatting/regression and browser E2E checks.
+The public prototype is deployed from `main` with GitHub Pages. Changes should be submitted through a pull request and must pass the repository's formatting/regression and browser E2E checks.
 
 ## License / project status
 
