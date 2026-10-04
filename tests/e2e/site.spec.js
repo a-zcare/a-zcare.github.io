@@ -53,7 +53,9 @@ for (const viewport of viewports) {
   });
 }
 
-test('phone and watch showcase keeps usable visual proportions across breakpoints', async ({ page }) => {
+test('phone and watch showcase keeps usable visual proportions across breakpoints', async ({
+  page,
+}) => {
   for (const viewport of viewports) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
     await page.goto('/#product');
