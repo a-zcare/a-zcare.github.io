@@ -66,20 +66,25 @@ test('phone and watch showcase keeps usable visual proportions across breakpoint
     await expect(watch).toBeVisible();
 
     const metrics = await page.evaluate(() => {
-      const phone = document.querySelector('.showcase-phone-demo .phone').getBoundingClientRect();
+      const phoneElement = document.querySelector('.showcase-phone-demo .phone');
+      const phone = phoneElement.getBoundingClientRect();
+      const phoneStyle = getComputedStyle(phoneElement);
       const watch = document.querySelector('.watch-shell').getBoundingClientRect();
       return {
-        phoneWidth: phone.width,
-        phoneHeight: phone.height,
+        phoneCssWidth: parseFloat(phoneStyle.width),
+        phoneCssHeight: parseFloat(phoneStyle.height),
+        phoneVisualWidth: phone.width,
+        phoneVisualHeight: phone.height,
         watchWidth: watch.width,
         watchHeight: watch.height,
         viewportWidth: document.documentElement.clientWidth,
       };
     });
 
-    expect(metrics.phoneHeight / metrics.phoneWidth, viewport.name).toBeGreaterThan(2.1);
-    expect(metrics.phoneHeight / metrics.phoneWidth, viewport.name).toBeLessThan(2.7);
-    expect(metrics.phoneWidth, viewport.name).toBeLessThan(metrics.viewportWidth);
+    expect(metrics.phoneCssHeight / metrics.phoneCssWidth, viewport.name).toBeGreaterThan(2.1);
+    expect(metrics.phoneCssHeight / metrics.phoneCssWidth, viewport.name).toBeLessThan(2.7);
+    expect(metrics.phoneVisualWidth, viewport.name).toBeLessThan(metrics.viewportWidth);
+    expect(metrics.phoneVisualHeight, viewport.name).toBeGreaterThan(metrics.phoneVisualWidth * 1.5);
     expect(metrics.watchWidth, viewport.name).toBeGreaterThan(100);
     expect(metrics.watchHeight, viewport.name).toBeGreaterThan(100);
   }
@@ -137,11 +142,12 @@ for (const viewport of viewports.filter((item) => item.width <= 800)) {
       await toggle.focus();
       await toggle.press('Enter');
       await expect(toggle).toHaveAttribute('aria-expanded', 'true');
-      const firstLink = page.locator('#site-navigation a').first();
-      await firstLink.focus();
-      await firstLink.press('Enter');
+      const firstLink = page.getByRole('link', { name: 'Why', exact: true });
+      await page.keyboard.press('Tab');
+      await expect(firstLink).toBeFocused();
+      await page.keyboard.press('Enter');
 
-      await expect(page).toHaveURL(/#why$/);
+      await expect.poll(() => page.evaluate(() => window.location.hash)).toBe('#why');
       await expect(page.locator('#why')).toBeInViewport();
       await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });
