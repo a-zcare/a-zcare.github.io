@@ -50,8 +50,9 @@ for (const page of ['index.html', 'privacy.html', 'hardware.html', 'watch.html',
   if (!read(page).includes('js/analytics.js')) fail('analytics module missing from ' + page);
 }
 if (!privacy.includes('mailto:azcare.project@gmail.com')) fail('privacy contact missing');
-if (!read('watch.html').includes('$200–600')) fail('watch concept price range missing');
-if (!read('hardware.html').includes('$400–900')) fail('phone concept price range missing');
+if (!read('watch.html').includes('$250–600')) fail('watch concept price range missing');
+if (!read('hardware.html').includes('$500–900')) fail('phone concept price range missing');
+if (read('hardware.html').includes('$496')) fail('stale single phone price remains');
 if (!read('ecosystem.html').includes('A-Z Care Center')) fail('Care Center concept missing');
 if (!workflow.includes('run: npm test')) fail('CI does not run formatting and static checks');
 if (!workflow.includes('run: npm run test:e2e')) fail('CI does not run browser tests');
