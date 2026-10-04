@@ -1095,17 +1095,19 @@ footer p {
 /* Ecosystem-first landing */
 .ecosystem-hero {
   padding-bottom: 48px;
-  background: radial-gradient(circle at 50% 28%, #335fff24, transparent 34%), radial-gradient(circle at 86% 44%, #62e7ff12, transparent 25%)
+  background:
+    radial-gradient(circle at 50% 28%, #335fff24, transparent 34%),
+    radial-gradient(circle at 86% 44%, #62e7ff12, transparent 25%);
 }
 
 .ecosystem-intro {
   max-width: 840px;
   margin: 0 auto 38px;
-  text-align: center
+  text-align: center;
 }
 
 .ecosystem-intro .lead {
-  margin: 22px auto
+  margin: 22px auto;
 }
 
 .ecosystem-choices {
@@ -1114,7 +1116,7 @@ footer p {
   gap: 10px;
   margin: 30px auto 0;
   max-width: 760px;
-  text-align: left
+  text-align: left;
 }
 
 .choice {
@@ -1125,24 +1127,24 @@ footer p {
   border: 1px solid var(--line);
   border-radius: 14px;
   background: #ffffff06;
-  transition: 0.2s ease
+  transition: 0.2s ease;
 }
 
 .choice:hover,
 .choice.active {
   transform: translateY(-2px);
   border-color: #5b8cff70;
-  background: #5b8cff12
+  background: #5b8cff12;
 }
 
-.choice>b {
+.choice > b {
   color: var(--blue);
-  font-size: 10px
+  font-size: 10px;
 }
 
 .choice span {
   font-weight: 800;
-  font-size: 13px
+  font-size: 13px;
 }
 
 .choice small {
@@ -1150,7 +1152,7 @@ footer p {
   margin-top: 2px;
   color: var(--muted);
   font-size: 9px;
-  font-weight: 500
+  font-weight: 500;
 }
 
 .device-stage {
@@ -1164,20 +1166,20 @@ footer p {
   border: 1px solid var(--line);
   border-radius: 30px;
   background: linear-gradient(145deg, #0b111be8, #080d15d9);
-  box-shadow: 0 35px 100px #0008
+  box-shadow: 0 35px 100px #0008;
 }
 
 .device-copy h2,
 .watch-copy h2 {
   font-size: 25px;
   line-height: 1.1;
-  margin: 8px 0 12px
+  margin: 8px 0 12px;
 }
 
 .device-copy p,
 .watch-copy p {
   color: var(--muted);
-  font-size: 12px
+  font-size: 12px;
 }
 
 .device-copy a,
@@ -1186,21 +1188,21 @@ footer p {
   margin-top: 8px;
   color: #9db8ff;
   font-size: 11px;
-  font-weight: 800
+  font-weight: 800;
 }
 
 .device-kicker {
   font-size: 9px;
   letter-spacing: 1.6px;
   color: var(--cyan);
-  font-weight: 900
+  font-weight: 900;
 }
 
 .watch-column {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px
+  gap: 25px;
 }
 
 .watch-shell {
@@ -1208,28 +1210,28 @@ footer p {
   width: 190px;
   height: 224px;
   display: grid;
-  place-items: center
+  place-items: center;
 }
 
 .watch-shell::before,
 .watch-shell::after {
-  content: "";
+  content: '';
   position: absolute;
   left: 68px;
   width: 54px;
   height: 64px;
   background: linear-gradient(90deg, #161c25, #252d39, #141a22);
-  z-index: 0
+  z-index: 0;
 }
 
 .watch-shell::before {
   top: 0;
-  border-radius: 20px 20px 8px 8px
+  border-radius: 20px 20px 8px 8px;
 }
 
 .watch-shell::after {
   bottom: 0;
-  border-radius: 8px 8px 20px 20px
+  border-radius: 8px 8px 20px 20px;
 }
 
 .watch-screen {
@@ -1242,7 +1244,7 @@ footer p {
   border-radius: 38px;
   background: radial-gradient(circle at 70% 15%, #335fff2c, transparent 35%), #070c13;
   box-shadow: 0 25px 60px #000;
-  text-align: center
+  text-align: center;
 }
 
 .watch-crown {
@@ -1253,26 +1255,26 @@ footer p {
   width: 9px;
   height: 28px;
   border-radius: 4px;
-  background: #343d49
+  background: #343d49;
 }
 
 .watch-screen small {
   font-size: 7px;
   letter-spacing: 1.2px;
-  color: #7f91a8
+  color: #7f91a8;
 }
 
-.watch-screen> strong {
+.watch-screen > strong {
   display: block;
   margin-top: 8px;
   font-size: 27px;
-  line-height: 1
+  line-height: 1;
 }
 
-.watch-screen> strong i {
+.watch-screen > strong i {
   font-size: 8px;
   color: var(--muted);
-  font-style: normal
+  font-style: normal;
 }
 
 .watch-wave {
@@ -1280,25 +1282,25 @@ footer p {
   color: #58e6a9;
   font-size: 22px;
   line-height: 20px;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .watch-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
-  margin: 5px 0 9px
+  margin: 5px 0 9px;
 }
 
 .watch-stats span {
   font-size: 6px;
-  color: #74859b
+  color: #74859b;
 }
 
 .watch-stats b {
   display: block;
   color: #eef4ff;
-  font-size: 9px
+  font-size: 9px;
 }
 
 .watch-screen button {
@@ -1309,12 +1311,12 @@ footer p {
   color: #ff8796;
   font-size: 8px;
   font-weight: 900;
-  padding: 5px
+  padding: 5px;
 }
 
 .watch-copy {
   text-align: center;
-  max-width: 240px
+  max-width: 240px;
 }
 
 .ecosystem-feature-grid {
@@ -1322,7 +1324,7 @@ footer p {
   grid-template-columns: repeat(3, 1fr);
   gap: 12px;
   max-width: 1080px;
-  margin: 18px auto 0
+  margin: 18px auto 0;
 }
 
 .ecosystem-feature {
@@ -1330,88 +1332,86 @@ footer p {
   border: 1px solid var(--line);
   border-radius: 18px;
   background: #ffffff05;
-  transition: 0.2s ease
+  transition: 0.2s ease;
 }
 
 .ecosystem-feature:hover {
   transform: translateY(-3px);
   border-color: #62e7ff4d;
-  background: #ffffff08
+  background: #ffffff08;
 }
 
 .ecosystem-feature span {
   font-size: 8px;
   letter-spacing: 1.4px;
   color: var(--blue);
-  font-weight: 900
+  font-weight: 900;
 }
 
 .ecosystem-feature h3 {
   margin: 8px 0;
-  font-size: 17px
+  font-size: 17px;
 }
 
 .ecosystem-feature p {
   min-height: 58px;
   margin: 0 0 12px;
   color: var(--muted);
-  font-size: 11px
+  font-size: 11px;
 }
 
 .ecosystem-feature b {
   font-size: 10px;
-  color: #a9c0ff
+  color: #a9c0ff;
 }
 
 @media (max-width: 900px) {
   .device-stage {
-  grid-template-columns: 1fr 1fr
-}
+    grid-template-columns: 1fr 1fr;
+  }
 
-.device-copy {
-  grid-column: 1 / -1;
-  text-align: center;
-  max-width: 520px;
-  margin: auto
-}
+  .device-copy {
+    grid-column: 1 / -1;
+    text-align: center;
+    max-width: 520px;
+    margin: auto;
+  }
 
-.ecosystem-feature-grid {
-  grid-template-columns: 1fr
-}
+  .ecosystem-feature-grid {
+    grid-template-columns: 1fr;
+  }
 
-.ecosystem-feature p {
-  min-height: 0
-}
-
+  .ecosystem-feature p {
+    min-height: 0;
+  }
 }
 
 @media (max-width: 650px) {
   .ecosystem-choices {
-  grid-template-columns: 1fr
-}
+    grid-template-columns: 1fr;
+  }
 
-.device-stage {
-  grid-template-columns: 1fr;
-  padding: 22px 14px
-}
+  .device-stage {
+    grid-template-columns: 1fr;
+    padding: 22px 14px;
+  }
 
-.watch-column {
-  margin-top: 4px
-}
+  .watch-column {
+    margin-top: 4px;
+  }
 
-.ecosystem-intro {
-  text-align: left
-}
+  .ecosystem-intro {
+    text-align: left;
+  }
 
-.ecosystem-intro .lead {
-  margin-left: 0
-}
+  .ecosystem-intro .lead {
+    margin-left: 0;
+  }
 
-.phone {
-  width: min(330px, 82vw);
-  height: 620px
-}
-
+  .phone {
+    width: min(330px, 82vw);
+    height: 620px;
+  }
 }
 
 .product-phone {
@@ -1424,7 +1424,7 @@ footer p {
   background: linear-gradient(145deg, #333c48, #11161d);
   border: 1px solid #ffffff20;
   box-shadow: 0 35px 80px #000;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .product-phone-camera {
@@ -1436,45 +1436,46 @@ footer p {
   height: 14px;
   transform: translateX(-50%);
   border-radius: 12px;
-  background: #030507
+  background: #030507;
 }
 
 .product-phone-screen {
   height: 100%;
   padding: 22px 14px 15px;
   border-radius: 30px;
-  background: radial-gradient(circle at 70% 8%, #4169e13d, transparent 31%), linear-gradient(#111b2c, #080e18);
+  background:
+    radial-gradient(circle at 70% 8%, #4169e13d, transparent 31%), linear-gradient(#111b2c, #080e18);
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .product-status {
   display: flex;
   justify-content: space-between;
   color: #8999ad;
-  font-size: 7px
+  font-size: 7px;
 }
 
 .product-greeting {
-  margin-top: 40px
+  margin-top: 40px;
 }
 
 .product-greeting small {
   display: block;
   color: #6f8fff;
   font-size: 7px;
-  letter-spacing: 1.4px
+  letter-spacing: 1.4px;
 }
 
 .product-greeting strong {
   display: block;
   margin-top: 5px;
-  font-size: 20px
+  font-size: 20px;
 }
 
 .product-greeting span {
   color: #7f91a7;
-  font-size: 8px
+  font-size: 8px;
 }
 
 .product-shield {
@@ -1488,13 +1489,13 @@ footer p {
   background: linear-gradient(145deg, #58e6a919, #5b8cff12);
   color: #6deab3;
   font-size: 35px;
-  box-shadow: inset 0 0 30px #58e6a90d
+  box-shadow: inset 0 0 30px #58e6a90d;
 }
 
 .product-apps {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 7px
+  gap: 7px;
 }
 
 .product-apps span {
@@ -1505,7 +1506,7 @@ footer p {
   text-align: center;
   color: #b8c4d4;
   font-size: 8px;
-  font-weight: 800
+  font-weight: 800;
 }
 
 .product-bottom {
@@ -1515,11 +1516,11 @@ footer p {
   background: #58e6a90d;
   color: #79dcb8;
   text-align: center;
-  font-size: 7px
+  font-size: 7px;
 }
 
 .phone-lab {
-  background: linear-gradient(180deg, #070b12, #05080d)
+  background: linear-gradient(180deg, #070b12, #05080d);
 }
 
 .phone-lab-grid {
@@ -1527,26 +1528,26 @@ footer p {
   grid-template-columns: minmax(260px, 1fr) minmax(340px, 0.8fr);
   gap: 70px;
   align-items: center;
-  max-width: 960px
+  max-width: 960px;
 }
 
 .phone-lab-copy h2 {
   font-size: clamp(32px, 4vw, 50px);
   line-height: 1.02;
-  margin: 0 0 18px
+  margin: 0 0 18px;
 }
 
-.phone-lab-copy> p:not(.eyebrow) {
+.phone-lab-copy > p:not(.eyebrow) {
   max-width: 520px;
   color: var(--muted);
-  font-size: 15px
+  font-size: 15px;
 }
 
 .phone-lab-points {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 24px
+  margin-top: 24px;
 }
 
 .phone-lab-points span {
@@ -1554,32 +1555,30 @@ footer p {
   border: 1px solid var(--line);
   border-radius: 999px;
   color: #aeb9c8;
-  font-size: 9px
+  font-size: 9px;
 }
 
 @media (max-width: 900px) {
   .product-phone {
-  width: 230px;
-  height: 460px
-}
+    width: 230px;
+    height: 460px;
+  }
 
-.phone-lab-grid {
-  grid-template-columns: 1fr;
-  gap: 28px
-}
+  .phone-lab-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 
-.phone-lab-copy {
-  text-align: center
-}
+  .phone-lab-copy {
+    text-align: center;
+  }
 
-.phone-lab-copy> p:not(.eyebrow) {
-  margin-left: auto;
-  margin-right: auto
-}
+  .phone-lab-copy > p:not(.eyebrow) {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.phone-lab-points {
-  justify-content: center
+  .phone-lab-points {
+    justify-content: center;
+  }
 }
-
-}
-
