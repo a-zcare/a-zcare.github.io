@@ -22,14 +22,18 @@
     if (!mobileOpen && restoreFocus) button.focus();
   }
 
-  button.addEventListener('click', () => setOpen(!isOpen()));
+  let keyboardActivation = false;
 
   button.addEventListener('keydown', (event) => {
-    if ((event.key !== 'Enter' && event.key !== ' ') || isOpen()) return;
+    if (event.key === 'Enter' || event.key === ' ') keyboardActivation = true;
+  });
 
-    event.preventDefault();
-    setOpen(true);
-    navigation.querySelector('a')?.focus();
+  button.addEventListener('click', () => {
+    const opening = !isOpen();
+    setOpen(opening);
+
+    if (opening && keyboardActivation) navigation.querySelector('a')?.focus();
+    keyboardActivation = false;
   });
 
   navigation.addEventListener('click', (event) => {
