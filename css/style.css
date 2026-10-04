@@ -2789,3 +2789,38 @@ footer p {
     margin-top: 14px !important;
   }
 }
+
+
+/* Watch Health Guardian: richer interactive controls without sacrificing mobile fit */
+.watch-shell {
+  width: 210px;
+  height: 268px;
+}
+.watch-shell::before,
+.watch-shell::after {
+  left: 76px;
+  width: 58px;
+  height: 72px;
+}
+.watch-screen {
+  width: 176px;
+  min-height: 218px;
+  padding: 15px 14px;
+  border-color: #465365;
+}
+.watch-crown {
+  right: 9px;
+  top: 112px;
+}
+.watch-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.watch-actions button {
+  min-height: 27px;
+}
+.watch-actions .watch-sos {
+  grid-column: 1 / -1;
+}
+.watch-screen.demo-alert .watch-wave {
+  color: #ff8796;
+}
