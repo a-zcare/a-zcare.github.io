@@ -201,6 +201,25 @@
     }, 1000);
   }
   document.addEventListener('click', (e) => {
+    const watchAction = e.target.closest('[data-watch-action]');
+    if (watchAction) {
+      const screen = watchAction.closest('.watch-screen');
+      const state = screen?.querySelector('#watchDemoState');
+      const action = watchAction.dataset.watchAction;
+      screen?.classList.remove('demo-alert', 'demo-health');
+      if (action === 'health') {
+        screen?.classList.add('demo-health');
+        if (state) state.textContent = 'Health check · 72 bpm · SpO₂ 98%';
+      } else if (action === 'status') {
+        if (state) state.textContent = 'Guardian active · connection ready';
+      } else {
+        screen?.classList.add('demo-alert');
+        if (state) state.textContent = 'SOS demo · hold to alert trusted contacts';
+      }
+      track('watch_demo_action', { action });
+      return;
+    }
+
     const o = e.target.closest('[data-open]'),
       b = e.target.closest('[data-back]'),
       w = e.target.closest('[data-widget]'),
