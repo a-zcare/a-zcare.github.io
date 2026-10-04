@@ -102,9 +102,10 @@ for (const viewport of viewports.filter((item) => item.width <= 800)) {
       await expect(toggle).toHaveAttribute('aria-expanded', 'true');
       const firstLink = page.locator('#site-navigation a').first();
       await firstLink.focus();
-      await Promise.all([page.waitForURL(/#why$/), firstLink.press('Enter')]);
+      await firstLink.press('Enter');
 
       await expect(page).toHaveURL(/#why$/);
+      await expect(page.locator('#why')).toBeInViewport();
       await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });
   });
