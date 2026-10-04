@@ -1,7 +1,9 @@
 name: Temporary exact Prettier watch fix
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - fix/mobile-product-navigation
 
 permissions:
   contents: write
