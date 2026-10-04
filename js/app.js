@@ -249,13 +249,37 @@
       };
 
       if (action === 'heart') {
-        setWatch('A-Z GUARDIAN · HEART', '72 <i>bpm</i>', '⌁⌁⌁⌁⌁', '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>', 'Built-in optical heart-rate sensor · demo');
+        setWatch(
+          'A-Z GUARDIAN · HEART',
+          '72 <i>bpm</i>',
+          '⌁⌁⌁⌁⌁',
+          '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>',
+          'Built-in optical heart-rate sensor · demo',
+        );
       } else if (action === 'ecg') {
-        setWatch('A-Z GUARDIAN · ECG', 'Sinus <i>demo</i>', '⌁╲⌁╱⌁╲⌁', '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>', 'ECG concept · validation and regional approval required');
+        setWatch(
+          'A-Z GUARDIAN · ECG',
+          'Sinus <i>demo</i>',
+          '⌁╲⌁╱⌁╲⌁',
+          '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>',
+          'ECG concept · validation and regional approval required',
+        );
       } else if (action === 'oxygen') {
-        setWatch('A-Z GUARDIAN · OXYGEN', '98 <i>%</i>', '••••••', '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>', 'Built-in SpO₂ sensor · wellness demo');
+        setWatch(
+          'A-Z GUARDIAN · OXYGEN',
+          '98 <i>%</i>',
+          '••••••',
+          '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>',
+          'Built-in SpO₂ sensor · wellness demo',
+        );
       } else if (action === 'temperature') {
-        setWatch('A-Z GUARDIAN · TEMP', '33.4 <i>°C</i>', '— — —', '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>', 'Skin-temperature trend · not core-body temperature');
+        setWatch(
+          'A-Z GUARDIAN · TEMP',
+          '33.4 <i>°C</i>',
+          '— — —',
+          '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>',
+          'Skin-temperature trend · not core-body temperature',
+        );
       } else if (action === 'fall') {
         screen?.classList.add('demo-alert');
         if (kicker) kicker.textContent = 'A-Z GUARDIAN · FALL';
