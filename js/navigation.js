@@ -25,7 +25,12 @@
   button.addEventListener('click', () => setOpen(!isOpen()));
 
   navigation.addEventListener('click', (event) => {
-    if (event.target.closest('a')) setOpen(false);
+    if (!event.target.closest('a')) return;
+
+    // Let the anchor complete its native activation before making the
+    // mobile navigation inert. Closing it synchronously can race keyboard
+    // activation of same-page hash links in some browsers.
+    window.setTimeout(() => setOpen(false), 0);
   });
 
   document.addEventListener('click', (event) => {

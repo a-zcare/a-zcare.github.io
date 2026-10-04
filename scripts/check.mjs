@@ -6,7 +6,7 @@ const ok = (message) => console.log('OK:', message);
 
 const index = read('index.html');
 const app = read('js/app.js');
-const css = read('css/visual-polish.css');
+const css = read('css/style.css');
 const product = read('js/product-data.js');
 const navigation = read('js/navigation.js');
 const consent = read('js/consent.js');
@@ -27,6 +27,7 @@ if (!index.includes('class="future-concept"')) fail('future concept is not seman
 if (!index.includes('js/navigation.js')) fail('navigation script is not loaded');
 if (!index.includes('js/product-data.js')) fail('product data is not loaded');
 if (!css.includes('.menu-toggle')) fail('mobile navigation styles missing');
+if (index.includes('ton-feedback-refine.css') || index.includes('visual-polish.css')) fail('retired CSS layers are still loaded');
 if (!index.includes('aria-controls="site-navigation"')) fail('semantic navigation toggle missing');
 if (!navigation.includes('navigation.inert')) fail('closed mobile navigation is not inert');
 if (!navigation.includes("event.key === 'Escape'")) fail('mobile navigation Escape handling missing');
