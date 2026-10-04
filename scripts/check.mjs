@@ -18,8 +18,11 @@ for (const path of ['privacy.html','hardware.html','watch.html','ecosystem.html'
   if (!fs.existsSync(path)) fail('missing ' + path);
 }
 
-for (const retired of ['widget-merge.js','audience-expansion.js','spec-consistency.js']) {
-  if (index.includes(retired)) fail('index still references retired ' + retired);
+for (const page of ['index.html', 'privacy.html', 'hardware.html', 'watch.html', 'ecosystem.html']) {
+  const pageContent = read(page);
+  for (const retired of ['widget-merge.js', 'audience-expansion.js', 'spec-consistency.js']) {
+    if (pageContent.includes(retired)) fail('retired script ' + retired + ' is still loaded by ' + page);
+  }
 }
 
 if (!index.includes('id="audiences"')) fail('audience content is not semantic HTML');
@@ -59,7 +62,7 @@ if (app.includes('Wi-Fi 7') || app.includes('wireless charging') || app.includes
 if (!app.includes('window.AZ_PRODUCT?.specs')) fail('app does not use shared product specs');
 if (!product.includes('Wi-Fi 6E') || !product.includes('65W USB-C PD/PPS')) fail('canonical product specs incomplete');
 
-for (const path of ['index.html','privacy.html','hardware.html','js/app.js','js/navigation.js','js/consent.js']) {
+for (const path of ['index.html','privacy.html','hardware.html','watch.html','ecosystem.html','js/app.js','js/navigation.js','js/consent.js','js/analytics.js']) {
   if (read(path).includes('MutationObserver')) fail('MutationObserver found in ' + path);
 }
 
