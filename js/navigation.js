@@ -24,6 +24,14 @@
 
   button.addEventListener('click', () => setOpen(!isOpen()));
 
+  button.addEventListener('keydown', (event) => {
+    if ((event.key !== 'Enter' && event.key !== ' ') || isOpen()) return;
+
+    event.preventDefault();
+    setOpen(true);
+    navigation.querySelector('a')?.focus();
+  });
+
   navigation.addEventListener('click', (event) => {
     if (!event.target.closest('a')) return;
 
