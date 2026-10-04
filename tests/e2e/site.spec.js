@@ -332,7 +332,7 @@ test('phone and watch SOS share the service but keep feedback on their own devic
   await page.goto('/');
 
   const watchState = page.locator('#watchDemoState');
-  await expect(watchState).toContainText('Tap a control');
+  await expect(watchState).toContainText('Tap a health or safety control');
 
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
@@ -355,7 +355,7 @@ test('Watch Health Guardian links health and fall flows to the phone', async ({ 
   await expect(page.locator('#watchValue')).toContainText('98');
 
   await page.getByRole('button', { name: 'Fall', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Fall detection' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Fall detection', exact: true })).toBeVisible();
   await expect(page.locator('#watchDemoState')).toContainText('phone safety flow linked');
 });
 
