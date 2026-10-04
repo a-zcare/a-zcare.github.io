@@ -278,6 +278,22 @@ test('scam and SOS demonstrations complete without real actions', async ({ page 
   await expect(page.locator('#sosState')).toContainText('No alert sent');
 });
 
+test('phone and watch SOS share the service but keep feedback on their own device', async ({ page }) => {
+  await page.goto('/');
+
+  const watchState = page.locator('#watchDemoState');
+  await expect(watchState).toContainText('Tap a control');
+
+  await page.getByRole('button', { name: 'SOS', exact: true }).click();
+  await page.getByRole('button', { name: 'Run SOS simulation' }).click();
+  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(watchState).toContainText('Tap a control');
+
+  await page.getByRole('button', { name: 'Watch SOS demo' }).click();
+  await expect(watchState).toContainText('No alert sent');
+  await expect(page.locator('#sosState')).toContainText('No alert sent');
+});
+
 test('privacy policy exposes the project contact and current revision', async ({ page }) => {
   await page.goto('/privacy.html');
   await expect(page.getByRole('heading', { name: 'Privacy Policy' })).toBeVisible();
