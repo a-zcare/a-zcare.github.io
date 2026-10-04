@@ -148,6 +148,17 @@ for (const viewport of viewports.filter((item) => item.width <= 800)) {
 
       const firstLink = page.getByRole('link', { name: 'Why', exact: true });
       await page.keyboard.press('Tab');
+      const focusedElement = await page.evaluate(() => ({
+        tag: document.activeElement?.tagName,
+        className: document.activeElement?.className,
+        href: document.activeElement?.getAttribute?.('href'),
+        label: document.activeElement?.getAttribute?.('aria-label'),
+        text: document.activeElement?.textContent?.trim(),
+      }));
+      expect(focusedElement, viewport.name).toMatchObject({
+        tag: 'A',
+        href: '#why',
+      });
       await expect(firstLink).toBeFocused();
       await page.keyboard.press('Enter');
 
