@@ -112,7 +112,7 @@ test('internal links and anchors resolve', async ({ page, request }) => {
   }
 });
 
-for (const viewport of viewports.filter((item) => item.name === 'phone-390')) {
+for (const viewport of viewports.filter((item) => item.width <= 800)) {
   test.describe(`${viewport.name} navigation`, () => {
     test.use({ viewport: { width: viewport.width, height: viewport.height } });
 
