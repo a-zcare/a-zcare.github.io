@@ -1859,6 +1859,13 @@ footer p {
   }
 }
 
+@media (max-width: 650px) {
+  .showcase-phone-demo .phone {
+    width: 292px;
+    height: 704px;
+  }
+}
+
 @media (max-width: 380px) {
   .showcase-phone-slot {
     width: 204px;
