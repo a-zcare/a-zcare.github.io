@@ -25,7 +25,7 @@
     navigation_select: {
       required: ['destination', 'placement'],
       values: {
-        destination: ['how', 'privacy', 'privacy_policy', 'product', 'research', 'why'],
+        destination: ['how', 'privacy', 'privacy_policy', 'phone_demo', 'product', 'research', 'why'],
         placement: ['footer', 'header', 'hero'],
       },
     },
