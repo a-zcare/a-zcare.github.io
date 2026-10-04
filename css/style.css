@@ -1752,7 +1752,7 @@ footer p {
 /* Interactive device showcase */
 .showcase-phone-slot {
   width: 246px;
-  height: 548px;
+  height: 604px;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -1767,8 +1767,8 @@ footer p {
 
 .showcase-phone-demo .phone {
   width: 292px;
-  height: 632px;
-  border-radius: 46px;
+  height: 704px;
+  border-radius: 48px;
   padding: 5px;
   border: 1px solid #ffffff26;
   background: linear-gradient(145deg, #3a4451, #11161d 58%, #070a0e);
@@ -1778,7 +1778,7 @@ footer p {
 }
 
 .showcase-phone-demo .phone-view {
-  border-radius: 40px;
+  border-radius: 42px;
 }
 
 .showcase-phone-demo .camera-dot {
@@ -1832,7 +1832,7 @@ footer p {
 @media (max-width: 900px) {
   .showcase-phone-slot {
     width: 232px;
-    height: 518px;
+    height: 558px;
   }
 
   .showcase-phone-demo {
@@ -1843,7 +1843,7 @@ footer p {
 @media (max-width: 650px) {
   .showcase-phone-slot {
     width: 218px;
-    height: 486px;
+    height: 522px;
   }
 
   .showcase-phone-demo {
@@ -1862,7 +1862,7 @@ footer p {
 @media (max-width: 380px) {
   .showcase-phone-slot {
     width: 204px;
-    height: 456px;
+    height: 492px;
   }
 
   .showcase-phone-demo {
