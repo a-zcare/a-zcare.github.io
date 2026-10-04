@@ -1766,6 +1766,7 @@ footer p {
 }
 
 .showcase-phone-demo .phone {
+  flex: 0 0 704px;
   width: 292px;
   height: 704px;
   border-radius: 48px;
