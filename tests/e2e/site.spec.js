@@ -53,6 +53,36 @@ for (const viewport of viewports) {
   });
 }
 
+test('phone and watch showcase keeps usable visual proportions across breakpoints', async ({ page }) => {
+  for (const viewport of viewports) {
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto('/#product');
+
+    const phone = page.locator('.showcase-phone-demo .phone');
+    const watch = page.locator('.watch-shell');
+    await expect(phone).toBeVisible();
+    await expect(watch).toBeVisible();
+
+    const metrics = await page.evaluate(() => {
+      const phone = document.querySelector('.showcase-phone-demo .phone').getBoundingClientRect();
+      const watch = document.querySelector('.watch-shell').getBoundingClientRect();
+      return {
+        phoneWidth: phone.width,
+        phoneHeight: phone.height,
+        watchWidth: watch.width,
+        watchHeight: watch.height,
+        viewportWidth: document.documentElement.clientWidth,
+      };
+    });
+
+    expect(metrics.phoneHeight / metrics.phoneWidth, viewport.name).toBeGreaterThan(2.1);
+    expect(metrics.phoneHeight / metrics.phoneWidth, viewport.name).toBeLessThan(2.7);
+    expect(metrics.phoneWidth, viewport.name).toBeLessThan(metrics.viewportWidth);
+    expect(metrics.watchWidth, viewport.name).toBeGreaterThan(100);
+    expect(metrics.watchHeight, viewport.name).toBeGreaterThan(100);
+  }
+});
+
 test('internal links and anchors resolve', async ({ page, request }) => {
   await page.goto('/');
   const links = await page
