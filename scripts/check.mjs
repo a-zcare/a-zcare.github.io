@@ -14,7 +14,7 @@ const analytics = read('js/analytics.js');
 const privacy = read('privacy.html');
 const workflow = read('.github/workflows/format.yml');
 
-for (const path of ['privacy.html','hardware.html','js/consent.js','js/analytics.js','js/navigation.js','js/product-data.js','js/app.js','docs/analytics-events.md']) {
+for (const path of ['privacy.html','hardware.html','watch.html','ecosystem.html','js/consent.js','js/analytics.js','js/navigation.js','js/product-data.js','js/app.js','docs/analytics-events.md']) {
   if (!fs.existsSync(path)) fail('missing ' + path);
 }
 
@@ -37,10 +37,13 @@ if (!analytics.includes('window.AZ_PRIVACY?.analyticsAllowed()')) fail('analytic
 if (!analytics.includes('scenario_complete')) fail('analytics scenario events missing');
 if (!app.includes('window.AZ_ANALYTICS?.track')) fail('phone demo analytics integration missing');
 if (!privacy.includes('fixed list of permitted values')) fail('analytics disclosure missing');
-for (const page of ['index.html', 'privacy.html', 'hardware.html']) {
+for (const page of ['index.html', 'privacy.html', 'hardware.html', 'ecosystem.html']) {
   if (!read(page).includes('js/analytics.js')) fail('analytics module missing from ' + page);
 }
 if (!privacy.includes('mailto:azcare.project@gmail.com')) fail('privacy contact missing');
+if (!read('watch.html').includes('$200–600')) fail('watch concept price range missing');
+if (!read('hardware.html').includes('$400–900')) fail('phone concept price range missing');
+if (!read('ecosystem.html').includes('A-Z Care Center')) fail('Care Center concept missing');
 if (!workflow.includes('run: npm test')) fail('CI does not run formatting and static checks');
 if (!workflow.includes('run: npm run test:e2e')) fail('CI does not run browser tests');
 if (!fs.existsSync('playwright.config.js') || !fs.existsSync('tests/e2e/site.spec.js')) {
