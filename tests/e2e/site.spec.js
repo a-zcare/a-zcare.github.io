@@ -278,7 +278,9 @@ test('scam and SOS demonstrations complete without real actions', async ({ page 
   await expect(page.locator('#sosState')).toContainText('No alert sent');
 });
 
-test('phone and watch SOS share the service but keep feedback on their own device', async ({ page }) => {
+test('phone and watch SOS share the service but keep feedback on their own device', async ({
+  page,
+}) => {
   await page.goto('/');
 
   const watchState = page.locator('#watchDemoState');
