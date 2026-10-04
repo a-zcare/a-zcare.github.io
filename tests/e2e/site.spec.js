@@ -84,7 +84,9 @@ test('phone and watch showcase keeps usable visual proportions across breakpoint
     expect(metrics.phoneCssHeight / metrics.phoneCssWidth, viewport.name).toBeGreaterThan(2.1);
     expect(metrics.phoneCssHeight / metrics.phoneCssWidth, viewport.name).toBeLessThan(2.7);
     expect(metrics.phoneVisualWidth, viewport.name).toBeLessThan(metrics.viewportWidth);
-    expect(metrics.phoneVisualHeight, viewport.name).toBeGreaterThan(metrics.phoneVisualWidth * 1.5);
+    expect(metrics.phoneVisualHeight, viewport.name).toBeGreaterThan(
+      metrics.phoneVisualWidth * 1.5,
+    );
     expect(metrics.watchWidth, viewport.name).toBeGreaterThan(100);
     expect(metrics.watchHeight, viewport.name).toBeGreaterThan(100);
   }
