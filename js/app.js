@@ -93,7 +93,13 @@
   function settings() {
     const tracking = localStorage.getItem('az_tracking') === 'on',
       alerts = localStorage.getItem('az_alerts') !== 'off';
-    return `${head('SYSTEM', 'Settings')}<div class="phone-list">${row('◉', 'Privacy dashboard', 'Review permissions', 'privacy')}${row('⌁', 'Network', '5G · Wi-Fi connected')}${row('ϟ', 'Battery', '82% · Good')}${row('▣', 'Device information', 'Specifications', 'specs')}<button class="phone-row toggle-row" data-toggle="alerts"><span>!</span><b>Safety alerts<small>Suspicious activity warnings</small></b><i class="toggle ${alerts ? 'on' : ''}"></i></button><button class="phone-row toggle-row" data-toggle="tracking"><span>⌖</span><b>Location sharing<small>Trusted people only</small></b><i class="toggle ${tracking ? 'on' : ''}"></i></button></div>`;
+    return `${head('SYSTEM', 'Settings')}<div class="phone-list">${row('◉', 'Privacy dashboard', 'Review permissions', 'privacy')}${row('⌁', 'Connectivity', '5G · Wi-Fi · emergency fallback', 'connectivity')}${row('ϟ', 'Battery Guardian', 'Starts at 20% · preserve safety', 'battery')}${row('▣', 'Device information', 'Specifications', 'specs')}<button class="phone-row toggle-row" data-toggle="alerts"><span>!</span><b>Safety alerts<small>Suspicious activity warnings</small></b><i class="toggle ${alerts ? 'on' : ''}"></i></button><button class="phone-row toggle-row" data-toggle="tracking"><span>⌖</span><b>Location sharing<small>Trusted people only</small></b><i class="toggle ${tracking ? 'on' : ''}"></i></button></div>`;
+  }
+  function battery() {
+    return `${head('POWER & SAFETY', 'Battery Guardian')}<div class="info-card health-head"><strong>20% safety threshold</strong><p>Below 20%, A-Z Care reduces nonessential background activity while preserving SOS, critical communication, safety sensing and periodic permitted location snapshots.</p></div><div class="phone-list">${row('SOS', 'Emergency reserve', 'Highest priority')}${row('⌖', 'Location snapshots', 'Reduced frequency · permitted sharing only')}${row('⌁', 'Background activity', 'Nonessential work reduced')}</div>`;
+  }
+  function connectivity() {
+    return `${head('RESILIENT SAFETY', 'Connectivity')}<div class="info-card"><strong>Use the safest available path</strong><p>Normal internet first, then supported safety paths when ordinary connectivity is unavailable.</p></div><div class="phone-list">${row('5G', 'Mobile / eSIM', 'Primary connection')}${row('Wi', 'Wi-Fi', 'Available internet')}${row('↔', 'Encrypted nearby relay', 'BLE / Wi-Fi research concept')}${row('◌', 'Store & forward', 'Hold encrypted emergency packet until connectivity returns')}</div><div class="info-card"><small>Satellite and partner safety connectivity depend on compatible hardware, services and region.</small></div>`;
   }
   function privacy() {
     const mic = localStorage.getItem('az_mic') === 'on';
@@ -130,6 +136,8 @@
     specs,
     settings,
     privacy,
+    battery,
+    connectivity,
     sos,
     calls: () =>
       `${head('CALL PROTECTION', 'Phone')}<div class="info-card"><strong>Unknown caller</strong><small>+371 2X XXX XXX</small></div><div class="info-card warning"><strong>⚠ Possible scam</strong><p>Never share passwords or verification codes.</p></div><button class="wide" data-open="ai">Ask AI Care</button>`,
@@ -223,13 +231,38 @@
     if (watchAction) {
       const screen = watchAction.closest('.watch-screen');
       const state = screen?.querySelector('#watchDemoState');
+      const kicker = screen?.querySelector('#watchKicker');
+      const value = screen?.querySelector('#watchValue');
+      const wave = screen?.querySelector('#watchWave');
+      const stats = screen?.querySelector('#watchStats');
       const action = watchAction.dataset.watchAction;
       screen?.classList.remove('demo-alert', 'demo-health');
-      if (action === 'health') {
+
+      const setWatch = (label, main, waveform, detail, message) => {
         screen?.classList.add('demo-health');
-        if (state) state.textContent = 'Health check · 72 bpm · SpO₂ 98%';
-      } else if (action === 'status') {
-        if (state) state.textContent = 'Guardian active · connection ready';
+        if (kicker) kicker.textContent = label;
+        if (value) value.innerHTML = main;
+        if (wave) wave.textContent = waveform;
+        if (stats) stats.innerHTML = detail;
+        if (state) state.textContent = message;
+      };
+
+      if (action === 'heart') {
+        setWatch('A-Z GUARDIAN · HEART', '72 <i>bpm</i>', '⌁⌁⌁⌁⌁', '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>', 'Built-in optical heart-rate sensor · demo');
+      } else if (action === 'ecg') {
+        setWatch('A-Z GUARDIAN · ECG', 'Sinus <i>demo</i>', '⌁╲⌁╱⌁╲⌁', '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>', 'ECG concept · validation and regional approval required');
+      } else if (action === 'oxygen') {
+        setWatch('A-Z GUARDIAN · OXYGEN', '98 <i>%</i>', '••••••', '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>', 'Built-in SpO₂ sensor · wellness demo');
+      } else if (action === 'temperature') {
+        setWatch('A-Z GUARDIAN · TEMP', '33.4 <i>°C</i>', '— — —', '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>', 'Skin-temperature trend · not core-body temperature');
+      } else if (action === 'fall') {
+        screen?.classList.add('demo-alert');
+        if (kicker) kicker.textContent = 'A-Z GUARDIAN · FALL';
+        if (value) value.innerHTML = 'Are you <i>OK?</i>';
+        if (wave) wave.textContent = '!';
+        if (stats) stats.innerHTML = '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>';
+        if (state) state.textContent = 'Possible fall · phone safety flow linked';
+        render('fall');
       } else {
         runSosDemo('watch');
       }
