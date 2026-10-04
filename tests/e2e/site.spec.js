@@ -143,7 +143,6 @@ for (const viewport of viewports.filter((item) => item.width <= 800)) {
       await toggle.press('Enter');
       await expect(toggle).toHaveAttribute('aria-expanded', 'true');
       const firstLink = page.getByRole('link', { name: 'Why', exact: true });
-      await page.keyboard.press('Tab');
       await expect(firstLink).toBeFocused();
       await page.keyboard.press('Enter');
 
