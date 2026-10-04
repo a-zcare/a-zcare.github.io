@@ -1758,7 +1758,7 @@ footer p {
 
 /* Interactive device showcase */
 .showcase-phone-slot {
-  width: 262px;
+  width: 273px;
   height: 604px;
   margin: 0 auto;
   display: flex;
@@ -1767,14 +1767,14 @@ footer p {
 }
 
 .showcase-phone-demo {
-  width: 312px;
+  width: 325px;
   transform: scale(0.82);
   transform-origin: top center;
 }
 
 .showcase-phone-demo .phone {
   flex: 0 0 704px;
-  width: 312px;
+  width: 325px;
   height: 704px;
   border-radius: 46px;
   padding: 6px;
@@ -1840,7 +1840,7 @@ footer p {
 
 @media (max-width: 900px) {
   .showcase-phone-slot {
-    width: 248px;
+    width: 258px;
     height: 558px;
   }
 
@@ -1851,7 +1851,7 @@ footer p {
 
 @media (max-width: 650px) {
   .showcase-phone-slot {
-    width: 234px;
+    width: 244px;
     height: 522px;
   }
 
@@ -1870,7 +1870,7 @@ footer p {
 
 @media (max-width: 650px) {
   .phone-demo-shell.showcase-phone-demo .phone {
-    width: 312px;
+    width: 325px;
     height: 704px;
     max-height: none;
   }
@@ -1878,7 +1878,7 @@ footer p {
 
 @media (max-width: 380px) {
   .showcase-phone-slot {
-    width: 220px;
+    width: 230px;
     height: 492px;
   }
 
