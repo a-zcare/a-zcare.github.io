@@ -1130,7 +1130,8 @@ footer p {
   transition: 0.2s ease;
 }
 
-.choice:focus-visible {
+.choice:focus-visible,
+.choice:active {
   transform: translateY(-2px);
   border-color: #5b8cff70;
   background: #5b8cff12;
