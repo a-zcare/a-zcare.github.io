@@ -1130,11 +1130,19 @@ footer p {
   transition: 0.2s ease;
 }
 
-.choice:hover,
-.choice.active {
+.choice:focus-visible,
+.choice:active {
   transform: translateY(-2px);
   border-color: #5b8cff70;
   background: #5b8cff12;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .choice:hover {
+    transform: translateY(-2px);
+    border-color: #5b8cff70;
+    background: #5b8cff12;
+  }
 }
 
 .choice > b {
@@ -1751,7 +1759,7 @@ footer p {
 
 /* Interactive device showcase */
 .showcase-phone-slot {
-  width: 262px;
+  width: 273px;
   height: 604px;
   margin: 0 auto;
   display: flex;
@@ -1760,19 +1768,19 @@ footer p {
 }
 
 .showcase-phone-demo {
-  width: 312px;
+  width: 325px;
   transform: scale(0.82);
   transform-origin: top center;
 }
 
 .showcase-phone-demo .phone {
   flex: 0 0 704px;
-  width: 312px;
+  width: 325px;
   height: 704px;
   border-radius: 46px;
-  padding: 6px;
-  border: 1px solid #ffffff26;
-  background: linear-gradient(145deg, #3a4451, #11161d 58%, #070a0e);
+  padding: 5px;
+  border: 2px solid #465365;
+  background: #111822;
   box-shadow:
     0 38px 90px #000b,
     inset 0 0 0 1px #ffffff0a;
@@ -1780,6 +1788,7 @@ footer p {
 
 .showcase-phone-demo .phone-view {
   border-radius: 39px;
+  box-shadow: inset 0 0 0 1px #ffffff0a;
   overflow: hidden;
 }
 
@@ -1833,7 +1842,7 @@ footer p {
 
 @media (max-width: 900px) {
   .showcase-phone-slot {
-    width: 248px;
+    width: 258px;
     height: 558px;
   }
 
@@ -1844,7 +1853,7 @@ footer p {
 
 @media (max-width: 650px) {
   .showcase-phone-slot {
-    width: 234px;
+    width: 244px;
     height: 522px;
   }
 
@@ -1863,7 +1872,7 @@ footer p {
 
 @media (max-width: 650px) {
   .phone-demo-shell.showcase-phone-demo .phone {
-    width: 312px;
+    width: 325px;
     height: 704px;
     max-height: none;
   }
@@ -1871,7 +1880,7 @@ footer p {
 
 @media (max-width: 380px) {
   .showcase-phone-slot {
-    width: 220px;
+    width: 230px;
     height: 492px;
   }
 
@@ -2779,4 +2788,38 @@ footer p {
   .phone-view > #sosState:not(:empty) {
     margin-top: 14px !important;
   }
+}
+
+/* Watch Health Guardian: richer interactive controls without sacrificing mobile fit */
+.watch-shell {
+  width: 210px;
+  height: 268px;
+}
+.watch-shell::before,
+.watch-shell::after {
+  left: 76px;
+  width: 58px;
+  height: 72px;
+}
+.watch-screen {
+  width: 176px;
+  min-height: 218px;
+  padding: 15px 14px;
+  border-color: #465365;
+}
+.watch-crown {
+  right: 9px;
+  top: 112px;
+}
+.watch-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.watch-actions button {
+  min-height: 27px;
+}
+.watch-actions .watch-sos {
+  grid-column: 1 / -1;
+}
+.watch-screen.demo-alert .watch-wave {
+  color: #ff8796;
 }

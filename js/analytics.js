@@ -2,9 +2,11 @@
   const EVENT_SCHEMA_VERSION = 1;
   const screens = [
     'ai',
+    'battery',
     'browser',
     'calls',
     'camera',
+    'connectivity',
     'contacts',
     'diabetes',
     'fall',
@@ -63,6 +65,10 @@
     privacy_settings_open: {
       required: ['source'],
       values: { source: ['banner', 'footer', 'privacy_page'] },
+    },
+    watch_demo_action: {
+      required: ['action'],
+      values: { action: ['heart', 'ecg', 'oxygen', 'temperature', 'fall', 'sos'] },
     },
     survey_start: {
       required: ['source'],
