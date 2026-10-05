@@ -337,7 +337,7 @@ test('phone and watch SOS share the service but keep feedback on their own devic
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
   await expect(page.locator('#sosState')).toContainText('No alert sent');
-  await expect(watchState).toContainText('Tap a control');
+  await expect(watchState).toContainText('Tap a health or safety control');
 
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
   await expect(watchState).toContainText('No alert sent');
