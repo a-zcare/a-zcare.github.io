@@ -2823,3 +2823,41 @@ footer p {
 .watch-screen.demo-alert .watch-wave {
   color: #ff8796;
 }
+
+
+/* A-Z Care desktop-first layout refresh — stage 1.
+   Keep the existing device demos and narrow-screen navigation intact. */
+@media (min-width: 1100px) {
+  .container {
+    width: min(1520px, calc(100% - 96px));
+  }
+  .ecosystem-intro {
+    max-width: 1080px;
+    margin-inline: auto;
+  }
+  .device-stage {
+    width: 100%;
+    max-width: none;
+  }
+}
+@media (min-width: 1600px) {
+  .container {
+    width: min(1560px, calc(100% - 112px));
+  }
+}
+@media (max-width: 800px) {
+  .hero {
+    padding-top: 92px;
+  }
+  .container {
+    width: calc(100% - 32px);
+  }
+  .ecosystem-intro h1 {
+    text-wrap: balance;
+  }
+}
+@media (max-width: 390px) {
+  .container {
+    width: calc(100% - 24px);
+  }
+}
