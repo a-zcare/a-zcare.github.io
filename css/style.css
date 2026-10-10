@@ -2790,7 +2790,7 @@ footer p {
   }
 }
 
-/* Compact watch: all navigation and emergency controls live inside the device */
+/* Polished Watch: controls stay inside the device and frame the active widget */
 .watch-carousel {
   display: grid;
   place-items: center;
@@ -2798,23 +2798,34 @@ footer p {
   margin: 0 auto;
 }
 .watch-shell {
-  flex: 0 0 176px;
-  width: 176px;
-  height: 218px;
+  flex: 0 0 204px;
+  width: 204px;
+  height: 254px;
+  filter: drop-shadow(0 24px 34px #0009);
 }
 .watch-shell::before,
 .watch-shell::after {
-  left: 61px;
-  width: 54px;
-  height: 58px;
+  left: 68px;
+  width: 68px;
+  height: 66px;
+  border-radius: 24px 24px 14px 14px;
+  background: linear-gradient(90deg, #111923, #202b37 48%, #101720);
+}
+.watch-shell::after {
+  border-radius: 14px 14px 24px 24px;
 }
 .watch-screen {
-  width: 166px;
-  height: 168px;
+  width: 194px;
+  height: 196px;
   min-height: 0;
-  padding: 10px 10px 8px;
-  border: 2px solid #465365;
-  border-radius: 40px;
+  padding: 12px 11px 10px;
+  border: 2px solid #526175;
+  border-radius: 47px;
+  background: radial-gradient(circle at 50% 15%, #101a28 0, #070c13 56%, #05080d 100%);
+  box-shadow:
+    inset 0 0 0 2px #ffffff08,
+    inset 0 -18px 28px #0006,
+    0 0 0 1px #000;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -2822,57 +2833,71 @@ footer p {
   overflow: hidden;
 }
 .watch-crown {
-  right: -2px;
-  top: 95px;
-  height: 23px;
+  right: -4px;
+  top: 108px;
+  width: 8px;
+  height: 29px;
+  border-radius: 0 6px 6px 0;
+  background: linear-gradient(#596575, #343e4c);
+  box-shadow: inset 1px 0 #8792a0;
 }
-.watch-topbar {
+.watch-title {
+  display: block;
+  text-align: center;
+  min-height: 12px;
+  color: #9faec2;
+  font-size: 7px;
+  line-height: 12px;
+  letter-spacing: 1.7px;
+}
+.watch-metric-row {
   display: grid;
-  grid-template-columns: 28px 1fr 28px;
+  grid-template-columns: 30px minmax(0, 1fr) 30px;
   align-items: center;
   gap: 4px;
 }
-.watch-topbar small {
-  text-align: center;
-  font-size: 7px;
-  letter-spacing: 1px;
-}
 .watch-arrow {
-  width: 28px;
-  height: 27px;
-  border: 1px solid #465365;
-  border-radius: 9px;
+  width: 30px;
+  height: 42px;
+  border: 0;
+  border-radius: 12px;
   padding: 0;
-  background: #172335;
-  color: #e5efff;
-  font-size: 21px;
+  background: #152133;
+  color: #a9bedb;
+  box-shadow: inset 0 0 0 1px #344861;
+  font-size: 24px;
   line-height: 1;
   cursor: pointer;
+  transition: 160ms ease;
 }
 .watch-arrow:hover,
 .watch-arrow:focus-visible {
-  border-color: #6d98ff;
-  background: #263c60;
+  color: #f2f7ff;
+  background: #203451;
+  box-shadow:
+    inset 0 0 0 1px #6685ad,
+    0 0 0 2px #6d98ff22;
 }
 .watch-metric {
   width: 100%;
-  min-height: 88px;
-  padding: 4px 5px;
+  min-width: 0;
+  min-height: 101px;
+  padding: 5px 2px;
   border: 1px solid transparent !important;
-  border-radius: 18px !important;
+  border-radius: 19px !important;
   background: transparent !important;
   color: inherit !important;
   cursor: pointer;
 }
 .watch-metric:hover,
 .watch-metric:focus-visible {
-  border-color: #56739d !important;
-  background: #162438 !important;
+  border-color: #405979 !important;
+  background: #111d2d !important;
 }
 .watch-metric strong {
   display: block;
-  font-size: 24px;
-  line-height: 1;
+  font-size: 25px;
+  line-height: 1.05;
 }
 .watch-metric strong i {
   font-size: 8px;
@@ -2881,34 +2906,49 @@ footer p {
 }
 .watch-metric .watch-wave {
   display: block;
-  height: 20px;
-  font-size: 18px;
-  line-height: 18px;
+  height: 22px;
+  margin-top: 3px;
   color: #58e6a9;
+  font-size: 17px;
+  line-height: 20px;
   overflow: hidden;
 }
 .watch-metric .watch-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5px;
+  gap: 4px;
   width: 100%;
   margin-top: 3px;
 }
+.watch-metric .watch-stats span {
+  font-size: 6px;
+}
+.watch-metric .watch-stats b {
+  font-size: 9px;
+}
 .watch-sos-fixed {
-  width: 100% !important;
-  min-height: 30px;
-  border: 1px solid #ff637688 !important;
-  border-radius: 12px !important;
-  background: #ff314c24 !important;
-  color: #ff9aa7 !important;
+  align-self: center;
+  width: 76% !important;
+  min-height: 29px;
+  padding: 4px 12px !important;
+  border: 1px solid #e6576d80 !important;
+  border-radius: 14px !important;
+  background: linear-gradient(180deg, #681f2d66, #39121b77) !important;
+  color: #ff9dac !important;
+  box-shadow: inset 0 1px #ffffff0d;
   font-size: 10px !important;
   font-weight: 900 !important;
-  letter-spacing: 1.4px;
+  letter-spacing: 1.8px;
   cursor: pointer;
+}
+.watch-sos-fixed:hover,
+.watch-sos-fixed:focus-visible {
+  border-color: #ff8094 !important;
+  background: #5a1b2877 !important;
 }
 .watch-navigation-status {
   text-align: center;
-  margin: 5px auto 8px;
+  margin: 8px auto 8px;
 }
 .watch-navigation-status #watchPageIndicator {
   color: #d5e6ff;
@@ -2919,7 +2959,7 @@ footer p {
   font-size: 10px !important;
 }
 .watch-detail-panel {
-  max-width: 380px;
+  max-width: 400px;
   margin: 0 auto 16px;
   padding: 12px 14px;
   border: 1px solid #34465f;
@@ -2933,6 +2973,12 @@ footer p {
 }
 .watch-detail-panel p {
   margin: 5px 0 0;
+}
+@media (max-width: 380px) {
+  .watch-shell {
+    transform: scale(0.94);
+    margin: -7px 0;
+  }
 }
 @media (max-width: 700px) {
   .container {
