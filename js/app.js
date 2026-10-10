@@ -461,14 +461,22 @@
     if (e.target.closest('[data-sos-confirm]')) {
       localStorage.setItem('az_last_share', 'SOS status + permitted location · simulation');
       const state = $('#sosState');
-      if (state) state.innerHTML = '<div class="info-card health-head"><strong>✓ Trusted contacts notified · simulation</strong><p>Anna and Michael would receive only the permitted emergency payload. No real message was sent.</p></div>';
+      if (state)
+        state.innerHTML =
+          '<div class="info-card health-head"><strong>✓ Trusted contacts notified · simulation</strong><p>Anna and Michael would receive only the permitted emergency payload. No real message was sent.</p></div>';
       const watchState = document.querySelector('#watchDemoState');
       if (watchState) watchState.textContent = 'Trusted contacts notified · demo only';
-      track('scenario_complete', { scenario_name: 'sos', source: 'linked_devices', result: 'trusted_contacts_demo' });
+      track('scenario_complete', {
+        scenario_name: 'sos',
+        source: 'linked_devices',
+        result: 'trusted_contacts_demo',
+      });
     }
     if (e.target.closest('[data-sos-cancel]')) {
       const state = $('#sosState');
-      if (state) state.innerHTML = '<div class="info-card"><strong>SOS demo cancelled</strong><p>No data was sent.</p></div>';
+      if (state)
+        state.innerHTML =
+          '<div class="info-card"><strong>SOS demo cancelled</strong><p>No data was sent.</p></div>';
       document.querySelector('.watch-screen')?.classList.remove('demo-alert');
     }
     if (e.target.closest('[data-sos]')) runSosDemo('phone');
