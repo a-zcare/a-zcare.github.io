@@ -133,3 +133,10 @@ for (const path of [
 }
 
 if (!process.exitCode) ok('static regression checks passed');
+
+if (!index.includes('data-demo-open="carecenter"') || !app.includes('CURRENT SOS ROUTE')) fail('integrated scenario launchpad or connectivity route missing');
+if (!app.includes('20%') || !app.includes('19% · Safety mode')) fail('interactive Battery Guardian threshold missing');
+if (!app.includes('CGM · EXTERNAL') || !app.includes('BP · EXTERNAL')) fail('external health sensor disclosure missing');
+if (!app.includes('Block sender') || !app.includes('Open official site safely')) fail('anti-scam safe actions missing');
+if (!app.includes('Last data sent') || !app.includes('SOS location')) fail('interactive privacy controls missing');
+if (!app.includes("carecenter: careCenter")) fail('Care Center demo missing');
