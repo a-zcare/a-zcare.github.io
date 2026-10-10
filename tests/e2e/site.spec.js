@@ -332,13 +332,14 @@ test('phone and watch SOS share the service but keep feedback on their own devic
   await page.goto('/');
 
   const watchState = page.locator('#watchDemoState');
-  await expect(watchState).toContainText('Tap a health or safety control');
+  await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
   await expect(page.locator('#sosState')).toContainText('No alert sent');
-  await expect(watchState).toContainText('Tap a health or safety control');
+  await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
+  await page.getByRole('button', { name: 'Previous watch screen' }).click();
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
   await expect(watchState).toContainText('No alert sent');
   await expect(page.locator('#sosState')).toContainText('No alert sent');
@@ -347,16 +348,33 @@ test('phone and watch SOS share the service but keep feedback on their own devic
 test('Watch Health Guardian links health and fall flows to the phone', async ({ page }) => {
   await page.goto('/');
 
-  await page.getByRole('button', { name: 'ECG', exact: true }).click();
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
   await expect(page.locator('#watchDemoState')).toContainText('ECG concept');
   await expect(page.locator('#watchKicker')).toContainText('ECG');
 
-  await page.getByRole('button', { name: 'SpO₂', exact: true }).click();
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
   await expect(page.locator('#watchValue')).toContainText('98');
 
-  await page.getByRole('button', { name: 'Fall', exact: true }).click();
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
+  await page.getByRole('button', { name: 'Open fall detection on phone' }).click();
   await expect(page.getByRole('heading', { name: 'Fall detection', exact: true })).toBeVisible();
   await expect(page.locator('#watchDemoState')).toContainText('phone safety flow linked');
+});
+
+test('compact watch stays square-ish and arrows navigate on phone tablet desktop', async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const box = await page.locator('.watch-screen').boundingBox();
+    expect(box).not.toBeNull();
+    expect(box.height).toBeLessThan(190);
+    expect(box.width).toBeGreaterThan(140);
+    await page.getByRole('button', { name: 'Next watch screen' }).click();
+    await expect(page.locator('#watchPageIndicator')).toContainText('ECG · 2 of 6');
+    await page.getByRole('button', { name: 'Previous watch screen' }).click();
+    await expect(page.locator('#watchPageIndicator')).toContainText('HEART · 1 of 6');
+  }
 });
 
 test('Battery Guardian and privacy dashboard expose safety-first controls', async ({ page }) => {
