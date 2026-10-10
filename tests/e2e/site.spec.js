@@ -484,7 +484,7 @@ test('Battery Guardian and privacy dashboard expose safety-first controls', asyn
 
   await page.getByRole('button', { name: 'Back to previous screen' }).click();
   await page.locator('#phoneView [data-open="privacy"]').click();
-  await expect(page.locator('#phoneView')).toContainText('Last safety share');
+  await expect(page.locator('#phoneView')).toContainText('Last data sent');
   await expect(page.locator('#phoneView')).toContainText('Optional analytics');
 });
 
