@@ -214,20 +214,33 @@
   }
   function runSosDemo(source) {
     track('scenario_start', { scenario_name: 'sos', source });
+    const screen = document.querySelector('.watch-screen');
+    const watchState = document.querySelector('#watchDemoState');
+    const payload = 'SOS status · permitted location · time · device battery';
+
     if (source === 'watch') {
-      const screen = document.querySelector('.watch-screen');
-      const state = document.querySelector('#watchDemoState');
       screen?.classList.remove('demo-health');
       screen?.classList.add('demo-alert');
-      if (state) state.textContent = 'SOS simulation complete · No alert sent';
+      if (watchState) watchState.textContent = 'SOS sent to linked phone · demo';
+      localStorage.setItem('az_last_share', 'Watch SOS → linked phone · simulation');
+      render('sos');
+      const state = $('#sosState');
+      if (state) {
+        state.innerHTML =
+          '<div class="info-card warning"><strong>Watch SOS received</strong><p>The linked phone received the watch emergency signal. No real alert was sent.</p></div><div class="info-card health-head"><strong>Emergency packet prepared</strong><p>' +
+          payload +
+          '</p></div><div class="sos-actions"><button data-sos-confirm>Send to trusted contacts</button><button data-sos-cancel>Cancel demo</button></div>';
+      }
     } else {
       const state = $('#sosState');
       if (state) {
         state.innerHTML =
-          '<div class="info-card warning"><strong>SOS simulation complete · No alert sent</strong><p>In a working product, Anna and Michael would receive your SOS status and permitted location.</p></div>';
+          '<div class="info-card warning"><strong>Phone SOS ready · simulation</strong><p>No real emergency call, message or location sharing will happen.</p></div><div class="info-card"><strong>Permitted payload</strong><p>' +
+          payload +
+          '</p></div><div class="sos-actions"><button data-sos-confirm>Send to trusted contacts</button><button data-sos-cancel>Cancel demo</button></div>';
       }
     }
-    track('scenario_complete', { scenario_name: 'sos', source, result: 'simulation_complete' });
+    track('scenario_complete', { scenario_name: 'sos', source, result: 'phone_received' });
   }
 
   function startFall() {
@@ -444,6 +457,19 @@
       localStorage.setItem('az_last_share', 'SOS status + permitted location · simulation');
       $('#fallState').innerHTML =
         '<div class="info-card warning"><strong>Help flow simulated · No alert sent</strong><p>Watch event → phone SOS → trusted contacts. Permitted payload: SOS status, last location, time and device battery.</p></div>';
+    }
+    if (e.target.closest('[data-sos-confirm]')) {
+      localStorage.setItem('az_last_share', 'SOS status + permitted location · simulation');
+      const state = $('#sosState');
+      if (state) state.innerHTML = '<div class="info-card health-head"><strong>✓ Trusted contacts notified · simulation</strong><p>Anna and Michael would receive only the permitted emergency payload. No real message was sent.</p></div>';
+      const watchState = document.querySelector('#watchDemoState');
+      if (watchState) watchState.textContent = 'Trusted contacts notified · demo only';
+      track('scenario_complete', { scenario_name: 'sos', source: 'linked_devices', result: 'trusted_contacts_demo' });
+    }
+    if (e.target.closest('[data-sos-cancel]')) {
+      const state = $('#sosState');
+      if (state) state.innerHTML = '<div class="info-card"><strong>SOS demo cancelled</strong><p>No data was sent.</p></div>';
+      document.querySelector('.watch-screen')?.classList.remove('demo-alert');
     }
     if (e.target.closest('[data-sos]')) runSosDemo('phone');
     const h = e.target.closest('[data-health]');
