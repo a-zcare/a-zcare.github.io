@@ -227,69 +227,51 @@
       }
     }, 1000);
   }
+  const watchScreens = [
+    { action: 'heart', title: 'HEART', value: '72 <i>bpm</i>', wave: '⌁⌁⌁⌁⌁', stats: '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>', message: 'Built-in optical heart-rate sensor · demo' },
+    { action: 'ecg', title: 'ECG', value: 'Sinus <i>demo</i>', wave: '⌁╲⌁╱⌁╲⌁', stats: '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>', message: 'ECG concept · validation and regional approval required' },
+    { action: 'oxygen', title: 'SpO₂', value: '98 <i>%</i>', wave: '••••••', stats: '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>', message: 'Built-in SpO₂ sensor · wellness demo' },
+    { action: 'temperature', title: 'TEMP', value: '33.4 <i>°C</i>', wave: '— — —', stats: '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>', message: 'Skin-temperature trend · not core-body temperature' },
+    { action: 'fall', title: 'FALL', value: 'Are you <i>OK?</i>', wave: '!', stats: '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>', message: 'Possible fall · phone safety flow linked' },
+    { action: 'sos', title: 'SOS', value: 'SOS <i>ready</i>', wave: '✦', stats: '<span>PHONE<b>Linked</b></span><span>ALERT<b>Demo</b></span>', message: 'Emergency SOS simulation · no real alert' },
+  ];
+  let watchIndex = 0;
+  function renderWatch() {
+    const current = watchScreens[watchIndex];
+    const screen = document.querySelector('.watch-screen');
+    if (!screen) return;
+    screen.classList.toggle('demo-alert', current.action === 'fall' || current.action === 'sos');
+    screen.classList.toggle('demo-health', current.action !== 'fall' && current.action !== 'sos');
+    document.querySelector('#watchKicker').textContent = 'A-Z GUARDIAN · ' + current.title;
+    document.querySelector('#watchValue').innerHTML = current.value;
+    document.querySelector('#watchWave').textContent = current.wave;
+    document.querySelector('#watchStats').innerHTML = current.stats;
+    document.querySelector('#watchPageIndicator').textContent = current.title + ' · ' + (watchIndex + 1) + ' of ' + watchScreens.length;
+    const actionButton = document.querySelector('#watchScreenAction');
+    actionButton.dataset.watchAction = current.action;
+    actionButton.textContent = current.action === 'fall' ? 'Check safety' : current.action === 'sos' ? 'SOS demo' : 'Details';
+    actionButton.setAttribute('aria-label', current.action === 'sos' ? 'Watch SOS demo' : current.action === 'fall' ? 'Open fall detection on phone' : 'Show ' + current.title + ' details');
+    document.querySelector('#watchDemoState').textContent = current.message;
+  }
+  renderWatch();
   document.addEventListener('click', (e) => {
+    const watchDirection = e.target.closest('[data-watch-direction]');
+    if (watchDirection) {
+      watchIndex = (watchIndex + Number(watchDirection.dataset.watchDirection) + watchScreens.length) % watchScreens.length;
+      renderWatch();
+      return;
+    }
     const watchAction = e.target.closest('[data-watch-action]');
     if (watchAction) {
-      const screen = watchAction.closest('.watch-screen');
-      const state = screen?.querySelector('#watchDemoState');
-      const kicker = screen?.querySelector('#watchKicker');
-      const value = screen?.querySelector('#watchValue');
-      const wave = screen?.querySelector('#watchWave');
-      const stats = screen?.querySelector('#watchStats');
       const action = watchAction.dataset.watchAction;
-      screen?.classList.remove('demo-alert', 'demo-health');
-
-      const setWatch = (label, main, waveform, detail, message) => {
-        screen?.classList.add('demo-health');
-        if (kicker) kicker.textContent = label;
-        if (value) value.innerHTML = main;
-        if (wave) wave.textContent = waveform;
-        if (stats) stats.innerHTML = detail;
-        if (state) state.textContent = message;
-      };
-
-      if (action === 'heart') {
-        setWatch(
-          'A-Z GUARDIAN · HEART',
-          '72 <i>bpm</i>',
-          '⌁⌁⌁⌁⌁',
-          '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>',
-          'Built-in optical heart-rate sensor · demo',
-        );
-      } else if (action === 'ecg') {
-        setWatch(
-          'A-Z GUARDIAN · ECG',
-          'Sinus <i>demo</i>',
-          '⌁╲⌁╱⌁╲⌁',
-          '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>',
-          'ECG concept · validation and regional approval required',
-        );
-      } else if (action === 'oxygen') {
-        setWatch(
-          'A-Z GUARDIAN · OXYGEN',
-          '98 <i>%</i>',
-          '••••••',
-          '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>',
-          'Built-in SpO₂ sensor · wellness demo',
-        );
-      } else if (action === 'temperature') {
-        setWatch(
-          'A-Z GUARDIAN · TEMP',
-          '33.4 <i>°C</i>',
-          '— — —',
-          '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>',
-          'Skin-temperature trend · not core-body temperature',
-        );
-      } else if (action === 'fall') {
-        screen?.classList.add('demo-alert');
-        if (kicker) kicker.textContent = 'A-Z GUARDIAN · FALL';
-        if (value) value.innerHTML = 'Are you <i>OK?</i>';
-        if (wave) wave.textContent = '!';
-        if (stats) stats.innerHTML = '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>';
-        if (state) state.textContent = 'Possible fall · phone safety flow linked';
+      if (action === 'fall') {
         render('fall');
-      } else {
+        document.querySelector('.watch-screen')?.classList.add('demo-alert');
+        document.querySelector('#watchDemoState').textContent = 'Possible fall · phone safety flow linked';
+      } else if (action === 'sos') {
         runSosDemo('watch');
+      } else {
+        document.querySelector('#watchDemoState').textContent = watchScreens[watchIndex].message;
       }
       track('watch_demo_action', { action });
       return;
