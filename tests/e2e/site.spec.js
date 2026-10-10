@@ -323,7 +323,7 @@ test('scam and SOS demonstrations complete without real actions', async ({ page 
   await page.getByRole('button', { name: 'Back to previous screen' }).click();
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
-  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(page.locator('#sosState')).toContainText('No real emergency call');
 });
 
 test('phone and watch SOS share the service but keep feedback on their own device', async ({
@@ -336,12 +336,12 @@ test('phone and watch SOS share the service but keep feedback on their own devic
 
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
-  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(page.locator('#sosState')).toContainText('No real emergency call');
   await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
-  await expect(watchState).toContainText('No alert sent');
-  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(watchState).toContainText('SOS sent to linked phone');
+  await expect(page.locator('#sosState')).toContainText('Watch SOS received');
 });
 
 test('Watch Health Guardian links health and fall flows to the phone', async ({ page }) => {
@@ -426,6 +426,17 @@ test('Watch shows glucose only as external CGM data', async ({ page }) => {
   await expect(page.locator('#watchDetailPanel')).toContainText(
     'watch itself does not measure blood glucose',
   );
+});
+
+test('Watch SOS hands the emergency flow to the linked phone', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('[data-watch-sos]').click();
+  await expect(page.locator('#phoneView h3')).toHaveText('SOS');
+  await expect(page.locator('#phoneView')).toContainText('Watch SOS received');
+  await expect(page.locator('#watchDemoState')).toContainText('SOS sent to linked phone');
+  await page.getByRole('button', { name: 'Send to trusted contacts' }).click();
+  await expect(page.locator('#phoneView')).toContainText('Trusted contacts notified');
+  await expect(page.locator('#watchDemoState')).toContainText('Trusted contacts notified');
 });
 
 test('scenario launchpad opens integrated product demos', async ({ page }) => {

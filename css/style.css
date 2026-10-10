@@ -3083,3 +3083,118 @@ footer p {
     min-height: 72px;
   }
 }
+
+/* Device frame + linked Watch SOS refinement */
+.showcase-phone-demo .phone {
+  padding: 7px 6px 9px;
+  border: 1px solid #697585;
+  border-radius: 50px;
+  background: linear-gradient(
+    115deg,
+    #77808b 0%,
+    #202936 7%,
+    #0b1018 48%,
+    #35404e 93%,
+    #87919c 100%
+  );
+  box-shadow:
+    0 42px 100px #000c,
+    inset 0 0 0 1px #ffffff18,
+    inset 0 -3px 6px #0008;
+  overflow: visible;
+}
+.showcase-phone-demo .phone::before,
+.showcase-phone-demo .phone::after {
+  content: '';
+  position: absolute;
+  right: -4px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(#697483, #28313d);
+}
+.showcase-phone-demo .phone::before {
+  top: 122px;
+  height: 58px;
+}
+.showcase-phone-demo .phone::after {
+  top: 196px;
+  height: 88px;
+}
+.showcase-phone-demo .phone-view {
+  position: relative;
+  border-radius: 42px;
+  background:
+    radial-gradient(circle at 75% 8%, #3868c230, transparent 34%), linear-gradient(#101827, #090f19);
+  box-shadow:
+    inset 0 0 0 1px #ffffff0f,
+    0 0 0 1px #000;
+}
+.showcase-phone-demo .phone-view::after {
+  content: '';
+  position: absolute;
+  z-index: 8;
+  left: 50%;
+  bottom: 5px;
+  width: 76px;
+  height: 3px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #d7deea9e;
+  pointer-events: none;
+}
+.showcase-phone-demo .dock {
+  left: 7px;
+  right: 7px;
+  bottom: 14px;
+  padding: 8px 3px 7px;
+  border: 1px solid #ffffff0b;
+  border-radius: 19px;
+  background: linear-gradient(180deg, #172130e8, #0c121be8);
+  box-shadow:
+    0 9px 25px #0008,
+    inset 0 1px #ffffff0c;
+}
+.watch-sos-fixed {
+  width: 70% !important;
+  min-height: 27px;
+  border-radius: 999px !important;
+  box-shadow:
+    0 5px 16px #0007,
+    inset 0 1px #ffffff12;
+}
+.watch-screen.demo-alert .watch-sos-fixed {
+  animation: watch-sos-pulse 1.25s ease-in-out infinite;
+}
+.sos-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: 8px;
+}
+.sos-actions button {
+  min-height: 34px;
+  border: 1px solid #405570;
+  border-radius: 10px;
+  background: #152337;
+  color: #eef5ff;
+  font-size: 8px;
+  font-weight: 800;
+}
+.sos-actions button:first-child {
+  border-color: #e6576d80;
+  background: #521a2677;
+  color: #ff9dac;
+}
+@keyframes watch-sos-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 5px 16px #0007,
+      0 0 0 0 #ff637630;
+  }
+  50% {
+    box-shadow:
+      0 5px 16px #0007,
+      0 0 0 6px #ff637608;
+  }
+}
