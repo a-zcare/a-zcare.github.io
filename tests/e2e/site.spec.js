@@ -370,8 +370,8 @@ test('compact watch stays square-ish and arrows navigate on phone tablet desktop
     await page.goto('/');
     const box = await page.locator('.watch-screen').boundingBox();
     expect(box).not.toBeNull();
-    expect(box.height).toBeLessThan(190);
-    expect(box.width).toBeGreaterThan(150);
+    expect(box.height).toBeLessThan(215);
+    expect(box.width).toBeGreaterThan(175);
     await page.getByRole('button', { name: 'Next watch screen' }).click();
     await expect(page.locator('#watchPageIndicator')).toContainText('ECG · 2 of 6');
     await page.getByRole('button', { name: 'Previous watch screen' }).click();
@@ -399,6 +399,20 @@ test('Watch arrows and permanent SOS stay inside the watch while readings open d
   await expect(page.locator('#watchDetailPanel')).toContainText('Heart rate');
   await page.getByRole('button', { name: 'Next watch screen' }).click();
   await expect(page.locator('#watchDetailPanel')).toBeHidden();
+});
+
+test('Watch navigation flanks the metric and SOS remains compact inside the face', async ({ page }) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto('/');
+    const row = page.locator('.watch-metric-row');
+    await expect(row.getByRole('button', { name: 'Previous watch screen' })).toBeVisible();
+    await expect(row.getByRole('button', { name: 'Next watch screen' })).toBeVisible();
+    const screenBox = await page.locator('.watch-screen').boundingBox();
+    const sosBox = await page.getByRole('button', { name: 'Watch SOS demo' }).boundingBox();
+    expect(sosBox.width).toBeLessThan(screenBox.width * 0.85);
+    expect(sosBox.width).toBeGreaterThan(screenBox.width * 0.6);
+  }
 });
 
 test('Watch shows glucose only as external CGM data', async ({ page }) => {
