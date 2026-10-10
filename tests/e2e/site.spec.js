@@ -340,7 +340,7 @@ test('phone and watch SOS share the service but keep feedback on their own devic
   await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
-  await expect(watchState).toContainText('No alert sent');
+  await expect(watchState).toContainText('SOS sent to linked phone');
   await expect(page.locator('#sosState')).toContainText('No real emergency call');
 });
 
