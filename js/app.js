@@ -96,28 +96,47 @@
     return `${head('SYSTEM', 'Settings')}<div class="phone-list">${row('◉', 'Privacy dashboard', 'Review permissions', 'privacy')}${row('⌁', 'Connectivity', '5G · Wi-Fi · emergency fallback', 'connectivity')}${row('ϟ', 'Battery Guardian', 'Starts at 20% · preserve safety', 'battery')}${row('▣', 'Device information', 'Specifications', 'specs')}<button class="phone-row toggle-row" data-toggle="alerts"><span>!</span><b>Safety alerts<small>Suspicious activity warnings</small></b><i class="toggle ${alerts ? 'on' : ''}"></i></button><button class="phone-row toggle-row" data-toggle="tracking"><span>⌖</span><b>Location sharing<small>Trusted people only</small></b><i class="toggle ${tracking ? 'on' : ''}"></i></button></div>`;
   }
   function battery() {
-    return `${head('POWER & SAFETY', 'Battery Guardian')}<div class="info-card health-head"><strong>20% safety threshold</strong><p>Below 20%, A-Z Care reduces nonessential background activity while preserving SOS, critical communication, safety sensing and periodic permitted location snapshots.</p></div><div class="phone-list">${row('SOS', 'Emergency reserve', 'Highest priority')}${row('⌖', 'Location snapshots', 'Reduced frequency · permitted sharing only')}${row('⌁', 'Background activity', 'Nonessential work reduced')}</div>`;
+    const safety = localStorage.getItem('az_battery_demo') === 'safety';
+    return `${head('POWER & SAFETY', 'Battery Guardian')}<div class="info-card ${safety ? 'warning' : 'health-head'}"><strong>${safety ? '19% · Safety mode' : '44% · Normal mode'}</strong><p>At 20%, A-Z Care reduces nonessential background work while preserving SOS, critical communication, safety sensing and permitted location snapshots.</p></div><button class="wide primary-phone" data-battery-demo>${safety ? 'Restore 44% demo' : 'Simulate battery below 20%'}</button><div class="phone-list">${row('SOS', 'Emergency reserve', 'Always highest priority')}${row('⌖', 'Location snapshots', safety ? 'Reduced frequency · permitted only' : 'Normal permitted schedule')}${row('⌁', 'Background activity', safety ? 'Nonessential work reduced' : 'Normal')}</div>`;
   }
   function connectivity() {
-    return `${head('RESILIENT SAFETY', 'Connectivity')}<div class="info-card"><strong>Use the safest available path</strong><p>Normal internet first, then supported safety paths when ordinary connectivity is unavailable.</p></div><div class="phone-list">${row('5G', 'Mobile / eSIM', 'Primary connection')}${row('Wi', 'Wi-Fi', 'Available internet')}${row('↔', 'Encrypted nearby relay', 'BLE / Wi-Fi research concept')}${row('◌', 'Store & forward', 'Hold encrypted emergency packet until connectivity returns')}</div><div class="info-card"><small>Satellite and partner safety connectivity depend on compatible hardware, services and region.</small></div>`;
+    const routes = [
+      '5G / eSIM',
+      'Wi-Fi',
+      'Safety connectivity',
+      'Nearby encrypted relay',
+      'Satellite where supported',
+      'Store & forward',
+    ];
+    const routeIndex = +(localStorage.getItem('az_route_demo') || 0) % routes.length;
+    return `${head('RESILIENT SAFETY', 'Connectivity')}<div class="info-card health-head"><small>CURRENT SOS ROUTE</small><strong>${routes[routeIndex]}</strong><p>Demo route only · no emergency packet is transmitted.</p></div><button class="wide" data-route-next>Simulate next fallback</button><div class="route-flow">${routes.map((route, i) => `<span class="${i === routeIndex ? 'active' : ''}">${route}</span>`).join('<i>→</i>')}</div><div class="info-card"><small>Partner safety connectivity and satellite require compatible hardware, services and regional availability. Nearby relay and store-forward remain research concepts.</small></div>`;
   }
   function privacy() {
-    const mic = localStorage.getItem('az_mic') === 'on';
+    const setting = (key, fallback = false) => {
+      const value = localStorage.getItem('az_' + key);
+      return value === null ? fallback : value === 'on';
+    };
+    const privacyRow = (key, icon, title, note, fallback = false) =>
+      `<button class="phone-row toggle-row" data-toggle="${key}"><span>${icon}</span><b>${title}<small>${note}</small></b><i class="toggle ${setting(key, fallback) ? 'on' : ''}"></i></button>`;
     const analyticsAllowed = window.AZ_PRIVACY?.analyticsAllowed() === true;
-    return `${head('PRIVACY', 'Privacy dashboard')}<div class="info-card"><strong>You stay in control</strong><p>See what can be accessed, who can receive safety data and what was shared.</p></div><div class="phone-list"><button class="phone-row toggle-row" data-toggle="mic"><span>●</span><b>Microphone<small>AI Care voice assistance</small></b><i class="toggle ${mic ? 'on' : ''}"></i></button>${row('◉', 'Camera', 'Food scan · Camera app')}${row('⌖', 'Location', 'Family off · SOS trusted contacts only')}${row('♥', 'Health', 'Private · external sensors by permission')}${row('A', 'Optional analytics', analyticsAllowed ? 'Allowed · no health/location/message content' : 'Off')}${row('↗', 'Last safety share', 'None · demo only')}</div>`;
+    const lastShare = localStorage.getItem('az_last_share') || 'None · demo only';
+    return `${head('PRIVACY', 'Privacy dashboard')}<div class="info-card"><strong>Local-first controls</strong><p>Choose what the demo may share. Emergency sharing remains limited to categories you explicitly allow.</p></div><div class="phone-list">${privacyRow('mic', '●', 'Microphone', 'AI Care voice assistance')}${privacyRow('family_location', '⌖', 'Family location', 'Off by default')}${privacyRow('sos_location', 'SOS', 'SOS location', 'Trusted contacts only', true)}${privacyRow('health_share', '♥', 'Health sharing', 'Private unless permitted')}${row('A', 'Optional analytics', analyticsAllowed ? 'Allowed · no health/location/message content' : 'Off')}${row('↗', 'Last data sent', lastShare)}</div>`;
   }
   function health() {
-    return `${head('A-Z CARE', 'Health')}<div class="health-metrics"><button data-health="glucose"><small>GLUCOSE</small><b id="glucoseVal">6.4</b><span>mmol/L</span></button><button data-health="pulse"><small>PULSE</small><b id="pulseVal">72</b><span>bpm</span></button><button data-health="bp"><small>PRESSURE</small><b id="bpVal">122/78</b><span>mmHg</span></button></div><div class="phone-list">${row('◒', 'Diabetes', 'Food · glucose · insulin log', 'diabetes')}${row('◷', 'Medication', 'Next reminder · 18:00')}${row('⌁', 'Fall detection', 'Test the safety flow', 'fall')}</div><div class="info-card"><small>Demo values only. Health tools do not replace medical advice or prescribe insulin doses.</small></div>`;
+    return `${head('A-Z CARE', 'Health Guardian')}<div class="health-metrics"><button data-health="glucose"><small>CGM · EXTERNAL</small><b id="glucoseVal">6.4</b><span>mmol/L</span></button><button data-health="pulse"><small>PULSE</small><b id="pulseVal">72</b><span>bpm</span></button><button data-health="bp"><small>BP · EXTERNAL</small><b id="bpVal">122/78</b><span>mmHg</span></button></div><div class="phone-list">${row('ECG', 'ECG snapshot', 'Single-lead concept · where validated')}${row('O₂', 'SpO₂', '98% · wellness trend')}${row('Zz', 'Sleep', '7 h 24 min · demo')}${row('↟', 'Activity', '6,240 steps · demo')}${row('≈', 'Breathing', '15/min · demo')}${row('⌁', 'Fall detection', 'Watch + phone safety flow', 'fall')}</div><div class="info-card"><small>Demo values only. CGM and blood pressure come from compatible external devices. Health tools do not diagnose or prescribe treatment.</small></div>`;
   }
   function messages() {
     const scanned = localStorage.getItem('az_scanned') === 'yes';
-    return `${head('SAFE INBOX', 'Messages')}<div class="message-bubble"><small>Unknown sender</small><p>Your bank account has been blocked. Verify now: <b>secure-bank-check.example</b></p></div>${scanned ? `<div class="info-card warning"><strong>⚠ Suspicious message</strong><p>Urgency, unfamiliar domain and an account threat were detected. Open the bank app directly instead.</p></div><button class="wide" data-open="ai">Ask AI Care</button><button class="wide" data-open="protect">Use safer action</button>` : `<button class="wide primary-phone" data-scan>Scan this message</button>`}`;
+    return `${head('SAFE INBOX', 'Messages')}<div class="message-bubble"><small>Unknown sender</small><p>Your bank account has been blocked. Verify now: <b>secure-bank-check.example</b></p></div>${scanned ? `<div class="info-card warning"><strong>⚠ Suspicious message · high risk</strong><p>Signals: urgency · account threat · unfamiliar domain. AI Care recommends avoiding the supplied link.</p></div><div class="safe-actions"><button data-scam-action="block">Block sender</button><button data-scam-action="trusted">Call trusted person</button><button data-scam-action="official">Open official site safely</button></div><div id="scamActionState"></div>` : `<button class="wide primary-phone" data-scan>Scan this message</button>`}`;
   }
   function fall() {
     return `${head('HEALTH & SAFETY', 'Fall detection')}<div class="info-card warning"><strong>Simulation only</strong><p>This prototype cannot detect a real fall or contact anyone.</p></div><div class="info-card"><strong>Concept flow</strong><p>Strong impact + inactivity would start a check-in.</p></div><button class="wide primary-phone" data-fall>Run fall simulation</button><div id="fallState"></div>`;
   }
   function sos() {
     return `${head('EMERGENCY', 'SOS')}<div class="sos-orb">SOS</div><div class="info-card warning"><strong>Simulation only</strong><p>No real emergency call, message or location sharing will happen.</p></div><div class="info-card"><strong>Concept flow</strong><p>In a working product, chosen contacts could receive your SOS status and shared location.</p></div><button class="wide danger-phone" data-sos>Run SOS simulation</button><div id="sosState"></div>`;
+  }
+  function careCenter() {
+    return `${head('CARE CENTER · DEMO', 'Care Center')}<div class="info-card"><strong>Facility overview · permission-based</strong><p>Optional B2B monitoring for enrolled residents and devices.</p></div><div class="phone-list">${row('✓', 'Anna · Room 12', 'Online · Watch 76%')}${row('!', 'Michael · Room 18', 'Low battery · 18%')}${row('⌁', 'Eva · Room 21', 'Fall check-in · resolved')}${row('○', 'Peter · Room 08', 'Offline · 14 min')}</div><div class="info-card"><small>Demo only. Staff access, consent, audit logs and role controls would be required in production.</small></div>`;
   }
   const screens = {
     protect: () =>
@@ -139,6 +158,7 @@
     privacy,
     battery,
     connectivity,
+    carecenter: careCenter,
     sos,
     calls: () =>
       `${head('CALL PROTECTION', 'Phone')}<div class="info-card"><strong>Unknown caller</strong><small>+371 2X XXX XXX</small></div><div class="info-card warning"><strong>⚠ Possible scam</strong><p>Never share passwords or verification codes.</p></div><button class="wide" data-open="ai">Ask AI Care</button>`,
@@ -311,6 +331,14 @@
   }
   renderWatch();
   document.addEventListener('click', (e) => {
+    const demoOpen = e.target.closest('[data-demo-open]');
+    if (demoOpen) {
+      render(demoOpen.dataset.demoOpen);
+      document
+        .querySelector('.showcase-phone-demo')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
     const watchDirection = e.target.closest('[data-watch-direction]');
     if (watchDirection) {
       watchIndex =
@@ -371,6 +399,32 @@
       localStorage.setItem(k, v ? 'off' : 'on');
       render(current, false);
     }
+    if (e.target.closest('[data-battery-demo]')) {
+      localStorage.setItem(
+        'az_battery_demo',
+        localStorage.getItem('az_battery_demo') === 'safety' ? 'normal' : 'safety',
+      );
+      render('battery', false);
+    }
+    if (e.target.closest('[data-route-next]')) {
+      const next = (+(localStorage.getItem('az_route_demo') || 0) + 1) % 6;
+      localStorage.setItem('az_route_demo', String(next));
+      render('connectivity', false);
+    }
+    const scamAction = e.target.closest('[data-scam-action]');
+    if (scamAction) {
+      const messages = {
+        block: 'Sender blocked in this simulation.',
+        trusted: 'Trusted-person call prepared in this simulation.',
+        official: 'Use a known official app or manually entered official address · demo only.',
+      };
+      const state = $('#scamActionState');
+      if (state)
+        state.innerHTML =
+          '<div class="info-card health-head"><strong>Safer action</strong><p>' +
+          messages[scamAction.dataset.scamAction] +
+          '</p></div>';
+    }
     if (e.target.closest('[data-scan]')) {
       track('scenario_start', { scenario_name: 'scam_message' });
       localStorage.setItem('az_scanned', 'yes');
@@ -387,8 +441,9 @@
     if (e.target.closest('[data-need]')) {
       clearInterval(fallTimer);
       track('scenario_complete', { scenario_name: 'fall', result: 'help_requested' });
+      localStorage.setItem('az_last_share', 'SOS status + permitted location · simulation');
       $('#fallState').innerHTML =
-        '<div class="info-card warning"><strong>Simulation complete · No alert sent</strong><p>In a working product, this action would request help from chosen contacts.</p></div>';
+        '<div class="info-card warning"><strong>Help flow simulated · No alert sent</strong><p>Watch event → phone SOS → trusted contacts. Permitted payload: SOS status, last location, time and device battery.</p></div>';
     }
     if (e.target.closest('[data-sos]')) runSosDemo('phone');
     const h = e.target.closest('[data-health]');
