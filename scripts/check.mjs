@@ -145,3 +145,6 @@ if (!app.includes('Block sender') || !app.includes('Open official site safely'))
 if (!app.includes('Last data sent') || !app.includes('SOS location'))
   fail('interactive privacy controls missing');
 if (!app.includes('carecenter: careCenter')) fail('Care Center demo missing');
+
+if (!app.includes('Watch SOS received') || !app.includes('data-sos-confirm')) fail('linked Watch-to-phone SOS flow missing');
+if (!css.includes('Device frame + linked Watch SOS refinement') || !css.includes('.showcase-phone-demo .phone::before')) fail('refined phone hardware frame missing');
