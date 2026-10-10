@@ -2990,3 +2990,27 @@ footer p {
     width: min(1400px, 92%);
   }
 }
+
+/* Interactive ecosystem milestone */
+.scenario-launchpad { width: min(1100px, 100%); margin: 24px auto 34px; text-align: center; }
+.scenario-launchpad h2 { margin: 8px 0 18px; }
+.scenario-launch-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.scenario-launch-grid button {
+  min-height: 94px; padding: 15px; border: 1px solid #293a50; border-radius: 16px;
+  background: linear-gradient(160deg, #111c2a, #0a111b); color: #eef5ff; text-align: left; cursor: pointer;
+}
+.scenario-launch-grid button:hover, .scenario-launch-grid button:focus-visible { border-color: #5f83b5; transform: translateY(-1px); }
+.scenario-launch-grid b, .scenario-launch-grid small { display: block; }
+.scenario-launch-grid small { margin-top: 6px; color: #93a6bd; line-height: 1.35; }
+.route-flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; margin: 10px 0; }
+.route-flow span { padding: 5px 7px; border: 1px solid #2b3b50; border-radius: 8px; color: #879bb4; font-size: 7px; }
+.route-flow span.active { border-color: #5de0ad; color: #8ff2ca; background: #183529; }
+.route-flow i { color: #52647a; font-style: normal; font-size: 8px; }
+.safe-actions { display: grid; gap: 6px; margin: 8px 0; }
+.safe-actions button { min-height: 32px; border: 1px solid #39506d; border-radius: 10px; background: #152338; color: #eaf2ff; font-size: 9px; }
+@media (max-width: 900px) { .scenario-launch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) {
+  .scenario-launchpad { margin-top: 12px; }
+  .scenario-launch-grid { grid-template-columns: 1fr; }
+  .scenario-launch-grid button { min-height: 72px; }
+}
