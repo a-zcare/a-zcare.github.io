@@ -323,7 +323,7 @@ test('scam and SOS demonstrations complete without real actions', async ({ page 
   await page.getByRole('button', { name: 'Back to previous screen' }).click();
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
-  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(page.locator('#sosState')).toContainText('No real emergency call');
 });
 
 test('phone and watch SOS share the service but keep feedback on their own device', async ({
@@ -336,12 +336,12 @@ test('phone and watch SOS share the service but keep feedback on their own devic
 
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
-  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(page.locator('#sosState')).toContainText('No real emergency call');
   await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
   await expect(watchState).toContainText('No alert sent');
-  await expect(page.locator('#sosState')).toContainText('No alert sent');
+  await expect(page.locator('#sosState')).toContainText('No real emergency call');
 });
 
 test('Watch Health Guardian links health and fall flows to the phone', async ({ page }) => {
