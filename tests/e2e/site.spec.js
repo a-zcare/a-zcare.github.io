@@ -339,7 +339,6 @@ test('phone and watch SOS share the service but keep feedback on their own devic
   await expect(page.locator('#sosState')).toContainText('No alert sent');
   await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
-  await page.getByRole('button', { name: 'Previous watch screen' }).click();
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
   await expect(watchState).toContainText('No alert sent');
   await expect(page.locator('#sosState')).toContainText('No alert sent');
@@ -357,7 +356,8 @@ test('Watch Health Guardian links health and fall flows to the phone', async ({ 
 
   await page.getByRole('button', { name: 'Next watch screen' }).click();
   await page.getByRole('button', { name: 'Next watch screen' }).click();
-  await page.getByRole('button', { name: 'Open fall detection on phone' }).click();
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
+  await page.getByRole('button', { name: 'Open FALL details' }).click();
   await expect(page.getByRole('heading', { name: 'Fall detection', exact: true })).toBeVisible();
   await expect(page.locator('#watchDemoState')).toContainText('phone safety flow linked');
 });
@@ -371,12 +371,45 @@ test('compact watch stays square-ish and arrows navigate on phone tablet desktop
     const box = await page.locator('.watch-screen').boundingBox();
     expect(box).not.toBeNull();
     expect(box.height).toBeLessThan(190);
-    expect(box.width).toBeGreaterThan(140);
+    expect(box.width).toBeGreaterThan(150);
     await page.getByRole('button', { name: 'Next watch screen' }).click();
     await expect(page.locator('#watchPageIndicator')).toContainText('ECG · 2 of 6');
     await page.getByRole('button', { name: 'Previous watch screen' }).click();
     await expect(page.locator('#watchPageIndicator')).toContainText('HEART · 1 of 6');
   }
+});
+
+test('Watch arrows and permanent SOS stay inside the watch while readings open details', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto('/');
+  const screen = page.locator('.watch-screen');
+  for (const name of ['Previous watch screen', 'Next watch screen', 'Watch SOS demo']) {
+    const button = page.getByRole('button', { name });
+    await expect(button).toBeVisible();
+    expect(
+      await screen.evaluate(
+        (parent, child) => parent.contains(child),
+        await button.elementHandle(),
+      ),
+    ).toBe(true);
+  }
+  await page.getByRole('button', { name: 'Open HEART details' }).click();
+  await expect(page.locator('#watchDetailPanel')).toContainText('Heart rate');
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
+  await expect(page.locator('#watchDetailPanel')).toBeHidden();
+});
+
+test('Watch shows glucose only as external CGM data', async ({ page }) => {
+  await page.goto('/');
+  for (let i = 0; i < 4; i++) await page.getByRole('button', { name: 'Next watch screen' }).click();
+  await expect(page.locator('#watchPageIndicator')).toContainText('GLUCOSE');
+  await expect(page.locator('#watchStats')).toContainText('External');
+  await page.getByRole('button', { name: 'Open GLUCOSE details' }).click();
+  await expect(page.locator('#watchDetailPanel')).toContainText(
+    'watch itself does not measure blood glucose',
+  );
 });
 
 test('Battery Guardian and privacy dashboard expose safety-first controls', async ({ page }) => {

@@ -235,6 +235,8 @@
       wave: '⌁⌁⌁⌁⌁',
       stats: '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>',
       message: 'Built-in optical heart-rate sensor · demo',
+      detail:
+        '<strong>Heart rate</strong><p>Current demo reading: 72 bpm. The watch can show resting trends and share permitted alerts with the linked phone.</p>',
     },
     {
       action: 'ecg',
@@ -243,6 +245,8 @@
       wave: '⌁╲⌁╱⌁╲⌁',
       stats: '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>',
       message: 'ECG concept · validation and regional approval required',
+      detail:
+        '<strong>ECG concept</strong><p>Single-lead ECG concept for rhythm snapshots. Medical claims require validation and regional regulatory approval.</p>',
     },
     {
       action: 'oxygen',
@@ -251,6 +255,8 @@
       wave: '••••••',
       stats: '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>',
       message: 'Built-in SpO₂ sensor · wellness demo',
+      detail:
+        '<strong>Blood oxygen</strong><p>SpO₂ wellness trend from the built-in optical sensor. Demo values are not a diagnosis.</p>',
     },
     {
       action: 'temperature',
@@ -259,6 +265,18 @@
       wave: '— — —',
       stats: '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>',
       message: 'Skin-temperature trend · not core-body temperature',
+      detail:
+        '<strong>Skin temperature</strong><p>Shows changes from the wearer’s baseline rather than claiming core-body temperature.</p>',
+    },
+    {
+      action: 'glucose',
+      title: 'GLUCOSE',
+      value: '6.1 <i>mmol/L</i>',
+      wave: '↗ — —',
+      stats: '<span>SOURCE<b>CGM</b></span><span>LINK<b>External</b></span>',
+      message: 'External CGM integration · watch does not measure glucose itself',
+      detail:
+        '<strong>Glucose · external CGM</strong><p>Shown from a compatible external continuous glucose monitor through A-Z Sensor Hub. The watch itself does not measure blood glucose.</p>',
     },
     {
       action: 'fall',
@@ -267,14 +285,8 @@
       wave: '!',
       stats: '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>',
       message: 'Possible fall · phone safety flow linked',
-    },
-    {
-      action: 'sos',
-      title: 'SOS',
-      value: 'SOS <i>ready</i>',
-      wave: '✦',
-      stats: '<span>PHONE<b>Linked</b></span><span>ALERT<b>Demo</b></span>',
-      message: 'Emergency SOS simulation · no real alert',
+      detail:
+        '<strong>Fall detection</strong><p>Motion sensors can start a check-in flow and link the event to the phone safety screen.</p>',
     },
   ];
   let watchIndex = 0;
@@ -282,31 +294,20 @@
     const current = watchScreens[watchIndex];
     const screen = document.querySelector('.watch-screen');
     if (!screen) return;
-    screen.classList.toggle('demo-alert', current.action === 'fall' || current.action === 'sos');
-    screen.classList.toggle('demo-health', current.action !== 'fall' && current.action !== 'sos');
-    document.querySelector('#watchKicker').textContent = 'A-Z GUARDIAN · ' + current.title;
+    screen.classList.toggle('demo-alert', current.action === 'fall');
+    screen.classList.toggle('demo-health', current.action !== 'fall');
+    document.querySelector('#watchKicker').textContent = current.title;
     document.querySelector('#watchValue').innerHTML = current.value;
     document.querySelector('#watchWave').textContent = current.wave;
     document.querySelector('#watchStats').innerHTML = current.stats;
     document.querySelector('#watchPageIndicator').textContent =
       current.title + ' · ' + (watchIndex + 1) + ' of ' + watchScreens.length;
-    const actionButton = document.querySelector('#watchScreenAction');
-    actionButton.dataset.watchAction = current.action;
-    actionButton.textContent =
-      current.action === 'fall'
-        ? 'Check safety'
-        : current.action === 'sos'
-          ? 'SOS demo'
-          : 'Details';
-    actionButton.setAttribute(
-      'aria-label',
-      current.action === 'sos'
-        ? 'Watch SOS demo'
-        : current.action === 'fall'
-          ? 'Open fall detection on phone'
-          : 'Show ' + current.title + ' details',
-    );
+    const metric = document.querySelector('#watchMetric');
+    metric.setAttribute('aria-label', 'Open ' + current.title + ' details');
     document.querySelector('#watchDemoState').textContent = current.message;
+    const detail = document.querySelector('#watchDetailPanel');
+    detail.hidden = true;
+    detail.innerHTML = '';
   }
   renderWatch();
   document.addEventListener('click', (e) => {
@@ -318,20 +319,19 @@
       renderWatch();
       return;
     }
-    const watchAction = e.target.closest('[data-watch-action]');
-    if (watchAction) {
-      const action = watchAction.dataset.watchAction;
-      if (action === 'fall') {
-        render('fall');
-        document.querySelector('.watch-screen')?.classList.add('demo-alert');
-        document.querySelector('#watchDemoState').textContent =
-          'Possible fall · phone safety flow linked';
-      } else if (action === 'sos') {
-        runSosDemo('watch');
-      } else {
-        document.querySelector('#watchDemoState').textContent = watchScreens[watchIndex].message;
-      }
-      track('watch_demo_action', { action });
+    if (e.target.closest('[data-watch-sos]')) {
+      runSosDemo('watch');
+      track('watch_demo_action', { action: 'sos' });
+      return;
+    }
+    if (e.target.closest('[data-watch-detail]')) {
+      const current = watchScreens[watchIndex];
+      const detail = document.querySelector('#watchDetailPanel');
+      detail.innerHTML = current.detail;
+      detail.hidden = false;
+      document.querySelector('#watchDemoState').textContent = current.message;
+      if (current.action === 'fall') render('fall');
+      track('watch_demo_action', { action: current.action });
       return;
     }
 
