@@ -336,12 +336,12 @@ test('phone and watch SOS share the service but keep feedback on their own devic
 
   await page.getByRole('button', { name: 'SOS', exact: true }).click();
   await page.getByRole('button', { name: 'Run SOS simulation' }).click();
-  await expect(page.locator('#sosState')).toContainText('Watch SOS received');
+  await expect(page.locator('#sosState')).toContainText('No real emergency call');
   await expect(watchState).toContainText('Built-in optical heart-rate sensor');
 
   await page.getByRole('button', { name: 'Watch SOS demo' }).click();
   await expect(watchState).toContainText('SOS sent to linked phone');
-  await expect(page.locator('#sosState')).toContainText('No real emergency call');
+  await expect(page.locator('#sosState')).toContainText('Watch SOS received');
 });
 
 test('Watch Health Guardian links health and fall flows to the phone', async ({ page }) => {
