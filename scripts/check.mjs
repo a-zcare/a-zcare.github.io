@@ -56,7 +56,7 @@ if (read('hardware.html').includes('$496')) fail('stale single phone price remai
 if (!read('ecosystem.html').includes('A-Z Care Center')) fail('Care Center concept missing');
 if (!read('ecosystem.html').includes('At 20% battery')) fail('20% Battery Guardian threshold missing');
 if (!read('watch.html').includes('External · CGM') || !read('watch.html').includes('Built in · ECG')) fail('Watch sensor architecture incomplete');
-if (!index.includes('data-watch-action="ecg"') || !index.includes('data-watch-action="fall"')) fail('interactive Watch health/safety controls missing');
+if (!index.includes('data-watch-direction="-1"') || !index.includes('data-watch-direction="1"') || !app.includes("action: 'ecg'") || !app.includes("action: 'fall'")) fail('interactive Watch carousel or health/safety controls missing');
 if (!app.includes("'battery'") || !app.includes("'connectivity'")) fail('phone Battery Guardian or connectivity screen missing');
 if (!analytics.includes('watch_demo_action')) fail('Watch analytics schema missing');
 if (!workflow.includes('run: npm test')) fail('CI does not run formatting and static checks');
