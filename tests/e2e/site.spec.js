@@ -428,6 +428,51 @@ test('Watch shows glucose only as external CGM data', async ({ page }) => {
   );
 });
 
+test('scenario launchpad opens integrated product demos', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Anti-Scam/ }).click();
+  await expect(page.locator('#phoneView h3')).toHaveText('Messages');
+  await page.getByRole('button', { name: 'Scan this message' }).click();
+  await expect(page.getByText('Suspicious message · high risk')).toBeVisible();
+  await page.getByRole('button', { name: 'Block sender' }).click();
+  await expect(page.locator('#scamActionState')).toContainText('Sender blocked');
+
+  await page.getByRole('button', { name: /Connectivity/ }).click();
+  await expect(page.locator('#phoneView')).toContainText('CURRENT SOS ROUTE');
+  await page.getByRole('button', { name: 'Simulate next fallback' }).click();
+  await expect(page.locator('#phoneView')).toContainText('Wi-Fi');
+});
+
+test('Battery Guardian switches at the 20 percent safety threshold', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Battery Guardian/ }).click();
+  await expect(page.locator('#phoneView')).toContainText('44% · Normal mode');
+  await page.getByRole('button', { name: 'Simulate battery below 20%' }).click();
+  await expect(page.locator('#phoneView')).toContainText('19% · Safety mode');
+  await expect(page.locator('#phoneView')).toContainText('Emergency reserve');
+});
+
+test('Privacy controls and Care Center are interactive demos', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /^Privacy/ }).click();
+  await expect(page.locator('#phoneView')).toContainText('Local-first controls');
+  await expect(page.locator('#phoneView')).toContainText('SOS location');
+  await page.getByRole('button', { name: /Care Center/ }).click();
+  await expect(page.locator('#phoneView h3')).toHaveText('Care Center');
+  await expect(page.locator('#phoneView')).toContainText('Michael · Room 18');
+  await expect(page.locator('#phoneView')).toContainText('role controls');
+});
+
+test('Health Guardian distinguishes built-in wellness data from external devices', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('button', { name: /Health Guardian/ }).click();
+  await expect(page.locator('#phoneView h3')).toHaveText('Health Guardian');
+  await expect(page.locator('#phoneView')).toContainText('CGM · EXTERNAL');
+  await expect(page.locator('#phoneView')).toContainText('BP · EXTERNAL');
+  await expect(page.locator('#phoneView')).toContainText('Sleep');
+  await expect(page.locator('#phoneView')).toContainText('Breathing');
+});
+
 test('Battery Guardian and privacy dashboard expose safety-first controls', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
