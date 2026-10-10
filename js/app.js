@@ -324,6 +324,12 @@
   }
   renderWatch();
   document.addEventListener('click', (e) => {
+    const demoOpen = e.target.closest('[data-demo-open]');
+    if (demoOpen) {
+      render(demoOpen.dataset.demoOpen);
+      document.querySelector('.showcase-phone-demo')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
     const watchDirection = e.target.closest('[data-watch-direction]');
     if (watchDirection) {
       watchIndex =
