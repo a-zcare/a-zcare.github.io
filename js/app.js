@@ -100,7 +100,14 @@
     return `${head('POWER & SAFETY', 'Battery Guardian')}<div class="info-card ${safety ? 'warning' : 'health-head'}"><strong>${safety ? '19% · Safety mode' : '44% · Normal mode'}</strong><p>At 20%, A-Z Care reduces nonessential background work while preserving SOS, critical communication, safety sensing and permitted location snapshots.</p></div><button class="wide primary-phone" data-battery-demo>${safety ? 'Restore 44% demo' : 'Simulate battery below 20%'}</button><div class="phone-list">${row('SOS', 'Emergency reserve', 'Always highest priority')}${row('⌖', 'Location snapshots', safety ? 'Reduced frequency · permitted only' : 'Normal permitted schedule')}${row('⌁', 'Background activity', safety ? 'Nonessential work reduced' : 'Normal')}</div>`;
   }
   function connectivity() {
-    const routes = ['5G / eSIM', 'Wi-Fi', 'Safety connectivity', 'Nearby encrypted relay', 'Satellite where supported', 'Store & forward'];
+    const routes = [
+      '5G / eSIM',
+      'Wi-Fi',
+      'Safety connectivity',
+      'Nearby encrypted relay',
+      'Satellite where supported',
+      'Store & forward',
+    ];
     const routeIndex = +(localStorage.getItem('az_route_demo') || 0) % routes.length;
     return `${head('RESILIENT SAFETY', 'Connectivity')}<div class="info-card health-head"><small>CURRENT SOS ROUTE</small><strong>${routes[routeIndex]}</strong><p>Demo route only · no emergency packet is transmitted.</p></div><button class="wide" data-route-next>Simulate next fallback</button><div class="route-flow">${routes.map((route, i) => `<span class="${i === routeIndex ? 'active' : ''}">${route}</span>`).join('<i>→</i>')}</div><div class="info-card"><small>Partner safety connectivity and satellite require compatible hardware, services and regional availability. Nearby relay and store-forward remain research concepts.</small></div>`;
   }
@@ -327,7 +334,9 @@
     const demoOpen = e.target.closest('[data-demo-open]');
     if (demoOpen) {
       render(demoOpen.dataset.demoOpen);
-      document.querySelector('.showcase-phone-demo')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document
+        .querySelector('.showcase-phone-demo')
+        ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     const watchDirection = e.target.closest('[data-watch-direction]');
@@ -391,7 +400,10 @@
       render(current, false);
     }
     if (e.target.closest('[data-battery-demo]')) {
-      localStorage.setItem('az_battery_demo', localStorage.getItem('az_battery_demo') === 'safety' ? 'normal' : 'safety');
+      localStorage.setItem(
+        'az_battery_demo',
+        localStorage.getItem('az_battery_demo') === 'safety' ? 'normal' : 'safety',
+      );
       render('battery', false);
     }
     if (e.target.closest('[data-route-next]')) {
@@ -407,7 +419,11 @@
         official: 'Use a known official app or manually entered official address · demo only.',
       };
       const state = $('#scamActionState');
-      if (state) state.innerHTML = '<div class="info-card health-head"><strong>Safer action</strong><p>' + messages[scamAction.dataset.scamAction] + '</p></div>';
+      if (state)
+        state.innerHTML =
+          '<div class="info-card health-head"><strong>Safer action</strong><p>' +
+          messages[scamAction.dataset.scamAction] +
+          '</p></div>';
     }
     if (e.target.closest('[data-scan]')) {
       track('scenario_start', { scenario_name: 'scam_message' });

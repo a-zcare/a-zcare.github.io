@@ -463,7 +463,9 @@ test('Privacy controls and Care Center are interactive demos', async ({ page }) 
   await expect(page.locator('#phoneView')).toContainText('role controls');
 });
 
-test('Health Guardian distinguishes built-in wellness data from external devices', async ({ page }) => {
+test('Health Guardian distinguishes built-in wellness data from external devices', async ({
+  page,
+}) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Health Guardian/ }).click();
   await expect(page.locator('#phoneView h3')).toHaveText('Health Guardian');
