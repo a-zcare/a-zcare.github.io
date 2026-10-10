@@ -2790,36 +2790,76 @@ footer p {
   }
 }
 
-/* Watch Health Guardian: richer interactive controls without sacrificing mobile fit */
+/* Compact watch body with external carousel controls */
+.watch-carousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto;
+}
 .watch-shell {
-  width: 210px;
-  height: 268px;
+  flex: 0 0 168px;
+  width: 168px;
+  height: 214px;
 }
 .watch-shell::before,
 .watch-shell::after {
-  left: 76px;
-  width: 58px;
-  height: 72px;
+  left: 58px;
+  width: 52px;
+  height: 58px;
 }
 .watch-screen {
-  width: 176px;
-  min-height: 218px;
-  padding: 15px 14px;
-  border-color: #465365;
+  width: 158px;
+  height: 164px;
+  min-height: 0;
+  padding: 17px 12px 9px;
+  border: 2px solid #465365;
+  border-radius: 39px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
-.watch-crown {
-  right: 9px;
-  top: 112px;
+.watch-screen > strong { margin-top: 6px; font-size: 25px; }
+.watch-wave { flex: 0 0 23px; width: 100%; }
+.watch-stats { width: 100%; margin: 3px 0 6px; }
+.watch-crown { right: -2px; top: 93px; height: 23px; }
+.watch-arrow {
+  flex: 0 0 36px;
+  width: 36px;
+  height: 42px;
+  border: 1px solid #465365;
+  border-radius: 12px;
+  background: #172335;
+  color: #e5efff;
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
 }
-.watch-actions {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.watch-arrow:hover, .watch-arrow:focus-visible { border-color: #6d98ff; background: #263c60; }
+.watch-screen .watch-screen-action {
+  width: auto;
+  min-width: 78px;
+  min-height: 25px;
+  padding: 3px 10px;
+  border: 1px solid #56739d;
+  border-radius: 12px;
+  background: #1c304b;
+  color: #e7f0ff;
+  cursor: pointer;
 }
-.watch-actions button {
-  min-height: 27px;
-}
-.watch-actions .watch-sos {
-  grid-column: 1 / -1;
-}
-.watch-screen.demo-alert .watch-wave {
+.watch-screen.demo-alert .watch-screen-action {
+  border-color: #ff637655;
+  background: #ff637619;
   color: #ff8796;
+}
+.watch-navigation-status { text-align: center; margin: 5px auto 16px; }
+.watch-navigation-status #watchPageIndicator { color: #d5e6ff; font-size: 12px; }
+.watch-navigation-status .watch-demo-state { margin-top: 4px; font-size: 10px !important; }
+@media (max-width: 380px) {
+  .watch-carousel { gap: 5px; }
+  .watch-arrow { flex-basis: 32px; width: 32px; }
 }
