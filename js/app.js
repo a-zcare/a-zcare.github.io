@@ -288,14 +288,6 @@
       detail:
         '<strong>Fall detection</strong><p>Motion sensors can start a check-in flow and link the event to the phone safety screen.</p>',
     },
-    {
-      action: 'sos',
-      title: 'SOS',
-      value: 'SOS <i>ready</i>',
-      wave: '✦',
-      stats: '<span>PHONE<b>Linked</b></span><span>ALERT<b>Demo</b></span>',
-      message: 'Emergency SOS simulation · no real alert',
-    },
   ];
   let watchIndex = 0;
   function renderWatch() {
@@ -310,23 +302,12 @@
     document.querySelector('#watchStats').innerHTML = current.stats;
     document.querySelector('#watchPageIndicator').textContent =
       current.title + ' · ' + (watchIndex + 1) + ' of ' + watchScreens.length;
-    const actionButton = document.querySelector('#watchScreenAction');
-    actionButton.dataset.watchAction = current.action;
-    actionButton.textContent =
-      current.action === 'fall'
-        ? 'Check safety'
-        : current.action === 'sos'
-          ? 'SOS demo'
-          : 'Details';
-    actionButton.setAttribute(
-      'aria-label',
-      current.action === 'sos'
-        ? 'Watch SOS demo'
-        : current.action === 'fall'
-          ? 'Open fall detection on phone'
-          : 'Show ' + current.title + ' details',
-    );
+    const metric = document.querySelector('#watchMetric');
+    metric.setAttribute('aria-label', 'Open ' + current.title + ' details');
     document.querySelector('#watchDemoState').textContent = current.message;
+    const detail = document.querySelector('#watchDetailPanel');
+    detail.hidden = true;
+    detail.innerHTML = '';
   }
   renderWatch();
   document.addEventListener('click', (e) => {
