@@ -128,6 +128,9 @@
   function sos() {
     return `${head('EMERGENCY', 'SOS')}<div class="sos-orb">SOS</div><div class="info-card warning"><strong>Simulation only</strong><p>No real emergency call, message or location sharing will happen.</p></div><div class="info-card"><strong>Concept flow</strong><p>In a working product, chosen contacts could receive your SOS status and shared location.</p></div><button class="wide danger-phone" data-sos>Run SOS simulation</button><div id="sosState"></div>`;
   }
+  function careCenter() {
+    return `${head('CARE CENTER · DEMO', 'Care Center')}<div class="info-card"><strong>Facility overview · permission-based</strong><p>Optional B2B monitoring for enrolled residents and devices.</p></div><div class="phone-list">${row('✓', 'Anna · Room 12', 'Online · Watch 76%')}${row('!', 'Michael · Room 18', 'Low battery · 18%')}${row('⌁', 'Eva · Room 21', 'Fall check-in · resolved')}${row('○', 'Peter · Room 08', 'Offline · 14 min')}</div><div class="info-card"><small>Demo only. Staff access, consent, audit logs and role controls would be required in production.</small></div>`;
+  }
   const screens = {
     protect: () =>
       `${head('PROTECTION', 'Safety Center')}<div class="info-card health-head"><strong>✓ Protection ready</strong><small>Safety services active in this demo</small></div><div class="phone-list">${row('✉', 'Check message', 'Look for scam signals', 'messages')}${row('↗', 'Check link', 'Open safely', 'browser')}${row('☎', 'Check caller', 'Unknown-call protection', 'calls')}${row('✦', 'Ask AI Care', 'Explain what feels wrong', 'ai')}</div>`,
@@ -148,6 +151,7 @@
     privacy,
     battery,
     connectivity,
+    carecenter: careCenter,
     sos,
     calls: () =>
       `${head('CALL PROTECTION', 'Phone')}<div class="info-card"><strong>Unknown caller</strong><small>+371 2X XXX XXX</small></div><div class="info-card warning"><strong>⚠ Possible scam</strong><p>Never share passwords or verification codes.</p></div><button class="wide" data-open="ai">Ask AI Care</button>`,
@@ -380,6 +384,25 @@
       localStorage.setItem(k, v ? 'off' : 'on');
       render(current, false);
     }
+    if (e.target.closest('[data-battery-demo]')) {
+      localStorage.setItem('az_battery_demo', localStorage.getItem('az_battery_demo') === 'safety' ? 'normal' : 'safety');
+      render('battery', false);
+    }
+    if (e.target.closest('[data-route-next]')) {
+      const next = (+(localStorage.getItem('az_route_demo') || 0) + 1) % 6;
+      localStorage.setItem('az_route_demo', String(next));
+      render('connectivity', false);
+    }
+    const scamAction = e.target.closest('[data-scam-action]');
+    if (scamAction) {
+      const messages = {
+        block: 'Sender blocked in this simulation.',
+        trusted: 'Trusted-person call prepared in this simulation.',
+        official: 'Use a known official app or manually entered official address · demo only.',
+      };
+      const state = $('#scamActionState');
+      if (state) state.innerHTML = '<div class="info-card health-head"><strong>Safer action</strong><p>' + messages[scamAction.dataset.scamAction] + '</p></div>';
+    }
     if (e.target.closest('[data-scan]')) {
       track('scenario_start', { scenario_name: 'scam_message' });
       localStorage.setItem('az_scanned', 'yes');
@@ -396,8 +419,9 @@
     if (e.target.closest('[data-need]')) {
       clearInterval(fallTimer);
       track('scenario_complete', { scenario_name: 'fall', result: 'help_requested' });
+      localStorage.setItem('az_last_share', 'SOS status + permitted location · simulation');
       $('#fallState').innerHTML =
-        '<div class="info-card warning"><strong>Simulation complete · No alert sent</strong><p>In a working product, this action would request help from chosen contacts.</p></div>';
+        '<div class="info-card warning"><strong>Help flow simulated · No alert sent</strong><p>Watch event → phone SOS → trusted contacts. Permitted payload: SOS status, last location, time and device battery.</p></div>';
     }
     if (e.target.closest('[data-sos]')) runSosDemo('phone');
     const h = e.target.closest('[data-health]');
