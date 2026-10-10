@@ -235,7 +235,8 @@
       wave: '⌁⌁⌁⌁⌁',
       stats: '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>',
       message: 'Built-in optical heart-rate sensor · demo',
-      detail: '<strong>Heart rate</strong><p>Current demo reading: 72 bpm. The watch can show resting trends and share permitted alerts with the linked phone.</p>',
+      detail:
+        '<strong>Heart rate</strong><p>Current demo reading: 72 bpm. The watch can show resting trends and share permitted alerts with the linked phone.</p>',
     },
     {
       action: 'ecg',
@@ -244,7 +245,8 @@
       wave: '⌁╲⌁╱⌁╲⌁',
       stats: '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>',
       message: 'ECG concept · validation and regional approval required',
-      detail: '<strong>ECG concept</strong><p>Single-lead ECG concept for rhythm snapshots. Medical claims require validation and regional regulatory approval.</p>',
+      detail:
+        '<strong>ECG concept</strong><p>Single-lead ECG concept for rhythm snapshots. Medical claims require validation and regional regulatory approval.</p>',
     },
     {
       action: 'oxygen',
@@ -253,7 +255,8 @@
       wave: '••••••',
       stats: '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>',
       message: 'Built-in SpO₂ sensor · wellness demo',
-      detail: '<strong>Blood oxygen</strong><p>SpO₂ wellness trend from the built-in optical sensor. Demo values are not a diagnosis.</p>',
+      detail:
+        '<strong>Blood oxygen</strong><p>SpO₂ wellness trend from the built-in optical sensor. Demo values are not a diagnosis.</p>',
     },
     {
       action: 'temperature',
@@ -262,7 +265,8 @@
       wave: '— — —',
       stats: '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>',
       message: 'Skin-temperature trend · not core-body temperature',
-      detail: '<strong>Skin temperature</strong><p>Shows changes from the wearer’s baseline rather than claiming core-body temperature.</p>',
+      detail:
+        '<strong>Skin temperature</strong><p>Shows changes from the wearer’s baseline rather than claiming core-body temperature.</p>',
     },
     {
       action: 'glucose',
@@ -271,7 +275,8 @@
       wave: '↗ — —',
       stats: '<span>SOURCE<b>CGM</b></span><span>LINK<b>External</b></span>',
       message: 'External CGM integration · watch does not measure glucose itself',
-      detail: '<strong>Glucose · external CGM</strong><p>Shown from a compatible external continuous glucose monitor through A-Z Sensor Hub. The watch itself does not measure blood glucose.</p>',
+      detail:
+        '<strong>Glucose · external CGM</strong><p>Shown from a compatible external continuous glucose monitor through A-Z Sensor Hub. The watch itself does not measure blood glucose.</p>',
     },
     {
       action: 'fall',
@@ -280,7 +285,8 @@
       wave: '!',
       stats: '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>',
       message: 'Possible fall · phone safety flow linked',
-      detail: '<strong>Fall detection</strong><p>Motion sensors can start a check-in flow and link the event to the phone safety screen.</p>',
+      detail:
+        '<strong>Fall detection</strong><p>Motion sensors can start a check-in flow and link the event to the phone safety screen.</p>',
     },
     {
       action: 'sos',
@@ -326,7 +332,9 @@
   document.addEventListener('click', (e) => {
     const watchDirection = e.target.closest('[data-watch-direction]');
     if (watchDirection) {
-      watchIndex = (watchIndex + Number(watchDirection.dataset.watchDirection) + watchScreens.length) % watchScreens.length;
+      watchIndex =
+        (watchIndex + Number(watchDirection.dataset.watchDirection) + watchScreens.length) %
+        watchScreens.length;
       renderWatch();
       return;
     }

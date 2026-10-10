@@ -379,14 +379,21 @@ test('compact watch stays square-ish and arrows navigate on phone tablet desktop
   }
 });
 
-test('Watch arrows and permanent SOS stay inside the watch while readings open details', async ({ page }) => {
+test('Watch arrows and permanent SOS stay inside the watch while readings open details', async ({
+  page,
+}) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
   const screen = page.locator('.watch-screen');
   for (const name of ['Previous watch screen', 'Next watch screen', 'Watch SOS demo']) {
     const button = page.getByRole('button', { name });
     await expect(button).toBeVisible();
-    expect(await screen.evaluate((parent, child) => parent.contains(child), await button.elementHandle())).toBe(true);
+    expect(
+      await screen.evaluate(
+        (parent, child) => parent.contains(child),
+        await button.elementHandle(),
+      ),
+    ).toBe(true);
   }
   await page.getByRole('button', { name: 'Open HEART details' }).click();
   await expect(page.locator('#watchDetailPanel')).toContainText('Heart rate');
@@ -400,7 +407,9 @@ test('Watch shows glucose only as external CGM data', async ({ page }) => {
   await expect(page.locator('#watchPageIndicator')).toContainText('GLUCOSE');
   await expect(page.locator('#watchStats')).toContainText('External');
   await page.getByRole('button', { name: 'Open GLUCOSE details' }).click();
-  await expect(page.locator('#watchDetailPanel')).toContainText('watch itself does not measure blood glucose');
+  await expect(page.locator('#watchDetailPanel')).toContainText(
+    'watch itself does not measure blood glucose',
+  );
 });
 
 test('Battery Guardian and privacy dashboard expose safety-first controls', async ({ page }) => {
