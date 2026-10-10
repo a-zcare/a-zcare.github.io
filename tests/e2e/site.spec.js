@@ -401,7 +401,9 @@ test('Watch arrows and permanent SOS stay inside the watch while readings open d
   await expect(page.locator('#watchDetailPanel')).toBeHidden();
 });
 
-test('Watch navigation flanks the metric and SOS remains compact inside the face', async ({ page }) => {
+test('Watch navigation flanks the metric and SOS remains compact inside the face', async ({
+  page,
+}) => {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
