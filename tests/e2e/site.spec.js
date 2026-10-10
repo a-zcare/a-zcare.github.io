@@ -428,6 +428,17 @@ test('Watch shows glucose only as external CGM data', async ({ page }) => {
   );
 });
 
+test('Watch SOS hands the emergency flow to the linked phone', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('[data-watch-sos]').click();
+  await expect(page.locator('#phoneView h3')).toHaveText('SOS');
+  await expect(page.locator('#phoneView')).toContainText('Watch SOS received');
+  await expect(page.locator('#watchDemoState')).toContainText('SOS sent to linked phone');
+  await page.getByRole('button', { name: 'Send to trusted contacts' }).click();
+  await expect(page.locator('#phoneView')).toContainText('Trusted contacts notified');
+  await expect(page.locator('#watchDemoState')).toContainText('Trusted contacts notified');
+});
+
 test('scenario launchpad opens integrated product demos', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: /Anti-Scam/ }).click();
