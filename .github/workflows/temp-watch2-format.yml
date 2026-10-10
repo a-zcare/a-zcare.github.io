@@ -1,0 +1,24 @@
+name: Temporary format
+on:
+  push:
+    branches: [feat/watch-controls-wide-desktop]
+permissions:
+  contents: write
+jobs:
+  format:
+    if: github.event.head_commit.message != 'Apply Prettier formatting'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with: { ref: feat/watch-controls-wide-desktop }
+      - uses: actions/setup-node@v7
+        with: { node-version: 24, cache: npm }
+      - run: npm ci
+      - run: npx prettier --write "index.html" "css/style.css" "js/app.js" "tests/e2e/site.spec.js" "scripts/check.mjs"
+      - run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Apply Prettier formatting"
+          git push origin HEAD:feat/watch-controls-wide-desktop
