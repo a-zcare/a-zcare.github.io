@@ -454,7 +454,7 @@ test('Battery Guardian switches at the 20 percent safety threshold', async ({ pa
 
 test('Privacy controls and Care Center are interactive demos', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('button', { name: /^Privacy/ }).click();
+  await page.locator('[data-demo-open="privacy"]').click();
   await expect(page.locator('#phoneView')).toContainText('Local-first controls');
   await expect(page.locator('#phoneView')).toContainText('SOS location');
   await page.getByRole('button', { name: /Care Center/ }).click();
@@ -478,12 +478,12 @@ test('Health Guardian distinguishes built-in wellness data from external devices
 test('Battery Guardian and privacy dashboard expose safety-first controls', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('button', { name: 'Settings', exact: true }).click();
-  await page.getByRole('button', { name: /Battery Guardian/ }).click();
+  await page.locator('#phoneView [data-open="battery"]').click();
   await expect(page.getByRole('heading', { name: 'Battery Guardian' })).toBeVisible();
-  await expect(page.locator('#phoneView')).toContainText('20% safety threshold');
+  await expect(page.locator('#phoneView')).toContainText('At 20%');
 
   await page.getByRole('button', { name: 'Back to previous screen' }).click();
-  await page.getByRole('button', { name: /Privacy dashboard/ }).click();
+  await page.locator('#phoneView [data-open="privacy"]').click();
   await expect(page.locator('#phoneView')).toContainText('Last safety share');
   await expect(page.locator('#phoneView')).toContainText('Optional analytics');
 });
