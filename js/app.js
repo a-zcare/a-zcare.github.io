@@ -228,12 +228,54 @@
     }, 1000);
   }
   const watchScreens = [
-    { action: 'heart', title: 'HEART', value: '72 <i>bpm</i>', wave: '⌁⌁⌁⌁⌁', stats: '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>', message: 'Built-in optical heart-rate sensor · demo' },
-    { action: 'ecg', title: 'ECG', value: 'Sinus <i>demo</i>', wave: '⌁╲⌁╱⌁╲⌁', stats: '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>', message: 'ECG concept · validation and regional approval required' },
-    { action: 'oxygen', title: 'SpO₂', value: '98 <i>%</i>', wave: '••••••', stats: '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>', message: 'Built-in SpO₂ sensor · wellness demo' },
-    { action: 'temperature', title: 'TEMP', value: '33.4 <i>°C</i>', wave: '— — —', stats: '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>', message: 'Skin-temperature trend · not core-body temperature' },
-    { action: 'fall', title: 'FALL', value: 'Are you <i>OK?</i>', wave: '!', stats: '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>', message: 'Possible fall · phone safety flow linked' },
-    { action: 'sos', title: 'SOS', value: 'SOS <i>ready</i>', wave: '✦', stats: '<span>PHONE<b>Linked</b></span><span>ALERT<b>Demo</b></span>', message: 'Emergency SOS simulation · no real alert' },
+    {
+      action: 'heart',
+      title: 'HEART',
+      value: '72 <i>bpm</i>',
+      wave: '⌁⌁⌁⌁⌁',
+      stats: '<span>SpO₂<b>98%</b></span><span>STATUS<b>Normal</b></span>',
+      message: 'Built-in optical heart-rate sensor · demo',
+    },
+    {
+      action: 'ecg',
+      title: 'ECG',
+      value: 'Sinus <i>demo</i>',
+      wave: '⌁╲⌁╱⌁╲⌁',
+      stats: '<span>RATE<b>72 bpm</b></span><span>LEAD<b>1-lead</b></span>',
+      message: 'ECG concept · validation and regional approval required',
+    },
+    {
+      action: 'oxygen',
+      title: 'SpO₂',
+      value: '98 <i>%</i>',
+      wave: '••••••',
+      stats: '<span>PULSE<b>72</b></span><span>SIGNAL<b>Good</b></span>',
+      message: 'Built-in SpO₂ sensor · wellness demo',
+    },
+    {
+      action: 'temperature',
+      title: 'TEMP',
+      value: '33.4 <i>°C</i>',
+      wave: '— — —',
+      stats: '<span>TREND<b>Stable</b></span><span>TYPE<b>Skin</b></span>',
+      message: 'Skin-temperature trend · not core-body temperature',
+    },
+    {
+      action: 'fall',
+      title: 'FALL',
+      value: 'Are you <i>OK?</i>',
+      wave: '!',
+      stats: '<span>PHONE<b>Linked</b></span><span>SOS<b>Ready</b></span>',
+      message: 'Possible fall · phone safety flow linked',
+    },
+    {
+      action: 'sos',
+      title: 'SOS',
+      value: 'SOS <i>ready</i>',
+      wave: '✦',
+      stats: '<span>PHONE<b>Linked</b></span><span>ALERT<b>Demo</b></span>',
+      message: 'Emergency SOS simulation · no real alert',
+    },
   ];
   let watchIndex = 0;
   function renderWatch() {
@@ -246,18 +288,33 @@
     document.querySelector('#watchValue').innerHTML = current.value;
     document.querySelector('#watchWave').textContent = current.wave;
     document.querySelector('#watchStats').innerHTML = current.stats;
-    document.querySelector('#watchPageIndicator').textContent = current.title + ' · ' + (watchIndex + 1) + ' of ' + watchScreens.length;
+    document.querySelector('#watchPageIndicator').textContent =
+      current.title + ' · ' + (watchIndex + 1) + ' of ' + watchScreens.length;
     const actionButton = document.querySelector('#watchScreenAction');
     actionButton.dataset.watchAction = current.action;
-    actionButton.textContent = current.action === 'fall' ? 'Check safety' : current.action === 'sos' ? 'SOS demo' : 'Details';
-    actionButton.setAttribute('aria-label', current.action === 'sos' ? 'Watch SOS demo' : current.action === 'fall' ? 'Open fall detection on phone' : 'Show ' + current.title + ' details');
+    actionButton.textContent =
+      current.action === 'fall'
+        ? 'Check safety'
+        : current.action === 'sos'
+          ? 'SOS demo'
+          : 'Details';
+    actionButton.setAttribute(
+      'aria-label',
+      current.action === 'sos'
+        ? 'Watch SOS demo'
+        : current.action === 'fall'
+          ? 'Open fall detection on phone'
+          : 'Show ' + current.title + ' details',
+    );
     document.querySelector('#watchDemoState').textContent = current.message;
   }
   renderWatch();
   document.addEventListener('click', (e) => {
     const watchDirection = e.target.closest('[data-watch-direction]');
     if (watchDirection) {
-      watchIndex = (watchIndex + Number(watchDirection.dataset.watchDirection) + watchScreens.length) % watchScreens.length;
+      watchIndex =
+        (watchIndex + Number(watchDirection.dataset.watchDirection) + watchScreens.length) %
+        watchScreens.length;
       renderWatch();
       return;
     }
@@ -267,7 +324,8 @@
       if (action === 'fall') {
         render('fall');
         document.querySelector('.watch-screen')?.classList.add('demo-alert');
-        document.querySelector('#watchDemoState').textContent = 'Possible fall · phone safety flow linked';
+        document.querySelector('#watchDemoState').textContent =
+          'Possible fall · phone safety flow linked';
       } else if (action === 'sos') {
         runSosDemo('watch');
       } else {

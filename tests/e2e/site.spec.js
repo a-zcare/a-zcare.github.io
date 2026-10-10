@@ -362,7 +362,9 @@ test('Watch Health Guardian links health and fall flows to the phone', async ({ 
   await expect(page.locator('#watchDemoState')).toContainText('phone safety flow linked');
 });
 
-test('compact watch stays square-ish and arrows navigate on phone tablet desktop', async ({ page }) => {
+test('compact watch stays square-ish and arrows navigate on phone tablet desktop', async ({
+  page,
+}) => {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
