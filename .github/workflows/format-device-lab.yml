@@ -1,0 +1,40 @@
+name: Format interactive device lab branch
+
+on:
+  push:
+    branches:
+      - feature/interactive-device-lab
+    paths:
+      - .github/workflows/format-device-lab.yml
+      - device-lab.html
+      - css/device-lab.css
+      - js/device-lab.js
+      - index.html
+      - docs/INTERACTIVE_DEVICE_LAB.md
+      - tests/e2e/device-lab.spec.js
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx prettier --write device-lab.html css/device-lab.css js/device-lab.js index.html docs/INTERACTIVE_DEVICE_LAB.md tests/e2e/device-lab.spec.js
+      - name: Commit formatting changes
+        run: |
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add device-lab.html css/device-lab.css js/device-lab.js index.html docs/INTERACTIVE_DEVICE_LAB.md tests/e2e/device-lab.spec.js
+            git commit -m "style: format interactive device lab with Prettier"
+            git push
+          fi
