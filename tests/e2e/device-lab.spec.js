@@ -114,7 +114,7 @@ test('watch status, metrics and controls fit inside its screen on mobile', async
   expect(width).toBeLessThanOrEqual(320);
 });
 
-test('landing-style icons and compact back button retain stable phone geometry', async ({ page }) => {
+test('landing-style icons and back button keep stable geometry', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const phone = page.locator('.phone-frame');
   const initial = await phone.boundingBox();
