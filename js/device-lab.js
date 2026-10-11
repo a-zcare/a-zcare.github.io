@@ -1,21 +1,24 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const apps = [
-    ['SOS', '🚨'],
-    ['Scam Shield', '🛡️'],
-    ['AI Assistant', '✦'],
-    ['Health', '♥'],
-    ['Family', '👪'],
-    ['Location', '⌖'],
-    ['Battery', '⚡'],
-    ['Connection', '◉'],
-    ['Privacy', '🔒'],
-    ['Kids', '★'],
-    ['Senior', '♿'],
-    ['Care Center', '▦'],
-    ['Settings', '⚙'],
-  ];
+  // Reuse the vector icon shapes and navigation pattern from the landing-page phone.
+  const svg = (paths) => '<svg viewBox="0 0 24 24" aria-hidden="true">' + paths + '</svg>';
+  const icons = {
+    SOS: '<b class="sos-glyph">SOS</b>',
+    'Scam Shield': '<img src="assets/azcare-logo-white.svg" alt="">',
+    'AI Assistant': svg('<path d="M12 2l1.8 6.2L20 10l-6.2 1.8L12 18l-1.8-6.2L4 10l6.2-1.8L12 2z"/>'),
+    Health: svg('<path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 00-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 000-7.8z"/><path d="M5 12h3l1.5-3 2.5 6 1.5-3H19"/>'),
+    Family: svg('<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.3"/><path d="M3.5 20c.4-4 2.3-6 5.5-6s5.1 2 5.5 6M14 15c3.7-.8 6 1 6.5 5"/>'),
+    Location: svg('<path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1116 0z"/><circle cx="12" cy="10" r="2.5"/>'),
+    Battery: svg('<path d="M13 2L5 13h6l-1 9 9-12h-6z"/>'),
+    Connection: svg('<path d="M2 9c6-6 14-6 20 0M5 13c4-4 10-4 14 0M9 17c2-2 4-2 6 0"/><circle cx="12" cy="21" r="1"/>'),
+    Privacy: svg('<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/>'),
+    Kids: svg('<circle cx="12" cy="8" r="4"/><path d="M5 22v-3a7 7 0 0114 0v3"/>'),
+    Senior: svg('<circle cx="12" cy="5" r="2"/><path d="M12 8v8m-5-5 5-3 5 3M8 22l4-6 4 6"/>'),
+    'Care Center': svg('<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M10 5V2h4v3M12 9v8M8 13h8"/>'),
+    Settings: svg('<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>'),
+  };
+  const apps = Object.keys(icons);
   const watch = [
     ['Heart rate', '72', 'bpm · simulated'],
     ['Oxygen', '98%', 'SpO₂ · simulated'],
@@ -60,9 +63,9 @@
   }
   function renderPhone() {
     let h =
-      '<button class="back" data-action="home">‹ Home</button><div class="tag">SIMULATED · LOCAL DEMO</div><h2 class="screen-title">' +
+      '<div class="subhead"><button class="back" data-action="home" aria-label="Back to home screen"><span aria-hidden="true">‹</span></button><div><small>A-Z CARE · SIMULATED</small><h2 class="screen-title">' +
       screen +
-      '</h2>';
+      '</h2></div></div>';
     switch (screen) {
       case 'Home':
         h =
@@ -77,14 +80,16 @@
           '<div class="app-grid">' +
           apps
             .map(
-              ([name, emoji]) =>
+              (name) =>
                 '<button class="app-tile" data-open="' +
                 name +
-                '"><span>' +
-                emoji +
-                '</span>' +
+                '" aria-label="' +
                 name +
-                '</button>',
+                '"><span class="app-icon">' +
+                icons[name] +
+                '</span><small>' +
+                name +
+                '</small></button>',
             )
             .join('') +
           '</div>';
@@ -247,6 +252,7 @@
         h += card('Example response', screen);
     }
     $('phoneContent').innerHTML = h;
+    $('phoneContent').scrollTop = 0;
   }
   function renderWatch() {
     const w = watch[watchIndex];
