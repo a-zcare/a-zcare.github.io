@@ -113,3 +113,22 @@ test('watch status, metrics and controls fit inside its screen on mobile', async
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(width).toBeLessThanOrEqual(320);
 });
+
+test('landing-style icons and back button keep stable geometry', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const phone = page.locator('.phone-frame');
+  const initial = await phone.boundingBox();
+  await expect(page.locator('.app-icon svg').first()).toBeVisible();
+  await page.locator('[data-open="Health"]').click();
+  await expect(page.getByRole('button', { name: 'Back to home screen' })).toBeVisible();
+  await expect(page.locator('.subhead .screen-title')).toHaveText('Health');
+  const health = await phone.boundingBox();
+  await page.getByRole('button', { name: 'Back to home screen' }).click();
+  await page.locator('[data-open="SOS"]').click();
+  const sos = await phone.boundingBox();
+  expect(health.width).toBe(initial.width);
+  expect(health.height).toBe(initial.height);
+  expect(sos.width).toBe(initial.width);
+  expect(sos.height).toBe(initial.height);
+  expect(initial.height).toBe(590);
+});
