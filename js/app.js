@@ -329,6 +329,9 @@
     if (!screen) return;
     screen.classList.toggle('demo-alert', current.action === 'fall');
     screen.classList.toggle('demo-health', current.action !== 'fall');
+    screen.classList.remove('metric-transition');
+    void screen.offsetWidth;
+    screen.classList.add('metric-transition');
     document.querySelector('#watchKicker').textContent = current.title;
     document.querySelector('#watchValue').innerHTML = current.value;
     document.querySelector('#watchWave').textContent = current.wave;

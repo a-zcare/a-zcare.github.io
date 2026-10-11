@@ -401,6 +401,15 @@ test('Watch arrows and permanent SOS stay inside the watch while readings open d
   await expect(page.locator('#watchDetailPanel')).toBeHidden();
 });
 
+test('Watch exposes device status and AMOLED transition treatment', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('.watch-status')).toContainText('LINK');
+  await expect(page.locator('.watch-status')).toContainText('76%');
+  await page.getByRole('button', { name: 'Next watch screen' }).click();
+  await expect(page.locator('.watch-screen')).toHaveClass(/metric-transition/);
+  await expect(page.locator('#watchKicker')).toHaveText('ECG');
+});
+
 test('Watch navigation flanks the metric and SOS remains compact inside the face', async ({
   page,
 }) => {

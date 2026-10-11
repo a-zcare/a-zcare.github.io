@@ -3198,3 +3198,101 @@ footer p {
       0 0 0 6px #ff637608;
   }
 }
+
+/* Watch navigation: quiet hardware-inspired controls; red is reserved for SOS */
+.watch-arrow {
+  border: 1px solid #405064 !important;
+  background: linear-gradient(145deg, #1b2633, #111923) !important;
+  color: #b9c9dc !important;
+  box-shadow:
+    inset 0 1px #ffffff0b,
+    0 4px 12px #0005 !important;
+}
+.watch-arrow:hover,
+.watch-arrow:focus-visible {
+  border-color: #6f8dab !important;
+  background: linear-gradient(145deg, #25384b, #172535) !important;
+  color: #edf6ff !important;
+  box-shadow:
+    inset 0 1px #ffffff14,
+    0 0 0 3px #78a9d51c,
+    0 5px 14px #0006 !important;
+}
+.watch-arrow:active {
+  transform: scale(0.96);
+  background: #223448 !important;
+  color: #ffffff !important;
+}
+@media (hover: none) {
+  .watch-arrow:hover {
+    border-color: #405064 !important;
+    background: linear-gradient(145deg, #1b2633, #111923) !important;
+    color: #b9c9dc !important;
+    box-shadow:
+      inset 0 1px #ffffff0b,
+      0 4px 12px #0005 !important;
+  }
+}
+
+/* AMOLED treatment for A-Z Phone and Watch */
+.showcase-phone-demo .phone-view {
+  background:
+    radial-gradient(circle at 78% 5%, #0c2548 0, #061329 18%, transparent 40%),
+    radial-gradient(circle at 20% 36%, #071e24 0, transparent 35%), #010306 !important;
+  box-shadow:
+    inset 0 0 0 1px #ffffff0d,
+    inset 0 -30px 60px #000b,
+    0 0 0 1px #000 !important;
+}
+.showcase-phone-demo .smart-widget {
+  background: linear-gradient(135deg, #101d2ddd, #050a11ed);
+  border-color: #ffffff12;
+}
+.showcase-phone-demo .dock {
+  background: linear-gradient(180deg, #111a25e8, #030609f2);
+}
+.watch-screen {
+  background: radial-gradient(circle at 50% 18%, #0a1826 0, #03080d 43%, #000 82%) !important;
+  border-color: #596b80;
+  box-shadow:
+    inset 0 0 0 1px #ffffff0c,
+    inset 0 -22px 34px #000d,
+    0 0 0 1px #000,
+    0 18px 42px #000b;
+}
+.watch-status {
+  display: flex;
+  justify-content: space-between;
+  min-height: 9px;
+  padding: 0 15px;
+  color: #7890a9;
+  font-size: 5px;
+  line-height: 8px;
+  letter-spacing: 0.65px;
+}
+.watch-status span:first-child {
+  color: #68c8aa;
+}
+.watch-screen.metric-transition .watch-title,
+.watch-screen.metric-transition .watch-metric {
+  animation: watch-metric-in 180ms ease-out both;
+}
+.watch-screen.metric-transition .watch-metric {
+  animation-delay: 25ms;
+}
+@keyframes watch-metric-in {
+  from {
+    opacity: 0.35;
+    transform: translateX(5px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .watch-screen.metric-transition .watch-title,
+  .watch-screen.metric-transition .watch-metric {
+    animation: none;
+  }
+}
