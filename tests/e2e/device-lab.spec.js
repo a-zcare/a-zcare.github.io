@@ -73,3 +73,13 @@ test('watch navigation works with keyboard and mobile viewport', async ({ page }
   const width = await page.evaluate(() => document.documentElement.scrollWidth);
   expect(width).toBeLessThanOrEqual(390);
 });
+
+test('SOS cannot be acknowledged before delivery and timeline clears completely', async ({ page }) => {
+  await page.locator('[data-open="SOS"]').click();
+  await page.locator('[data-action="sos-confirm"]').click();
+  await expect(page.locator('#phoneContent')).toContainText('No active alert');
+  await page.locator('[data-action="sos-ack"]').click();
+  await expect(page.locator('#phoneContent')).toContainText('No active alert');
+  await page.locator('#clearLog').click();
+  await expect(page.locator('#timeline li')).toHaveCount(0);
+});
