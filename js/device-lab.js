@@ -65,6 +65,7 @@
     privacy: false,
     role: 'Senior',
     ack: false,
+    sosSource: null,
   };
   function event(message) {
     log.unshift(message);
@@ -133,7 +134,7 @@
             'Emergency simulation',
             incident === 'none'
               ? 'No active alert. No real messages will be sent.'
-              : 'Status: ' + incident + ' · Source: Watch / Phone demo',
+              : 'Status: ' + incident + ' · Source: ' + (state.sosSource || 'Unknown'),
           ) +
           btn('Start SOS countdown', 'sos-start', 'danger') +
           btn('Confirm simulated alert', 'sos-confirm', 'primary') +
@@ -299,6 +300,12 @@
     event('Phone opened ' + s);
   }
   function sos(source) {
+    if (incident.startsWith('Countdown') || incident.startsWith('Queued')) {
+      event('Duplicate SOS ignored: active alert from ' + (state.sosSource || 'device'));
+      return;
+    }
+    state.sosSource = source;
+    state.ack = false;
     incident = 'Countdown · ' + source;
     screen = 'SOS';
     renderPhone();
@@ -326,6 +333,10 @@
         renderPhone();
         break;
       case 'sos-cancel':
+        if (incident === 'none' || incident === 'Cancelled') {
+          event('SOS cancellation ignored: no active alert');
+          break;
+        }
         incident = 'Cancelled';
         event('SOS cancelled');
         renderPhone();
@@ -453,6 +464,7 @@
       privacy: false,
       role: 'Senior',
       ack: false,
+      sosSource: null,
     });
     ['network', 'sharing', 'battery'].forEach((k) => ($(k).checked = state[k]));
     log = [];
