@@ -132,3 +132,32 @@ test('landing-style icons and back button keep stable geometry', async ({ page }
   expect(sos.height).toBe(initial.height);
   expect(initial.height).toBe(590);
 });
+
+test('phone settings use accessible switches with distinct states', async ({ page }) => {
+  await page.getByRole('button', { name: 'Connection', exact: true }).click();
+  const network = page.getByRole('switch', { name: 'Network available' });
+  await expect(network).toHaveAttribute('aria-checked', 'true');
+  await network.click();
+  await expect(network).toHaveAttribute('aria-checked', 'false');
+  await expect(page.locator('#phoneContent')).toContainText('Offline');
+  await network.click();
+  await expect(network).toHaveAttribute('aria-checked', 'true');
+});
+
+test('watch temperature is 36.6 and screen elements stay inside watch', async ({ page }) => {
+  for (let i = 0; i < 3; i += 1) {
+    await page.getByRole('button', { name: 'Next watch screen' }).click();
+  }
+  await expect(page.locator('#watchContent')).toContainText('36.6°');
+  const bounds = await page.evaluate(() => {
+    const screen = document.querySelector('.watch-screen').getBoundingClientRect();
+    const nav = document.querySelector('.watch-nav').getBoundingClientRect();
+    const status = document.querySelector('.watch-status').getBoundingClientRect();
+    return {
+      navInside: nav.left >= screen.left && nav.right <= screen.right,
+      statusInside: status.left >= screen.left && status.right <= screen.right,
+      navBottomInside: nav.bottom <= screen.bottom,
+    };
+  });
+  expect(bounds).toEqual({ navInside: true, statusInside: true, navBottomInside: true });
+});
