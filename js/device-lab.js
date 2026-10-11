@@ -60,7 +60,7 @@
   }
   function renderPhone() {
     let h =
-      '<button class="back" data-action="home">‹ Home</button><div class="tag">SIMULATED · OFFLINE DEMO</div><h2 class="screen-title">' +
+      '<button class="back" data-action="home">‹ Home</button><div class="tag">SIMULATED · LOCAL DEMO</div><h2 class="screen-title">' +
       screen +
       '</h2>';
     switch (screen) {
@@ -277,6 +277,10 @@
         sos('Phone');
         break;
       case 'sos-confirm':
+        if (!incident.startsWith('Countdown')) {
+          event('SOS confirmation ignored: no countdown active');
+          break;
+        }
         incident = state.network ? 'Simulated contact notified' : 'Queued offline (not sent)';
         state.ack = false;
         event('SOS ' + incident);
@@ -288,6 +292,10 @@
         renderPhone();
         break;
       case 'sos-ack':
+        if (incident !== 'Simulated contact notified') {
+          event('Acknowledgement unavailable: no delivered SOS');
+          break;
+        }
         state.ack = true;
         incident = 'Acknowledged by fictional contact';
         event('Fictional contact acknowledged alert');
@@ -385,7 +393,7 @@
         break;
       case 'clear':
         log = [];
-        event('Demo timeline cleared');
+        $('timeline').replaceChildren();
         break;
       case 'reset':
         reset();
