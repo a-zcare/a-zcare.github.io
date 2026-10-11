@@ -83,3 +83,33 @@ test('SOS guard and timeline clearing', async ({ page }) => {
   await page.locator('#clearLog').click();
   await expect(page.locator('#timeline li')).toHaveCount(0);
 });
+
+test('phone dimensions stay fixed when switching between apps', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const frame = page.locator('.phone-frame');
+  const before = await frame.boundingBox();
+  await page.locator('[data-open="SOS"]').click();
+  const sos = await frame.boundingBox();
+  await page.locator('[data-action="home"]').click();
+  await page.locator('[data-open="Health"]').click();
+  const health = await frame.boundingBox();
+  expect(sos.width).toBe(before.width);
+  expect(sos.height).toBe(before.height);
+  expect(health.width).toBe(before.width);
+  expect(health.height).toBe(before.height);
+  expect(before.height).toBeLessThanOrEqual(600);
+});
+
+test('watch status, metrics and controls fit inside its screen on mobile', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 720 });
+  const screen = await page.locator('.watch-screen').boundingBox();
+  for (const selector of ['.watch-status', '#watchContent', '.watch-nav', '#watchSOS']) {
+    const rect = await page.locator(selector).boundingBox();
+    expect(rect.x).toBeGreaterThanOrEqual(screen.x);
+    expect(rect.y).toBeGreaterThanOrEqual(screen.y);
+    expect(rect.x + rect.width).toBeLessThanOrEqual(screen.x + screen.width + 1);
+    expect(rect.y + rect.height).toBeLessThanOrEqual(screen.y + screen.height + 1);
+  }
+  const width = await page.evaluate(() => document.documentElement.scrollWidth);
+  expect(width).toBeLessThanOrEqual(320);
+});
