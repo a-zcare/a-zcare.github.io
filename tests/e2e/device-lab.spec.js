@@ -74,7 +74,9 @@ test('watch navigation works with keyboard and mobile viewport', async ({ page }
   expect(width).toBeLessThanOrEqual(390);
 });
 
-test('SOS cannot be acknowledged before delivery and timeline clears completely', async ({ page }) => {
+test('SOS cannot be acknowledged before delivery and timeline clears completely', async ({
+  page,
+}) => {
   await page.locator('[data-open="SOS"]').click();
   await page.locator('[data-action="sos-confirm"]').click();
   await expect(page.locator('#phoneContent')).toContainText('No active alert');
