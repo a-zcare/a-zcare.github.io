@@ -154,5 +154,10 @@ if (
 )
   fail('refined phone hardware frame missing');
 
-if (!index.includes('class="watch-status"') || !css.includes('AMOLED treatment for A-Z Phone and Watch')) fail('AMOLED/status treatment missing');
-if (!app.includes("metric-transition") || !css.includes('@keyframes watch-metric-in')) fail('Watch metric transition missing');
+if (
+  !index.includes('class="watch-status"') ||
+  !css.includes('AMOLED treatment for A-Z Phone and Watch')
+)
+  fail('AMOLED/status treatment missing');
+if (!app.includes('metric-transition') || !css.includes('@keyframes watch-metric-in'))
+  fail('Watch metric transition missing');
