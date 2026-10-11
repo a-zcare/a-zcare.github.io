@@ -119,8 +119,9 @@ main {
 }
 .phone-frame {
   position: relative;
-  width: min(100%, 310px);
-  aspect-ratio: 9/19.5;
+  width: min(100%, 273px);
+  height: 590px;
+  flex: 0 0 auto;
   border: 6px solid #354456;
   border-radius: 48px;
   padding: 5px;
@@ -140,6 +141,9 @@ main {
 }
 .phone-screen {
   height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 34px minmax(0, 1fr) 27px;
   position: relative;
   border-radius: 37px;
   overflow: hidden;
@@ -166,8 +170,10 @@ main {
   font-size: 10px;
 }
 .phone-content {
-  height: calc(100% - 61px);
-  overflow: auto;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 10px 14px 15px;
   scrollbar-width: thin;
 }
@@ -270,8 +276,9 @@ main {
 }
 .watch-body {
   position: relative;
-  width: min(100%, 285px);
+  width: min(100%, 245px);
   aspect-ratio: 1;
+  flex: 0 0 auto;
   border: 10px solid #303c4c;
   border-radius: 34%;
   padding: 7px;
@@ -294,13 +301,15 @@ main {
   height: 100%;
   border-radius: 29%;
   background: radial-gradient(circle at 50% 20%, #18324d, #000 70%);
-  padding: 18px 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 12px 10px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 0;
   overflow: hidden;
 }
 .watch-status {
+  gap: 4px;
+  white-space: nowrap;
   display: flex;
   justify-content: space-between;
   font-size: 10px;
@@ -308,7 +317,9 @@ main {
 }
 #watchContent {
   text-align: center;
-  min-height: 110px;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
   display: grid;
   align-content: center;
 }
@@ -317,7 +328,7 @@ main {
   font-size: 17px;
 }
 #watchContent .reading {
-  font-size: 37px;
+  font-size: clamp(23px, 9vw, 32px);
   font-weight: 700;
   line-height: 1.1;
 }
@@ -327,6 +338,7 @@ main {
   margin: 4px;
 }
 .watch-nav {
+  min-width: 0;
   display: flex;
   justify-content: space-between;
   gap: 8px;
@@ -335,8 +347,9 @@ main {
   background: #26384c;
   border: 1px solid #52667c;
   border-radius: 12px;
-  min-width: 43px;
-  min-height: 38px;
+  min-width: 0;
+  min-height: 34px;
+  flex: 0 0 34px;
   font-size: 23px;
 }
 .watch-nav .watch-sos {
@@ -344,7 +357,8 @@ main {
   border-color: #ec7185;
   font-size: 13px;
   font-weight: 800;
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 .strap {
   width: 125px;
@@ -448,7 +462,7 @@ footer {
     padding: 16px;
   }
   .phone-frame {
-    width: min(100%, 305px);
+    width: min(100%, 273px);
   }
 }
 @media (prefers-reduced-motion: no-preference) {
