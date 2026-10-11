@@ -5,6 +5,7 @@ Branch: `feature/interactive-device-lab`.
 Baseline: existing static HTML/CSS/JS demo, no real emergency or medical service.
 
 ## Non-negotiable rules
+
 - Preserve existing landing, Watch/Phone/Ecosystem routes, consent, RU/EN support, accessibility and analytics allowlist.
 - Never commit credentials, .env, personal data or client records.
 - Label every simulated sensor, notification, location, AI result and SOS event **DEMO**.
@@ -13,11 +14,14 @@ Baseline: existing static HTML/CSS/JS demo, no real emergency or medical service
 - Implement in small PRs with tests, never a giant unreviewed rewrite.
 
 ## Workstream A — Device fidelity
+
 Phone: 19.5:9 silhouette, uniform bezel, AMOLED theme, punch-hole camera, safe-area status bar, correct bottom gesture indicator, physical side buttons, lock screen, notification shade, haptic-like CSS feedback, screen transitions, screen reader labels. Do not emulate an operating system's privileged APIs.
 Watch: proportional strap/crown/bezel, AMOLED screen, battery/connectivity indicators, six+ accessible screens, always-visible SOS, tap/swipe/keyboard navigation, compact metric typography, realistic animation and reduced-motion fallback.
 
 ## Workstream B — Fully clickable local demo
+
 A deterministic local state store and event bus, no backend dependency:
+
 1. Home launcher with app grid and back/home transitions.
 2. SOS: press -> countdown -> cancel/confirm -> route selection -> trusted contact receipt -> acknowledgement -> history; Watch-initiated SOS appears on Phone with device origin; simulate unavailable network and retries; no actual messages.
 3. Scam Shield: sample SMS, call and phishing link; inspect red flags, risk explanation, report/block simulation, false positive and uncertainty states.
@@ -30,14 +34,17 @@ A deterministic local state store and event bus, no backend dependency:
 10. Care Center: simulated dashboard for multiple devices, alerts, roles, acknowledgement and audit.
 
 ## Workstream C — UX
+
 A scenario launchpad with 3 top-level device destinations and 3 guided journeys:
+
 - Older adult receives scam SMS, assistant explains and suggests safe action.
 - Fall detected on Watch, countdown and linked Phone SOS.
 - Child checks in, trusted contact sees consent-scoped status.
-Every scenario has Start / Next / Reset and transparent DEMO indicator.
-Use RU/EN copy for all new UI; persist language only after preference choice.
+  Every scenario has Start / Next / Reset and transparent DEMO indicator.
+  Use RU/EN copy for all new UI; persist language only after preference choice.
 
 ## Workstream D — Quality gates
+
 - Extend Playwright E2E: every screen reachable, each action has visible feedback, cross-device SOS, cancel/retry/offline, permissions, responsive overflow, keyboard and screen-reader semantics.
 - Run `npm ci`, `npm test`, `npx playwright install chromium`, `npm run test:e2e`.
 - Validate no JS errors, broken links, unintended GA events, personal-data leaks, or secrets.
@@ -45,6 +52,7 @@ Use RU/EN copy for all new UI; persist language only after preference choice.
 - Keep existing CI green before merge.
 
 ## Suggested PR sequence
+
 1. Device Lab state machine and screen registry + tests.
 2. Phone visual polish and clickable app launcher.
 3. Watch visual polish and gesture/keyboard controls.
@@ -55,4 +63,5 @@ Use RU/EN copy for all new UI; persist language only after preference choice.
 8. RU/EN, accessibility, performance and final release audit.
 
 ## Definition of done
+
 Every visible control works and yields a clear state change; all sample data explicitly simulated; cross-device flows reproducible; no medical/emergency guarantees; mobile and desktop tests pass; preview reviewed before merging to main.

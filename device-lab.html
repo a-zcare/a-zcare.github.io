@@ -1,8 +1,90 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#060b13"><title>A-Z Care · Interactive Device Lab</title><meta name="description" content="Interactive simulated A-Z Care phone and watch safety laboratory. No live emergency service."><link rel="icon" href="assets/azcare-logo-white.svg"><link rel="stylesheet" href="css/device-lab.css"></head>
-<body><header class="top"><a href="./" class="brand">← A-Z <b>Care</b></a><span>INTERACTIVE DEVICE LAB <strong>· DEMO ONLY</strong></span><button id="reset" type="button">Reset demo</button></header>
-<main><section class="intro"><p class="eyebrow">EXPERIENCE THE ECOSYSTEM</p><h1>Safety you can explore.</h1><p>Tap apps on the phone, navigate watch screens, and trigger connected scenarios. All events, health readings, locations and notifications are simulated locally. No emergency services or contacts are notified.</p></section>
-<div class="lab"><section class="device-area"><h2>A-Z Phone <small>AMOLED concept</small></h2><div class="phone-frame"><div class="side-key" aria-hidden="true"></div><div class="phone-screen" id="phoneScreen"><div class="status"><span id="clock">09:41</span><span>● ● ▰ 82%</span></div><div class="camera-cutout" aria-hidden="true"></div><div id="phoneContent" class="phone-content" aria-live="polite"></div><div class="gesture"><button id="home" aria-label="Phone home screen"><span></span></button></div></div></div></section>
-<section class="device-area"><h2>A-Z Watch <small>Guardian concept</small></h2><div class="strap topstrap"></div><div class="watch-body"><div class="crown" aria-hidden="true"></div><div class="watch-screen"><div class="watch-status"><span>AZ · DEMO</span><span id="watchBattery">82% ◉</span></div><div id="watchContent" aria-live="polite"></div><div class="watch-nav"><button id="prev" aria-label="Previous watch screen">‹</button><button id="watchSOS" class="watch-sos">SOS</button><button id="next" aria-label="Next watch screen">›</button></div></div></div><div class="strap bottomstrap"></div><p class="tip">Use arrows or swipe on the watch face. SOS sends a simulated event to the phone.</p></section>
-<aside class="panel"><h2>Scenario control</h2><p>Try complete journeys and see what each device would display.</p><div id="scenarios" class="scenario-buttons"></div><h3>Environment</h3><label class="toggle"><input id="network" type="checkbox" checked> Network available</label><label class="toggle"><input id="sharing" type="checkbox"> Location sharing consent</label><label class="toggle"><input id="battery" type="checkbox"> Battery saver (20%)</label><h3>Event timeline</h3><ol id="timeline" aria-live="polite"></ol><button id="clearLog" class="secondary">Clear timeline</button></aside></div></main>
-<footer>Concept prototype · Not a medical device, threat-detection service or emergency dispatch system. No live data.</footer><script src="js/device-lab.js" defer></script></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#060b13" />
+    <title>A-Z Care · Interactive Device Lab</title>
+    <meta
+      name="description"
+      content="Interactive simulated A-Z Care phone and watch safety laboratory. No live emergency service."
+    />
+    <link rel="icon" href="assets/azcare-logo-white.svg" />
+    <link rel="stylesheet" href="css/device-lab.css" />
+  </head>
+  <body>
+    <header class="top">
+      <a href="./" class="brand">← A-Z <b>Care</b></a
+      ><span>INTERACTIVE DEVICE LAB <strong>· DEMO ONLY</strong></span
+      ><button id="reset" type="button">Reset demo</button>
+    </header>
+    <main>
+      <section class="intro">
+        <p class="eyebrow">EXPERIENCE THE ECOSYSTEM</p>
+        <h1>Safety you can explore.</h1>
+        <p>
+          Tap apps on the phone, navigate watch screens, and trigger connected scenarios. All
+          events, health readings, locations and notifications are simulated locally. No emergency
+          services or contacts are notified.
+        </p>
+      </section>
+      <div class="lab">
+        <section class="device-area">
+          <h2>A-Z Phone <small>AMOLED concept</small></h2>
+          <div class="phone-frame">
+            <div class="side-key" aria-hidden="true"></div>
+            <div class="phone-screen" id="phoneScreen">
+              <div class="status"><span id="clock">09:41</span><span>● ● ▰ 82%</span></div>
+              <div class="camera-cutout" aria-hidden="true"></div>
+              <div id="phoneContent" class="phone-content" aria-live="polite"></div>
+              <div class="gesture">
+                <button id="home" aria-label="Phone home screen"><span></span></button>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="device-area">
+          <h2>A-Z Watch <small>Guardian concept</small></h2>
+          <div class="strap topstrap"></div>
+          <div class="watch-body">
+            <div class="crown" aria-hidden="true"></div>
+            <div class="watch-screen">
+              <div class="watch-status">
+                <span>AZ · DEMO</span><span id="watchBattery">82% ◉</span>
+              </div>
+              <div id="watchContent" aria-live="polite"></div>
+              <div class="watch-nav">
+                <button id="prev" aria-label="Previous watch screen">‹</button
+                ><button id="watchSOS" class="watch-sos">SOS</button
+                ><button id="next" aria-label="Next watch screen">›</button>
+              </div>
+            </div>
+          </div>
+          <div class="strap bottomstrap"></div>
+          <p class="tip">
+            Use arrows or swipe on the watch face. SOS sends a simulated event to the phone.
+          </p>
+        </section>
+        <aside class="panel">
+          <h2>Scenario control</h2>
+          <p>Try complete journeys and see what each device would display.</p>
+          <div id="scenarios" class="scenario-buttons"></div>
+          <h3>Environment</h3>
+          <label class="toggle"
+            ><input id="network" type="checkbox" checked /> Network available</label
+          ><label class="toggle"
+            ><input id="sharing" type="checkbox" /> Location sharing consent</label
+          ><label class="toggle"><input id="battery" type="checkbox" /> Battery saver (20%)</label>
+          <h3>Event timeline</h3>
+          <ol id="timeline" aria-live="polite"></ol>
+          <button id="clearLog" class="secondary">Clear timeline</button>
+        </aside>
+      </div>
+    </main>
+    <footer>
+      Concept prototype · Not a medical device, threat-detection service or emergency dispatch
+      system. No live data.
+    </footer>
+    <script src="js/device-lab.js" defer></script>
+  </body>
+</html>
