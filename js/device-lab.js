@@ -4,6 +4,8 @@
   // Reuse the vector icon shapes and navigation pattern from the landing-page phone.
   const svg = (paths) =>
     '<svg viewBox="0 0 24 24" aria-hidden="true">' + paths + '</svg>';
+  // SVG path data is kept verbatim to match the landing-page phone icons.
+  // prettier-ignore
   const icons = {
     SOS: '<b class="sos-glyph">SOS</b>',
     'Scam Shield': '<img src="assets/azcare-logo-white.svg" alt="">',
