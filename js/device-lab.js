@@ -2,8 +2,7 @@
   'use strict';
   const $ = (id) => document.getElementById(id);
   // Reuse the vector icon shapes and navigation pattern from the landing-page phone.
-  const svg = (paths) =>
-    '<svg viewBox="0 0 24 24" aria-hidden="true">' + paths + '</svg>';
+  const svg = (paths) => '<svg viewBox="0 0 24 24" aria-hidden="true">' + paths + '</svg>';
   // SVG path data is kept verbatim to match the landing-page phone icons.
   // prettier-ignore
   const icons = {
