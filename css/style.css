@@ -3198,3 +3198,31 @@ footer p {
       0 0 0 6px #ff637608;
   }
 }
+
+/* Watch navigation: quiet hardware-inspired controls; red is reserved for SOS */
+.watch-arrow {
+  border: 1px solid #405064 !important;
+  background: linear-gradient(145deg, #1b2633, #111923) !important;
+  color: #b9c9dc !important;
+  box-shadow: inset 0 1px #ffffff0b, 0 4px 12px #0005 !important;
+}
+.watch-arrow:hover,
+.watch-arrow:focus-visible {
+  border-color: #6f8dab !important;
+  background: linear-gradient(145deg, #25384b, #172535) !important;
+  color: #edf6ff !important;
+  box-shadow: inset 0 1px #ffffff14, 0 0 0 3px #78a9d51c, 0 5px 14px #0006 !important;
+}
+.watch-arrow:active {
+  transform: scale(.96);
+  background: #223448 !important;
+  color: #ffffff !important;
+}
+@media (hover: none) {
+  .watch-arrow:hover {
+    border-color: #405064 !important;
+    background: linear-gradient(145deg, #1b2633, #111923) !important;
+    color: #b9c9dc !important;
+    box-shadow: inset 0 1px #ffffff0b, 0 4px 12px #0005 !important;
+  }
+}
