@@ -161,3 +161,14 @@ test('watch temperature is 36.6 and screen elements stay inside watch', async ({
   });
   expect(bounds).toEqual({ navInside: true, statusInside: true, navBottomInside: true });
 });
+
+test('SOS preserves watch origin and rejects repeated countdown', async ({ page }) => {
+  await page.locator('#watchSOS').click();
+  await expect(page.locator('#phoneContent')).toContainText('Source: Watch');
+  await page.locator('[data-action="sos-start"]').click();
+  await expect(page.locator('#timeline')).toContainText('Duplicate SOS ignored');
+  await expect(page.locator('#phoneContent')).toContainText('Source: Watch');
+  await page.locator('[data-action="sos-confirm"]').click();
+  await expect(page.locator('#phoneContent')).toContainText('Simulated contact notified');
+  await expect(page.locator('#phoneContent')).toContainText('Source: Watch');
+});
