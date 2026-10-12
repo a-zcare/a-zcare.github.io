@@ -9,17 +9,17 @@
 
 ## Critical gaps
 
-| Priority | Finding | Next action |
-| --- | --- | --- |
-| P0 | SOS incident text previously used generic 'Watch / Phone demo' source | Preserve actual origin in state; test repeated activation |
-| P0 | Watch interface risks clipping near rounded bezel | Visual screenshot regression at 320–430 px; adjust safe-area layout |
-| P0 | Settings have inconsistent presentation between device and scenario panel | Standardize switch appearance and state semantics |
-| P1 | Homepage and Device Lab use different phone visuals | Consolidate reusable design tokens and navigation |
-| P1 | Site is long and duplicates explanations | Introduce Home, Phone, Watch, Ecosystem destinations and tabbed detail views |
-| P1 | Every visible control is not yet covered by E2E | Inventory and test buttons, links, switches, tabs, scenarios and keyboard navigation |
-| P1 | Language support is inconsistent | Implement RU/EN string catalogs |
-| P2 | Watch and health concepts are not validated sensors | Keep clear simulated labels and disclaimers |
-| P2 | Hardware, CGM, resilient connectivity and Care Center require separate pilots | Document as concepts, not deployed services |
+| Priority | Finding                                                                       | Next action                                                                          |
+| -------- | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| P0       | SOS incident text previously used generic 'Watch / Phone demo' source         | Preserve actual origin in state; test repeated activation                            |
+| P0       | Watch interface risks clipping near rounded bezel                             | Visual screenshot regression at 320–430 px; adjust safe-area layout                  |
+| P0       | Settings have inconsistent presentation between device and scenario panel     | Standardize switch appearance and state semantics                                    |
+| P1       | Homepage and Device Lab use different phone visuals                           | Consolidate reusable design tokens and navigation                                    |
+| P1       | Site is long and duplicates explanations                                      | Introduce Home, Phone, Watch, Ecosystem destinations and tabbed detail views         |
+| P1       | Every visible control is not yet covered by E2E                               | Inventory and test buttons, links, switches, tabs, scenarios and keyboard navigation |
+| P1       | Language support is inconsistent                                              | Implement RU/EN string catalogs                                                      |
+| P2       | Watch and health concepts are not validated sensors                           | Keep clear simulated labels and disclaimers                                          |
+| P2       | Hardware, CGM, resilient connectivity and Care Center require separate pilots | Document as concepts, not deployed services                                          |
 
 ## Acceptance gates
 
