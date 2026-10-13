@@ -307,7 +307,11 @@
     event('Phone opened ' + s);
   }
   function sos(source) {
-    if (incident.startsWith('Countdown') || incident.startsWith('Queued') || incident === 'Simulated contact notified') {
+    if (
+      incident.startsWith('Countdown') ||
+      incident.startsWith('Queued') ||
+      incident === 'Simulated contact notified'
+    ) {
       event('Duplicate SOS ignored: active alert from ' + (state.sosSource || 'device'));
       return;
     }
