@@ -293,6 +293,7 @@
     $('watchContent').innerHTML =
       '<h3>' + w[0] + '</h3><div class="reading">' + w[1] + '</div><p>' + w[2] + '</p>';
     $('watchBattery').textContent = (state.battery ? '20%' : '82%') + ' ◉';
+    $('watchAlert').textContent = incident === 'none' ? 'Safety ready · simulated' : 'SOS: ' + incident + ' · ' + (state.sosSource || 'device');
   }
   function open(s) {
     screen = s;
@@ -309,6 +310,7 @@
     incident = 'Countdown · ' + source;
     screen = 'SOS';
     renderPhone();
+    renderWatch();
     event(source + ' initiated SOS countdown (demo)');
   }
   function act(a) {
@@ -331,6 +333,7 @@
         state.ack = false;
         event('SOS ' + incident);
         renderPhone();
+        renderWatch();
         break;
       case 'sos-cancel':
         if (incident === 'none' || incident === 'Cancelled') {
@@ -340,6 +343,7 @@
         incident = 'Cancelled';
         event('SOS cancelled');
         renderPhone();
+        renderWatch();
         break;
       case 'sos-ack':
         if (incident !== 'Simulated contact notified') {
@@ -350,6 +354,7 @@
         incident = 'Acknowledged by fictional contact';
         event('Fictional contact acknowledged alert');
         renderPhone();
+        renderWatch();
         break;
       case 'scam-review':
         scamReviewed = true;
@@ -429,6 +434,7 @@
         if (state.network && incident.startsWith('Queued')) {
           incident = 'Simulated contact notified';
           event('Queued SOS delivered in demo');
+          renderWatch();
         }
         renderPhone();
         break;
