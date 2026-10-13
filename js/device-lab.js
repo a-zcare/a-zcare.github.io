@@ -45,7 +45,7 @@
     ['Heart rate', '72', 'bpm · simulated'],
     ['Oxygen', '98%', 'SpO₂ · simulated'],
     ['Movement', '2,840', 'steps · simulated'],
-    ['Temperature', '33.4°', 'skin trend · simulated'],
+    ['Temperature', '36.6°', '°C · simulated reading'],
     ['Glucose', '6.4', 'mmol/L · external CGM example'],
     ['Safety', 'Ready', 'SOS and fall check · demo'],
     ['Sleep', '7h 20m', 'estimated · simulated'],
@@ -65,6 +65,7 @@
     privacy: false,
     role: 'Senior',
     ack: false,
+    sosSource: null,
   };
   function event(message) {
     log.unshift(message);
@@ -79,6 +80,17 @@
   }
   function btn(label, action, cls = '') {
     return '<button class="action ' + cls + '" data-action="' + action + '">' + label + '</button>';
+  }
+  function switchControl(label, action, enabled) {
+    return (
+      '<button class="setting-switch" type="button" role="switch" aria-checked="' +
+      enabled +
+      '" data-action="' +
+      action +
+      '"><span>' +
+      label +
+      '</span><span class="switch-track" aria-hidden="true"><span class="switch-thumb"></span></span></button>'
+    );
   }
   function card(title, detail) {
     return '<div class="card"><strong>' + title + '</strong><p>' + detail + '</p></div>';
@@ -122,7 +134,7 @@
             'Emergency simulation',
             incident === 'none'
               ? 'No active alert. No real messages will be sent.'
-              : 'Status: ' + incident + ' · Source: Watch / Phone demo',
+              : 'Status: ' + incident + ' · Source: ' + (state.sosSource || 'Unknown'),
           ) +
           btn('Start SOS countdown', 'sos-start', 'danger') +
           btn('Confirm simulated alert', 'sos-confirm', 'primary') +
@@ -167,7 +179,7 @@
           [
             'Heart rate: 72 bpm',
             'SpO₂: 98%',
-            'Skin temperature: 33.4°C',
+            'Temperature: 36.6°C',
             'External CGM: 6.4 mmol/L',
             'Sleep: 7h 20m',
           ]
@@ -196,7 +208,7 @@
             'Location sharing',
             state.sharing ? 'Enabled for this local demo' : 'Disabled — no position is accessed',
           ) +
-          btn(state.sharing ? 'Revoke sharing' : 'Grant simulated sharing', 'share') +
+          switchControl('Location sharing', 'share', state.sharing) +
           card('Safe zone', 'Home · illustrative zone only; no GPS accessed');
         break;
       case 'Battery':
@@ -205,7 +217,7 @@
             'Battery Guardian',
             state.battery ? '20% · Essential safety mode' : '82% · Standard mode',
           ) +
-          btn('Toggle 20% battery saver', 'battery') +
+          switchControl('Battery saver (20%)', 'battery', state.battery) +
           card(
             'Sync policy',
             state.battery
@@ -221,7 +233,7 @@
               ? 'Phone network available'
               : 'Offline: emergency event queued, not delivered',
           ) +
-          btn('Toggle network', 'network') +
+          switchControl('Network available', 'network', state.network) +
           card(
             'Routes',
             'BLE → Phone → Wi-Fi/LTE; independent Watch LTE and emergency relay are concepts, not guaranteed connectivity.',
@@ -236,8 +248,8 @@
               ' · Demo diagnostics: ' +
               (state.privacy ? 'enabled' : 'disabled'),
           ) +
-          btn('Toggle location sharing', 'share') +
-          btn('Toggle demo diagnostics', 'privacy') +
+          switchControl('Location sharing', 'share', state.sharing) +
+          switchControl('Demo diagnostics', 'privacy', state.privacy) +
           btn('Clear demo timeline', 'clear');
         break;
       case 'Kids':
@@ -288,6 +300,12 @@
     event('Phone opened ' + s);
   }
   function sos(source) {
+    if (incident.startsWith('Countdown') || incident.startsWith('Queued')) {
+      event('Duplicate SOS ignored: active alert from ' + (state.sosSource || 'device'));
+      return;
+    }
+    state.sosSource = source;
+    state.ack = false;
     incident = 'Countdown · ' + source;
     screen = 'SOS';
     renderPhone();
@@ -315,6 +333,10 @@
         renderPhone();
         break;
       case 'sos-cancel':
+        if (incident === 'none' || incident === 'Cancelled') {
+          event('SOS cancellation ignored: no active alert');
+          break;
+        }
         incident = 'Cancelled';
         event('SOS cancelled');
         renderPhone();
@@ -442,6 +464,7 @@
       privacy: false,
       role: 'Senior',
       ack: false,
+      sosSource: null,
     });
     ['network', 'sharing', 'battery'].forEach((k) => ($(k).checked = state[k]));
     log = [];

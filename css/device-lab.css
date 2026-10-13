@@ -579,3 +579,132 @@ footer {
     max-height: 590px;
   }
 }
+
+/* Device Lab: Android-inspired hardware and unclipped watch controls. */
+.phone-frame {
+  border-radius: 30px;
+  border-color: #526477;
+  padding: 4px;
+  background: #101b2b;
+  box-shadow:
+    inset 0 0 0 1px #8ca2b6,
+    0 22px 48px #0008;
+}
+.phone-screen {
+  border-radius: 24px;
+  background: linear-gradient(155deg, #142b4c 0%, #0d1c32 43%, #050b15 100%);
+}
+.camera-cutout {
+  width: 7px;
+  height: 7px;
+  top: 12px;
+  border: 0;
+  background: #030710;
+  box-shadow: 0 0 0 2px #273c55;
+}
+.gesture span {
+  width: 76px;
+  height: 3px;
+  background: #91a9c1;
+}
+.setting-switch {
+  display: flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 7px 0;
+  padding: 11px 12px;
+  border: 1px solid #3c526b;
+  border-radius: 13px;
+  background: #152840;
+  color: #edf5ff;
+  text-align: left;
+}
+.switch-track {
+  width: 43px;
+  height: 25px;
+  flex: 0 0 43px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  border-radius: 999px;
+  background: #666e7b;
+  transition: background 0.15s;
+}
+.switch-thumb {
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 0.15s;
+}
+.setting-switch[aria-checked='true'] .switch-track {
+  background: #1ba6a0;
+}
+.setting-switch[aria-checked='true'] .switch-thumb {
+  transform: translateX(18px);
+}
+.setting-switch:focus-visible,
+.watch-nav button:focus-visible {
+  outline: 2px solid #9beaff;
+  outline-offset: 3px;
+}
+.watch-body {
+  border-radius: 31%;
+  padding: 8px;
+}
+.watch-screen {
+  border-radius: 27%;
+  padding: 19px 12px 14px;
+  grid-template-rows: 20px minmax(0, 1fr) 42px;
+}
+.watch-status {
+  padding: 0 5px;
+  font-size: 9px;
+  gap: 8px;
+}
+.watch-status span {
+  min-width: 0;
+}
+.watch-status span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#watchContent {
+  padding: 6px 4px;
+  overflow: hidden;
+}
+#watchContent h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  line-height: 1.2;
+}
+#watchContent .reading {
+  font-size: clamp(26px, 7vw, 36px);
+}
+#watchContent p {
+  font-size: 10px;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.watch-nav {
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+}
+.watch-nav button {
+  flex: 0 0 35px;
+  height: 35px;
+  min-height: 35px;
+  border-radius: 12px;
+  font-size: 21px;
+}
+.watch-nav .watch-sos {
+  flex: 1 1 auto;
+  height: 37px;
+  min-height: 37px;
+  font-size: 12px;
+  border-radius: 13px;
+}
