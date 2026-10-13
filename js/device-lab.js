@@ -292,7 +292,8 @@
     const w = watch[watchIndex];
     $('watchContent').innerHTML =
       '<h3>' + w[0] + '</h3><div class="reading">' + w[1] + '</div><p>' + w[2] + '</p>';
-    $('watchBattery').textContent = (state.battery ? '20%' : '82%') + (state.network ? ' ◉' : ' · Offline');
+    $('watchBattery').textContent =
+      (state.battery ? '20%' : '82%') + (state.network ? ' ◉' : ' · Offline');
     $('watchAlert').textContent =
       incident === 'none'
         ? 'Safety ready · simulated'
