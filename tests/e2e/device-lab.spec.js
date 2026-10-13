@@ -185,3 +185,14 @@ test('investor walkthrough advances through three local-only scenarios', async (
   await expect(page.locator('#network')).not.toBeChecked();
   await expect(page.locator('#phoneContent')).toContainText('Queued offline');
 });
+
+test('watch reflects the phone SOS lifecycle without sending live alerts', async ({ page }) => {
+  await page.locator('#watchSOS').click();
+  await expect(page.locator('#watchAlert')).toContainText('Countdown');
+  await page.locator('[data-action="sos-confirm"]').click();
+  await expect(page.locator('#watchAlert')).toContainText('Simulated contact notified');
+  await page.locator('[data-action="sos-cancel"]').click();
+  await expect(page.locator('#watchAlert')).toContainText('Cancelled');
+  await page.locator('#reset').click();
+  await expect(page.locator('#watchAlert')).toContainText('Safety ready');
+});
