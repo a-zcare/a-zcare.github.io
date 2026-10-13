@@ -14,12 +14,21 @@ test('unlisted investor overview is accessible by direct URL but absent from sit
 
 test('device lab navigation reaches phone, watch and ecosystem', async ({ page }) => {
   await page.goto('/device-lab.html');
-  await page.getByRole('navigation', { name: 'Product sections' }).getByRole('link', { name: 'Watch' }).click();
+  await page
+    .getByRole('navigation', { name: 'Product sections' })
+    .getByRole('link', { name: 'Watch' })
+    .click();
   await expect(page).toHaveURL(/#watch-device$/);
   await expect(page.locator('#watch-device')).toBeVisible();
-  await page.getByRole('navigation', { name: 'Product sections' }).getByRole('link', { name: 'Phone' }).click();
+  await page
+    .getByRole('navigation', { name: 'Product sections' })
+    .getByRole('link', { name: 'Phone' })
+    .click();
   await expect(page).toHaveURL(/#phone-device$/);
-  await page.getByRole('navigation', { name: 'Product sections' }).getByRole('link', { name: 'Ecosystem' }).click();
+  await page
+    .getByRole('navigation', { name: 'Product sections' })
+    .getByRole('link', { name: 'Ecosystem' })
+    .click();
   await expect(page).toHaveURL(/ecosystem\.html$/);
 });
 
