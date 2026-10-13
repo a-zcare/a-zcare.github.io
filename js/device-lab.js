@@ -231,7 +231,9 @@
             'Connectivity',
             state.network
               ? 'Phone network available'
-              : 'Offline: emergency event queued, not delivered',
+              : incident.startsWith('Queued')
+                ? 'Offline: emergency event queued locally, not delivered'
+                : 'Offline: no active queued emergency event',
           ) +
           switchControl('Network available', 'network', state.network) +
           card(
@@ -305,7 +307,7 @@
     event('Phone opened ' + s);
   }
   function sos(source) {
-    if (incident.startsWith('Countdown') || incident.startsWith('Queued')) {
+    if (incident.startsWith('Countdown') || incident.startsWith('Queued') || incident === 'Simulated contact notified') {
       event('Duplicate SOS ignored: active alert from ' + (state.sosSource || 'device'));
       return;
     }
@@ -534,9 +536,13 @@
       renderWatch();
     }
   });
-  ['network', 'sharing', 'battery'].forEach(
-    (k) => ($(k).onchange = () => act(k === 'sharing' ? 'share' : k)),
-  );
+  ['network', 'sharing', 'battery'].forEach((k) => {
+    $(k).onchange = () => {
+      const nextValue = $(k).checked;
+      $(k).checked = state[k];
+      if (nextValue !== state[k]) act(k === 'sharing' ? 'share' : k);
+    };
+  });
   $('reset').onclick = reset;
   $('clearLog').onclick = () => act('clear');
   const scenarios = [
@@ -622,7 +628,9 @@
     },
   ];
   $('investorStart').addEventListener('click', () => {
-    if (investorIndex === 0) reset();
+    if (investorIndex === 0) {
+      reset();
+    }
     const current = investorSteps[investorIndex];
     current.run();
     $('investorStatus').textContent = current.label;
