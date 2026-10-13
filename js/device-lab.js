@@ -565,6 +565,20 @@
     const b = e.target.closest('[data-scenario]');
     if (b) scenarios[Number(b.dataset.scenario)][1]();
   };
+  const investorSteps = [
+    { label: '1/3 · Scam Shield: scripted analysis', run: () => { open('Scam Shield'); act('scam-review'); } },
+    { label: '2/3 · Watch fall: shared SOS countdown', run: () => { reset(); sos('Watch fall detection'); } },
+    { label: '3/3 · Offline SOS: queued, never falsely delivered', run: () => { reset(); act('network'); sos('Watch'); act('sos-confirm'); open('SOS'); } },
+  ];
+  let investorIndex = 0;
+  $('investorStart').addEventListener('click', () => {
+    if (investorIndex === 0) reset();
+    const current = investorSteps[investorIndex];
+    current.run();
+    $('investorStatus').textContent = current.label;
+    investorIndex = (investorIndex + 1) % investorSteps.length;
+    $('investorStart').textContent = investorIndex === 0 ? 'Restart guided demo' : 'Next scenario';
+  });
   function tick() {
     const d = new Date();
     $('clock').textContent = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
