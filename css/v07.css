@@ -27,3 +27,5 @@
 #investorStatus {
   color: #71d7f5;
 }
+
+.watch-alert{font-size:10px;line-height:1.25;color:#6de5e4;text-align:center;padding:3px 5px;overflow-wrap:anywhere}
