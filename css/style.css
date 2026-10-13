@@ -3296,3 +3296,44 @@ footer p {
     animation: none;
   }
 }
+
+
+/* v0.7 desktop layout: use the available widescreen space. */
+@media (min-width: 1200px) {
+  .container {
+    width: min(1760px, calc(100% - 96px));
+  }
+
+  .ecosystem-intro {
+    max-width: 1040px;
+  }
+
+  .ecosystem-choices {
+    max-width: 1120px;
+    gap: 18px;
+  }
+
+  .device-stage {
+    width: 100%;
+    max-width: 1640px;
+    grid-template-columns: minmax(240px, 1fr) minmax(320px, 380px) minmax(260px, 1fr);
+    gap: clamp(30px, 4vw, 76px);
+    padding: clamp(36px, 3.5vw, 64px);
+  }
+
+  .device-copy h2,
+  .watch-copy h2 {
+    font-size: clamp(26px, 2vw, 36px);
+  }
+
+  .device-copy p,
+  .watch-copy p {
+    font-size: 15px;
+    line-height: 1.65;
+  }
+
+  .device-copy a,
+  .watch-copy a {
+    font-size: 14px;
+  }
+}
