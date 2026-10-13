@@ -293,7 +293,10 @@
     $('watchContent').innerHTML =
       '<h3>' + w[0] + '</h3><div class="reading">' + w[1] + '</div><p>' + w[2] + '</p>';
     $('watchBattery').textContent = (state.battery ? '20%' : '82%') + ' ◉';
-    $('watchAlert').textContent = incident === 'none' ? 'Safety ready · simulated' : 'SOS: ' + incident + ' · ' + (state.sosSource || 'device');
+    $('watchAlert').textContent =
+      incident === 'none'
+        ? 'Safety ready · simulated'
+        : 'SOS: ' + incident + ' · ' + (state.sosSource || 'device');
   }
   function open(s) {
     screen = s;
