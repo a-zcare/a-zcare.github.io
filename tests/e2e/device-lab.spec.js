@@ -172,3 +172,16 @@ test('SOS preserves watch origin and rejects repeated countdown', async ({ page 
   await expect(page.locator('#phoneContent')).toContainText('Simulated contact notified');
   await expect(page.locator('#phoneContent')).toContainText('Source: Watch');
 });
+
+test('investor walkthrough advances through three local-only scenarios', async ({ page }) => {
+  const next = page.locator('#investorStart');
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Scam Shield');
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Watch fall');
+  await expect(page.locator('#phoneContent')).toContainText('Countdown');
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Offline SOS');
+  await expect(page.locator('#network')).not.toBeChecked();
+  await expect(page.locator('#phoneContent')).toContainText('Queued offline');
+});
