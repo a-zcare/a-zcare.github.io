@@ -196,3 +196,18 @@ test('watch reflects the phone SOS lifecycle without sending live alerts', async
   await page.locator('#reset').click();
   await expect(page.locator('#watchAlert')).toContainText('Safety ready');
 });
+
+test('guided tour covers family consent and ecosystem and resets to the first stage', async ({ page }) => {
+  const next = page.locator('#investorStart');
+  for (let i = 0; i < 4; i += 1) await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Family check-in');
+  await expect(page.locator('#sharing')).toBeChecked();
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Ecosystem');
+  await expect(page.locator('#watchContent')).toContainText('Connectivity');
+  await expect(next).toHaveText('Restart guided demo');
+  await page.locator('#reset').click();
+  await expect(page.locator('#sharing')).not.toBeChecked();
+  await expect(page.locator('#investorStatus')).toBeEmpty();
+  await expect(next).toHaveText('Start guided demo');
+});
