@@ -46,8 +46,12 @@ for (const page of [
   }
 }
 
-if (!index.includes('id="audiences"')) fail('audience content is not semantic HTML');
-if (!index.includes('class="future-concept"')) fail('future concept is not semantic HTML');
+// v0.7 intentionally consolidated the former audiences and future-concept sections.
+// Check the replacement semantic content rather than requiring deleted markup.
+for (const section of ['id="why"', 'id="how"', 'id="privacy"']) {
+  if (!index.includes(section)) fail('compact homepage section missing: ' + section);
+}
+if (!index.includes('<main')) fail('homepage main landmark missing');
 if (!index.includes('js/navigation.js')) fail('navigation script is not loaded');
 if (!index.includes('js/product-data.js')) fail('product data is not loaded');
 if (!css.includes('.menu-toggle')) fail('mobile navigation styles missing');
