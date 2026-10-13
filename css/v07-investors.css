@@ -1,6 +1,10 @@
 :root {
   color-scheme: dark;
-  font-family: Inter, system-ui, -apple-system, sans-serif;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: #071018;
   color: #e8f5ff;
 }
@@ -91,7 +95,9 @@ li {
   background: #0d1e2b;
 }
 .cards article {
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 .cards article:hover {
   transform: translateY(-3px);
