@@ -292,7 +292,7 @@
     const w = watch[watchIndex];
     $('watchContent').innerHTML =
       '<h3>' + w[0] + '</h3><div class="reading">' + w[1] + '</div><p>' + w[2] + '</p>';
-    $('watchBattery').textContent = (state.battery ? '20%' : '82%') + ' ◉';
+    $('watchBattery').textContent = (state.battery ? '20%' : '82%') + (state.network ? ' ◉' : ' · Offline');
     $('watchAlert').textContent =
       incident === 'none'
         ? 'Safety ready · simulated'
@@ -440,6 +440,7 @@
           renderWatch();
         }
         renderPhone();
+        renderWatch();
         break;
       case 'privacy':
         state.privacy = !state.privacy;
@@ -459,7 +460,11 @@
         break;
     }
   }
+  let investorIndex = 0;
   function reset() {
+    investorIndex = 0;
+    $('investorStatus').textContent = '';
+    $('investorStart').textContent = 'Start guided demo';
     screen = 'Home';
     watchIndex = 0;
     step = 0;
@@ -576,31 +581,45 @@
   };
   const investorSteps = [
     {
-      label: '1/3 · Scam Shield: scripted analysis',
+      label: '1/5 · Scam Shield: scripted analysis',
       run: () => {
         open('Scam Shield');
         act('scam-review');
       },
     },
     {
-      label: '2/3 · Watch fall: shared SOS countdown',
-      run: () => {
-        reset();
-        sos('Watch fall detection');
-      },
+      label: '2/5 · Watch fall: shared SOS countdown',
+      run: () => sos('Watch fall detection'),
     },
     {
-      label: '3/3 · Offline SOS: queued, never falsely delivered',
+      label: '3/5 · Offline SOS: queued, not delivered',
       run: () => {
-        reset();
-        act('network');
+        act('sos-cancel');
+        if (state.network) act('network');
         sos('Watch');
         act('sos-confirm');
         open('SOS');
       },
     },
+    {
+      label: '4/5 · Family check-in and location consent',
+      run: () => {
+        if (!state.network) act('network');
+        open('Family');
+        act('checkin');
+        if (!state.sharing) act('share');
+      },
+    },
+    {
+      label: '5/5 · Ecosystem: phone and watch stay connected',
+      run: () => {
+        open('Connection');
+        watchIndex = watch.findIndex((item) => item[0] === 'Connectivity');
+        renderWatch();
+        event('Guided tour complete · explore freely or restart');
+      },
+    },
   ];
-  let investorIndex = 0;
   $('investorStart').addEventListener('click', () => {
     if (investorIndex === 0) reset();
     const current = investorSteps[investorIndex];
