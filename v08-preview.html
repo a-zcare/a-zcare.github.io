@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#050a12" />
+    <title>A-Z Care — v0.8 Design Preview</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #050a12;
+        --panel: #0c1726;
+        --line: #23334a;
+        --cyan: #66e5ef;
+        --text: #f5f9ff;
+        --muted: #a4b6ca;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(ellipse 65% 36% at 50% 16%, #122849 0%, transparent 78%), var(--bg);
+        color: var(--text);
+        font:
+          16px/1.6 system-ui,
+          -apple-system,
+          Segoe UI,
+          sans-serif;
+      }
+      button,
+      a {
+        font: inherit;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      button {
+        cursor: pointer;
+      }
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid var(--cyan);
+        outline-offset: 4px;
+      }
+      .wrap {
+        width: min(1700px, calc(100% - 96px));
+        margin: auto;
+      }
+      .top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #050b16e8;
+        backdrop-filter: blur(20px);
+        border-bottom: 1px solid #ffffff18;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        min-height: 78px;
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: -0.8px;
+      }
+      .logo span,
+      .accent {
+        color: var(--cyan);
+      }
+      .links {
+        display: flex;
+        gap: 32px;
+        color: #a6b8cc;
+        font-size: 14px;
+      }
+      .nav-cta,
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 1px solid #446075;
+        border-radius: 13px;
+        padding: 13px 23px;
+        background: #101e30;
+        color: white;
+        font-weight: 700;
+      }
+      .btn.primary {
+        background: var(--cyan);
+        border-color: var(--cyan);
+        color: #04101a;
+      }
+      .hero {
+        text-align: center;
+        padding: 96px 0 35px;
+      }
+      .eyebrow {
+        color: var(--cyan);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 2.8px;
+        text-transform: uppercase;
+      }
+      .pill {
+        display: inline-block;
+        border: 1px solid #294b5d;
+        border-radius: 999px;
+        padding: 6px 16px;
+        background: #0c2432;
+        font-size: 12px;
+        color: #b7dfe6;
+      }
+      .hero h1 {
+        font-size: clamp(46px, 5.5vw, 96px);
+        letter-spacing: -0.065em;
+        line-height: 1.04;
+        max-width: 1120px;
+        margin: 27px auto;
+      }
+      .hero .lead {
+        color: var(--muted);
+        max-width: 760px;
+        margin: 0 auto 30px;
+        font-size: clamp(16px, 1.25vw, 20px);
+      }
+      .actions {
+        display: flex;
+        gap: 13px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .stage {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(200px, 1fr) minmax(320px, 1.45fr) minmax(220px, 1fr);
+        gap: clamp(20px, 3vw, 60px);
+        align-items: center;
+        min-height: 650px;
+        margin: 50px auto 35px;
+        padding: 50px clamp(24px, 4vw, 72px);
+        border: 1px solid #294057;
+        border-radius: 34px;
+        background: radial-gradient(ellipse at 50% 38%, #163c55 0%, #0c1a2d 44%, #09111d 86%);
+        box-shadow: 0 30px 120px #0007;
+        overflow: hidden;
+      }
+      .stage:after {
+        content: '';
+        position: absolute;
+        inset: auto 18% 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #55b9d580, transparent);
+      }
+      .side h2 {
+        font-size: clamp(25px, 2.2vw, 39px);
+        letter-spacing: -0.035em;
+        line-height: 1.13;
+        margin: 12px 0;
+      }
+      .side p {
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .side small {
+        color: var(--cyan);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.8px;
+      }
+      .devices {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        min-width: 0;
+      }
+      .phone {
+        width: clamp(205px, 18vw, 295px);
+        height: clamp(420px, 37vw, 570px);
+        flex: none;
+        border: 8px solid #3b4b5e;
+        border-radius: 46px;
+        background: #010408;
+        padding: 8px;
+        box-shadow:
+          0 35px 60px #000b,
+          inset 0 0 0 2px #91a2b3;
+      }
+      .screen {
+        height: 100%;
+        border-radius: 33px;
+        padding: 18px 13px;
+        background: radial-gradient(circle at 80% 0%, #193b59, transparent 44%), #030a12;
+        overflow: auto;
+        scrollbar-width: thin;
+      }
+      .phone-status {
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+        color: #92a9bc;
+      }
+      .screen h3 {
+        font-size: 22px;
+        margin: 24px 0 3px;
+      }
+      .screen p {
+        font-size: 11px;
+        color: #a1b3c7;
+        margin: 0 0 15px;
+      }
+      .metric {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        background: #101f31;
+        border: 1px solid #274058;
+        border-radius: 12px;
+        padding: 12px;
+        margin-bottom: 12px;
+        font-size: 12px;
+      }
+      .metric b {
+        color: #7ce8da;
+      }
+      .apps {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 9px;
+      }
+      .app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        border: 1px solid #294057;
+        background: #102239;
+        color: #e9f5ff;
+        border-radius: 12px;
+        padding: 10px 2px;
+        font-size: 10px;
+      }
+      .app span {
+        font-size: 21px;
+      }
+      .app.active {
+        border-color: var(--cyan);
+        background: #124054;
+      }
+      .watch {
+        width: clamp(130px, 11vw, 185px);
+        height: clamp(145px, 12vw, 205px);
+        border: 9px solid #3c5062;
+        border-radius: 38%;
+        padding: 10px 6px;
+        background: #010408;
+        box-shadow: 0 20px 40px #000b;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .watch small {
+        color: #77d7c6;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+      .watch strong {
+        font-size: clamp(21px, 2.1vw, 37px);
+      }
+      .watch p {
+        font-size: 10px;
+        color: #a4b6ca;
+        margin: 2px 0 8px;
+      }
+      .watch button {
+        font-size: 10px;
+        font-weight: 800;
+        border: 1px solid #a13b4a;
+        border-radius: 99px;
+        background: #4a1522;
+        color: #ffcbd1;
+        padding: 6px 18px;
+      }
+      .preview-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 18px;
+        font-size: 11px;
+        color: #9db1c3;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        background: #69e6ba;
+        border-radius: 50%;
+      }
+      .section {
+        padding: 65px 0 90px;
+      }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 30px;
+        margin-bottom: 25px;
+      }
+      .section h2 {
+        font-size: clamp(30px, 3.4vw, 54px);
+        letter-spacing: -0.05em;
+        line-height: 1.1;
+        margin: 8px 0;
+      }
+      .section-head p {
+        max-width: 450px;
+        color: var(--muted);
+      }
+      .tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 25px 0;
+      }
+      .tab {
+        background: #0e1c2d;
+        border: 1px solid #293d54;
+        color: #b8c9da;
+        border-radius: 11px;
+        padding: 12px 18px;
+      }
+      .tab[aria-selected='true'] {
+        color: #04131b;
+        background: var(--cyan);
+        border-color: var(--cyan);
+        font-weight: 800;
+      }
+      .feature {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        align-items: center;
+        border: 1px solid #294057;
+        border-radius: 25px;
+        padding: clamp(24px, 4vw, 60px);
+        background: linear-gradient(120deg, #0e1d30, #081321);
+      }
+      .feature h3 {
+        font-size: clamp(27px, 3vw, 44px);
+        margin: 8px 0;
+      }
+      .feature p {
+        color: var(--muted);
+        max-width: 560px;
+      }
+      .feature-visual {
+        border: 1px solid #31536a;
+        border-radius: 20px;
+        background: radial-gradient(circle at 50% 30%, #184459, #091725 70%);
+        min-height: 270px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 25px;
+      }
+      .feature-visual .symbol {
+        font-size: 70px;
+      }
+      .feature-visual strong {
+        font-size: 25px;
+      }
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .step {
+        padding: 30px;
+        border: 1px solid #273b52;
+        border-radius: 20px;
+        background: #0b1727;
+      }
+      .step b {
+        color: var(--cyan);
+        font-size: 13px;
+      }
+      .step h3 {
+        font-size: 24px;
+      }
+      .step p {
+        color: var(--muted);
+      }
+      .foot {
+        border-top: 1px solid #22354a;
+        padding: 30px 0 50px;
+        color: #9baec2;
+        font-size: 13px;
+      }
+      .foot .wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 25px;
+      }
+      .status {
+        min-height: 23px;
+        font-size: 12px;
+        color: #87e9d6;
+      }
+      .notice {
+        font-size: 12px;
+        color: #a4b6ca;
+        margin-top: 22px;
+      }
+      @media (max-width: 1100px) {
+        .stage {
+          grid-template-columns: 1fr 1fr;
+        }
+        .devices {
+          grid-column: 1/-1;
+          grid-row: 1;
+        }
+        .side {
+          grid-row: 2;
+        }
+        .phone {
+          width: 260px;
+          height: 520px;
+        }
+        .watch {
+          width: 170px;
+          height: 180px;
+        }
+        .links {
+          display: none;
+        }
+      }
+      @media (max-width: 700px) {
+        .wrap {
+          width: calc(100% - 32px);
+        }
+        .nav {
+          min-height: 64px;
+        }
+        .logo {
+          font-size: 20px;
+        }
+        .nav-cta {
+          padding: 8px 12px;
+          font-size: 12px;
+        }
+        .hero {
+          padding: 70px 0 20px;
+        }
+        .hero h1 {
+          font-size: clamp(40px, 11vw, 60px);
+        }
+        .stage {
+          display: flex;
+          flex-direction: column;
+          gap: 20px;
+          padding: 24px 14px;
+          min-height: 0;
+        }
+        .devices {
+          gap: 10px;
+        }
+        .phone {
+          width: min(55vw, 240px);
+          height: 460px;
+          border-width: 6px;
+        }
+        .watch {
+          width: min(34vw, 145px);
+          height: 150px;
+          padding: 5px;
+        }
+        .watch strong {
+          font-size: 22px;
+        }
+        .side {
+          text-align: center;
+        }
+        .section {
+          padding: 45px 0;
+        }
+        .section-head {
+          display: block;
+        }
+        .feature {
+          grid-template-columns: 1fr;
+        }
+        .steps {
+          grid-template-columns: 1fr;
+        }
+        .foot .wrap {
+          flex-direction: column;
+        }
+        .screen {
+          padding: 13px 8px;
+        }
+        .app {
+          font-size: 9px;
+          padding: 7px 0;
+        }
+        .app span {
+          font-size: 18px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap nav">
+        <a class="logo" href="#top">⬡ A-Z<span>Care</span></a>
+        <nav class="links" aria-label="Preview navigation">
+          <a href="#experience">Experience</a><a href="#solutions">Solutions</a
+          ><a href="#how">How it works</a>
+        </nav>
+        <a class="nav-cta" href="#solutions">Explore solutions ↗</a>
+      </div>
+    </header>
+    <main id="top">
+      <section class="hero wrap">
+        <div class="pill">● A-Z Care ecosystem · Interactive design concept</div>
+        <p class="eyebrow">Phone + Watch + Connected Protection</p>
+        <h1>Protection that <span class="accent">stays with you.</span></h1>
+        <p class="lead">
+          One connected experience for digital safety, family care and emergency awareness —
+          designed to keep people informed and in control.
+        </p>
+        <div class="actions">
+          <a class="btn primary" href="#experience">Explore interactive demo →</a
+          ><a class="btn" href="#solutions">See all solutions</a>
+        </div>
+        <div class="stage" id="experience">
+          <div class="side">
+            <small>01 / A-Z PHONE</small>
+            <h2>Everyday safety.<br />One simple place.</h2>
+            <p>
+              Explore the concept interface and switch between protection scenarios. The screen
+              responds to your choices.
+            </p>
+            <div class="preview-label"><i class="dot"></i> Interactive local preview</div>
+          </div>
+          <div class="devices">
+            <div class="phone">
+              <div class="screen">
+                <div class="phone-status"><span>9:41</span><span>◉ 82%</span></div>
+                <h3 id="phoneTitle">Good day 👋</h3>
+                <p id="phoneDesc">Your safety overview</p>
+                <div class="metric">
+                  <span id="metricLabel">Protection status</span><b id="metricValue">Ready</b>
+                </div>
+                <div class="apps" id="phoneApps">
+                  <button class="app active" data-feature="scam"><span>⬡</span>Scam</button
+                  ><button class="app" data-feature="sos"><span>🆘</span>SOS</button
+                  ><button class="app" data-feature="family"><span>♡</span>Family</button
+                  ><button class="app" data-feature="health"><span>♥</span>Health</button
+                  ><button class="app" data-feature="ai"><span>✧</span>Assistant</button
+                  ><button class="app" data-feature="privacy"><span>♧</span>Privacy</button>
+                </div>
+                <p class="notice" id="phoneHint">Tap an app to explore.</p>
+              </div>
+            </div>
+            <div class="watch">
+              <small>A-Z WATCH</small><strong id="watchValue">72 bpm</strong>
+              <p id="watchCaption">Simulated heart rate</p>
+              <button id="watchSos" type="button">SOS DEMO</button>
+            </div>
+          </div>
+          <div class="side">
+            <small>02 / CONNECTED WATCH</small>
+            <h2>Support, right<br />on your wrist.</h2>
+            <p>
+              See how a wearable could share safety states with a phone while keeping consent at the
+              center.
+            </p>
+            <p class="status" id="demoStatus" role="status" aria-live="polite">
+              No active emergency simulation.
+            </p>
+          </div>
+        </div>
+        <p class="notice">
+          Concept demonstration only. No real alerts, tracking, AI processing, medical measurements
+          or emergency dispatch.
+        </p>
+      </section>
+      <section class="section wrap" id="solutions">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Explore the possibilities</p>
+            <h2>One ecosystem.<br /><span class="accent">Six safety experiences.</span></h2>
+          </div>
+          <p>
+            Choose a solution to see the problem it addresses and the type of interaction envisioned
+            for A-Z Care.
+          </p>
+        </div>
+        <div class="tabs" role="tablist" aria-label="Safety solutions">
+          <button class="tab" role="tab" aria-selected="true" data-feature="scam">
+            Scam Shield</button
+          ><button class="tab" role="tab" aria-selected="false" data-feature="sos">
+            Emergency SOS</button
+          ><button class="tab" role="tab" aria-selected="false" data-feature="family">
+            Family Safety</button
+          ><button class="tab" role="tab" aria-selected="false" data-feature="health">
+            Health Awareness</button
+          ><button class="tab" role="tab" aria-selected="false" data-feature="ai">
+            AI Assistant</button
+          ><button class="tab" role="tab" aria-selected="false" data-feature="privacy">
+            Privacy
+          </button>
+        </div>
+        <div class="feature">
+          <div>
+            <p class="eyebrow" id="featureNumber">01 / DIGITAL PROTECTION</p>
+            <h3 id="featureTitle">Spot suspicious messages before you act.</h3>
+            <p id="featureBody">
+              Explore a scripted warning-sign review that highlights urgency, unfamiliar links and
+              requests for credentials. No real messages are read.
+            </p>
+            <button class="btn primary" id="featureAction" type="button">Try scenario →</button>
+          </div>
+          <div class="feature-visual">
+            <div class="symbol" id="featureSymbol">⬡</div>
+            <strong id="featureVisualTitle">Scam Shield</strong>
+            <p id="featureVisualText">Sample SMS · Warning signs detected</p>
+          </div>
+        </div>
+      </section>
+      <section class="section wrap" id="how">
+        <p class="eyebrow">A simpler approach</p>
+        <h2>Detect. Protect. Connect.</h2>
+        <div class="steps">
+          <article class="step">
+            <b>01 / DETECT</b>
+            <h3>Understand the signal</h3>
+            <p>
+              Bring potentially important safety information into a clear, understandable interface.
+            </p>
+          </article>
+          <article class="step">
+            <b>02 / PROTECT</b>
+            <h3>Choose what happens</h3>
+            <p>Review warnings, permissions and next steps without hiding essential controls.</p>
+          </article>
+          <article class="step">
+            <b>03 / CONNECT</b>
+            <h3>Keep people informed</h3>
+            <p>
+              Explore how a phone, wearable and trusted contacts could coordinate in a future
+              product.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+    <footer class="foot">
+      <div class="wrap">
+        <span>© A-Z Care · v0.8 visual preview · Not a production product</span
+        ><span>Privacy-first by design · All interactions simulated</span>
+      </div>
+    </footer>
+    <script>
+      (() => {
+        'use strict';
+        const $ = (id) => document.getElementById(id);
+        const data = {
+          scam: [
+            '01 / DIGITAL PROTECTION',
+            'Spot suspicious messages before you act.',
+            'Explore a scripted warning-sign review that highlights urgency, unfamiliar links and requests for credentials. No real messages are read.',
+            '⬡',
+            'Scam Shield',
+            'Sample SMS · Warning signs detected',
+            'Scam Shield',
+            'Sample SMS review',
+            'Review',
+            '72 bpm',
+            'Simulated heart rate',
+          ],
+          sos: [
+            '02 / EMERGENCY CONCEPT',
+            'One clear action when help matters.',
+            'Try a local SOS simulation. The watch and phone show a synchronized alert state. No messages or emergency calls are sent.',
+            '🆘',
+            'Emergency SOS',
+            'Watch → Phone → Fictional contact',
+            'SOS countdown',
+            'Emergency simulation',
+            'Ready',
+            'SOS READY',
+            'No real alert',
+          ],
+          family: [
+            '03 / FAMILY SAFETY',
+            'Stay connected without constant tracking.',
+            'Explore consent-aware check-ins and trusted-contact concepts without collecting location or sending real notifications.',
+            '♡',
+            'Family Safety',
+            'Trusted contacts · Check-in demo',
+            'Family check-in',
+            'Trusted contact: Anna (fictional)',
+            'Safe',
+            '72 bpm',
+            'Simulated heart rate',
+          ],
+          health: [
+            '04 / HEALTH AWARENESS',
+            'Make everyday signals easier to understand.',
+            'View fictional health readings and a possible wearable experience. These values are not medical measurements.',
+            '♥',
+            'Health Awareness',
+            'Sample readings · Not medical advice',
+            'Health overview',
+            'Illustrative wellness readings',
+            'Demo',
+            '72 bpm',
+            'Simulated heart rate',
+          ],
+          ai: [
+            '05 / GUIDED SUPPORT',
+            'Helpful explanations when you need them.',
+            'Explore scripted guidance for common safety questions. This preview does not call an AI service.',
+            '✧',
+            'AI Assistant',
+            'Scripted advice · No live AI',
+            'Safety assistant',
+            'Scripted example guidance',
+            'Guide',
+            '72 bpm',
+            'Simulated heart rate',
+          ],
+          privacy: [
+            '06 / CONSENT FIRST',
+            'Your choices should stay yours.',
+            'Explore how explicit consent and easy-to-understand permissions could work. No location is collected in this preview.',
+            '♧',
+            'Privacy',
+            'Location sharing · Off by default',
+            'Privacy controls',
+            'Location access disabled',
+            'Off',
+            '72 bpm',
+            'Simulated heart rate',
+          ],
+        };
+        let active = 'scam',
+          alert = false;
+        function select(key) {
+          const d = data[key];
+          if (!d) return;
+          active = key;
+          [
+            'featureNumber',
+            'featureTitle',
+            'featureBody',
+            'featureSymbol',
+            'featureVisualTitle',
+            'featureVisualText',
+            'phoneTitle',
+            'phoneDesc',
+            'metricValue',
+            'watchValue',
+            'watchCaption',
+          ].forEach((id, i) => ($(id).textContent = d[i]));
+          $('metricLabel').textContent = key === 'privacy' ? 'Location sharing' : 'Demo status';
+          document.querySelectorAll('[data-feature]').forEach((b) => {
+            const on = b.dataset.feature === key;
+            b.classList.toggle('active', on);
+            if (b.getAttribute('role') === 'tab') b.setAttribute('aria-selected', String(on));
+          });
+          $('phoneHint').textContent = 'Selected: ' + d[4] + '. This is a local concept demo.';
+        }
+        document.addEventListener('click', (e) => {
+          const b = e.target.closest('[data-feature]');
+          if (b) select(b.dataset.feature);
+        });
+        function sos() {
+          alert = !alert;
+          select('sos');
+          $('phoneTitle').textContent = alert ? 'SOS · simulated alert' : 'SOS · cancelled';
+          $('metricValue').textContent = alert ? 'Demo active' : 'Cancelled';
+          $('watchValue').textContent = alert ? 'SOS!' : 'Ready';
+          $('watchCaption').textContent = alert ? 'Local simulation only' : 'No active alert';
+          $('demoStatus').textContent = alert
+            ? 'Simulated SOS active. No real message sent.'
+            : 'SOS demo cancelled. No real message sent.';
+          $('watchSos').textContent = alert ? 'CANCEL DEMO' : 'SOS DEMO';
+        }
+        $('watchSos').addEventListener('click', sos);
+        $('featureAction').addEventListener('click', () => {
+          if (active === 'sos') {
+            sos();
+          } else {
+            select(active);
+            $('demoStatus').textContent = data[active][4] + ' scenario selected (local preview).';
+            document
+              .getElementById('experience')
+              .scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        });
+        select('scam');
+      })();
+    </script>
+  </body>
+</html>

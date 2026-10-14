@@ -172,3 +172,71 @@ test('SOS preserves watch origin and rejects repeated countdown', async ({ page 
   await expect(page.locator('#phoneContent')).toContainText('Simulated contact notified');
   await expect(page.locator('#phoneContent')).toContainText('Source: Watch');
 });
+
+test('investor walkthrough advances through three local-only scenarios', async ({ page }) => {
+  const next = page.locator('#investorStart');
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Scam Shield');
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Watch fall');
+  await expect(page.locator('#phoneContent')).toContainText('Countdown');
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Offline SOS');
+  await expect(page.locator('#network')).not.toBeChecked();
+  await expect(page.locator('#phoneContent')).toContainText('Queued offline');
+});
+
+test('watch reflects the phone SOS lifecycle without sending live alerts', async ({ page }) => {
+  await page.locator('#watchSOS').click();
+  await expect(page.locator('#watchAlert')).toContainText('Countdown');
+  await page.locator('[data-action="sos-confirm"]').click();
+  await expect(page.locator('#watchAlert')).toContainText('Simulated contact notified');
+  await page.locator('[data-action="sos-cancel"]').click();
+  await expect(page.locator('#watchAlert')).toContainText('Cancelled');
+  await page.locator('#reset').click();
+  await expect(page.locator('#watchAlert')).toContainText('Safety ready');
+});
+
+test('guided tour covers family consent and ecosystem and resets to the first stage', async ({
+  page,
+}) => {
+  const next = page.locator('#investorStart');
+  for (let i = 0; i < 4; i += 1) await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Family check-in');
+  await expect(page.locator('#sharing')).toBeChecked();
+  await next.click();
+  await expect(page.locator('#investorStatus')).toContainText('Ecosystem');
+  await expect(page.locator('#watchContent')).toContainText('Connectivity');
+  await expect(next).toHaveText('Restart guided demo');
+  await page.locator('#reset').click();
+  await expect(page.locator('#sharing')).not.toBeChecked();
+  await expect(page.locator('#investorStatus')).toBeEmpty();
+  await expect(next).toHaveText('Start guided demo');
+});
+
+test('native environment checkboxes update shared state on first change', async ({ page }) => {
+  await page.locator('#network').uncheck();
+  await expect(page.locator('#network')).not.toBeChecked();
+  await expect(page.locator('#watchBattery')).toContainText('Offline');
+  await page.locator('#sharing').check();
+  await expect(page.locator('#sharing')).toBeChecked();
+  await page.locator('[data-open="Location"]').click();
+  await expect(page.locator('#phoneContent')).toContainText('Enabled');
+  await page.locator('#network').check();
+  await expect(page.locator('#watchBattery')).not.toContainText('Offline');
+});
+
+test('delivered SOS cannot be overwritten by another device until cancelled', async ({ page }) => {
+  await page.locator('#watchSOS').click();
+  await page.locator('[data-action="sos-confirm"]').click();
+  await page.locator('[data-action="sos-start"]').click();
+  await expect(page.locator('#phoneContent')).toContainText('Simulated contact notified');
+  await expect(page.locator('#phoneContent')).toContainText('Source: Watch');
+  await expect(page.locator('#timeline')).toContainText('Duplicate SOS ignored');
+});
+
+test('offline status does not claim a queued event without an SOS', async ({ page }) => {
+  await page.locator('#network').uncheck();
+  await page.locator('[data-open="Connection"]').click();
+  await expect(page.locator('#phoneContent')).toContainText('no active queued emergency event');
+});

@@ -231,7 +231,9 @@
             'Connectivity',
             state.network
               ? 'Phone network available'
-              : 'Offline: emergency event queued, not delivered',
+              : incident.startsWith('Queued')
+                ? 'Offline: emergency event queued locally, not delivered'
+                : 'Offline: no active queued emergency event',
           ) +
           switchControl('Network available', 'network', state.network) +
           card(
@@ -292,7 +294,12 @@
     const w = watch[watchIndex];
     $('watchContent').innerHTML =
       '<h3>' + w[0] + '</h3><div class="reading">' + w[1] + '</div><p>' + w[2] + '</p>';
-    $('watchBattery').textContent = (state.battery ? '20%' : '82%') + ' ◉';
+    $('watchBattery').textContent =
+      (state.battery ? '20%' : '82%') + (state.network ? ' ◉' : ' · Offline');
+    $('watchAlert').textContent =
+      incident === 'none'
+        ? 'Safety ready · simulated'
+        : 'SOS: ' + incident + ' · ' + (state.sosSource || 'device');
   }
   function open(s) {
     screen = s;
@@ -300,7 +307,11 @@
     event('Phone opened ' + s);
   }
   function sos(source) {
-    if (incident.startsWith('Countdown') || incident.startsWith('Queued')) {
+    if (
+      incident.startsWith('Countdown') ||
+      incident.startsWith('Queued') ||
+      incident === 'Simulated contact notified'
+    ) {
       event('Duplicate SOS ignored: active alert from ' + (state.sosSource || 'device'));
       return;
     }
@@ -309,6 +320,7 @@
     incident = 'Countdown · ' + source;
     screen = 'SOS';
     renderPhone();
+    renderWatch();
     event(source + ' initiated SOS countdown (demo)');
   }
   function act(a) {
@@ -331,6 +343,7 @@
         state.ack = false;
         event('SOS ' + incident);
         renderPhone();
+        renderWatch();
         break;
       case 'sos-cancel':
         if (incident === 'none' || incident === 'Cancelled') {
@@ -340,6 +353,7 @@
         incident = 'Cancelled';
         event('SOS cancelled');
         renderPhone();
+        renderWatch();
         break;
       case 'sos-ack':
         if (incident !== 'Simulated contact notified') {
@@ -350,6 +364,7 @@
         incident = 'Acknowledged by fictional contact';
         event('Fictional contact acknowledged alert');
         renderPhone();
+        renderWatch();
         break;
       case 'scam-review':
         scamReviewed = true;
@@ -429,8 +444,10 @@
         if (state.network && incident.startsWith('Queued')) {
           incident = 'Simulated contact notified';
           event('Queued SOS delivered in demo');
+          renderWatch();
         }
         renderPhone();
+        renderWatch();
         break;
       case 'privacy':
         state.privacy = !state.privacy;
@@ -450,7 +467,11 @@
         break;
     }
   }
+  let investorIndex = 0;
   function reset() {
+    investorIndex = 0;
+    $('investorStatus').textContent = '';
+    $('investorStart').textContent = 'Start guided demo';
     screen = 'Home';
     watchIndex = 0;
     step = 0;
@@ -519,9 +540,13 @@
       renderWatch();
     }
   });
-  ['network', 'sharing', 'battery'].forEach(
-    (k) => ($(k).onchange = () => act(k === 'sharing' ? 'share' : k)),
-  );
+  ['network', 'sharing', 'battery'].forEach((k) => {
+    $(k).onchange = () => {
+      const nextValue = $(k).checked;
+      $(k).checked = state[k];
+      if (nextValue !== state[k]) act(k === 'sharing' ? 'share' : k);
+    };
+  });
   $('reset').onclick = reset;
   $('clearLog').onclick = () => act('clear');
   const scenarios = [
@@ -565,6 +590,57 @@
     const b = e.target.closest('[data-scenario]');
     if (b) scenarios[Number(b.dataset.scenario)][1]();
   };
+  const investorSteps = [
+    {
+      label: '1/5 · Scam Shield: scripted analysis',
+      run: () => {
+        open('Scam Shield');
+        act('scam-review');
+      },
+    },
+    {
+      label: '2/5 · Watch fall: shared SOS countdown',
+      run: () => sos('Watch fall detection'),
+    },
+    {
+      label: '3/5 · Offline SOS: queued, not delivered',
+      run: () => {
+        act('sos-cancel');
+        if (state.network) act('network');
+        sos('Watch');
+        act('sos-confirm');
+        open('SOS');
+      },
+    },
+    {
+      label: '4/5 · Family check-in and location consent',
+      run: () => {
+        if (!state.network) act('network');
+        open('Family');
+        act('checkin');
+        if (!state.sharing) act('share');
+      },
+    },
+    {
+      label: '5/5 · Ecosystem: phone and watch stay connected',
+      run: () => {
+        open('Connection');
+        watchIndex = watch.findIndex((item) => item[0] === 'Connectivity');
+        renderWatch();
+        event('Guided tour complete · explore freely or restart');
+      },
+    },
+  ];
+  $('investorStart').addEventListener('click', () => {
+    if (investorIndex === 0) {
+      reset();
+    }
+    const current = investorSteps[investorIndex];
+    current.run();
+    $('investorStatus').textContent = current.label;
+    investorIndex = (investorIndex + 1) % investorSteps.length;
+    $('investorStart').textContent = investorIndex === 0 ? 'Restart guided demo' : 'Next scenario';
+  });
   function tick() {
     const d = new Date();
     $('clock').textContent = d.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });

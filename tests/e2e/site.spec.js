@@ -146,13 +146,12 @@ for (const viewport of viewports.filter((item) => item.width <= 800)) {
       await expect(toggle).toHaveAttribute('aria-expanded', 'true');
       await expect(toggle).toBeFocused();
 
-      const firstLink = page.getByRole('link', { name: 'Why', exact: true });
+      const firstLink = page.getByRole('link', { name: 'Home', exact: true });
       await page.keyboard.press('Tab');
       await expect(firstLink).toBeFocused();
       await page.keyboard.press('Enter');
 
-      await expect.poll(() => page.evaluate(() => window.location.hash)).toBe('#why');
-      await expect(page.locator('#why')).toBeInViewport();
+      await expect(page).toHaveURL(/\/$/);
       await expect(toggle).toHaveAttribute('aria-expanded', 'false');
     });
   });

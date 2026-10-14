@@ -1,0 +1,133 @@
+:root {
+  color-scheme: dark;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: #071018;
+  color: #e8f5ff;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: radial-gradient(ellipse at 70% 5%, #123b4b 0, transparent 38%), #071018;
+}
+a {
+  color: inherit;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 22px max(24px, calc((100vw - 1100px) / 2));
+  border-bottom: 1px solid #244053;
+}
+.brand {
+  font-size: 21px;
+  font-weight: 800;
+  text-decoration: none;
+}
+.brand span,
+.eyebrow,
+.cards article span {
+  color: #64dfe5;
+}
+.eyebrow,
+.cards article span {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+main {
+  width: min(1100px, calc(100% - 40px));
+  margin: auto;
+}
+.hero {
+  max-width: 790px;
+  padding: 110px 0 80px;
+}
+h1 {
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  margin: 20px 0;
+}
+h2 {
+  margin: 12px 0;
+}
+p,
+li {
+  color: #b3c9d8;
+  line-height: 1.7;
+}
+.cta {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 15px 22px;
+  border-radius: 12px;
+  color: #03171b;
+  background: #67e4e3;
+  font-weight: 750;
+  text-decoration: none;
+  box-shadow: 0 0 30px #26c5ca33;
+}
+.cta:hover,
+.cta:focus-visible {
+  box-shadow: 0 0 42px #26c5ca88;
+  outline: 2px solid #e8ffff;
+}
+.notice {
+  font-size: 13px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.cards article,
+.roadmap {
+  padding: 28px;
+  border: 1px solid #29485a;
+  border-radius: 20px;
+  background: #0d1e2b;
+}
+.cards article {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+.cards article:hover {
+  transform: translateY(-3px);
+  border-color: #53aeb7;
+}
+.roadmap {
+  margin: 48px 0 70px;
+}
+footer {
+  padding: 28px;
+  text-align: center;
+  border-top: 1px solid #29485a;
+  color: #a4bccc;
+}
+@media (max-width: 640px) {
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .hero {
+    padding: 60px 0;
+  }
+  .nav {
+    padding: 20px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}

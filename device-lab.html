@@ -11,6 +11,7 @@
     />
     <link rel="icon" href="assets/azcare-logo-white.svg" />
     <link rel="stylesheet" href="css/device-lab.css" />
+    <link rel="stylesheet" href="css/v07.css" />
   </head>
   <body>
     <header class="top">
@@ -18,6 +19,10 @@
       ><span>INTERACTIVE DEVICE LAB <strong>· DEMO ONLY</strong></span
       ><button id="reset" type="button">Reset demo</button>
     </header>
+    <nav class="v07-nav" aria-label="Product sections">
+      <a href="./">Home</a><a href="device-lab.html#phone-device">Phone</a
+      ><a href="device-lab.html#watch-device">Watch</a><a href="ecosystem.html">Ecosystem</a>
+    </nav>
     <main>
       <section class="intro">
         <p class="eyebrow">EXPERIENCE THE ECOSYSTEM</p>
@@ -28,8 +33,16 @@
           services or contacts are notified.
         </p>
       </section>
+      <div class="investor-demo">
+        <div>
+          <strong>Investor walkthrough</strong>
+          <p>Five connected scenarios · local simulation only · no real alerts.</p>
+        </div>
+        <button id="investorStart" type="button" class="secondary">Start guided demo</button
+        ><span id="investorStatus" role="status" aria-live="polite"></span>
+      </div>
       <div class="lab">
-        <section class="device-area">
+        <section class="device-area" id="phone-device">
           <h2>A-Z Phone <small>AMOLED concept</small></h2>
           <div class="phone-frame">
             <div class="side-key" aria-hidden="true"></div>
@@ -43,7 +56,7 @@
             </div>
           </div>
         </section>
-        <section class="device-area">
+        <section class="device-area" id="watch-device">
           <h2>A-Z Watch <small>Guardian concept</small></h2>
           <div class="strap topstrap"></div>
           <div class="watch-body">
@@ -53,6 +66,9 @@
                 <span>AZ · DEMO</span><span id="watchBattery">82% ◉</span>
               </div>
               <div id="watchContent" aria-live="polite"></div>
+              <div id="watchAlert" class="watch-alert" role="status" aria-live="polite">
+                Safety ready · simulated
+              </div>
               <div class="watch-nav">
                 <button id="prev" aria-label="Previous watch screen">‹</button
                 ><button id="watchSOS" class="watch-sos">SOS</button

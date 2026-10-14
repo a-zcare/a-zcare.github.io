@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#071018" />
+    <meta
+      name="description"
+      content="A-Z Care is a privacy-first smartphone concept combining scam protection, AI assistance, family safety, consent-based location, health tools, fall detection and SOS."
+    />
+    <title>A-Z Care — v0.8 Real Devices Preview</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="canonical" href="https://a-zcare.github.io/" />
+    <meta property="og:title" content="A-Z Care — Safer smartphone experience" />
+    <meta
+      property="og:description"
+      content="Privacy-first smartphone concept for digital safety, family care and everyday health support."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://a-zcare.github.io/" />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" href="assets/azcare-logo-white.svg" />
+    <link rel="stylesheet" href="css/style.css?v=7" />
+    <link rel="stylesheet" href="css/consent.css?v=2" />
+    <link rel="stylesheet" href="css/v08-real-preview.css?v=1" />
+  </head>
+  <body>
+    <header>
+      <div class="container nav">
+        <a class="brand" href="#top"
+          ><img src="assets/azcare-logo-white.svg" alt="" /><b>A-Z<span>Care</span></b></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"
+          aria-label="Open navigation"
+        >
+          <span class="menu-toggle-icon" aria-hidden="true"
+            ><span></span><span></span><span></span
+          ></span>
+        </button>
+        <nav id="site-navigation" class="primary-nav" aria-label="Primary navigation">
+          <a href="./" aria-current="page">Home</a>
+          <a href="device-lab.html#phone-device">Phone</a>
+          <a href="device-lab.html#watch-device">Watch</a>
+          <a href="ecosystem.html">Ecosystem</a>
+        </nav>
+        <a
+          class="nav-btn"
+          href="https://github.com/a-zcare/a-zcare.github.io"
+          target="_blank"
+          rel="noreferrer"
+          data-analytics-event="project_link_open"
+          data-analytics-placement="header"
+          >View project ↗</a
+        >
+      </div>
+    </header>
+    <main id="top">
+      <div
+        style="
+          text-align: center;
+          padding: 12px 18px;
+          background: #12253a;
+          border-bottom: 1px solid #42627f;
+        "
+      >
+        <a
+          href="device-lab.html"
+          style="color: #94eaff; font-weight: 700; text-decoration: underline"
+          >Explore Phone, Watch and the guided investor demo →</a
+        >
+        <small style="color: #afc6dd">DEMO ONLY</small>
+      </div>
+      <section class="hero ecosystem-hero">
+        <div class="container">
+          <div class="ecosystem-intro">
+            <div class="pill"><i></i>A-Z Care · v0.8 design preview</div>
+            <p class="eyebrow">PHONE + WATCH + SAFETY NETWORK</p>
+            <h1>Protection that <em>stays with you.</em></h1>
+            <p class="lead">
+              One connected experience for digital safety, family care and emergency awareness —
+              designed around our interactive A-Z Phone and A-Z Watch.
+            </p>
+            <div class="v08-actions">
+              <a class="v08-primary" href="#product">Explore live devices →</a
+              ><a class="v08-secondary" href="#solutions">See solutions</a>
+            </div>
+            <div class="ecosystem-choices" aria-label="Explore A-Z Care">
+              <a class="choice" href="hardware.html">
+                <b>01</b><span>A-Z Phone<small>Hardware · safety · interactive demo</small></span>
+              </a>
+              <a class="choice" href="watch.html">
+                <b>02</b><span>A-Z Watch<small>Guardian · health · SOS</small></span>
+              </a>
+              <a class="choice" href="ecosystem.html">
+                <b>03</b><span>Ecosystem<small>Phone · watch · cloud · connectivity</small></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="device-stage" id="product">
+            <div class="device-copy">
+              <span class="device-kicker">A-Z CARE PHONE</span>
+              <h2>Your everyday safety hub.</h2>
+              <p>
+                Protection, family, health and emergency tools stay understandable in one familiar
+                Android experience.
+              </p>
+              <a
+                href="#phone-demo"
+                aria-label="Explore the phone"
+                data-analytics-event="navigation_select"
+                data-analytics-destination="phone_demo"
+                data-analytics-placement="hero"
+                >Try the interactive phone ↓</a
+              >
+            </div>
+            <div class="showcase-phone-slot" id="phone-demo">
+              <div class="phone-demo-shell showcase-phone-demo">
+                <p class="phone-demo-label">Interactive demo · No live services</p>
+                <div class="phone">
+                  <div class="camera-dot"></div>
+                  <div id="phoneView" class="phone-view" aria-live="polite"></div>
+                </div>
+              </div>
+            </div>
+            <div class="watch-column">
+              <div class="watch-carousel" aria-label="Interactive A-Z Care Watch demo">
+                <div class="watch-shell" aria-label="A-Z Care Watch concept">
+                  <div class="watch-crown"></div>
+                  <div class="watch-screen" data-watch-screen>
+                    <div class="watch-status" aria-hidden="true">
+                      <span>● LINK</span><span>◒ 76%</span>
+                    </div>
+                    <small class="watch-title" id="watchKicker">HEART</small>
+                    <div class="watch-metric-row">
+                      <button
+                        type="button"
+                        class="watch-arrow"
+                        data-watch-direction="-1"
+                        aria-label="Previous watch screen"
+                      >
+                        ‹
+                      </button>
+                      <button
+                        type="button"
+                        class="watch-metric"
+                        id="watchMetric"
+                        data-watch-detail
+                        aria-label="Open Heart details"
+                      >
+                        <strong id="watchValue">72 <i>bpm</i></strong>
+                        <span class="watch-wave" id="watchWave" aria-hidden="true">⌁⌁⌁⌁⌁</span>
+                        <span class="watch-stats" id="watchStats"
+                          ><span>SpO₂<b>98%</b></span
+                          ><span>STATUS<b>Normal</b></span></span
+                        >
+                      </button>
+                      <button
+                        type="button"
+                        class="watch-arrow"
+                        data-watch-direction="1"
+                        aria-label="Next watch screen"
+                      >
+                        ›
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      class="watch-sos-fixed"
+                      data-watch-sos
+                      aria-label="Watch SOS demo"
+                    >
+                      SOS
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="watch-navigation-status">
+                <span id="watchPageIndicator" aria-live="polite">Heart · 1 of 6</span>
+                <small class="watch-demo-state" id="watchDemoState" aria-live="polite"
+                  >Tap the reading for more information</small
+                >
+              </div>
+              <div class="watch-detail-panel" id="watchDetailPanel" hidden aria-live="polite"></div>
+              <div class="watch-copy">
+                <span class="device-kicker">A-Z CARE WATCH</span>
+                <h2>Protection on the wrist.</h2>
+                <p>
+                  Built-in heart rate, ECG concept, SpO₂, skin temperature, motion/fall sensing and
+                  GPS — plus CGM and validated external sensor integrations through A-Z Sensor Hub.
+                </p>
+                <a href="watch.html">Explore A-Z Watch →</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="scenario-launchpad" aria-label="A-Z Care interactive scenario shortcuts">
+            <span class="device-kicker">TRY THE SYSTEM</span>
+            <h2>One ecosystem. Connected safety flows.</h2>
+            <div class="scenario-launch-grid">
+              <button type="button" data-demo-open="fall">
+                <b>Watch → Phone SOS</b><small>Fall check-in and permitted emergency payload</small>
+              </button>
+              <button type="button" data-demo-open="health">
+                <b>Health Guardian</b><small>Built-in trends + external CGM/BP</small>
+              </button>
+              <button type="button" data-demo-open="messages">
+                <b>Anti-Scam</b><small>Scan, explain risk and choose a safer action</small>
+              </button>
+              <button type="button" data-demo-open="connectivity">
+                <b>Connectivity</b><small>Simulate the current SOS route and fallbacks</small>
+              </button>
+              <button type="button" data-demo-open="battery">
+                <b>Battery Guardian</b><small>See the 20% safety threshold</small>
+              </button>
+              <button type="button" data-demo-open="privacy">
+                <b>Privacy</b><small>Control permitted sharing and last data sent</small>
+              </button>
+              <button type="button" data-demo-open="carecenter">
+                <b>Care Center</b><small>Optional facility monitoring concept</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="v08-section-title" id="solutions">
+            <span class="device-kicker">EXPLORE THE ECOSYSTEM</span>
+            <h2>One ecosystem. <em>Six safety experiences.</em></h2>
+            <p>Explore our existing interactive product scenarios or dive into dedicated pages.</p>
+          </div>
+          <div class="ecosystem-feature-grid">
+            <a class="ecosystem-feature" id="protect" href="#how">
+              <span>01 · DIGITAL SAFETY</span>
+              <h3>Protect & AI Care</h3>
+              <p>
+                Scam checks, suspicious links and callers, understandable warnings and privacy-first
+                assistance.
+              </p>
+              <b>Explore scenarios →</b>
+            </a>
+            <a class="ecosystem-feature" id="health" href="ecosystem.html">
+              <span>02 · HEALTH</span>
+              <h3>Watch & Health Guardian</h3>
+              <p>
+                Heart rate, SpO₂, ECG where supported, sleep, breathing, temperature, movement, CGM
+                and compatible sensor integrations.
+              </p>
+              <b>Explore health system →</b>
+            </a>
+            <a class="ecosystem-feature" id="connect" href="ecosystem.html">
+              <span>03 · RESILIENT SAFETY</span>
+              <h3>SOS & Connectivity</h3>
+              <p>
+                Trusted contacts, location, LTE/eSIM, offline emergency concepts, nearby relay,
+                precise finding and mesh R&D.
+              </p>
+              <b>Explore connectivity →</b>
+            </a>
+          </div>
+        </div>
+      </section>
+      <section class="section alt" id="why">
+        <div class="container">
+          <div class="heading">
+            <p class="eyebrow">WHY A-Z CARE</p>
+            <h2>Smartphones are powerful. Safety is still fragmented.</h2>
+            <p>
+              People often need several apps, settings and services to handle scams, family safety,
+              health routines and emergencies. A-Z Care explores what happens when those needs are
+              designed as one understandable experience.
+            </p>
+          </div>
+          <div class="problem-grid">
+            <article class="problem-card">
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M12 3 3.5 19h17L12 3Z" />
+                  <path d="M12 9v4M12 16.5v.2" /></svg></span
+              ><b>Scams</b>
+              <p>Suspicious messages, links and callers are hard to judge quickly.</p>
+            </article>
+            <article class="problem-card">
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M4 18c3-6 5-10 8-10 2.8 0 3.5 4 8 4" />
+                  <path d="m17 9 3 3-3 3" /></svg></span
+              ><b>Falls</b>
+              <p>A possible fall matters most when nobody nearby knows something happened.</p>
+            </article>
+            <article class="problem-card">
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M12 5v14M5 12h14" />
+                  <circle cx="12" cy="12" r="9" /></svg></span
+              ><b>Health routines</b>
+              <p>
+                Medication, glucose and blood-pressure tracking can become another complicated task.
+              </p>
+            </article>
+            <article class="problem-card">
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <circle cx="9" cy="8" r="3" />
+                  <circle cx="17" cy="9" r="2" />
+                  <path d="M3 20c.5-4 2.5-6 6-6s5.5 2 6 6M15 15c3-.4 5 1.4 6 5" /></svg></span
+              ><b>Family safety</b>
+              <p>Families need useful alerts and trusted contacts without hidden surveillance.</p>
+            </article>
+            <article class="problem-card">
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <rect x="6" y="2.5" width="12" height="19" rx="3" />
+                  <path d="M9 6h6M9 10h6M9 14h4" /></svg></span
+              ><b>Complexity</b>
+              <p>
+                Many phones expect the person to adapt to the device instead of the other way
+                around.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section">
+        <div class="container">
+          <div class="heading">
+            <p class="eyebrow">WHAT IT DOES</p>
+            <h2>One phone. Safety that adapts to you.</h2>
+            <p>
+              The interactive prototype combines digital protection, AI Care, family and location
+              tools, trusted contacts, everyday health support, fall detection, SOS, privacy
+              controls and device information.
+            </p>
+          </div>
+          <div class="cards feature-cards">
+            <article>
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path d="M12 3 4.5 6v5c0 4.8 3 8.1 7.5 10 4.5-1.9 7.5-5.2 7.5-10V6L12 3Z" />
+                  <path d="m9 12 2 2 4-5" /></svg
+              ></span>
+              <h3>Protect & AI Care</h3>
+              <p>
+                Check suspicious messages, links and callers. AI Care explains warning signs and
+                safer next steps in simple language.
+              </p>
+            </article>
+            <article>
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <path
+                    d="M20 5.5a5 5 0 0 0-7 0L12 6.6l-1-1.1a5 5 0 0 0-7 7L12 21l8-8.5a5 5 0 0 0 0-7Z"
+                  />
+                  <path d="M6 12h3l1.4-3 2.3 6 1.4-3H18" /></svg
+              ></span>
+              <h3>Health & Fall Detection</h3>
+              <p>
+                Health demos include diabetes logging, medication and blood-pressure concepts. Fall
+                Detection can ask if you are OK and escalate to trusted contacts when there is no
+                response.
+              </p>
+            </article>
+            <article>
+              <span class="line-icon"
+                ><svg viewBox="0 0 24 24">
+                  <circle cx="8" cy="8" r="3" />
+                  <circle cx="17" cy="9" r="2.3" />
+                  <path d="M2.5 20c.5-4 2.3-6 5.5-6s5 2 5.5 6M14 15c3.5-.6 5.7 1.2 6.5 5" /></svg
+              ></span>
+              <h3>Family, Location & Contacts</h3>
+              <p>
+                Trusted contacts, consent-based location, family status and meaningful safety events
+                without hidden tracking.
+              </p>
+            </article>
+            <article>
+              <span class="line-icon sos-line"
+                ><svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v6M12 17v.1" /></svg
+              ></span>
+              <h3>SOS & Privacy</h3>
+              <p>
+                Emergency escalation can share status and last available location with trusted
+                contacts. Privacy and sharing controls stay visible and adjustable.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section alt" id="how">
+        <div class="container">
+          <div class="heading">
+            <p class="eyebrow">HOW IT WORKS</p>
+            <h2>Show the moment, not just the feature.</h2>
+            <p>
+              A-Z Care is being designed around understandable safety flows that connect the phone,
+              the person and trusted contacts.
+            </p>
+          </div>
+          <div class="scenario-grid">
+            <article class="scenario-card">
+              <small>DIGITAL SAFETY</small>
+              <h3>Suspicious message</h3>
+              <p>
+                Protect flags the warning signs and AI Care explains why the message may be risky,
+                then suggests a safer next step.
+              </p>
+              <div class="flow">
+                <span>Message</span><span>Protect</span><span>AI Care</span
+                ><span>Safer action</span>
+              </div>
+            </article>
+            <article class="scenario-card">
+              <small>FALL DETECTION</small>
+              <h3>Possible fall</h3>
+              <p>
+                The phone can ask “Are you OK?” after a possible fall. If there is no response, the
+                concept escalates to trusted contacts and can include the last available location.
+              </p>
+              <div class="flow">
+                <span>Possible fall</span><span>Check-in</span><span>No response</span
+                ><span>Trusted contacts</span>
+              </div>
+            </article>
+            <article class="scenario-card">
+              <small>FAMILY SAFETY</small>
+              <h3>Useful alerts, not constant tracking</h3>
+              <p>
+                Family tools focus on consent-based location sharing, check-ins and meaningful
+                events instead of invisible surveillance.
+              </p>
+              <div class="flow">
+                <span>Consent</span><span>Trusted contacts</span><span>Safety event</span
+                ><span>Action</span>
+              </div>
+            </article>
+            <article class="scenario-card">
+              <small>HEALTH SUPPORT</small>
+              <h3>Everyday health context</h3>
+              <p>
+                Health concepts bring glucose, blood pressure, medication and fall-related
+                information into one simpler place without presenting the prototype as a medical
+                service.
+              </p>
+              <div class="flow">
+                <span>Log</span><span>Review</span><span>Reminder</span><span>Understand</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="section" id="privacy">
+        <div class="container">
+          <div class="heading">
+            <p class="eyebrow">PRIVACY & TRUST</p>
+            <h2>Built for safety. Designed for privacy.</h2>
+            <p class="privacy-intro">
+              A safety product should explain what it uses, why it uses it and who can receive
+              information. These are design principles for the A-Z Care concept, not claims of
+              completed certification.
+            </p>
+          </div>
+          <div class="principles">
+            <div>
+              <b>Visible controls</b
+              ><span
+                >Privacy permissions, safety alerts and sharing settings stay understandable.</span
+              >
+            </div>
+            <div>
+              <b>Consent first</b
+              ><span>Family and location sharing are explicit and controllable.</span>
+            </div>
+            <div>
+              <b>Minimum necessary data</b
+              ><span
+                >Use only what a feature needs, especially for location, health and emergency
+                functions.</span
+              >
+            </div>
+          </div>
+          <p class="truth-note">
+            A-Z Care is currently a concept and interactive web prototype. It is not an emergency
+            service, medical device or finished consumer phone.
+          </p>
+          <a class="text-link" href="privacy.html">Read the Privacy Policy →</a>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container">
+        <a class="brand" href="#top"
+          ><img src="assets/azcare-logo-white.svg" alt="" /><b>A-Z<span>Care</span></b></a
+        >
+        <p>Concept prototype · Not an emergency or medical service.</p>
+        <div class="footer-links">
+          <a
+            href="privacy.html"
+            data-analytics-event="navigation_select"
+            data-analytics-destination="privacy_policy"
+            data-analytics-placement="footer"
+            >Privacy Policy</a
+          >
+          <button type="button" data-privacy-settings data-privacy-source="footer">
+            Privacy settings
+          </button>
+        </div>
+      </div>
+    </footer>
+    <script src="js/consent.js?v=3" defer></script>
+    <script src="js/analytics.js?v=1" defer></script>
+    <script src="js/navigation.js?v=2" defer></script>
+    <script src="js/product-data.js?v=1" defer></script>
+    <script src="js/app.js?v=9" defer></script>
+  </body>
+</html>
