@@ -1,14 +1,131 @@
 /* v0.8 real-device homepage preview. Does not affect the live index. */
-@media(min-width:1200px){.container{width:min(1740px,calc(100% - 96px))}.device-stage{max-width:1640px;grid-template-columns:minmax(230px,1fr) minmax(320px,390px) minmax(260px,1fr);gap:clamp(24px,3.5vw,64px);padding:clamp(36px,4vw,70px)}.ecosystem-intro{max-width:1160px}.ecosystem-choices{max-width:1120px}.device-copy h2,.watch-copy h2{font-size:clamp(27px,2.1vw,38px)}.device-copy p,.watch-copy p{font-size:15px}.ecosystem-feature-grid{gap:22px}}
-.ecosystem-hero{background:radial-gradient(ellipse at 50% 16%,#12345188,transparent 58%),radial-gradient(circle at 84% 40%,#0c5e6350,transparent 33%),#050b13}
-.ecosystem-intro{margin-bottom:46px}.ecosystem-intro h1{font-size:clamp(45px,6vw,98px);line-height:1.05;letter-spacing:-.055em}.ecosystem-intro .lead{font-size:clamp(16px,1.35vw,20px);max-width:850px}
-.v08-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:26px auto 28px}
-.v08-primary,.v08-secondary{display:inline-flex;align-items:center;justify-content:center;padding:14px 25px;border-radius:13px;font-size:14px;font-weight:800;text-decoration:none;transition:transform .18s ease}
-.v08-primary{background:#67e4ef;color:#051521}.v08-secondary{border:1px solid #405e72;background:#132538;color:#f3f9ff}
-.v08-primary:hover,.v08-secondary:hover{transform:translateY(-2px)}
-.device-stage{border:1px solid #30506a;background:radial-gradient(ellipse at 50% 30%,#15374d,#0b1728 62%,#080f1a);box-shadow:0 35px 110px #0008}
-.v08-section-title{text-align:center;margin:90px auto 30px;max-width:900px;scroll-margin-top:100px}.v08-section-title h2{font-size:clamp(32px,4vw,60px);letter-spacing:-.045em;line-height:1.12;margin:14px 0}.v08-section-title h2 em{color:#69e4ef;font-style:normal}.v08-section-title p{font-size:16px;color:#aabaca}
-.ecosystem-feature-grid{scroll-margin-top:110px}
-@media(max-width:1199px){.device-stage{width:100%}}
-@media(max-width:650px){.ecosystem-intro h1{font-size:clamp(39px,10vw,58px)}.v08-section-title{margin-top:52px}.v08-section-title p{font-size:14px}.v08-actions a{width:min(100%,270px)}}
-@media(prefers-reduced-motion:reduce){.v08-primary,.v08-secondary{transition:none}}
+@media (min-width: 1200px) {
+  .container {
+    width: min(1740px, calc(100% - 96px));
+  }
+  .device-stage {
+    max-width: 1640px;
+    grid-template-columns: minmax(230px, 1fr) minmax(320px, 390px) minmax(260px, 1fr);
+    gap: clamp(24px, 3.5vw, 64px);
+    padding: clamp(36px, 4vw, 70px);
+  }
+  .ecosystem-intro {
+    max-width: 1160px;
+  }
+  .ecosystem-choices {
+    max-width: 1120px;
+  }
+  .device-copy h2,
+  .watch-copy h2 {
+    font-size: clamp(27px, 2.1vw, 38px);
+  }
+  .device-copy p,
+  .watch-copy p {
+    font-size: 15px;
+  }
+  .ecosystem-feature-grid {
+    gap: 22px;
+  }
+}
+.ecosystem-hero {
+  background:
+    radial-gradient(ellipse at 50% 16%, #12345188, transparent 58%),
+    radial-gradient(circle at 84% 40%, #0c5e6350, transparent 33%), #050b13;
+}
+.ecosystem-intro {
+  margin-bottom: 46px;
+}
+.ecosystem-intro h1 {
+  font-size: clamp(45px, 6vw, 98px);
+  line-height: 1.05;
+  letter-spacing: -0.055em;
+}
+.ecosystem-intro .lead {
+  font-size: clamp(16px, 1.35vw, 20px);
+  max-width: 850px;
+}
+.v08-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 26px auto 28px;
+}
+.v08-primary,
+.v08-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 25px;
+  border-radius: 13px;
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+.v08-primary {
+  background: #67e4ef;
+  color: #051521;
+}
+.v08-secondary {
+  border: 1px solid #405e72;
+  background: #132538;
+  color: #f3f9ff;
+}
+.v08-primary:hover,
+.v08-secondary:hover {
+  transform: translateY(-2px);
+}
+.device-stage {
+  border: 1px solid #30506a;
+  background: radial-gradient(ellipse at 50% 30%, #15374d, #0b1728 62%, #080f1a);
+  box-shadow: 0 35px 110px #0008;
+}
+.v08-section-title {
+  text-align: center;
+  margin: 90px auto 30px;
+  max-width: 900px;
+  scroll-margin-top: 100px;
+}
+.v08-section-title h2 {
+  font-size: clamp(32px, 4vw, 60px);
+  letter-spacing: -0.045em;
+  line-height: 1.12;
+  margin: 14px 0;
+}
+.v08-section-title h2 em {
+  color: #69e4ef;
+  font-style: normal;
+}
+.v08-section-title p {
+  font-size: 16px;
+  color: #aabaca;
+}
+.ecosystem-feature-grid {
+  scroll-margin-top: 110px;
+}
+@media (max-width: 1199px) {
+  .device-stage {
+    width: 100%;
+  }
+}
+@media (max-width: 650px) {
+  .ecosystem-intro h1 {
+    font-size: clamp(39px, 10vw, 58px);
+  }
+  .v08-section-title {
+    margin-top: 52px;
+  }
+  .v08-section-title p {
+    font-size: 14px;
+  }
+  .v08-actions a {
+    width: min(100%, 270px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .v08-primary,
+  .v08-secondary {
+    transition: none;
+  }
+}

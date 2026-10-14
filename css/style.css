@@ -3297,7 +3297,6 @@ footer p {
   }
 }
 
-
 /* v0.7 desktop layout: use the available widescreen space. */
 @media (min-width: 1200px) {
   .container {
