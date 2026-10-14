@@ -1,0 +1,39 @@
+name: v0.8 one-time formatting repair
+
+on:
+  push:
+    branches:
+      - feat/v0.7-unified-experience
+    paths:
+      - .github/workflows/v08-format-once.yml
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/v0.7-unified-experience
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - name: Format known failing files
+        run: npx prettier --write css/style.css css/v08-real-preview.css index.html tests/e2e/v08-homepage.spec.js v08-preview.html v08-real-preview.html about.html
+      - name: Commit formatting only if needed
+        run: |
+          if git diff --quiet; then
+            echo "Already formatted"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add css/style.css css/v08-real-preview.css index.html tests/e2e/v08-homepage.spec.js v08-preview.html v08-real-preview.html about.html
+          git commit -m "style(v0.8): normalize formatting for CI"
+          git push origin HEAD:feat/v0.7-unified-experience
